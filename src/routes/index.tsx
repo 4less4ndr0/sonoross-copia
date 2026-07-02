@@ -232,10 +232,14 @@ function Index() {
   return (
     <main
       className="relative w-full"
-      style={{ backgroundColor: "#faf7f2" }}
+      style={{
+        background:
+          "linear-gradient(180deg, #faf7f2 0%, #faf7f2 45%, #f7c8b0 65%, #ec8ea6 80%, #d94892 92%)",
+      }}
     >
       {/* HERO — first screen */}
       <section className="relative h-screen w-full overflow-hidden">
+
         {/* Clouds */}
         <div className="absolute inset-0 pointer-events-none z-10">
           {CLOUDS.map((c, i) => (
