@@ -322,9 +322,10 @@ function Index() {
         <div
           className="max-w-2xl mx-auto space-y-6"
           style={{
-            fontFamily: '"Instrument Serif", serif',
-            fontSize: "clamp(1.1rem, 1.5vw, 1.35rem)",
-            lineHeight: 1.55,
+            fontFamily: '"DM Sans", system-ui, sans-serif',
+            fontSize: "clamp(1rem, 1.15vw, 1.15rem)",
+            fontWeight: 400,
+            lineHeight: 1.65,
             letterSpacing: "-0.005em",
           }}
         >
