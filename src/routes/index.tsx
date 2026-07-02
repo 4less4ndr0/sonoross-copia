@@ -12,30 +12,20 @@ type Bubble = {
   height: number;
   variant: "a" | "b" | "c" | "d";
   delay: string;
-  side: "left" | "right"; // tail side (iMessage: left=gray incoming, right=blue outgoing)
-  tone: "gray" | "blue";
   rotate: number;
 };
 
-// 10 iMessage-style bubbles, spread across the viewport, avoiding a central
-// rect (~30-70% x, ~35-70% y) where the headline + email form sit.
+// 5 larger iMessage-style bubbles, all with the same right-tail shape.
 const BUBBLES: Bubble[] = [
-  { top: "8%",  left: "6%",  width: 90,  height: 34, variant: "a", delay: "0s",   side: "left",  tone: "gray", rotate: -3 },
-  { top: "14%", left: "78%", width: 110, height: 36, variant: "b", delay: "1.1s", side: "right", tone: "blue", rotate: 2 },
-  { top: "26%", left: "18%", width: 75,  height: 32, variant: "c", delay: "2.2s", side: "left",  tone: "gray", rotate: 3 },
-  { top: "22%", left: "84%", width: 95,  height: 34, variant: "d", delay: "0.6s", side: "right", tone: "blue", rotate: -2 },
-  { top: "42%", left: "4%",  width: 100, height: 36, variant: "b", delay: "1.6s", side: "left",  tone: "gray", rotate: 2 },
-  { top: "38%", left: "86%", width: 80,  height: 32, variant: "a", delay: "0.9s", side: "right", tone: "blue", rotate: -3 },
-  { top: "60%", left: "8%",  width: 85,  height: 34, variant: "c", delay: "2.5s", side: "left",  tone: "gray", rotate: 1 },
-  { top: "58%", left: "80%", width: 105, height: 36, variant: "d", delay: "0.3s", side: "right", tone: "blue", rotate: -2 },
-  { top: "18%", left: "44%", width: 70,  height: 30, variant: "a", delay: "1.9s", side: "left",  tone: "gray", rotate: 3 },
-  { top: "12%", left: "60%", width: 85,  height: 32, variant: "c", delay: "2.8s", side: "right", tone: "blue", rotate: -1 },
+  { top: "6%",  left: "4%",  width: 170, height: 62, variant: "a", delay: "0s",   rotate: -2 },
+  { top: "16%", left: "72%", width: 180, height: 64, variant: "b", delay: "1.1s", rotate: 1 },
+  { top: "28%", left: "10%", width: 150, height: 56, variant: "c", delay: "2.2s", rotate: 2 },
+  { top: "22%", left: "82%", width: 160, height: 60, variant: "d", delay: "0.6s", rotate: -1 },
+  { top: "10%", left: "45%", width: 140, height: 54, variant: "a", delay: "1.7s", rotate: 3 },
 ];
 
 function BubbleShape({ b }: { b: Bubble }) {
-  const isBlue = b.tone === "blue";
-  const bg = isBlue ? "#3B82F6" : "#E5E5EA";
-  const isRight = b.side === "right";
+  const bg = "#007AFF";
   return (
     <div
       className={`absolute float-${b.variant}`}
@@ -52,24 +42,23 @@ function BubbleShape({ b }: { b: Bubble }) {
         className="w-full h-full"
         style={{
           background: bg,
-          borderRadius: "20px",
-          boxShadow: "0 2px 8px rgba(0,0,0,0.06)",
+          borderRadius: "24px",
+          boxShadow: "0 4px 14px rgba(0,0,0,0.08)",
         }}
       />
-      {/* iMessage tail */}
+      {/* iMessage right tail */}
       <svg
-        width="14"
-        height="14"
-        viewBox="0 0 14 14"
+        width="20"
+        height="20"
+        viewBox="0 0 20 20"
         className="absolute"
         style={{
           bottom: -2,
-          [isRight ? "right" : "left"]: -3,
-          transform: isRight ? "scaleX(-1)" : undefined,
+          right: -6,
         }}
       >
         <path
-          d="M 0 14 C 6 14 12 10 12 0 C 12 8 6 12 0 12 Z"
+          d="M 0 0 C 10 0 18 6 20 20 C 12 14 6 14 0 14 Z"
           fill={bg}
         />
       </svg>
