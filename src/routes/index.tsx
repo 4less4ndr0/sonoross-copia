@@ -240,9 +240,9 @@ function Index() {
       <div
         className="absolute left-1/2 pointer-events-none z-0"
         style={{
-          top: "calc(100vh - clamp(240px, 36vh, 410px))",
+          top: "calc(100vh - clamp(140px, 20vh, 240px))",
           width: "min(168vw, 1500px)",
-          height: "clamp(560px, 82vh, 820px)",
+          height: "clamp(420px, 58vh, 620px)",
           transform: "translateX(-50%)",
           borderRadius: "50%",
           background:
