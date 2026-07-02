@@ -15,14 +15,15 @@ type Bubble = {
   rotate: number;
 };
 
-// 5 iMessage-style bubbles, positioned only in the top band (0-34%)
-// so the central headline+form area stays clear at every viewport size.
+// 5 iMessage-style bubbles:
+// - 3 above the headline (top band)
+// - 2 lower down, near the eyes/horizon
 const BUBBLES: Bubble[] = [
-  { top: "4%",  left: "2%",  widthVw: 26, aspect: 2.7, variant: "a", delay: "0s",   rotate: -3 },
-  { top: "6%",  left: "68%", widthVw: 28, aspect: 2.8, variant: "b", delay: "1.1s", rotate: 2 },
-  { top: "20%", left: "3%",  widthVw: 22, aspect: 2.6, variant: "c", delay: "2.2s", rotate: 2 },
-  { top: "22%", left: "70%", widthVw: 24, aspect: 2.7, variant: "d", delay: "0.6s", rotate: -1 },
-  { top: "31%", left: "38%", widthVw: 20, aspect: 2.5, variant: "a", delay: "1.7s", rotate: 3 },
+  { top: "72%", left: "10%", widthVw: 26, aspect: 2.7, variant: "a", delay: "0s",   rotate: -3 },
+  { top: "70%", left: "74%", widthVw: 28, aspect: 2.8, variant: "b", delay: "1.1s", rotate: 2 },
+  { top: "8%",  left: "5%",  widthVw: 22, aspect: 2.6, variant: "c", delay: "2.2s", rotate: 2 },
+  { top: "10%", left: "72%", widthVw: 24, aspect: 2.7, variant: "d", delay: "0.6s", rotate: -1 },
+  { top: "14%", left: "40%", widthVw: 20, aspect: 2.5, variant: "a", delay: "1.7s", rotate: 3 },
 ];
 
 function BubbleShape({ b }: { b: Bubble }) {
