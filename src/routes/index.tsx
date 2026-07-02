@@ -229,9 +229,9 @@ function Index() {
         }}
       />
 
-      {/* Mickey Mouse eyes on the horizon */}
-      <MickeyEye left="46%" />
-      <MickeyEye left="54%" />
+      {/* Flat pixel eyes on the horizon — blink together */}
+      <FlatEye left="46%" closed={eyesClosed} />
+      <FlatEye left="54%" closed={eyesClosed} />
     </main>
   );
 }
