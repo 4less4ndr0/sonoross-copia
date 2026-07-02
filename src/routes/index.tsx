@@ -64,7 +64,7 @@ const CLOUDS: Cloud[] = [
 function CloudShape({ c }: { c: Cloud }) {
   return (
     <div
-      className={`absolute ${c.positionClass} ${c.widthClass} float-${c.variant}`}
+      className={`absolute ${c.positionClass} ${c.widthClass} float-${c.variant} ${c.hideOnMobile ? "hidden sm:block" : ""}`}
       style={{
         animationDelay: c.delay,
         transform: `rotate(${c.rotate}deg)`,
