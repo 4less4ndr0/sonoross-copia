@@ -198,8 +198,8 @@ function Index() {
     >
       {/* Bubbles */}
       <div className="absolute inset-0 pointer-events-none z-10">
-        {BUBBLES.map((b, i) => (
-          <BubbleShape key={i} b={b} />
+        {CLOUDS.map((c, i) => (
+          <CloudShape key={i} c={c} />
         ))}
       </div>
 
