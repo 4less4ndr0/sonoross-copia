@@ -71,10 +71,8 @@ function BubbleShape({ b }: { b: Bubble }) {
   const height = `calc(${width} / ${b.aspect})`;
   return (
     <div
-      className={`absolute float-${b.variant}`}
+      className={`absolute ${b.positionClass} float-${b.variant}`}
       style={{
-        top: b.top,
-        left: b.left,
         width,
         height,
         animationDelay: b.delay,
