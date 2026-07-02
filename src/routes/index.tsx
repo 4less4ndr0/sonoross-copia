@@ -80,14 +80,15 @@ function CloudShape({ c }: { c: Cloud }) {
             filter: "drop-shadow(0 10px 20px rgba(80, 90, 130, 0.15))",
           }}
         />
-        {/* Inner text plate: sits on the flat "heart" of the cloud, above the geometric center */}
+        {/* Inner text plate: sits on the flat "heart" of the cloud (measured body center ~53%) */}
         <div
-          className="absolute left-1/2 -translate-x-1/2 flex items-center justify-center"
+          className="absolute flex items-center justify-center"
           style={{
-            top: "44%",
+            left: "50%",
+            top: "53%",
+            width: "58%",
+            height: "40%",
             transform: `translate(-50%, -50%) rotate(${-c.rotate}deg)`,
-            width: "62%",
-            height: "42%",
           }}
         >
           <p
@@ -107,6 +108,7 @@ function CloudShape({ c }: { c: Cloud }) {
             {c.text}
           </p>
         </div>
+
       </div>
     </div>
   );
