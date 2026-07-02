@@ -1,108 +1,79 @@
 import { createFileRoute } from "@tanstack/react-router";
 import { useEffect, useState, type FormEvent } from "react";
+import cloudAsset from "@/assets/cloud.png.asset.json";
 
 export const Route = createFileRoute("/")({
   component: Index,
 });
 
-type Bubble = {
+type Cloud = {
   positionClass: string;
-  widthVw: number; // percentage of min(vw, 1200)
-  aspect: number; // width / height
+  widthVw: number;
   variant: "a" | "b" | "c" | "d";
   delay: string;
   rotate: number;
 };
 
-// 5 iMessage-style bubbles.
-// Mobile: 3 bubbles in the top band spread out, 2 bubbles in the white space
-// above the horizon. Desktop: 3 above the headline, 2 near the eyes.
-const BUBBLES: Bubble[] = [
-  // bottom-left desktop → white-space left mobile
+// 5 floating clouds. Mobile: 3 in top band, 2 in white space above horizon.
+// Desktop: 3 above the headline, 2 near the eyes.
+const CLOUDS: Cloud[] = [
   {
-    positionClass: "top-[50%] left-[8%] sm:top-[72%] sm:left-[10%]",
-    widthVw: 26,
-    aspect: 2.7,
+    positionClass: "top-[50%] left-[4%] sm:top-[68%] sm:left-[6%]",
+    widthVw: 32,
     variant: "a",
     delay: "0s",
     rotate: -3,
   },
-  // bottom-right desktop → white-space right mobile
   {
-    positionClass: "top-[46%] left-[68%] sm:top-[70%] sm:left-[74%]",
-    widthVw: 28,
-    aspect: 2.8,
+    positionClass: "top-[46%] left-[62%] sm:top-[66%] sm:left-[70%]",
+    widthVw: 34,
     variant: "b",
     delay: "1.1s",
     rotate: 2,
   },
-  // top-left desktop → top-left mobile
   {
-    positionClass: "top-[4%] left-[8%] sm:top-[8%] sm:left-[5%]",
-    widthVw: 22,
-    aspect: 2.6,
+    positionClass: "top-[2%] left-[4%] sm:top-[6%] sm:left-[3%]",
+    widthVw: 28,
     variant: "c",
     delay: "2.2s",
     rotate: 2,
   },
-  // top-right desktop → center-right mobile
   {
-    positionClass: "top-[12%] left-[55%] sm:top-[10%] sm:left-[72%]",
-    widthVw: 24,
-    aspect: 2.7,
+    positionClass: "top-[10%] left-[52%] sm:top-[8%] sm:left-[70%]",
+    widthVw: 30,
     variant: "d",
     delay: "0.6s",
     rotate: -1,
   },
-  // center-left desktop → lower-center mobile
   {
-    positionClass: "top-[18%] left-[28%] sm:top-[6%] sm:left-[22%]",
-    widthVw: 20,
-    aspect: 2.5,
+    positionClass: "top-[18%] left-[24%] sm:top-[4%] sm:left-[38%]",
+    widthVw: 26,
     variant: "a",
     delay: "1.7s",
     rotate: 3,
   },
 ];
 
-function BubbleShape({ b }: { b: Bubble }) {
-  const bg = "#007AFF";
-  const width = `clamp(96px, ${b.widthVw}vw, ${b.widthVw * 8}px)`;
-  const height = `calc(${width} / ${b.aspect})`;
+function CloudShape({ c }: { c: Cloud }) {
+  const width = `clamp(140px, ${c.widthVw}vw, ${c.widthVw * 12}px)`;
   return (
     <div
-      className={`absolute ${b.positionClass} float-${b.variant}`}
+      className={`absolute ${c.positionClass} float-${c.variant}`}
       style={{
         width,
-        height,
-        animationDelay: b.delay,
-        transform: `rotate(${b.rotate}deg)`,
+        animationDelay: c.delay,
+        transform: `rotate(${c.rotate}deg)`,
       }}
     >
-      <div
-        className="w-full h-full"
+      <img
+        src={cloudAsset.url}
+        alt=""
+        className="w-full h-auto select-none"
+        draggable={false}
         style={{
-          background: bg,
-          borderRadius: "999px",
-          boxShadow: "0 4px 14px rgba(0,0,0,0.08)",
+          filter: "drop-shadow(0 10px 20px rgba(80, 90, 130, 0.15))",
         }}
       />
-      {/* iMessage right tail */}
-      <svg
-        width="20"
-        height="20"
-        viewBox="0 0 20 20"
-        className="absolute"
-        style={{
-          bottom: -2,
-          right: -6,
-        }}
-      >
-        <path
-          d="M 0 0 C 10 0 18 6 20 20 C 12 14 6 14 0 14 Z"
-          fill={bg}
-        />
-      </svg>
     </div>
   );
 }
