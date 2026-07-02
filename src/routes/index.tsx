@@ -299,10 +299,11 @@ function Index() {
             height: "clamp(220px, 34vh, 380px)",
             borderRadius: "50% 50% 0 0 / 100% 100% 0 0",
             background:
-              "radial-gradient(ellipse at 50% 100%, #ffd166 0%, #ff8a3d 25%, #f4506c 50%, #d94892 68%, rgba(250,247,242,0) 82%)",
+              "radial-gradient(ellipse at 50% 100%, #ffd166 0%, #ff8a3d 22%, #f4506c 48%, #d94892 70%, rgba(217,72,146,0) 90%)",
             filter: "blur(6px)",
           }}
         />
+
 
         {/* Flat pixel eyes on the horizon */}
         <FlatEye className="left-[38%] sm:left-[43%]" closed={eyesClosed} pixelSize={pixelSize} />
