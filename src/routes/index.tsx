@@ -101,28 +101,30 @@ function useBlink(minMs: number, maxMs: number) {
   return closed;
 }
 
-const PIXEL = 5;
+const PIXEL = 7;
 const GAP = 1;
-const COLS = 7;
+const COLS = 8;
 const FULL_ROWS = [
-  [0, 0, 0, 1, 0, 0, 0],
-  [0, 0, 1, 1, 1, 0, 0],
-  [0, 1, 1, 1, 1, 1, 0],
-  [1, 1, 1, 1, 1, 1, 1],
-  [1, 1, 1, 1, 1, 1, 1],
-  [1, 1, 1, 1, 1, 1, 1],
-  [1, 1, 1, 1, 1, 1, 1],
-  [1, 1, 1, 1, 1, 1, 1],
-  [1, 1, 1, 1, 1, 1, 1],
-  [0, 1, 1, 1, 1, 1, 0],
-  [0, 0, 1, 1, 1, 0, 0],
-  [0, 0, 0, 1, 0, 0, 0],
+  [0, 0, 0, 1, 1, 0, 0, 0],
+  [0, 0, 1, 1, 1, 1, 0, 0],
+  [0, 1, 1, 1, 1, 1, 1, 0],
+  [1, 1, 1, 1, 1, 1, 1, 1],
+  [1, 1, 1, 1, 1, 1, 1, 1],
+  [1, 1, 1, 1, 1, 1, 1, 1],
+  [1, 1, 1, 1, 1, 1, 1, 1],
+  [1, 1, 1, 1, 1, 1, 1, 1],
+  [1, 1, 1, 1, 1, 1, 1, 1],
+  [1, 1, 1, 1, 1, 1, 1, 1],
+  [1, 1, 1, 1, 1, 1, 1, 1],
+  [0, 1, 1, 1, 1, 1, 1, 0],
+  [0, 0, 1, 1, 1, 1, 0, 0],
+  [0, 0, 0, 1, 1, 0, 0, 0],
 ];
 
 function FlatEye({ left, closed }: { left: string; closed: boolean }) {
   const rows = closed
     ? FULL_ROWS.map(() => Array(COLS).fill(0)).map((r, i) =>
-        i === 5 || i === 6 ? [0, 0, 1, 1, 1, 0, 0] : r
+        i === 6 || i === 7 ? [0, 0, 0, 1, 1, 0, 0, 0] : r
       )
     : FULL_ROWS;
 
@@ -151,8 +153,8 @@ function FlatEye({ left, closed }: { left: string; closed: boolean }) {
               style={{
                 width: PIXEL,
                 height: PIXEL,
-                background: on ? "#FBBF24" : "transparent",
-                boxShadow: on ? "0 0 3px #FBBF24, 0 0 6px #F59E0B" : undefined,
+                background: on ? "#FFFFFF" : "transparent",
+                boxShadow: on ? "0 0 3px rgba(255,255,255,0.9), 0 0 6px rgba(255,255,255,0.6)" : undefined,
                 transition: "background 120ms ease, box-shadow 120ms ease",
               }}
             />
