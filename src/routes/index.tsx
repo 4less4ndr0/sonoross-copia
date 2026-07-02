@@ -243,9 +243,9 @@ function Index() {
         }}
       />
 
-      {/* Flat pixel eyes on the horizon — scale with viewport, blink together */}
-      <FlatEye left="43%" closed={eyesClosed} pixelSize={pixelSize} />
-      <FlatEye left="57%" closed={eyesClosed} pixelSize={pixelSize} />
+      {/* Flat pixel eyes on the horizon — bigger and more separated on mobile */}
+      <FlatEye className="left-[38%] sm:left-[43%]" closed={eyesClosed} pixelSize={pixelSize} />
+      <FlatEye className="left-[62%] sm:left-[57%]" closed={eyesClosed} pixelSize={pixelSize} />
     </main>
   );
 }
