@@ -230,15 +230,16 @@ function Index() {
 
 
   return (
-    <main className="relative w-full">
+    <main
+      className="relative w-full"
+      style={{
+        background:
+          "linear-gradient(180deg, #faf7f2 0vh, #faf7f2 55vh, #f7c8b0 75vh, #ec8ea6 90vh, #d94892 100vh, #b83a7a 130vh, #7a2456 180vh, #3a1230 260vh)",
+      }}
+    >
       {/* HERO — first screen */}
-      <section
-        className="relative h-screen w-full overflow-hidden"
-        style={{
-          background:
-            "linear-gradient(180deg, #faf7f2 0%, #faf7f2 45%, #f7c8b0 68%, #ec8ea6 84%, #d94892 100%)",
-        }}
-      >
+      <section className="relative h-screen w-full overflow-hidden">
+
 
 
         {/* Clouds */}
@@ -286,7 +287,7 @@ function Index() {
 
         {/* Scroll hint */}
         <div
-          className="absolute bottom-4 left-1/2 -translate-x-1/2 z-30 text-neutral-500 text-[10px] tracking-[0.25em] uppercase animate-bounce pointer-events-none"
+          className="absolute bottom-4 left-1/2 -translate-x-1/2 z-30 text-white/70 text-[10px] tracking-[0.25em] uppercase animate-bounce pointer-events-none"
         >
           ↓ scroll
         </div>
@@ -310,12 +311,10 @@ function Index() {
         <FlatEye className="left-[62%] sm:left-[57%]" closed={eyesClosed} pixelSize={pixelSize} />
       </section>
 
-      {/* NARRATIVE — revealed on scroll, background continues the horizon warmth */}
+      {/* NARRATIVE — revealed on scroll, inherits gradient from main */}
       <section
         className="relative w-full py-24 sm:py-32 px-6 sm:px-8"
         style={{
-          background:
-            "linear-gradient(180deg, #d94892 0%, #b83a7a 22%, #7a2456 58%, #3a1230 100%)",
           color: "#faf1e6",
         }}
       >
