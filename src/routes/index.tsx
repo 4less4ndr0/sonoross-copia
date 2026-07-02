@@ -23,7 +23,7 @@ const BUBBLES: Bubble[] = [
   { top: "70%", left: "74%", widthVw: 28, aspect: 2.8, variant: "b", delay: "1.1s", rotate: 2 },
   { top: "8%",  left: "5%",  widthVw: 22, aspect: 2.6, variant: "c", delay: "2.2s", rotate: 2 },
   { top: "10%", left: "72%", widthVw: 24, aspect: 2.7, variant: "d", delay: "0.6s", rotate: -1 },
-  { top: "14%", left: "40%", widthVw: 20, aspect: 2.5, variant: "a", delay: "1.7s", rotate: 3 },
+  { top: "6%",  left: "22%", widthVw: 20, aspect: 2.5, variant: "a", delay: "1.7s", rotate: 3 },
 ];
 
 function BubbleShape({ b }: { b: Bubble }) {
