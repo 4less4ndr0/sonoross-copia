@@ -13,6 +13,7 @@ type Cloud = {
   delay: string;
   rotate: number;
   text: string;
+  hideOnMobile?: boolean;
 };
 
 // 5 floating clouds with phrases inside.
@@ -40,6 +41,7 @@ const CLOUDS: Cloud[] = [
     delay: "2.2s",
     rotate: 2,
     text: "Chi ama, vuole sapere come stai davvero.",
+    hideOnMobile: true,
   },
   {
     positionClass: "top-[46%] left-[2%] sm:top-[40%] sm:left-[1%]",
@@ -62,7 +64,7 @@ const CLOUDS: Cloud[] = [
 function CloudShape({ c }: { c: Cloud }) {
   return (
     <div
-      className={`absolute ${c.positionClass} ${c.widthClass} float-${c.variant}`}
+      className={`absolute ${c.positionClass} ${c.widthClass} float-${c.variant} ${c.hideOnMobile ? "hidden sm:block" : ""}`}
       style={{
         animationDelay: c.delay,
         transform: `rotate(${c.rotate}deg)`,
