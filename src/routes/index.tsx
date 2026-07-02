@@ -13,6 +13,7 @@ type Cloud = {
   delay: string;
   rotate: number;
   text: string;
+  hideOnMobile?: boolean;
 };
 
 // 5 floating clouds with phrases inside.
