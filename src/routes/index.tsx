@@ -8,7 +8,7 @@ export const Route = createFileRoute("/")({
 
 type Cloud = {
   positionClass: string;
-  widthVw: number;
+  widthClass: string;
   variant: "a" | "b" | "c" | "d";
   delay: string;
   rotate: number;
@@ -18,36 +18,36 @@ type Cloud = {
 // Desktop: 3 above the headline, 2 near the eyes.
 const CLOUDS: Cloud[] = [
   {
-    positionClass: "top-[50%] left-[4%] sm:top-[68%] sm:left-[6%]",
-    widthVw: 32,
+    positionClass: "top-[50%] left-[4%] sm:top-[36%] sm:left-[3%]",
+    widthClass: "w-[32vw] max-w-[340px] sm:w-[13vw] sm:max-w-[190px]",
     variant: "a",
     delay: "0s",
     rotate: -3,
   },
   {
-    positionClass: "top-[46%] left-[62%] sm:top-[66%] sm:left-[70%]",
-    widthVw: 34,
+    positionClass: "top-[46%] left-[62%] sm:top-[40%] sm:right-[3%]",
+    widthClass: "w-[34vw] max-w-[360px] sm:w-[14vw] sm:max-w-[210px]",
     variant: "b",
     delay: "1.1s",
     rotate: 2,
   },
   {
-    positionClass: "top-[2%] left-[4%] sm:top-[6%] sm:left-[3%]",
-    widthVw: 28,
+    positionClass: "top-[2%] left-[4%] sm:top-[6%] sm:left-[4%]",
+    widthClass: "w-[28vw] max-w-[300px] sm:w-[11vw] sm:max-w-[170px]",
     variant: "c",
     delay: "2.2s",
     rotate: 2,
   },
   {
-    positionClass: "top-[10%] left-[52%] sm:top-[8%] sm:left-[70%]",
-    widthVw: 30,
+    positionClass: "top-[10%] left-[52%] sm:top-[10%] sm:right-[4%]",
+    widthClass: "w-[30vw] max-w-[320px] sm:w-[12vw] sm:max-w-[180px]",
     variant: "d",
     delay: "0.6s",
     rotate: -1,
   },
   {
-    positionClass: "top-[18%] left-[24%] sm:top-[4%] sm:left-[38%]",
-    widthVw: 26,
+    positionClass: "top-[18%] left-[24%] sm:top-[2%] sm:left-[22%]",
+    widthClass: "w-[26vw] max-w-[280px] sm:w-[10vw] sm:max-w-[160px]",
     variant: "a",
     delay: "1.7s",
     rotate: 3,
@@ -55,12 +55,10 @@ const CLOUDS: Cloud[] = [
 ];
 
 function CloudShape({ c }: { c: Cloud }) {
-  const width = `clamp(140px, ${c.widthVw}vw, ${c.widthVw * 12}px)`;
   return (
     <div
-      className={`absolute ${c.positionClass} float-${c.variant}`}
+      className={`absolute ${c.positionClass} ${c.widthClass} float-${c.variant}`}
       style={{
-        width,
         animationDelay: c.delay,
         transform: `rotate(${c.rotate}deg)`,
       }}
