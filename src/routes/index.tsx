@@ -55,12 +55,10 @@ const CLOUDS: Cloud[] = [
 ];
 
 function CloudShape({ c }: { c: Cloud }) {
-  const width = `clamp(140px, ${c.widthVw}vw, ${c.widthVw * 12}px)`;
   return (
     <div
-      className={`absolute ${c.positionClass} float-${c.variant}`}
+      className={`absolute ${c.positionClass} ${c.widthClass} float-${c.variant}`}
       style={{
-        width,
         animationDelay: c.delay,
         transform: `rotate(${c.rotate}deg)`,
       }}
