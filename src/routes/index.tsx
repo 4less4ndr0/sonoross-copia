@@ -8,7 +8,7 @@ export const Route = createFileRoute("/")({
 
 type Cloud = {
   positionClass: string;
-  widthVw: number;
+  widthClass: string;
   variant: "a" | "b" | "c" | "d";
   delay: string;
   rotate: number;
