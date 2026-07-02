@@ -20,44 +20,44 @@ type Cloud = {
 const CLOUDS: Cloud[] = [
   {
     positionClass: "top-[2%] left-[3%] sm:top-[4%] sm:left-[3%]",
-    widthClass: "w-[42vw] max-w-[320px] sm:w-[19vw] sm:max-w-[240px]",
+    widthClass: "w-[42vw] max-w-[320px] sm:w-[22vw] sm:max-w-[270px]",
     variant: "a",
     delay: "0s",
     rotate: -3,
-    text: "Per chi ha ancora tante cose da raccontare.",
+    text: "Per chi ha ancora\ntante cose da raccontare.",
   },
   {
     positionClass: "top-[10%] right-[3%] sm:top-[3%] sm:left-[41%]",
-    widthClass: "w-[44vw] max-w-[340px] sm:w-[20vw] sm:max-w-[250px]",
+    widthClass: "w-[44vw] max-w-[340px] sm:w-[23vw] sm:max-w-[280px]",
     variant: "b",
     delay: "1.1s",
     rotate: 2,
-    text: "La distanza non deve significare silenzio.",
+    text: "La distanza\nnon deve significare silenzio.",
   },
   {
     positionClass: "top-[20%] left-[28%] sm:top-[5%] sm:right-[3%] sm:left-auto",
-    widthClass: "w-[42vw] max-w-[320px] sm:w-[19vw] sm:max-w-[240px]",
+    widthClass: "w-[42vw] max-w-[320px] sm:w-[22vw] sm:max-w-[270px]",
     variant: "c",
     delay: "2.2s",
     rotate: 2,
-    text: "Chi ama, vuole sapere come stai davvero.",
+    text: "Chi ama, vuole sapere\ncome stai davvero.",
     hideOnMobile: true,
   },
   {
     positionClass: "top-[46%] left-[2%] sm:top-[40%] sm:left-[1%]",
-    widthClass: "w-[42vw] max-w-[320px] sm:w-[18vw] sm:max-w-[230px]",
+    widthClass: "w-[42vw] max-w-[320px] sm:w-[21vw] sm:max-w-[260px]",
     variant: "d",
     delay: "0.6s",
     rotate: -1,
-    text: "Una compagnia che ascolta, non che controlla.",
+    text: "Una compagnia che ascolta,\nnon che controlla.",
   },
   {
     positionClass: "top-[50%] right-[2%] sm:top-[42%] sm:right-[1%] sm:left-auto",
-    widthClass: "w-[42vw] max-w-[320px] sm:w-[18vw] sm:max-w-[230px]",
+    widthClass: "w-[42vw] max-w-[320px] sm:w-[21vw] sm:max-w-[260px]",
     variant: "a",
     delay: "1.7s",
     rotate: 3,
-    text: "Ogni giorno ha una storia da raccontare.",
+    text: "Ogni giorno ha\nuna storia da raccontare.",
   },
 ];
 
@@ -80,15 +80,28 @@ function CloudShape({ c }: { c: Cloud }) {
             filter: "drop-shadow(0 10px 20px rgba(80, 90, 130, 0.15))",
           }}
         />
+        {/* Inner text plate: sits on the flat "heart" of the cloud, above the geometric center */}
         <div
-          className="absolute inset-0 flex items-center justify-center px-[16%] pt-[6%] pb-[10%]"
-          style={{ transform: `rotate(${-c.rotate}deg)` }}
+          className="absolute left-1/2 -translate-x-1/2 flex items-center justify-center"
+          style={{
+            top: "44%",
+            transform: `translate(-50%, -50%) rotate(${-c.rotate}deg)`,
+            width: "62%",
+            height: "42%",
+          }}
         >
           <p
-            className="text-center text-neutral-800 leading-tight"
+            className="text-center"
             style={{
               fontFamily: '"Instrument Serif", serif',
-              fontSize: "clamp(0.7rem, 1.7vw, 1.05rem)",
+              color: "#1a1a1a",
+              fontSize: "clamp(0.72rem, 1.15vw, 1rem)",
+              lineHeight: 1.15,
+              letterSpacing: "-0.01em",
+              whiteSpace: "pre-line",
+              textWrap: "balance",
+              textShadow:
+                "0 1px 0 rgba(255,255,255,0.9), 0 0 6px rgba(255,255,255,0.65)",
             }}
           >
             {c.text}
@@ -98,6 +111,7 @@ function CloudShape({ c }: { c: Cloud }) {
     </div>
   );
 }
+
 
 
 function useBlink(minMs: number, maxMs: number) {
