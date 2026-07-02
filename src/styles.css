@@ -142,3 +142,26 @@
     color: var(--color-foreground);
   }
 }
+
+@keyframes float-a {
+  0%, 100% { transform: translate(0, 0) rotate(-2deg); }
+  50% { transform: translate(8px, -14px) rotate(2deg); }
+}
+@keyframes float-b {
+  0%, 100% { transform: translate(0, 0) rotate(1deg); }
+  50% { transform: translate(-10px, -18px) rotate(-3deg); }
+}
+@keyframes float-c {
+  0%, 100% { transform: translate(0, 0) rotate(-1deg); }
+  50% { transform: translate(12px, 10px) rotate(3deg); }
+}
+@keyframes float-d {
+  0%, 100% { transform: translate(0, 0) rotate(2deg); }
+  50% { transform: translate(-8px, 14px) rotate(-2deg); }
+}
+
+.float-a { animation: float-a 8s ease-in-out infinite; }
+.float-b { animation: float-b 10s ease-in-out infinite; }
+.float-c { animation: float-c 7s ease-in-out infinite; }
+.float-d { animation: float-d 11s ease-in-out infinite; }
+
