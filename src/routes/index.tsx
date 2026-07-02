@@ -41,6 +41,7 @@ const CLOUDS: Cloud[] = [
     delay: "2.2s",
     rotate: 2,
     text: "Chi ama, vuole sapere come stai davvero.",
+    hideOnMobile: true,
   },
   {
     positionClass: "top-[46%] left-[2%] sm:top-[40%] sm:left-[1%]",
