@@ -231,14 +231,27 @@ function Index() {
 
   return (
     <main
-      className="relative w-full"
+      className="relative w-full overflow-x-hidden"
       style={{
         background:
-          "linear-gradient(180deg, #faf7f2 0vh, #faf7f2 55vh, #f7c8b0 75vh, #ec8ea6 90vh, #d94892 100vh, #b83a7a 130vh, #7a2456 180vh, #3a1230 260vh)",
+          "radial-gradient(ellipse 92vw 78vh at 50% 100vh, #ffd166 0%, #ff9b3d 22%, #f4506c 46%, #d94892 68%, rgba(217,72,146,0) 100%), linear-gradient(180deg, #faf7f2 0vh, #faf7f2 50vh, #f7c8b0 72vh, #ec8ea6 88vh, #d94892 108vh, #c43d82 138vh, #8d2d66 190vh, #3a1230 270vh)",
       }}
     >
+      <div
+        className="absolute left-1/2 pointer-events-none z-0"
+        style={{
+          top: "calc(100vh - clamp(240px, 36vh, 410px))",
+          width: "min(168vw, 1500px)",
+          height: "clamp(560px, 82vh, 820px)",
+          transform: "translateX(-50%)",
+          borderRadius: "50%",
+          background:
+            "radial-gradient(ellipse at 50% 44%, #ffd166 0%, #ff9b3d 22%, #f4506c 46%, #d94892 68%, rgba(217,72,146,0) 94%)",
+          filter: "blur(8px)",
+        }}
+      />
       {/* HERO — first screen */}
-      <section className="relative h-screen w-full overflow-hidden">
+      <section className="relative z-10 h-screen w-full overflow-hidden">
 
 
 
@@ -291,20 +304,6 @@ function Index() {
         >
           ↓ scroll
         </div>
-
-        {/* Horizon — sits at bottom of hero, scrolls up with the page */}
-        <div
-          className="absolute left-1/2 bottom-0 -translate-x-1/2 pointer-events-none z-0"
-          style={{
-            width: "min(160vw, 1400px)",
-            height: "clamp(220px, 34vh, 380px)",
-            borderRadius: "50% 50% 0 0 / 100% 100% 0 0",
-            background:
-              "radial-gradient(ellipse at 50% 100%, #ffd166 0%, #ff8a3d 22%, #f4506c 48%, #d94892 70%, rgba(217,72,146,0) 90%)",
-            filter: "blur(6px)",
-          }}
-        />
-
 
         {/* Flat pixel eyes on the horizon */}
         <FlatEye className="left-[38%] sm:left-[43%]" closed={eyesClosed} pixelSize={pixelSize} />
