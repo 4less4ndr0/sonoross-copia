@@ -166,10 +166,12 @@ function FlatEye({ left, closed }: { left: string; closed: boolean }) {
 
 function Index() {
   const [email, setEmail] = useState("");
+  const eyesClosed = useBlink(2500, 6000);
 
   const onSubmit = (e: FormEvent) => {
     e.preventDefault();
   };
+
 
   return (
     <main
