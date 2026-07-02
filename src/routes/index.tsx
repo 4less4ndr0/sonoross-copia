@@ -1,5 +1,6 @@
 import { createFileRoute } from "@tanstack/react-router";
 import { useEffect, useState, type FormEvent } from "react";
+import cloudAsset from "@/assets/cloud.png.asset.json";
 
 export const Route = createFileRoute("/")({
   component: Index,
@@ -9,7 +10,6 @@ type Cloud = {
   positionClass: string;
   widthClass: string;
   variant: "a" | "b" | "c" | "d";
-  shape: "s1" | "s2" | "s3";
   delay: string;
   rotate: number;
   text: string;
@@ -21,7 +21,6 @@ const CLOUDS: Cloud[] = [
     positionClass: "top-[2%] left-[3%] sm:top-[4%] sm:left-[3%]",
     widthClass: "w-[42vw] max-w-[320px] sm:w-[19vw] sm:max-w-[240px]",
     variant: "a",
-    shape: "s1",
     delay: "0s",
     rotate: -3,
     text: "Per chi ha ancora tante cose da raccontare.",
@@ -30,7 +29,6 @@ const CLOUDS: Cloud[] = [
     positionClass: "top-[10%] right-[3%] sm:top-[3%] sm:left-[41%]",
     widthClass: "w-[44vw] max-w-[340px] sm:w-[20vw] sm:max-w-[250px]",
     variant: "b",
-    shape: "s2",
     delay: "1.1s",
     rotate: 2,
     text: "La distanza non deve significare silenzio.",
@@ -39,7 +37,6 @@ const CLOUDS: Cloud[] = [
     positionClass: "top-[20%] left-[28%] sm:top-[5%] sm:right-[3%] sm:left-auto",
     widthClass: "w-[42vw] max-w-[320px] sm:w-[19vw] sm:max-w-[240px]",
     variant: "c",
-    shape: "s3",
     delay: "2.2s",
     rotate: 2,
     text: "Chi ama, vuole sapere come stai davvero.",
@@ -48,7 +45,6 @@ const CLOUDS: Cloud[] = [
     positionClass: "top-[46%] left-[2%] sm:top-[40%] sm:left-[1%]",
     widthClass: "w-[42vw] max-w-[320px] sm:w-[18vw] sm:max-w-[230px]",
     variant: "d",
-    shape: "s2",
     delay: "0.6s",
     rotate: -1,
     text: "Una compagnia che ascolta, non che controlla.",
@@ -57,19 +53,11 @@ const CLOUDS: Cloud[] = [
     positionClass: "top-[50%] right-[2%] sm:top-[42%] sm:right-[1%] sm:left-auto",
     widthClass: "w-[42vw] max-w-[320px] sm:w-[18vw] sm:max-w-[230px]",
     variant: "a",
-    shape: "s1",
     delay: "1.7s",
     rotate: 3,
     text: "Ogni giorno ha una storia da raccontare.",
   },
 ];
-
-// Flat cloud silhouettes, viewBox 200x110. Simple stacked circles unified via a single path.
-const CLOUD_PATHS: Record<Cloud["shape"], string> = {
-  s1: "M40 82 C18 82 10 62 26 52 C22 34 44 26 58 36 C64 20 92 18 100 34 C112 22 140 28 142 46 C162 44 174 62 162 76 C176 88 162 104 146 96 C138 108 116 108 108 96 C96 108 72 108 64 96 C56 104 44 100 40 82 Z",
-  s2: "M38 84 C16 82 12 60 30 52 C24 36 50 26 62 40 C72 24 100 26 106 42 C118 30 146 40 144 58 C164 60 172 80 156 90 C160 104 138 108 128 98 C118 108 96 108 88 98 C76 108 54 106 50 96 C42 100 38 92 38 84 Z",
-  s3: "M42 80 C20 78 14 58 32 50 C28 32 54 24 66 38 C74 22 102 24 108 40 C122 30 148 42 144 60 C160 64 168 82 154 92 C158 106 132 108 124 96 C114 108 92 108 84 96 C74 108 52 106 48 94 C42 96 40 88 42 80 Z",
-};
 
 function CloudShape({ c }: { c: Cloud }) {
   return (
@@ -80,28 +68,25 @@ function CloudShape({ c }: { c: Cloud }) {
         transform: `rotate(${c.rotate}deg)`,
       }}
     >
-      <div className="relative w-full" style={{ aspectRatio: "200 / 110" }}>
-        <svg
-          viewBox="0 0 200 110"
-          className="absolute inset-0 w-full h-full"
-          preserveAspectRatio="none"
-          aria-hidden="true"
+      <div className="relative w-full">
+        <img
+          src={cloudAsset.url}
+          alt=""
+          className="w-full h-auto select-none"
+          draggable={false}
+          style={{
+            filter: "drop-shadow(0 10px 20px rgba(80, 90, 130, 0.15))",
+          }}
+        />
+        <div
+          className="absolute inset-0 flex items-center justify-center px-[16%] pt-[6%] pb-[10%]"
+          style={{ transform: `rotate(${-c.rotate}deg)` }}
         >
-          <path
-            d={CLOUD_PATHS[c.shape]}
-            fill="#fdfbf6"
-            stroke="#e8e0d0"
-            strokeWidth={1.2}
-            strokeLinejoin="round"
-          />
-        </svg>
-        <div className="absolute inset-0 flex items-center justify-center px-[14%] pt-[6%] pb-[10%]">
           <p
-            className="text-center leading-[1.15]"
+            className="text-center text-neutral-800 leading-tight"
             style={{
               fontFamily: '"Instrument Serif", serif',
-              fontSize: "clamp(0.72rem, 1.55vw, 1rem)",
-              color: "#4a4438",
+              fontSize: "clamp(0.7rem, 1.7vw, 1.05rem)",
             }}
           >
             {c.text}
@@ -111,7 +96,6 @@ function CloudShape({ c }: { c: Cloud }) {
     </div>
   );
 }
-
 
 
 function useBlink(minMs: number, maxMs: number) {
