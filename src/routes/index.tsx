@@ -230,12 +230,17 @@ function Index() {
 
 
   return (
-    <main
-      className="relative w-full"
-      style={{ backgroundColor: "#faf7f2" }}
-    >
+    <main className="relative w-full">
       {/* HERO — first screen */}
-      <section className="relative h-screen w-full overflow-hidden">
+      <section
+        className="relative h-screen w-full overflow-hidden"
+        style={{
+          background:
+            "linear-gradient(180deg, #faf7f2 0%, #faf7f2 45%, #f7c8b0 68%, #ec8ea6 84%, #d94892 100%)",
+        }}
+      >
+
+
         {/* Clouds */}
         <div className="absolute inset-0 pointer-events-none z-10">
           {CLOUDS.map((c, i) => (
@@ -294,10 +299,11 @@ function Index() {
             height: "clamp(220px, 34vh, 380px)",
             borderRadius: "50% 50% 0 0 / 100% 100% 0 0",
             background:
-              "radial-gradient(ellipse at 50% 100%, #ffd166 0%, #ff8a3d 25%, #f4506c 50%, #d94892 68%, rgba(250,247,242,0) 82%)",
+              "radial-gradient(ellipse at 50% 100%, #ffd166 0%, #ff8a3d 22%, #f4506c 48%, #d94892 70%, rgba(217,72,146,0) 90%)",
             filter: "blur(6px)",
           }}
         />
+
 
         {/* Flat pixel eyes on the horizon */}
         <FlatEye className="left-[38%] sm:left-[43%]" closed={eyesClosed} pixelSize={pixelSize} />
@@ -316,9 +322,10 @@ function Index() {
         <div
           className="max-w-2xl mx-auto space-y-6"
           style={{
-            fontFamily: '"Instrument Serif", serif',
-            fontSize: "clamp(1.1rem, 1.5vw, 1.35rem)",
-            lineHeight: 1.55,
+            fontFamily: '"DM Sans", system-ui, sans-serif',
+            fontSize: "clamp(1rem, 1.15vw, 1.15rem)",
+            fontWeight: 400,
+            lineHeight: 1.65,
             letterSpacing: "-0.005em",
           }}
         >
