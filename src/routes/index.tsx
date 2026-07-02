@@ -311,12 +311,10 @@ function Index() {
         <FlatEye className="left-[62%] sm:left-[57%]" closed={eyesClosed} pixelSize={pixelSize} />
       </section>
 
-      {/* NARRATIVE — revealed on scroll, background continues the horizon warmth */}
+      {/* NARRATIVE — revealed on scroll, inherits gradient from main */}
       <section
         className="relative w-full py-24 sm:py-32 px-6 sm:px-8"
         style={{
-          background:
-            "linear-gradient(180deg, #d94892 0%, #b83a7a 22%, #7a2456 58%, #3a1230 100%)",
           color: "#faf1e6",
         }}
       >
