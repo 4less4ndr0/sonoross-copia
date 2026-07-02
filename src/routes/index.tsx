@@ -12,45 +12,50 @@ type Cloud = {
   variant: "a" | "b" | "c" | "d";
   delay: string;
   rotate: number;
+  text: string;
 };
 
-// 5 floating clouds. Mobile: 3 in top band, 2 in white space above horizon.
-// Desktop: 3 above the headline, 2 near the eyes.
+// 5 floating clouds with phrases inside.
 const CLOUDS: Cloud[] = [
   {
-    positionClass: "top-[3%] left-[6%] sm:top-[5%] sm:left-[5%]",
-    widthClass: "w-[28vw] max-w-[300px] sm:w-[11vw] sm:max-w-[170px]",
+    positionClass: "top-[2%] left-[3%] sm:top-[4%] sm:left-[3%]",
+    widthClass: "w-[42vw] max-w-[320px] sm:w-[19vw] sm:max-w-[240px]",
     variant: "a",
     delay: "0s",
     rotate: -3,
+    text: "Per chi ha ancora tante cose da raccontare.",
   },
   {
-    positionClass: "top-[10%] right-[4%] sm:top-[4%] sm:left-[44%]",
-    widthClass: "w-[30vw] max-w-[320px] sm:w-[10vw] sm:max-w-[160px]",
+    positionClass: "top-[10%] right-[3%] sm:top-[3%] sm:left-[41%]",
+    widthClass: "w-[44vw] max-w-[340px] sm:w-[20vw] sm:max-w-[250px]",
     variant: "b",
     delay: "1.1s",
     rotate: 2,
+    text: "La distanza non deve significare silenzio.",
   },
   {
-    positionClass: "top-[17%] left-[30%] sm:top-[6%] sm:right-[5%] sm:left-auto",
-    widthClass: "w-[26vw] max-w-[280px] sm:w-[11vw] sm:max-w-[170px]",
+    positionClass: "top-[20%] left-[28%] sm:top-[5%] sm:right-[3%] sm:left-auto",
+    widthClass: "w-[42vw] max-w-[320px] sm:w-[19vw] sm:max-w-[240px]",
     variant: "c",
     delay: "2.2s",
     rotate: 2,
+    text: "Chi ama, vuole sapere come stai davvero.",
   },
   {
-    positionClass: "top-[48%] left-[2%] sm:top-[42%] sm:left-[2%]",
-    widthClass: "w-[26vw] max-w-[280px] sm:w-[10vw] sm:max-w-[150px]",
+    positionClass: "top-[46%] left-[2%] sm:top-[40%] sm:left-[1%]",
+    widthClass: "w-[42vw] max-w-[320px] sm:w-[18vw] sm:max-w-[230px]",
     variant: "d",
     delay: "0.6s",
     rotate: -1,
+    text: "Una compagnia che ascolta, non che controlla.",
   },
   {
-    positionClass: "top-[52%] right-[2%] sm:top-[44%] sm:right-[2%] sm:left-auto",
-    widthClass: "w-[28vw] max-w-[300px] sm:w-[10vw] sm:max-w-[150px]",
+    positionClass: "top-[50%] right-[2%] sm:top-[42%] sm:right-[1%] sm:left-auto",
+    widthClass: "w-[42vw] max-w-[320px] sm:w-[18vw] sm:max-w-[230px]",
     variant: "a",
     delay: "1.7s",
     rotate: 3,
+    text: "Ogni giorno ha una storia da raccontare.",
   },
 ];
 
@@ -63,18 +68,35 @@ function CloudShape({ c }: { c: Cloud }) {
         transform: `rotate(${c.rotate}deg)`,
       }}
     >
-      <img
-        src={cloudAsset.url}
-        alt=""
-        className="w-full h-auto select-none"
-        draggable={false}
-        style={{
-          filter: "drop-shadow(0 10px 20px rgba(80, 90, 130, 0.15))",
-        }}
-      />
+      <div className="relative w-full">
+        <img
+          src={cloudAsset.url}
+          alt=""
+          className="w-full h-auto select-none"
+          draggable={false}
+          style={{
+            filter: "drop-shadow(0 10px 20px rgba(80, 90, 130, 0.15))",
+          }}
+        />
+        <div
+          className="absolute inset-0 flex items-center justify-center px-[16%] pt-[6%] pb-[10%]"
+          style={{ transform: `rotate(${-c.rotate}deg)` }}
+        >
+          <p
+            className="text-center text-neutral-800 leading-tight"
+            style={{
+              fontFamily: '"Instrument Serif", serif',
+              fontSize: "clamp(0.7rem, 1.7vw, 1.05rem)",
+            }}
+          >
+            {c.text}
+          </p>
+        </div>
+      </div>
     </div>
   );
 }
+
 
 function useBlink(minMs: number, maxMs: number) {
   const [closed, setClosed] = useState(false);
