@@ -231,68 +231,148 @@ function Index() {
 
   return (
     <main
-      className="relative h-screen w-screen overflow-hidden"
+      className="relative w-full"
       style={{ backgroundColor: "#faf7f2" }}
     >
-      {/* Bubbles */}
-      <div className="absolute inset-0 pointer-events-none z-10">
-        {CLOUDS.map((c, i) => (
-          <CloudShape key={i} c={c} />
-        ))}
-      </div>
+      {/* HERO — first screen */}
+      <section className="relative h-screen w-full overflow-hidden">
+        {/* Clouds */}
+        <div className="absolute inset-0 pointer-events-none z-10">
+          {CLOUDS.map((c, i) => (
+            <CloudShape key={i} c={c} />
+          ))}
+        </div>
 
-      {/* Centered content (headline + email) — sits ABOVE the horizon */}
-      <div className="relative z-20 h-full flex flex-col items-center justify-center px-5 sm:px-6 pb-[34vh] sm:pb-[36vh]">
-        <h1
-          className="text-center text-neutral-900 max-w-3xl"
+        {/* Centered content (headline + email) — sits ABOVE the horizon */}
+        <div className="relative z-20 h-full flex flex-col items-center justify-center px-5 sm:px-6 pb-[34vh] sm:pb-[36vh]">
+          <h1
+            className="text-center text-neutral-900 max-w-3xl"
+            style={{
+              fontFamily: '"Instrument Serif", serif',
+              fontWeight: 400,
+              fontSize: "clamp(2rem, 7vw, 4.5rem)",
+              lineHeight: 1.05,
+            }}
+          >
+            Perché nessuno dovrebbe invecchiare solo.
+          </h1>
+
+          <form
+            onSubmit={onSubmit}
+            className="mt-6 sm:mt-8 flex items-center gap-2 bg-white rounded-full pl-5 sm:pl-6 pr-2 py-2 shadow-sm border border-neutral-200 w-full max-w-md"
+          >
+            <input
+              type="email"
+              required
+              value={email}
+              onChange={(e) => setEmail(e.target.value)}
+              placeholder="Il tuo indirizzo email"
+              className="flex-1 min-w-0 bg-transparent outline-none text-neutral-800 placeholder:text-neutral-400 py-2"
+            />
+            <button
+              type="submit"
+              aria-label="Iscriviti"
+              className="shrink-0 rounded-full bg-neutral-900 text-white w-10 h-10 flex items-center justify-center hover:bg-neutral-700 transition-colors"
+            >
+              →
+            </button>
+          </form>
+        </div>
+
+        {/* Scroll hint */}
+        <div
+          className="absolute bottom-4 left-1/2 -translate-x-1/2 z-30 text-neutral-500 text-[10px] tracking-[0.25em] uppercase animate-bounce pointer-events-none"
+        >
+          ↓ scroll
+        </div>
+
+        {/* Horizon — sits at bottom of hero, scrolls up with the page */}
+        <div
+          className="absolute left-1/2 bottom-0 -translate-x-1/2 pointer-events-none z-0"
+          style={{
+            width: "min(160vw, 1400px)",
+            height: "clamp(220px, 34vh, 380px)",
+            borderRadius: "50% 50% 0 0 / 100% 100% 0 0",
+            background:
+              "radial-gradient(ellipse at 50% 100%, #ffd166 0%, #ff8a3d 25%, #f4506c 50%, #d94892 68%, rgba(250,247,242,0) 82%)",
+            filter: "blur(6px)",
+          }}
+        />
+
+        {/* Flat pixel eyes on the horizon */}
+        <FlatEye className="left-[38%] sm:left-[43%]" closed={eyesClosed} pixelSize={pixelSize} />
+        <FlatEye className="left-[62%] sm:left-[57%]" closed={eyesClosed} pixelSize={pixelSize} />
+      </section>
+
+      {/* NARRATIVE — revealed on scroll, background continues the horizon warmth */}
+      <section
+        className="relative w-full py-24 sm:py-32 px-6 sm:px-8"
+        style={{
+          background:
+            "linear-gradient(180deg, #d94892 0%, #b83a7a 22%, #7a2456 58%, #3a1230 100%)",
+          color: "#faf1e6",
+        }}
+      >
+        <div
+          className="max-w-2xl mx-auto space-y-6"
           style={{
             fontFamily: '"Instrument Serif", serif',
-            fontWeight: 400,
-            fontSize: "clamp(2rem, 7vw, 4.5rem)",
-            lineHeight: 1.05,
+            fontSize: "clamp(1.1rem, 1.5vw, 1.35rem)",
+            lineHeight: 1.55,
+            letterSpacing: "-0.005em",
           }}
         >
-          Perché nessuno dovrebbe invecchiare solo.
-        </h1>
-
-        <form
-          onSubmit={onSubmit}
-          className="mt-6 sm:mt-8 flex items-center gap-2 bg-white rounded-full pl-5 sm:pl-6 pr-2 py-2 shadow-sm border border-neutral-200 w-full max-w-md"
-        >
-          <input
-            type="email"
-            required
-            value={email}
-            onChange={(e) => setEmail(e.target.value)}
-            placeholder="Il tuo indirizzo email"
-            className="flex-1 min-w-0 bg-transparent outline-none text-neutral-800 placeholder:text-neutral-400 py-2"
-          />
-          <button
-            type="submit"
-            aria-label="Iscriviti"
-            className="shrink-0 rounded-full bg-neutral-900 text-white w-10 h-10 flex items-center justify-center hover:bg-neutral-700 transition-colors"
+          <p
+            className="text-center"
+            style={{
+              fontSize: "clamp(1.75rem, 4vw, 2.75rem)",
+              lineHeight: 1.15,
+              marginBottom: "2rem",
+            }}
           >
-            →
-          </button>
-        </form>
-      </div>
+            Invecchiare non dovrebbe accadere soli.
+          </p>
 
-      {/* Horizon — fluid, sits below the email form */}
-      <div
-        className="absolute left-1/2 bottom-0 -translate-x-1/2 pointer-events-none z-0"
-        style={{
-          width: "min(160vw, 1400px)",
-          height: "clamp(220px, 34vh, 380px)",
-          borderRadius: "50% 50% 0 0 / 100% 100% 0 0",
-          background:
-            "radial-gradient(ellipse at 50% 100%, #ffd166 0%, #ff8a3d 25%, #f4506c 50%, #d94892 68%, rgba(250,247,242,0) 82%)",
-          filter: "blur(6px)",
-        }}
-      />
+          <p>
+            Ogni giorno, in migliaia di case, una telefonata si riduce a un controllo:
+            ha mangiato? ha preso le medicine? è uscito? si è fatto male?
+          </p>
 
-      {/* Flat pixel eyes on the horizon — bigger and more separated on mobile */}
-      <FlatEye className="left-[38%] sm:left-[43%]" closed={eyesClosed} pixelSize={pixelSize} />
-      <FlatEye className="left-[62%] sm:left-[57%]" closed={eyesClosed} pixelSize={pixelSize} />
+          <p>In famiglia ci si scrive per organizzarsi —</p>
+          <ul className="list-none space-y-2 pl-6" style={{ opacity: 0.92 }}>
+            <li>— chi va a trovarlo questo weekend</li>
+            <li>— chi ha sentito il medico</li>
+            <li>— chi si sente in colpa per non essere abbastanza presente.</li>
+          </ul>
+
+          <p>
+            Viene interpellato solo per confermare cosa è successo o non è successo.
+            Non gli si chiede più come sta davvero. Il problema pratico occupa tutto lo spazio.
+          </p>
+
+          <p>
+            Ma il problema non è mai stato solo la sicurezza.
+            Le soluzioni che esistono oggi — sensori, promemoria, dispositivi di controllo —
+            nascono tutte dalla stessa domanda: <em>come monitorarlo?</em>
+          </p>
+
+          <p style={{ fontSize: "clamp(1.35rem, 2.2vw, 1.75rem)", lineHeight: 1.3 }}>
+            E se lo strumento più potente non fosse clinico, ma relazionale?
+          </p>
+
+          <p>
+            La parte più difficile della solitudine non è il rischio fisico.
+            È che nessuno gli chiede più di raccontare — e quando qualcuno lo fa,
+            lui torna a stare meglio, a ricordare, a parlare.
+          </p>
+
+          <p>
+            <strong style={{ fontWeight: 400, letterSpacing: "0.02em" }}>R.O.S.S.</strong>{" "}
+            nasce per riportare al centro la famiglia con la propria storia, i ricordi,
+            e le persone che ha amato, perché tornare a parlargli non deve significare gestirlo.
+          </p>
+        </div>
+      </section>
     </main>
   );
 }
