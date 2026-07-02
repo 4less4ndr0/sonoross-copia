@@ -113,12 +113,12 @@ const FULL_ROWS = [
 const ROWS_COUNT = FULL_ROWS.length;
 
 function usePixelSize() {
-  const [px, setPx] = useState(7);
+  const [px, setPx] = useState(6);
   useEffect(() => {
     const update = () => {
       const vmin = Math.min(window.innerWidth, window.innerHeight);
-      // ~5px on 390 vmin, ~8px on 900 vmin
-      setPx(Math.max(4, Math.min(9, Math.round(vmin * 0.011))));
+      // bigger on mobile: ~6px at 390 vmin, ~8px at 760, capped at 10
+      setPx(Math.max(6, Math.min(10, Math.round(vmin * 0.012))));
     };
     update();
     window.addEventListener("resize", update);
