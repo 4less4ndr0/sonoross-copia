@@ -2,7 +2,7 @@ import { createFileRoute } from "@tanstack/react-router";
 import { useEffect, useState, type FormEvent } from "react";
 
 export const Route = createFileRoute("/")({
-  component: Index;
+  component: Index,
 });
 
 type Bubble = {
