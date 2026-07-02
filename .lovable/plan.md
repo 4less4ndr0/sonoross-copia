@@ -1,16 +1,15 @@
-Sostituisco le 5 bubble iMessage con 5 nuvole 3D bianche stile immagine allegata, mantenendo posizioni, dimensioni responsive e animazioni floating già esistenti.
+Riposiziono le 5 nuvole solo nella fascia bianca sopra l'orizzonte (che occupa ~34vh in basso), evitando la headline e il form al centro.
 
-## Approccio
+## Cambio in `src/routes/index.tsx`
 
-1. **Asset nuvola**: carico l'immagine `user-uploads://CleanShot_2026-07-02_at_17.27.51@2x.png` su Lovable Assets con background rimosso (PNG trasparente), così la nuvola galleggia sullo sfondo bianco senza il rettangolo azzurro. Salvo il pointer in `src/assets/cloud.png.asset.json`.
+Aggiorno l'array `CLOUDS` con nuove `positionClass` responsive. L'orizzonte parte da ~66% (desktop) / ~60% (mobile) dal top, quindi tutte le nuvole restano sopra quel limite. La headline+form occupa la fascia centrale ~30%–60%, quindi nella fascia centrale metto le nuvole solo ai bordi estremi (left <8% o right <8%).
 
-2. **Componente `CloudShape`** (in `src/routes/index.tsx`): sostituisce `BubbleShape`. Renderizza `<img src={cloudAsset.url}>` con:
-   - `width` / `height` presi dai valori già presenti in `BUBBLES` (le nuvole riempiono lo stesso bounding box delle bubble attuali → stesse dimensioni responsive)
-   - `object-contain`, drop-shadow leggera per dare profondità
-   - stessa animazione `float-*` e `positionClass` già definite
+Desktop (sm:):
+- 3 nuvole in alto sopra la headline: `sm:top-[5%]` a left 5%, 45%, 78%
+- 2 nuvole ai lati del form (fascia media, bordi estremi): `sm:top-[42%]` a `sm:left-[2%]` e `sm:right-[2%]`, dimensioni piccole (`sm:w-[10vw]`) per non toccare né form né orizzonte
 
-3. **Array `BUBBLES`**: lo rinomino concettualmente in `CLOUDS` ma mantengo identiche posizioni (3 in alto, 2 in basso sopra l'orizzonte su mobile / vicino agli occhi su desktop) e dimensioni. Rimuovo campi ora inutili (`variant`, tail SVG).
+Mobile:
+- 3 in alto: `top-[3%]` left 6%, `top-[10%]` right 4%, `top-[17%]` left 30%
+- 2 nella fascia bianca sotto il form ma sopra l'orizzonte (~top 48–54%), ai lati estremi: left 2% e right 2%
 
-4. **Cleanup**: rimuovo il vecchio SVG con la coda iMessage e i colori `#007AFF`. Le nuvole sono puramente immagini PNG trasparenti.
-
-Nessun cambiamento a headline, form email, orizzonte, occhi pixel.
+Nessun'altra modifica: occhi, orizzonte, headline e form restano invariati.
