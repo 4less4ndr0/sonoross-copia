@@ -328,16 +328,6 @@ function Index() {
             letterSpacing: "-0.005em",
           }}
         >
-          <p
-            className="text-center"
-            style={{
-              fontSize: "clamp(1.75rem, 4vw, 2.75rem)",
-              lineHeight: 1.15,
-              marginBottom: "2rem",
-            }}
-          >
-            Invecchiare non dovrebbe accadere soli.
-          </p>
 
           <p>
             Ogni giorno, in migliaia di case, una telefonata si riduce a un controllo:
