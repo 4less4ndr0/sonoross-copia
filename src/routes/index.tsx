@@ -113,12 +113,12 @@ const FULL_ROWS = [
 const ROWS_COUNT = FULL_ROWS.length;
 
 function usePixelSize() {
-  const [px, setPx] = useState(7);
+  const [px, setPx] = useState(6);
   useEffect(() => {
     const update = () => {
       const vmin = Math.min(window.innerWidth, window.innerHeight);
-      // ~5px on 390 vmin, ~8px on 900 vmin
-      setPx(Math.max(4, Math.min(9, Math.round(vmin * 0.011))));
+      // bigger on mobile: ~6px at 390 vmin, ~8px at 760, capped at 10
+      setPx(Math.max(6, Math.min(10, Math.round(vmin * 0.012))));
     };
     update();
     window.addEventListener("resize", update);
@@ -127,7 +127,7 @@ function usePixelSize() {
   return px;
 }
 
-function FlatEye({ left, closed, pixelSize }: { left: string; closed: boolean; pixelSize: number }) {
+function FlatEye({ className, closed, pixelSize }: { className?: string; closed: boolean; pixelSize: number }) {
   const gap = 1;
   const rows = closed
     ? FULL_ROWS.map(() => Array(COLS).fill(0)).map((r, i) =>
@@ -137,9 +137,8 @@ function FlatEye({ left, closed, pixelSize }: { left: string; closed: boolean; p
 
   return (
     <div
-      className="absolute"
+      className={`absolute ${className ?? ""}`}
       style={{
-        left,
         top: "80%",
         transform: "translate(-50%, -50%)",
         width: COLS * pixelSize + (COLS - 1) * gap,
@@ -244,9 +243,9 @@ function Index() {
         }}
       />
 
-      {/* Flat pixel eyes on the horizon — scale with viewport, blink together */}
-      <FlatEye left="43%" closed={eyesClosed} pixelSize={pixelSize} />
-      <FlatEye left="57%" closed={eyesClosed} pixelSize={pixelSize} />
+      {/* Flat pixel eyes on the horizon — bigger and more separated on mobile */}
+      <FlatEye className="left-[38%] sm:left-[43%]" closed={eyesClosed} pixelSize={pixelSize} />
+      <FlatEye className="left-[62%] sm:left-[57%]" closed={eyesClosed} pixelSize={pixelSize} />
     </main>
   );
 }
