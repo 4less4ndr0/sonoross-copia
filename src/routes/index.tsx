@@ -230,15 +230,16 @@ function Index() {
 
 
   return (
-    <main className="relative w-full">
+    <main
+      className="relative w-full"
+      style={{
+        background:
+          "linear-gradient(180deg, #faf7f2 0vh, #faf7f2 55vh, #f7c8b0 75vh, #ec8ea6 90vh, #d94892 100vh, #b83a7a 130vh, #7a2456 180vh, #3a1230 260vh)",
+      }}
+    >
       {/* HERO — first screen */}
-      <section
-        className="relative h-screen w-full overflow-hidden"
-        style={{
-          background:
-            "linear-gradient(180deg, #faf7f2 0%, #faf7f2 45%, #f7c8b0 68%, #ec8ea6 84%, #d94892 100%)",
-        }}
-      >
+      <section className="relative h-screen w-full overflow-hidden">
+
 
 
         {/* Clouds */}
