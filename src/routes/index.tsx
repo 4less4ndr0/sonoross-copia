@@ -231,9 +231,9 @@ function Index() {
         }}
       />
 
-      {/* Flat pixel eyes on the horizon — blink together */}
-      <FlatEye left="46%" closed={eyesClosed} />
-      <FlatEye left="54%" closed={eyesClosed} />
+      {/* Flat pixel eyes on the horizon — bigger, whiter, wider apart, blink together */}
+      <FlatEye left="42%" closed={eyesClosed} />
+      <FlatEye left="58%" closed={eyesClosed} />
     </main>
   );
 }
