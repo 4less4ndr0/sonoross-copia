@@ -263,7 +263,7 @@ function Index() {
         </div>
 
         {/* Centered content (headline + email) — sits ABOVE the horizon */}
-        <div className="relative z-20 h-full flex flex-col items-center justify-center px-5 sm:px-6 pb-[34vh] sm:pb-[36vh]">
+        <div className="relative z-20 h-full flex flex-col items-center justify-center px-5 sm:px-6 pb-[46vh] sm:pb-[48vh]">
           <h1
             className="text-center text-neutral-900 max-w-3xl"
             style={{
