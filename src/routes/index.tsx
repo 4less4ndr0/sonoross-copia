@@ -374,8 +374,7 @@ function Index() {
 
           <p>
             <strong style={{ fontWeight: 400, letterSpacing: "0.02em" }}>R.O.S.S.</strong>{" "}
-            nasce per riportare al centro la famiglia con la propria storia, i ricordi,
-            e le persone che ha amato, perché tornare a parlargli non deve significare gestirlo.
+            nasce per riportare al centro la famiglia con la propria storia, i ricordi e le persone che ne fanno parte.
           </p>
         </div>
       </section>
