@@ -238,7 +238,7 @@ function Index() {
       }}
     >
       {/* HERO — first screen */}
-      <section className="relative h-screen w-full overflow-hidden">
+      <section className="relative h-screen w-full overflow-x-hidden overflow-y-visible">
 
 
 
@@ -297,11 +297,11 @@ function Index() {
           className="absolute left-1/2 bottom-0 -translate-x-1/2 pointer-events-none z-0"
           style={{
             width: "min(160vw, 1400px)",
-            height: "clamp(220px, 34vh, 380px)",
+            height: "clamp(300px, 52vh, 560px)",
             borderRadius: "50% 50% 0 0 / 100% 100% 0 0",
             background:
-              "radial-gradient(ellipse at 50% 100%, #ffd166 0%, #ff9b3d 22%, #f4506c 46%, #d94892 68%, rgba(217,72,146,0) 92%)",
-            filter: "blur(6px)",
+              "radial-gradient(ellipse at 50% 58%, #ffd166 0%, #ff9b3d 22%, #f4506c 46%, #d94892 68%, rgba(217,72,146,0) 94%)",
+            filter: "blur(8px)",
           }}
         />
 
