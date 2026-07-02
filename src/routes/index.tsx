@@ -127,7 +127,7 @@ function usePixelSize() {
   return px;
 }
 
-function FlatEye({ left, closed, pixelSize }: { left: string; closed: boolean; pixelSize: number }) {
+function FlatEye({ className, closed, pixelSize }: { className?: string; closed: boolean; pixelSize: number }) {
   const gap = 1;
   const rows = closed
     ? FULL_ROWS.map(() => Array(COLS).fill(0)).map((r, i) =>
@@ -137,9 +137,8 @@ function FlatEye({ left, closed, pixelSize }: { left: string; closed: boolean; p
 
   return (
     <div
-      className="absolute"
+      className={`absolute ${className ?? ""}`}
       style={{
-        left,
         top: "80%",
         transform: "translate(-50%, -50%)",
         width: COLS * pixelSize + (COLS - 1) * gap,
