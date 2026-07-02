@@ -1,5 +1,8 @@
-1.  **Inspect current horizon math.** The absolute glow layer is currently positioned at `top: calc(100vh - clamp(240px, 36vh, 410px))` and is 82vh tall; the hero content is padded `pb-[34vh] sm:pb-[36vh]`. This makes the colored horizon start too high and crowd the email form.
-2.  **Lower the horizon glow.** Move the glow layer down so its upper edge sits just above the flat eyes, which are at 80% of the hero. Proposed change: shift `top` to `calc(100vh - clamp(140px, 20vh, 240px))` and reduce height to `clamp(420px, 58vh, 620px)`, keeping the same colors and blur.
-3.  **Re-center hero content.** Increase the bottom padding of the headline+form wrapper (e.g. `pb-[46vh] sm:pb-[48vh]`) so it stays vertically centered in the cream area above the new horizon.
-4.  **Check cloud clearance.** Ensure the lower clouds stay in the white/cream space and do not overlap the intensified lower glow.
-5.  **Verify visually.** Capture desktop and mobile preview screenshots and confirm the form has clear breathing room and the horizon edge sits close to the eyes.
+Capito: il problema non è solo la linea di stacco, è che la sezione narrativa sotto l’orizzonte continua con colori diversi/non coerenti rispetto al gradiente dell’orizzonte.
+
+Piano:
+1. Trattare l’area sotto l’orizzonte come prosecuzione naturale del gradiente dell’orizzonte, non come una sezione con palette autonoma.
+2. Modificare il gradiente globale del `main` in modo che dopo il punto dell’orizzonte continui dagli stessi colori visibili lì: arancio/rosa caldo → magenta → plum, senza salto tonale.
+3. Rimuovere o correggere gli stop attuali della narrativa che partono troppo “piatti”/monocromatici e non riprendono il glow arancio-rosa dell’orizzonte.
+4. Lasciare l’orizzonte come elemento visivo sopra, ma fare in modo che sotto di lui il fondo sembri lo stesso cielo/colore che prosegue nello scroll.
+5. Verificare nello scroll che appena sotto l’orizzonte non compaia più una fascia separata, ma una continuità cromatica reale.
