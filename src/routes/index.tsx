@@ -101,8 +101,31 @@ function useBlink(minMs: number, maxMs: number) {
   return closed;
 }
 
-function MickeyEye({ left }: { left: string }) {
-  const closed = useBlink(2800, 6500);
+const PIXEL = 5;
+const GAP = 1;
+const COLS = 7;
+const FULL_ROWS = [
+  [0, 0, 0, 1, 0, 0, 0],
+  [0, 0, 1, 1, 1, 0, 0],
+  [0, 1, 1, 1, 1, 1, 0],
+  [1, 1, 1, 1, 1, 1, 1],
+  [1, 1, 1, 1, 1, 1, 1],
+  [1, 1, 1, 1, 1, 1, 1],
+  [1, 1, 1, 1, 1, 1, 1],
+  [1, 1, 1, 1, 1, 1, 1],
+  [1, 1, 1, 1, 1, 1, 1],
+  [0, 1, 1, 1, 1, 1, 0],
+  [0, 0, 1, 1, 1, 0, 0],
+  [0, 0, 0, 1, 0, 0, 0],
+];
+
+function FlatEye({ left, closed }: { left: string; closed: boolean }) {
+  const rows = closed
+    ? FULL_ROWS.map(() => Array(COLS).fill(0)).map((r, i) =>
+        i === 5 || i === 6 ? [0, 0, 1, 1, 1, 0, 0] : r
+      )
+    : FULL_ROWS;
+
   return (
     <div
       className="absolute"
@@ -110,55 +133,45 @@ function MickeyEye({ left }: { left: string }) {
         left,
         top: "78%",
         transform: "translate(-50%, -50%)",
-        width: 56,
-        height: 72,
+        width: COLS * PIXEL + (COLS - 1) * GAP,
+        height: FULL_ROWS.length * PIXEL + (FULL_ROWS.length - 1) * GAP,
       }}
     >
-      {/* White eyeball (tall oval, Mickey style) */}
       <div
-        className="absolute inset-0"
         style={{
-          background: "#ffffff",
-          borderRadius: "50%",
-          boxShadow: "0 4px 14px rgba(0,0,0,0.15)",
-          overflow: "hidden",
+          display: "grid",
+          gridTemplateColumns: `repeat(${COLS}, ${PIXEL}px)`,
+          gap: GAP,
         }}
       >
-        {/* Pupil */}
-        <div
-          className="absolute"
-          style={{
-            width: 22,
-            height: 34,
-            background: "#111",
-            borderRadius: "50%",
-            left: "50%",
-            top: "50%",
-            transform: `translate(-50%, -50%) scaleY(${closed ? 0.05 : 1})`,
-            transition: "transform 140ms ease",
-          }}
-        />
-        {/* Eyelid (covers eye when closed) */}
-        <div
-          className="absolute inset-0"
-          style={{
-            background: "#ffffff",
-            transform: `scaleY(${closed ? 1 : 0})`,
-            transformOrigin: "top",
-            transition: "transform 140ms ease",
-          }}
-        />
+        {rows.map((row, r) =>
+          row.map((on, c) => (
+            <div
+              key={`${r}-${c}`}
+              style={{
+                width: PIXEL,
+                height: PIXEL,
+                background: on ? "#FBBF24" : "transparent",
+                boxShadow: on ? "0 0 3px #FBBF24, 0 0 6px #F59E0B" : undefined,
+                transition: "background 120ms ease, box-shadow 120ms ease",
+              }}
+            />
+          ))
+        )}
       </div>
     </div>
   );
 }
 
+
 function Index() {
   const [email, setEmail] = useState("");
+  const eyesClosed = useBlink(2500, 6000);
 
   const onSubmit = (e: FormEvent) => {
     e.preventDefault();
   };
+
 
   return (
     <main
@@ -216,9 +229,9 @@ function Index() {
         }}
       />
 
-      {/* Mickey Mouse eyes on the horizon */}
-      <MickeyEye left="46%" />
-      <MickeyEye left="54%" />
+      {/* Flat pixel eyes on the horizon — blink together */}
+      <FlatEye left="46%" closed={eyesClosed} />
+      <FlatEye left="54%" closed={eyesClosed} />
     </main>
   );
 }
