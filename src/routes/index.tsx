@@ -359,7 +359,7 @@ function Index() {
               fontStyle: "italic",
               fontSize: "clamp(1.5rem, 2.6vw, 2.1rem)",
               lineHeight: 1.25,
-              color: "#ffd9a8",
+              color: "#D68A3C",
             }}
           >
             E se lo strumento più potente non fosse clinico, ma relazionale?
