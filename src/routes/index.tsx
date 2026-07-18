@@ -232,10 +232,7 @@ function Index() {
   return (
     <main
       className="relative w-full overflow-x-hidden"
-      style={{
-        background:
-          "radial-gradient(ellipse 92vw 78vh at 50% 100vh, #ffd166 0%, #ff9b3d 22%, #f4506c 46%, #d94892 68%, rgba(217,72,146,0) 100%), linear-gradient(180deg, #faf7f2 0vh, #faf7f2 50vh, #f7c8b0 72vh, #ec8ea6 88vh, #d94892 108vh, #c43d82 138vh, #8d2d66 190vh, #3a1230 270vh)",
-      }}
+      style={{ background: "#f8f1e0" }}
     >
       <div
         className="absolute left-1/2 pointer-events-none z-0"
@@ -246,7 +243,7 @@ function Index() {
           transform: "translateX(-50%)",
           borderRadius: "50%",
           background:
-            "radial-gradient(ellipse at 50% 44%, #ffd166 0%, #ff9b3d 22%, #f4506c 46%, #d94892 68%, rgba(217,72,146,0) 94%)",
+            "radial-gradient(ellipse at 50% 44%, #E8C547 0%, #D68A3C 30%, #9CBE5F 62%, rgba(248,241,224,0) 92%)",
           filter: "blur(8px)",
         }}
       />
