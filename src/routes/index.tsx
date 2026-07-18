@@ -316,7 +316,7 @@ function Index() {
       <section
         className="relative w-full py-24 sm:py-32 px-6 sm:px-8"
         style={{
-          color: "#faf1e6",
+          color: "#1a1a1a",
         }}
       >
         <div
