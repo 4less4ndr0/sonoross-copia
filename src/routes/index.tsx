@@ -94,7 +94,7 @@ function CloudShape({ c }: { c: Cloud }) {
           <p
             className="text-center"
             style={{
-              fontFamily: '"Instrument Serif", serif',
+              fontFamily: 'Georgia, "Times New Roman", serif',
               color: "#1a1a1a",
               fontSize: "clamp(0.72rem, 1.15vw, 1rem)",
               lineHeight: 1.15,
@@ -265,12 +265,13 @@ function Index() {
         {/* Centered content (headline + email) — sits ABOVE the horizon */}
         <div className="relative z-20 h-full flex flex-col items-center justify-center px-5 sm:px-6 pb-[34vh] sm:pb-[36vh]">
           <h1
-            className="text-center text-neutral-900 max-w-3xl"
+            className="text-center max-w-3xl"
             style={{
-              fontFamily: '"Instrument Serif", serif',
+              fontFamily: 'Georgia, "Times New Roman", serif',
               fontWeight: 400,
               fontSize: "clamp(2rem, 7vw, 4.5rem)",
               lineHeight: 1.05,
+              color: "#1a1a1a",
             }}
           >
             Perché nessuno dovrebbe invecchiare solo.
@@ -279,6 +280,7 @@ function Index() {
           <form
             onSubmit={onSubmit}
             className="mt-6 sm:mt-8 flex items-center gap-2 bg-white rounded-full pl-5 sm:pl-6 pr-2 py-2 shadow-sm border border-neutral-200 w-full max-w-md"
+            style={{ fontFamily: '"DM Sans", system-ui, sans-serif' }}
           >
             <input
               type="email"
@@ -286,17 +288,20 @@ function Index() {
               value={email}
               onChange={(e) => setEmail(e.target.value)}
               placeholder="Il tuo indirizzo email"
-              className="flex-1 min-w-0 bg-transparent outline-none text-neutral-800 placeholder:text-neutral-400 py-2"
+              className="flex-1 min-w-0 bg-transparent outline-none py-2"
+              style={{ color: "#1a1a1a" }}
             />
             <button
               type="submit"
               aria-label="Iscriviti"
-              className="shrink-0 rounded-full bg-neutral-900 text-white w-10 h-10 flex items-center justify-center hover:bg-neutral-700 transition-colors"
+              className="shrink-0 rounded-full w-10 h-10 flex items-center justify-center transition-colors"
+              style={{ background: "#1a1a1a", color: "#faf7f2" }}
             >
               →
             </button>
           </form>
         </div>
+
 
         {/* Scroll hint */}
         <div
@@ -334,7 +339,7 @@ function Index() {
           </p>
 
           <p>In famiglia ci si scrive per organizzarsi —</p>
-          <ul className="list-none space-y-2 pl-6" style={{ opacity: 0.92 }}>
+          <ul className="list-none space-y-2 pl-6" style={{ opacity: 0.85 }}>
             <li>— chi va a trovarlo questo weekend</li>
             <li>— chi ha sentito il medico</li>
             <li>— chi si sente in colpa per non essere abbastanza presente.</li>
@@ -351,7 +356,15 @@ function Index() {
             nascono tutte dalla stessa domanda: <em>come monitorarlo?</em>
           </p>
 
-          <p style={{ fontSize: "clamp(1.35rem, 2.2vw, 1.75rem)", lineHeight: 1.3 }}>
+          <p
+            style={{
+              fontFamily: 'Georgia, "Times New Roman", serif',
+              fontStyle: "italic",
+              fontSize: "clamp(1.5rem, 2.6vw, 2.1rem)",
+              lineHeight: 1.25,
+              color: "#ffd9a8",
+            }}
+          >
             E se lo strumento più potente non fosse clinico, ma relazionale?
           </p>
 
@@ -362,7 +375,7 @@ function Index() {
           </p>
 
           <p>
-            <strong style={{ fontWeight: 400, letterSpacing: "0.02em" }}>R.O.S.S.</strong>{" "}
+            <strong style={{ fontWeight: 500, letterSpacing: "0.14em" }}>R.O.S.S.</strong>{" "}
             nasce per riportare al centro la famiglia con la propria storia, i ricordi e le persone che ne fanno parte.
           </p>
         </div>
