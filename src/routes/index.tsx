@@ -339,7 +339,7 @@ function Index() {
           </p>
 
           <p>In famiglia ci si scrive per organizzarsi —</p>
-          <ul className="list-none space-y-2 pl-6" style={{ opacity: 0.92 }}>
+          <ul className="list-none space-y-2 pl-6" style={{ opacity: 0.85 }}>
             <li>— chi va a trovarlo questo weekend</li>
             <li>— chi ha sentito il medico</li>
             <li>— chi si sente in colpa per non essere abbastanza presente.</li>
@@ -356,7 +356,15 @@ function Index() {
             nascono tutte dalla stessa domanda: <em>come monitorarlo?</em>
           </p>
 
-          <p style={{ fontSize: "clamp(1.35rem, 2.2vw, 1.75rem)", lineHeight: 1.3 }}>
+          <p
+            style={{
+              fontFamily: 'Georgia, "Times New Roman", serif',
+              fontStyle: "italic",
+              fontSize: "clamp(1.5rem, 2.6vw, 2.1rem)",
+              lineHeight: 1.25,
+              color: "#ffd9a8",
+            }}
+          >
             E se lo strumento più potente non fosse clinico, ma relazionale?
           </p>
 
