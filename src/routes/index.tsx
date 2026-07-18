@@ -94,7 +94,7 @@ function CloudShape({ c }: { c: Cloud }) {
           <p
             className="text-center"
             style={{
-              fontFamily: '"Instrument Serif", serif',
+              fontFamily: 'Georgia, "Times New Roman", serif',
               color: "#1a1a1a",
               fontSize: "clamp(0.72rem, 1.15vw, 1rem)",
               lineHeight: 1.15,
