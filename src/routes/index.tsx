@@ -375,7 +375,7 @@ function Index() {
           </p>
 
           <p>
-            <strong style={{ fontWeight: 400, letterSpacing: "0.02em" }}>R.O.S.S.</strong>{" "}
+            <strong style={{ fontWeight: 500, letterSpacing: "0.14em" }}>R.O.S.S.</strong>{" "}
             nasce per riportare al centro la famiglia con la propria storia, i ricordi e le persone che ne fanno parte.
           </p>
         </div>
