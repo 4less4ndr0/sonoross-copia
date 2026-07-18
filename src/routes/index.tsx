@@ -94,7 +94,7 @@ function CloudShape({ c }: { c: Cloud }) {
           <p
             className="text-center"
             style={{
-              fontFamily: 'Georgia, "Times New Roman", serif',
+              fontFamily: '"Instrument Serif", serif',
               color: "#1a1a1a",
               fontSize: "clamp(0.72rem, 1.15vw, 1rem)",
               lineHeight: 1.15,
@@ -232,7 +232,10 @@ function Index() {
   return (
     <main
       className="relative w-full overflow-x-hidden"
-      style={{ background: "#f8f1e0" }}
+      style={{
+        background:
+          "radial-gradient(ellipse 92vw 78vh at 50% 100vh, #ffd166 0%, #ff9b3d 22%, #f4506c 46%, #d94892 68%, rgba(217,72,146,0) 100%), linear-gradient(180deg, #faf7f2 0vh, #faf7f2 50vh, #f7c8b0 72vh, #ec8ea6 88vh, #d94892 108vh, #c43d82 138vh, #8d2d66 190vh, #3a1230 270vh)",
+      }}
     >
       <div
         className="absolute left-1/2 pointer-events-none z-0"
@@ -243,7 +246,7 @@ function Index() {
           transform: "translateX(-50%)",
           borderRadius: "50%",
           background:
-            "radial-gradient(ellipse at 50% 44%, #E8C547 0%, #D68A3C 52%, rgba(248,241,224,0) 92%)",
+            "radial-gradient(ellipse at 50% 44%, #ffd166 0%, #ff9b3d 22%, #f4506c 46%, #d94892 68%, rgba(217,72,146,0) 94%)",
           filter: "blur(8px)",
         }}
       />
@@ -262,13 +265,12 @@ function Index() {
         {/* Centered content (headline + email) — sits ABOVE the horizon */}
         <div className="relative z-20 h-full flex flex-col items-center justify-center px-5 sm:px-6 pb-[34vh] sm:pb-[36vh]">
           <h1
-            className="text-center max-w-3xl"
+            className="text-center text-neutral-900 max-w-3xl"
             style={{
-              fontFamily: 'Georgia, "Times New Roman", serif',
+              fontFamily: '"Instrument Serif", serif',
               fontWeight: 400,
               fontSize: "clamp(2rem, 7vw, 4.5rem)",
               lineHeight: 1.05,
-              color: "#1a1a1a",
             }}
           >
             Perché nessuno dovrebbe invecchiare solo.
@@ -277,7 +279,6 @@ function Index() {
           <form
             onSubmit={onSubmit}
             className="mt-6 sm:mt-8 flex items-center gap-2 bg-white rounded-full pl-5 sm:pl-6 pr-2 py-2 shadow-sm border border-neutral-200 w-full max-w-md"
-            style={{ fontFamily: '"DM Sans", system-ui, sans-serif' }}
           >
             <input
               type="email"
@@ -285,24 +286,21 @@ function Index() {
               value={email}
               onChange={(e) => setEmail(e.target.value)}
               placeholder="Il tuo indirizzo email"
-              className="flex-1 min-w-0 bg-transparent outline-none py-2"
-              style={{ color: "#1a1a1a" }}
+              className="flex-1 min-w-0 bg-transparent outline-none text-neutral-800 placeholder:text-neutral-400 py-2"
             />
             <button
               type="submit"
               aria-label="Iscriviti"
-              className="shrink-0 rounded-full w-10 h-10 flex items-center justify-center transition-colors"
-              style={{ background: "#1a1a1a", color: "#faf7f2" }}
+              className="shrink-0 rounded-full bg-neutral-900 text-white w-10 h-10 flex items-center justify-center hover:bg-neutral-700 transition-colors"
             >
               →
             </button>
           </form>
         </div>
 
-
         {/* Scroll hint */}
         <div
-          className="absolute bottom-4 left-1/2 -translate-x-1/2 z-30 text-black/50 text-[10px] tracking-[0.25em] uppercase animate-bounce pointer-events-none"
+          className="absolute bottom-4 left-1/2 -translate-x-1/2 z-30 text-white/70 text-[10px] tracking-[0.25em] uppercase animate-bounce pointer-events-none"
         >
           ↓ scroll
         </div>
@@ -316,7 +314,7 @@ function Index() {
       <section
         className="relative w-full py-24 sm:py-32 px-6 sm:px-8"
         style={{
-          color: "#1a1a1a",
+          color: "#faf1e6",
         }}
       >
         <div
@@ -336,7 +334,7 @@ function Index() {
           </p>
 
           <p>In famiglia ci si scrive per organizzarsi —</p>
-          <ul className="list-none space-y-2 pl-6" style={{ opacity: 0.85 }}>
+          <ul className="list-none space-y-2 pl-6" style={{ opacity: 0.92 }}>
             <li>— chi va a trovarlo questo weekend</li>
             <li>— chi ha sentito il medico</li>
             <li>— chi si sente in colpa per non essere abbastanza presente.</li>
@@ -353,15 +351,7 @@ function Index() {
             nascono tutte dalla stessa domanda: <em>come monitorarlo?</em>
           </p>
 
-          <p
-            style={{
-              fontFamily: 'Georgia, "Times New Roman", serif',
-              fontStyle: "italic",
-              fontSize: "clamp(1.5rem, 2.6vw, 2.1rem)",
-              lineHeight: 1.25,
-              color: "#D68A3C",
-            }}
-          >
+          <p style={{ fontSize: "clamp(1.35rem, 2.2vw, 1.75rem)", lineHeight: 1.3 }}>
             E se lo strumento più potente non fosse clinico, ma relazionale?
           </p>
 
@@ -372,7 +362,7 @@ function Index() {
           </p>
 
           <p>
-            <strong style={{ fontWeight: 500, letterSpacing: "0.14em" }}>R.O.S.S.</strong>{" "}
+            <strong style={{ fontWeight: 400, letterSpacing: "0.02em" }}>R.O.S.S.</strong>{" "}
             nasce per riportare al centro la famiglia con la propria storia, i ricordi e le persone che ne fanno parte.
           </p>
         </div>

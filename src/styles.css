@@ -165,5 +165,3 @@
 .float-c { animation: float-c 7s ease-in-out infinite; }
 .float-d { animation: float-d 11s ease-in-out infinite; }
 
-input::placeholder { color: #9a8f86; }
-

@@ -1,30 +1,8 @@
-# Apply new palette (Handoff slide)
+Capito: il problema non è solo la linea di stacco, è che la sezione narrativa sotto l’orizzonte continua con colori diversi/non coerenti rispetto al gradiente dell’orizzonte.
 
-Aggiorno solo colori in `src/routes/index.tsx`. Nessun cambio a font, layout, nuvole, animazioni.
-
-## Modifiche
-
-### 1. `<main>` background
-- Da: gradient magenta/plum/pink complesso
-- A: `#f8f1e0` (cream flat, come slide)
-
-### 2. Horizon glow (div assoluto sotto la hero)
-- Da: giallo → arancio → rosa/magenta
-- A: `#E8C547` (giallo) → `#D68A3C` (arancio) → `#9CBE5F` (verde salvia) → trasparente sul cream
-
-### 3. Narrative section
-- Colore testo body: da cream chiaro → `#1a1a1a`
-- Frase enfatica (Georgia italic): da `#ffd9a8` → `#D68A3C`
-- Firma "R.O.S.S.": near-black `#1a1a1a`
-
-### 4. Scroll hint "↓ scroll"
-- Da: `text-white/70`
-- A: `text-black/50` per leggibilità sul glow chiaro
-
-### 5. Occhi (FlatEye)
-- Restano bianchi (contrast sul nuovo glow caldo resta buono)
-
-## Non tocco
-- Font (Georgia headings, DM Sans body)
-- Cloud asset e posizioni
-- Struttura JSX, animazioni, form
+Piano:
+1. Trattare l’area sotto l’orizzonte come prosecuzione naturale del gradiente dell’orizzonte, non come una sezione con palette autonoma.
+2. Modificare il gradiente globale del `main` in modo che dopo il punto dell’orizzonte continui dagli stessi colori visibili lì: arancio/rosa caldo → magenta → plum, senza salto tonale.
+3. Rimuovere o correggere gli stop attuali della narrativa che partono troppo “piatti”/monocromatici e non riprendono il glow arancio-rosa dell’orizzonte.
+4. Lasciare l’orizzonte come elemento visivo sopra, ma fare in modo che sotto di lui il fondo sembri lo stesso cielo/colore che prosegue nello scroll.
+5. Verificare nello scroll che appena sotto l’orizzonte non compaia più una fascia separata, ma una continuità cromatica reale.
