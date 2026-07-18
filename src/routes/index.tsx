@@ -302,7 +302,7 @@ function Index() {
 
         {/* Scroll hint */}
         <div
-          className="absolute bottom-4 left-1/2 -translate-x-1/2 z-30 text-white/70 text-[10px] tracking-[0.25em] uppercase animate-bounce pointer-events-none"
+          className="absolute bottom-4 left-1/2 -translate-x-1/2 z-30 text-black/50 text-[10px] tracking-[0.25em] uppercase animate-bounce pointer-events-none"
         >
           ↓ scroll
         </div>
