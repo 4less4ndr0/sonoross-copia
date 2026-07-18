@@ -265,12 +265,13 @@ function Index() {
         {/* Centered content (headline + email) — sits ABOVE the horizon */}
         <div className="relative z-20 h-full flex flex-col items-center justify-center px-5 sm:px-6 pb-[34vh] sm:pb-[36vh]">
           <h1
-            className="text-center text-neutral-900 max-w-3xl"
+            className="text-center max-w-3xl"
             style={{
-              fontFamily: '"Instrument Serif", serif',
+              fontFamily: 'Georgia, "Times New Roman", serif',
               fontWeight: 400,
               fontSize: "clamp(2rem, 7vw, 4.5rem)",
               lineHeight: 1.05,
+              color: "#1a1a1a",
             }}
           >
             Perché nessuno dovrebbe invecchiare solo.
@@ -279,6 +280,7 @@ function Index() {
           <form
             onSubmit={onSubmit}
             className="mt-6 sm:mt-8 flex items-center gap-2 bg-white rounded-full pl-5 sm:pl-6 pr-2 py-2 shadow-sm border border-neutral-200 w-full max-w-md"
+            style={{ fontFamily: '"DM Sans", system-ui, sans-serif' }}
           >
             <input
               type="email"
@@ -286,17 +288,20 @@ function Index() {
               value={email}
               onChange={(e) => setEmail(e.target.value)}
               placeholder="Il tuo indirizzo email"
-              className="flex-1 min-w-0 bg-transparent outline-none text-neutral-800 placeholder:text-neutral-400 py-2"
+              className="flex-1 min-w-0 bg-transparent outline-none py-2"
+              style={{ color: "#1a1a1a" }}
             />
             <button
               type="submit"
               aria-label="Iscriviti"
-              className="shrink-0 rounded-full bg-neutral-900 text-white w-10 h-10 flex items-center justify-center hover:bg-neutral-700 transition-colors"
+              className="shrink-0 rounded-full w-10 h-10 flex items-center justify-center transition-colors"
+              style={{ background: "#1a1a1a", color: "#faf7f2" }}
             >
               →
             </button>
           </form>
         </div>
+
 
         {/* Scroll hint */}
         <div
