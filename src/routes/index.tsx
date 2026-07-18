@@ -243,7 +243,7 @@ function Index() {
           transform: "translateX(-50%)",
           borderRadius: "50%",
           background:
-            "radial-gradient(ellipse at 50% 44%, #E8C547 0%, #D68A3C 30%, #9CBE5F 62%, rgba(248,241,224,0) 92%)",
+            "radial-gradient(ellipse at 50% 44%, #E8C547 0%, #D68A3C 52%, rgba(248,241,224,0) 92%)",
           filter: "blur(8px)",
         }}
       />
