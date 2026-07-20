@@ -321,13 +321,30 @@ function BubbleCluster() {
             top: b.top,
             width: b.size,
             height: b.size,
-            backgroundColor: "var(--ross-teal-light)",
+            background:
+              "radial-gradient(circle at 30% 25%, rgba(255,255,255,0.9) 0%, rgba(255,255,255,0.35) 12%, #b6d97a 35%, #97C459 60%, #6f9a3a 100%)",
+            boxShadow:
+              "inset -6px -8px 14px rgba(60,90,20,0.35), inset 4px 6px 10px rgba(255,255,255,0.45), 0 6px 14px rgba(60,90,20,0.18)",
             animationDelay: b.delay,
             animationDuration: b.duration,
-            opacity: 0.95,
           }}
-        />
+        >
+          <span
+            aria-hidden
+            className="absolute rounded-full"
+            style={{
+              top: "10%",
+              left: "18%",
+              width: "42%",
+              height: "28%",
+              background:
+                "radial-gradient(ellipse at center, rgba(255,255,255,0.95) 0%, rgba(255,255,255,0) 70%)",
+              filter: "blur(1px)",
+            }}
+          />
+        </div>
       ))}
+
     </div>
   );
 }
