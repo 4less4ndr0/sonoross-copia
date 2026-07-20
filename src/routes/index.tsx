@@ -167,10 +167,8 @@ function FlatEye({ className, closed, pixelSize }: { className?: string; closed:
 
   return (
     <div
-      className={`absolute ${className ?? ""}`}
+      className={className ?? ""}
       style={{
-        top: "80%",
-        transform: "translate(-50%, -50%)",
         width: COLS * pixelSize + (COLS - 1) * gap,
         height: ROWS_COUNT * pixelSize + (ROWS_COUNT - 1) * gap,
         filter:
@@ -373,21 +371,22 @@ function Index() {
           </div>
         </div>
 
-        {/* Scroll hint */}
-        <div
-          className="absolute bottom-32 sm:bottom-40 left-1/2 -translate-x-1/2 z-30 text-[10px] tracking-[0.25em] uppercase animate-bounce pointer-events-none"
-          style={{ color: "rgba(28,26,20,0.7)" }}
-        >
-          ↓ scroll
-        </div>
-
         {/* Faded grid background */}
         <GridBackdrop />
 
-
-        {/* Eyes on the horizon */}
-        <FlatEye className="left-[38%] sm:left-[43%]" closed={eyesClosed} pixelSize={pixelSize} />
-        <FlatEye className="left-[62%] sm:left-[57%]" closed={eyesClosed} pixelSize={pixelSize} />
+        {/* Eyes + scroll hint grouped below the headline */}
+        <div className="absolute top-[78%] left-1/2 -translate-x-1/2 z-30 flex flex-col items-center gap-6 pointer-events-none">
+          <div className="flex items-start gap-[10vw] sm:gap-[12vw]">
+            <FlatEye closed={eyesClosed} pixelSize={pixelSize} />
+            <FlatEye closed={eyesClosed} pixelSize={pixelSize} />
+          </div>
+          <div
+            className="text-[10px] tracking-[0.25em] uppercase animate-bounce"
+            style={{ color: "rgba(28,26,20,0.7)" }}
+          >
+            ↓ scroll
+          </div>
+        </div>
       </section>
 
       {/* NARRATIVE */}
