@@ -12,9 +12,7 @@ import { useEffect, type ReactNode } from "react";
 import appCss from "../styles.css?url";
 import { reportLovableError } from "../lib/lovable-error-reporting";
 
-const appCssHref = import.meta.env.DEV
-  ? `${appCss}${appCss.includes("?") ? "&" : "?"}direct`
-  : appCss;
+const appCssHref = import.meta.env.DEV ? "/src/styles.css?direct" : appCss;
 
 function NotFoundComponent() {
   return (
