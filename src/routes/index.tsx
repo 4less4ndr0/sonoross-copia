@@ -267,7 +267,7 @@ function EyeLogo() {
 
 function GridBackdrop() {
   // Graph-paper grid in #97C459 that fades to transparent at the edges (radial mask).
-  const line = "rgba(151, 196, 89, 0.55)";
+  const line = "rgba(151, 196, 89, 0.22)";
   const cell = "44px";
   return (
     <div
