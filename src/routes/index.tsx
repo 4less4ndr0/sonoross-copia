@@ -1,7 +1,7 @@
 import { createFileRoute } from "@tanstack/react-router";
 import { useServerFn } from "@tanstack/react-start";
 import { useEffect, useState, type FormEvent } from "react";
-import cloudAsset from "@/assets/cloud.png.asset.json";
+
 import { submitLead } from "@/lib/leads.functions";
 
 export const Route = createFileRoute("/")({
@@ -72,48 +72,44 @@ function CloudShape({ c }: { c: Cloud }) {
   return (
     <div
       className={`absolute ${c.positionClass} ${c.widthClass} float-${c.variant} ${c.hideOnMobile ? "hidden sm:block" : ""}`}
-      style={{
-        animationDelay: c.delay,
-        transform: `rotate(${c.rotate}deg)`,
-      }}
+      style={{ animationDelay: c.delay }}
     >
-      <div className="relative w-full">
-        <img
-          src={cloudAsset.url}
-          alt=""
-          className="w-full h-auto select-none"
-          draggable={false}
+      {/* Soft sage glow behind the glass card */}
+      <div
+        aria-hidden
+        className="absolute -inset-5 rounded-[28px] pointer-events-none"
+        style={{
+          background: "rgba(232, 245, 211, 0.18)",
+          filter: "blur(36px)",
+        }}
+      />
+
+      {/* Glass card */}
+      <div
+        className="relative flex items-center justify-center text-center rounded-[20px] p-5 sm:p-6"
+        style={{
+          background: "rgba(255,255,255,0.55)",
+          backdropFilter: "blur(20px) saturate(140%)",
+          WebkitBackdropFilter: "blur(20px) saturate(140%)",
+          border: "1px solid rgba(255,255,255,0.5)",
+          transform: `rotate(${c.rotate}deg)`,
+          boxShadow: "0 10px 30px rgba(28,26,20,0.06)",
+        }}
+      >
+        <p
+          className="text-center"
           style={{
-            filter: "drop-shadow(0 10px 20px rgba(80, 90, 130, 0.15))",
-          }}
-        />
-        <div
-          className="absolute flex items-center justify-center"
-          style={{
-            left: "50%",
-            top: "53%",
-            width: "58%",
-            height: "40%",
-            transform: `translate(-50%, -50%) rotate(${-c.rotate}deg)`,
+            fontFamily: '"Instrument Serif", serif',
+            color: "#1a1a1a",
+            fontSize: "clamp(0.72rem, 1.15vw, 1rem)",
+            lineHeight: 1.15,
+            letterSpacing: "-0.01em",
+            whiteSpace: "pre-line",
+            textWrap: "balance",
           }}
         >
-          <p
-            className="text-center"
-            style={{
-              fontFamily: '"Instrument Serif", serif',
-              color: "#1a1a1a",
-              fontSize: "clamp(0.72rem, 1.15vw, 1rem)",
-              lineHeight: 1.15,
-              letterSpacing: "-0.01em",
-              whiteSpace: "pre-line",
-              textWrap: "balance",
-              textShadow:
-                "0 1px 0 rgba(255,255,255,0.9), 0 0 6px rgba(255,255,255,0.65)",
-            }}
-          >
-            {c.text}
-          </p>
-        </div>
+          {c.text}
+        </p>
       </div>
     </div>
   );
