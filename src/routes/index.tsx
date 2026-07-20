@@ -410,6 +410,12 @@ function Index() {
       {/* NARRATIVE */}
       <section className="relative w-full py-24 sm:py-32 px-6 sm:px-8">
         <div className="relative w-[70vw] max-w-6xl mx-auto">
+          {/* Cloud cards framing the manifesto glass card */}
+          <div className="absolute inset-0 pointer-events-none z-0 -mx-[4vw] sm:-mx-[8vw]">
+            {CLOUDS.map((c, i) => (
+              <CloudShape key={i} c={c} />
+            ))}
+          </div>
 
           {/* Soft sage glow behind the glass card */}
           <div
