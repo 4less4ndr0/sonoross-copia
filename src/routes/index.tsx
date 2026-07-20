@@ -281,9 +281,7 @@ function Index() {
     <main
       className="relative w-full overflow-x-hidden"
       style={{
-        background:
-          "linear-gradient(180deg, #F6F3ED 0vh, #F6F3ED 35vh, #EF9F27 130vh, #EF9F27 200vh, #1C1A14 320vh, #1C1A14 400vh)",
-        backgroundRepeat: "no-repeat",
+        background: "#F6F3ED",
       }}
     >
       {/* Grain overlay */}
@@ -447,7 +445,7 @@ function Index() {
           className="relative z-10 max-w-2xl mx-auto mt-32 sm:mt-48 text-center"
           style={{
             fontFamily: 'Georgia, "Times New Roman", serif',
-            color: "#F6F3ED",
+            color: "#1C1A14",
             fontSize: "clamp(1.4rem, 2vw, 1.9rem)",
             lineHeight: 1.35,
           }}
