@@ -18,12 +18,12 @@ type Cloud = {
   hideOnMobile?: boolean;
 };
 
-// Clouds line the sides of the manifesto glass card, smaller and vertically staggered.
+// Clouds line the sides of the manifesto glass card, small and close to the borders.
 const CLOUDS: Cloud[] = [
   {
     // left side, upper
-    positionClass: "top-[2%] -left-[12%] sm:top-[4%] sm:-left-[20%]",
-    widthClass: "w-[28vw] max-w-[150px] sm:w-[16vw] sm:max-w-[220px]",
+    positionClass: "top-[4%] -left-[4%] sm:top-[8%] sm:-left-[10%]",
+    widthClass: "w-[20vw] max-w-[110px] sm:w-[11vw] sm:max-w-[160px]",
     variant: "a",
     delay: "0s",
     rotate: -3,
@@ -31,8 +31,8 @@ const CLOUDS: Cloud[] = [
   },
   {
     // left side, middle
-    positionClass: "top-[40%] -left-[14%] sm:top-[42%] sm:-left-[22%]",
-    widthClass: "w-[28vw] max-w-[150px] sm:w-[16vw] sm:max-w-[220px]",
+    positionClass: "top-[42%] -left-[6%] sm:top-[44%] sm:-left-[12%]",
+    widthClass: "w-[20vw] max-w-[110px] sm:w-[11vw] sm:max-w-[160px]",
     variant: "b",
     delay: "1.1s",
     rotate: 2,
@@ -40,8 +40,8 @@ const CLOUDS: Cloud[] = [
   },
   {
     // left side, lower
-    positionClass: "top-[78%] -left-[12%] sm:top-[80%] sm:-left-[20%]",
-    widthClass: "w-[28vw] max-w-[150px] sm:w-[16vw] sm:max-w-[220px]",
+    positionClass: "top-[80%] -left-[4%] sm:top-[82%] sm:-left-[10%]",
+    widthClass: "w-[20vw] max-w-[110px] sm:w-[11vw] sm:max-w-[160px]",
     variant: "c",
     delay: "2.2s",
     rotate: 2,
@@ -49,8 +49,8 @@ const CLOUDS: Cloud[] = [
   },
   {
     // right side, upper
-    positionClass: "top-[20%] -right-[12%] sm:top-[24%] sm:-right-[20%]",
-    widthClass: "w-[28vw] max-w-[150px] sm:w-[16vw] sm:max-w-[220px]",
+    positionClass: "top-[22%] -right-[4%] sm:top-[26%] sm:-right-[10%]",
+    widthClass: "w-[20vw] max-w-[110px] sm:w-[11vw] sm:max-w-[160px]",
     variant: "d",
     delay: "0.6s",
     rotate: -1,
@@ -58,8 +58,8 @@ const CLOUDS: Cloud[] = [
   },
   {
     // right side, lower
-    positionClass: "top-[60%] -right-[12%] sm:top-[62%] sm:-right-[20%]",
-    widthClass: "w-[28vw] max-w-[150px] sm:w-[16vw] sm:max-w-[220px]",
+    positionClass: "top-[62%] -right-[4%] sm:top-[64%] sm:-right-[10%]",
+    widthClass: "w-[20vw] max-w-[110px] sm:w-[11vw] sm:max-w-[160px]",
     variant: "a",
     delay: "1.7s",
     rotate: 3,
