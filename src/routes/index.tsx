@@ -622,12 +622,6 @@ function Index() {
                 >
                   manifesto
                 </h3>
-                <span
-                  className="mt-2 text-[10px] tracking-[0.25em] uppercase"
-                  style={{ color: "rgba(28,26,20,0.6)" }}
-                >
-                  ↩ torna
-                </span>
               </div>
             ) : (
               MANIFESTO_PARAGRAPHS.map((p, i) =>
