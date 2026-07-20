@@ -85,8 +85,8 @@ export const Route = createRootRouteWithContext<{ queryClient: QueryClient }>()(
       { name: "twitter:card", content: "summary_large_image" },
       { name: "twitter:title", content: "ROSS" },
       { name: "twitter:description", content: "Una compagno per non affrontare gli anni da soli. Lascia la tua email." },
-      { property: "og:image", content: "https://pub-bb2e103a32db4e198524a2e9ed8f35b4.r2.dev/fa2ba5b9-2e52-4b57-aba7-36717b6070e6/id-preview-59e9ec18--REDACTED_PROJECT_ID.lovable.app-1783036644269.png" },
-      { name: "twitter:image", content: "https://pub-bb2e103a32db4e198524a2e9ed8f35b4.r2.dev/fa2ba5b9-2e52-4b57-aba7-36717b6070e6/id-preview-59e9ec18--REDACTED_PROJECT_ID.lovable.app-1783036644269.png" },
+      { property: "og:image", content: "https://4less4ndr0.github.io/sonoross-copia/og.jpg" },
+      { name: "twitter:image", content: "https://4less4ndr0.github.io/sonoross-copia/og.jpg" },
     ],
     links: [
       { rel: "preconnect", href: "https://fonts.googleapis.com" },
