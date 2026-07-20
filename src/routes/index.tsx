@@ -281,9 +281,7 @@ function Index() {
     <main
       className="relative w-full overflow-x-hidden"
       style={{
-        background:
-          "linear-gradient(180deg, #F6F3ED 0vh, #F6F3ED 35vh, #EF9F27 130vh, #EF9F27 200vh, #1C1A14 320vh, #1C1A14 400vh)",
-        backgroundRepeat: "no-repeat",
+        background: "#F6F3ED",
       }}
     >
       {/* Grain overlay */}
