@@ -22,7 +22,7 @@ type Cloud = {
 // from the sides. On hover each card flies to the center and reveals its text.
 const CLOUDS: Cloud[] = [
   {
-    positionClass: "top-[8%] -left-[5%] sm:top-[10%] sm:-left-[6%]",
+    positionClass: "top-[8%] -left-[8%] sm:top-[10%] sm:-left-[9%]",
     widthClass: "w-[22vw] max-w-[140px] sm:w-[16vw] sm:max-w-[210px]",
     variant: "a",
     delay: "0s",
@@ -30,7 +30,7 @@ const CLOUDS: Cloud[] = [
     text: "chi",
   },
   {
-    positionClass: "top-[64%] -left-[6%] sm:top-[66%] sm:-left-[7%]",
+    positionClass: "top-[64%] -left-[9%] sm:top-[66%] sm:-left-[10%]",
     widthClass: "w-[22vw] max-w-[140px] sm:w-[16vw] sm:max-w-[210px]",
     variant: "b",
     delay: "1.1s",
@@ -38,7 +38,7 @@ const CLOUDS: Cloud[] = [
     text: "cosa",
   },
   {
-    positionClass: "top-[18%] -right-[6%] sm:top-[20%] sm:-right-[6%]",
+    positionClass: "top-[18%] -right-[9%] sm:top-[20%] sm:-right-[9%]",
     widthClass: "w-[22vw] max-w-[140px] sm:w-[16vw] sm:max-w-[210px]",
     variant: "d",
     delay: "0.6s",
@@ -46,7 +46,7 @@ const CLOUDS: Cloud[] = [
     text: "come",
   },
   {
-    positionClass: "top-[70%] -right-[5%] sm:top-[72%] sm:-right-[6%]",
+    positionClass: "top-[70%] -right-[8%] sm:top-[72%] sm:-right-[9%]",
     widthClass: "w-[22vw] max-w-[140px] sm:w-[16vw] sm:max-w-[210px]",
     variant: "a",
     delay: "1.7s",
