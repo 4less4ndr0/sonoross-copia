@@ -8,71 +8,146 @@ export const Route = createFileRoute("/")({
   component: Index,
 });
 
-type Cloud = {
-  positionClass: string;
-  widthClass: string;
-  variant: "a" | "b" | "c" | "d";
-  delay: string;
-  rotateClass: string;
-  text: string;
-  hideOnMobile?: boolean;
+type Slot = {
+  top: string;
+  left?: string;
+  right?: string;
+  width: string;
+  maxWidth?: string;
+  rotate: number;
 };
 
-// Clouds sit BEHIND the manifesto glass card; only a small portion peeks out
-// from the sides. On hover each card flies to the center and reveals its text.
+type Cloud = {
+  variant: "a" | "b" | "c" | "d";
+  delay: string;
+  text: string;
+  body: string;
+  desktop: Slot;
+  mobile: Slot;
+};
+
+// Clouds sit BEHIND the manifesto glass card; only a small portion peeks out.
+// On click they SWAP with the manifesto card.
 const CLOUDS: Cloud[] = [
   {
-    positionClass: "top-[8%] -left-[16%] sm:top-[10%] sm:-left-[22%]",
-    widthClass: "w-[34vw] max-w-[220px] sm:w-[22vw] sm:max-w-[300px]",
     variant: "a",
     delay: "0s",
-    rotateClass: "-rotate-[4deg]",
     text: "chi",
+    body: "Chi vive solo, non chi va sorvegliato. Al centro c'è la persona, con la sua storia, non un rischio da monitorare.",
+    desktop: { top: "10%", left: "-22%", width: "22vw", maxWidth: "300px", rotate: -4 },
+    mobile:  { top: "8%",  left: "-16%", width: "34vw", maxWidth: "220px", rotate: -4 },
   },
   {
-    positionClass: "top-[64%] -left-[17%] sm:top-[66%] sm:-left-[23%]",
-    widthClass: "w-[34vw] max-w-[220px] sm:w-[22vw] sm:max-w-[300px]",
     variant: "b",
     delay: "1.1s",
-    rotateClass: "rotate-[3deg]",
     text: "cosa",
+    body: "Un compagno conversazionale che stimola cognitivamente attraverso il racconto: ricordi, passioni, storia di vita.",
+    desktop: { top: "66%", left: "-23%", width: "22vw", maxWidth: "300px", rotate: 3 },
+    mobile:  { top: "64%", left: "-17%", width: "34vw", maxWidth: "220px", rotate: 3 },
   },
   {
-    positionClass: "top-[18%] -right-[17%] sm:top-[20%] sm:-right-[22%]",
-    widthClass: "w-[34vw] max-w-[220px] sm:w-[22vw] sm:max-w-[300px]",
     variant: "d",
     delay: "0.6s",
-    rotateClass: "-rotate-[2deg]",
     text: "come",
+    body: "Adattandosi a chi ha davanti: famiglia, passioni, biografia. Non domande uguali per tutti, un dialogo su misura.",
+    desktop: { top: "20%", right: "-22%", width: "22vw", maxWidth: "300px", rotate: -2 },
+    mobile:  { top: "18%", right: "-17%", width: "34vw", maxWidth: "220px", rotate: -2 },
   },
   {
-    positionClass: "top-[70%] -right-[16%] sm:top-[72%] sm:-right-[23%]",
-    widthClass: "w-[34vw] max-w-[220px] sm:w-[22vw] sm:max-w-[300px]",
     variant: "a",
     delay: "1.7s",
-    rotateClass: "rotate-[4deg]",
     text: "perché",
+    body: "Perché la relazione, non il monitoraggio, è lo strumento più potente di cura. Rimettere le persone al centro.",
+    desktop: { top: "72%", right: "-23%", width: "22vw", maxWidth: "300px", rotate: 4 },
+    mobile:  { top: "70%", right: "-16%", width: "34vw", maxWidth: "220px", rotate: 4 },
   },
 ];
 
+function useIsDesktop() {
+  const [isDesktop, setIsDesktop] = useState(false);
+  useEffect(() => {
+    const mq = window.matchMedia("(min-width: 640px)");
+    const on = () => setIsDesktop(mq.matches);
+    on();
+    mq.addEventListener("change", on);
+    return () => mq.removeEventListener("change", on);
+  }, []);
+  return isDesktop;
+}
 
-function CloudShape({ c }: { c: Cloud }) {
+const TRANSITION =
+  "top 600ms cubic-bezier(0.22,1,0.36,1), left 600ms cubic-bezier(0.22,1,0.36,1), right 600ms cubic-bezier(0.22,1,0.36,1), bottom 600ms cubic-bezier(0.22,1,0.36,1), width 600ms cubic-bezier(0.22,1,0.36,1), max-width 600ms cubic-bezier(0.22,1,0.36,1), transform 600ms cubic-bezier(0.22,1,0.36,1), opacity 400ms ease";
+
+function slotToStyle(s: Slot): React.CSSProperties {
+  return {
+    top: s.top,
+    left: s.left,
+    right: s.right,
+    width: s.width,
+    maxWidth: s.maxWidth,
+    transform: `rotate(${s.rotate}deg)`,
+  };
+}
+
+function CloudShape({
+  c,
+  index,
+  isActive,
+  anyActive,
+  onToggle,
+  isDesktop,
+}: {
+  c: Cloud;
+  index: number;
+  isActive: boolean;
+  anyActive: boolean;
+  onToggle: (i: number) => void;
+  isDesktop: boolean;
+}) {
+  const baseSlot = isDesktop ? c.desktop : c.mobile;
+  const style: React.CSSProperties = isActive
+    ? {
+        top: "0",
+        left: "0",
+        right: "0",
+        width: "auto",
+        maxWidth: "none",
+        transform: "rotate(0deg)",
+        zIndex: 30,
+        transition: TRANSITION,
+        animationDelay: c.delay,
+      }
+    : {
+        ...slotToStyle(baseSlot),
+        zIndex: anyActive ? 1 : 5,
+        opacity: anyActive ? 0.55 : 1,
+        transition: TRANSITION,
+        animationDelay: c.delay,
+      };
+
   return (
-    <div
-      className={`group absolute ${c.positionClass} ${c.widthClass} float-${c.variant} pointer-events-auto cursor-pointer transition-all duration-500 ease-[cubic-bezier(0.22,1,0.36,1)] hover:!top-1/2 hover:!left-1/2 hover:!right-auto hover:!bottom-auto hover:!-translate-x-1/2 hover:!-translate-y-1/2 hover:!w-[min(82vw,520px)] hover:!max-w-none hover:z-40 ${c.hideOnMobile ? "hidden sm:block" : ""}`}
-      style={{ animationDelay: c.delay }}
+    <button
+      type="button"
+      onClick={() => onToggle(index)}
+      aria-expanded={isActive}
+      aria-label={c.text}
+      className={`group absolute float-${c.variant} pointer-events-auto cursor-pointer text-left focus:outline-none focus-visible:ring-2 focus-visible:ring-[#EF9F27] rounded-[20px] ${
+        !isActive && !anyActive ? "hover:scale-[1.04] hover:z-20" : ""
+      }`}
+      style={style}
     >
       <div
         aria-hidden
-        className="absolute -inset-8 rounded-[32px] pointer-events-none transition-opacity duration-500 opacity-80 group-hover:opacity-100"
+        className="absolute -inset-8 rounded-[32px] pointer-events-none transition-opacity duration-500"
         style={{
           background: "rgba(239, 159, 39, 0.45)",
           filter: "blur(44px)",
+          opacity: isActive ? 1 : anyActive ? 0.35 : 0.8,
         }}
       />
 
       <div
-        className={`relative flex items-center justify-center text-center rounded-[20px] aspect-[4/3] transition-transform duration-500 ease-[cubic-bezier(0.22,1,0.36,1)] ${c.rotateClass} group-hover:!rotate-0 group-hover:scale-[1.02]`}
+        className="relative flex flex-col items-center justify-center text-center rounded-[20px] transition-all duration-500 ease-[cubic-bezier(0.22,1,0.36,1)]"
         style={{
           background: "rgba(255,255,255,0.65)",
           backdropFilter: "blur(20px) saturate(140%)",
@@ -80,25 +155,45 @@ function CloudShape({ c }: { c: Cloud }) {
           border: "1px solid rgba(255,255,255,0.6)",
           boxShadow: "0 10px 30px rgba(28,26,20,0.08)",
           containerType: "inline-size",
-          padding: "clamp(14px, 6cqi, 32px)",
+          padding: isActive ? "clamp(32px, 5cqi, 64px)" : "clamp(14px, 6cqi, 32px)",
+          aspectRatio: isActive ? "auto" : "4 / 3",
+          minHeight: isActive ? "100%" : undefined,
+          gap: isActive ? "1.5rem" : 0,
         }}
       >
         <h3
-          className="text-center m-0 font-normal"
+          className="m-0 font-normal"
           style={{
             fontFamily: '"Instrument Serif", serif',
             color: "#1a1a1a",
-            fontSize: "clamp(2.4rem, 22cqi, 5rem)",
+            fontSize: isActive
+              ? "clamp(3rem, 8cqi, 6rem)"
+              : "clamp(2.4rem, 22cqi, 5rem)",
             lineHeight: 1.05,
             letterSpacing: "-0.02em",
           }}
         >
           {c.text}
         </h3>
+        {isActive && (
+          <p
+            className="max-w-2xl animate-fade-in"
+            style={{
+              fontFamily: '"DM Sans", system-ui, sans-serif',
+              color: "#1C1A14",
+              fontSize: "clamp(1rem, 1.4cqi, 1.4rem)",
+              lineHeight: 1.55,
+              opacity: 0.85,
+            }}
+          >
+            {c.body}
+          </p>
+        )}
       </div>
-    </div>
+    </button>
   );
 }
+
 
 function useBlink(minMs: number, maxMs: number) {
   const [closed, setClosed] = useState(false);
