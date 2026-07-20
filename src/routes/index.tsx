@@ -406,7 +406,7 @@ function Index() {
             R.O.S.S. lo rimette al centro della conversazione, non ai margini di una gestione.
           </p>
 
-          <p style={{ fontSize: "clamp(1.15rem, 1.5vw, 1.35rem)", fontWeight: 500, lineHeight: 1.4 }}>
+          <p style={{ fontSize: "clamp(1.25rem, 1.65vw, 1.5rem)", fontWeight: 500, lineHeight: 1.4 }}>
             <strong>Per questo R.O.S.S. non sorveglia. Dà voce.</strong>
           </p>
         </div>
