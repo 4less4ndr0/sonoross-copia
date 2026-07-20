@@ -305,10 +305,10 @@ function BubbleCluster() {
       aria-hidden
       className="absolute left-1/2 -translate-x-1/2 pointer-events-none"
       style={{
-        top: "80%",
+        top: "78%",
         transform: "translate(-50%, -50%)",
-        width: "clamp(280px, 58vw, 520px)",
-        height: "clamp(170px, 26vh, 250px)",
+        width: "clamp(340px, 68vw, 720px)",
+        height: "clamp(220px, 34vh, 340px)",
         zIndex: 0,
       }}
     >
