@@ -22,32 +22,32 @@ type Cloud = {
 // from the sides. On hover each card flies to the center and reveals its text.
 const CLOUDS: Cloud[] = [
   {
-    positionClass: "top-[8%] -left-[8%] sm:top-[10%] sm:-left-[9%]",
-    widthClass: "w-[22vw] max-w-[140px] sm:w-[16vw] sm:max-w-[210px]",
+    positionClass: "top-[8%] -left-[10%] sm:top-[10%] sm:-left-[12%]",
+    widthClass: "w-[30vw] max-w-[200px] sm:w-[20vw] sm:max-w-[260px]",
     variant: "a",
     delay: "0s",
     rotateClass: "-rotate-[4deg]",
     text: "chi",
   },
   {
-    positionClass: "top-[64%] -left-[9%] sm:top-[66%] sm:-left-[10%]",
-    widthClass: "w-[22vw] max-w-[140px] sm:w-[16vw] sm:max-w-[210px]",
+    positionClass: "top-[64%] -left-[11%] sm:top-[66%] sm:-left-[13%]",
+    widthClass: "w-[30vw] max-w-[200px] sm:w-[20vw] sm:max-w-[260px]",
     variant: "b",
     delay: "1.1s",
     rotateClass: "rotate-[3deg]",
     text: "cosa",
   },
   {
-    positionClass: "top-[18%] -right-[9%] sm:top-[20%] sm:-right-[9%]",
-    widthClass: "w-[22vw] max-w-[140px] sm:w-[16vw] sm:max-w-[210px]",
+    positionClass: "top-[18%] -right-[11%] sm:top-[20%] sm:-right-[12%]",
+    widthClass: "w-[30vw] max-w-[200px] sm:w-[20vw] sm:max-w-[260px]",
     variant: "d",
     delay: "0.6s",
     rotateClass: "-rotate-[2deg]",
     text: "come",
   },
   {
-    positionClass: "top-[70%] -right-[8%] sm:top-[72%] sm:-right-[9%]",
-    widthClass: "w-[22vw] max-w-[140px] sm:w-[16vw] sm:max-w-[210px]",
+    positionClass: "top-[70%] -right-[10%] sm:top-[72%] sm:-right-[12%]",
+    widthClass: "w-[30vw] max-w-[200px] sm:w-[20vw] sm:max-w-[260px]",
     variant: "a",
     delay: "1.7s",
     rotateClass: "rotate-[4deg]",
@@ -59,7 +59,7 @@ const CLOUDS: Cloud[] = [
 function CloudShape({ c }: { c: Cloud }) {
   return (
     <div
-      className={`group absolute ${c.positionClass} ${c.widthClass} float-${c.variant} pointer-events-auto cursor-pointer transition-all duration-500 ease-[cubic-bezier(0.22,1,0.36,1)] hover:!top-1/2 hover:!left-1/2 hover:!right-auto hover:!bottom-auto hover:!-translate-x-1/2 hover:!-translate-y-1/2 hover:!w-[min(78vw,460px)] hover:!max-w-none hover:z-40 ${c.hideOnMobile ? "hidden sm:block" : ""}`}
+      className={`group absolute ${c.positionClass} ${c.widthClass} float-${c.variant} pointer-events-auto cursor-pointer transition-all duration-500 ease-[cubic-bezier(0.22,1,0.36,1)] hover:!top-1/2 hover:!left-1/2 hover:!right-auto hover:!bottom-auto hover:!-translate-x-1/2 hover:!-translate-y-1/2 hover:!w-[min(82vw,520px)] hover:!max-w-none hover:z-40 ${c.hideOnMobile ? "hidden sm:block" : ""}`}
       style={{ animationDelay: c.delay }}
     >
       <div
@@ -80,7 +80,7 @@ function CloudShape({ c }: { c: Cloud }) {
           border: "1px solid rgba(255,255,255,0.6)",
           boxShadow: "0 10px 30px rgba(28,26,20,0.08)",
           containerType: "inline-size",
-          padding: "clamp(12px, 5cqi, 26px)",
+          padding: "clamp(14px, 6cqi, 32px)",
         }}
       >
         <h3
@@ -88,7 +88,7 @@ function CloudShape({ c }: { c: Cloud }) {
           style={{
             fontFamily: '"Instrument Serif", serif',
             color: "#1a1a1a",
-            fontSize: "clamp(1.4rem, 14cqi, 3rem)",
+            fontSize: "clamp(1.7rem, 16cqi, 3.4rem)",
             lineHeight: 1.1,
             letterSpacing: "-0.02em",
           }}
