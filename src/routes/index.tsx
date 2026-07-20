@@ -498,10 +498,10 @@ function Index() {
             <div className="relative z-10 mx-auto mt-6 sm:mt-8 w-full max-w-md">
               <div
                 aria-hidden
-                className="absolute -inset-4 rounded-full pointer-events-none"
+                className="absolute -inset-3 rounded-full pointer-events-none"
                 style={{
-                  background: "rgba(239, 159, 39, 0.28)",
-                  filter: "blur(30px)",
+                  background: "rgba(239, 159, 39, 0.55)",
+                  filter: "blur(18px)",
                 }}
               />
               <form
