@@ -359,7 +359,7 @@ function Index() {
           className="max-w-2xl mx-auto space-y-6"
           style={{
             fontFamily: '"DM Sans", system-ui, sans-serif',
-            fontSize: "clamp(1rem, 1.15vw, 1.15rem)",
+            fontSize: "clamp(1.1rem, 1.3vw, 1.3rem)",
             fontWeight: 400,
             lineHeight: 1.65,
             letterSpacing: "-0.005em",
@@ -406,7 +406,7 @@ function Index() {
             R.O.S.S. lo rimette al centro della conversazione, non ai margini di una gestione.
           </p>
 
-          <p style={{ fontSize: "clamp(1.15rem, 1.5vw, 1.35rem)", fontWeight: 500, lineHeight: 1.4 }}>
+          <p style={{ fontSize: "clamp(1.25rem, 1.65vw, 1.5rem)", fontWeight: 500, lineHeight: 1.4 }}>
             <strong>Per questo R.O.S.S. non sorveglia. Dà voce.</strong>
           </p>
         </div>
