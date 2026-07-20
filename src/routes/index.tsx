@@ -404,7 +404,7 @@ function Index() {
             aria-hidden
             className="absolute -inset-16 rounded-[28px] pointer-events-none z-0"
             style={{
-              background: "rgba(232, 245, 211, 0.23)",
+              background: "rgba(107, 142, 90, 0.28)",
               filter: "blur(60px)",
             }}
           />
