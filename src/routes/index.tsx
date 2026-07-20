@@ -18,27 +18,30 @@ type Cloud = {
   hideOnMobile?: boolean;
 };
 
-// 5 floating clouds with phrases inside.
+// Clouds grouped around the manifesto glass card (framing it, not decoration).
 const CLOUDS: Cloud[] = [
   {
-    positionClass: "top-[2%] left-[3%] sm:top-[4%] sm:left-[3%]",
-    widthClass: "w-[42vw] max-w-[320px] sm:w-[22vw] sm:max-w-[270px]",
+    // top-left, above card, partially behind
+    positionClass: "-top-[6%] -left-[6%] sm:-top-[8%] sm:-left-[10%]",
+    widthClass: "w-[46vw] max-w-[300px] sm:w-[26vw] sm:max-w-[320px]",
     variant: "a",
     delay: "0s",
     rotate: -3,
     text: "Per chi ha ancora\ntante cose da raccontare.",
   },
   {
-    positionClass: "top-[10%] right-[3%] sm:top-[3%] sm:left-[41%]",
-    widthClass: "w-[44vw] max-w-[340px] sm:w-[23vw] sm:max-w-[280px]",
+    // top-right, above card, partially behind
+    positionClass: "-top-[4%] -right-[6%] sm:-top-[10%] sm:-right-[10%]",
+    widthClass: "w-[46vw] max-w-[300px] sm:w-[26vw] sm:max-w-[320px]",
     variant: "b",
     delay: "1.1s",
     rotate: 2,
     text: "La distanza\nnon deve significare silenzio.",
   },
   {
-    positionClass: "top-[20%] left-[28%] sm:top-[5%] sm:right-[3%] sm:left-auto",
-    widthClass: "w-[42vw] max-w-[320px] sm:w-[22vw] sm:max-w-[270px]",
+    // center-back, only desktop, larger and behind
+    positionClass: "top-[30%] left-1/2 -translate-x-1/2",
+    widthClass: "w-[38vw] max-w-[420px]",
     variant: "c",
     delay: "2.2s",
     rotate: 2,
@@ -46,16 +49,18 @@ const CLOUDS: Cloud[] = [
     hideOnMobile: true,
   },
   {
-    positionClass: "top-[46%] left-[2%] sm:top-[40%] sm:left-[1%]",
-    widthClass: "w-[42vw] max-w-[320px] sm:w-[21vw] sm:max-w-[260px]",
+    // bottom-left
+    positionClass: "-bottom-[4%] -left-[8%] sm:-bottom-[6%] sm:-left-[10%]",
+    widthClass: "w-[46vw] max-w-[300px] sm:w-[26vw] sm:max-w-[320px]",
     variant: "d",
     delay: "0.6s",
     rotate: -1,
     text: "Una compagnia che ascolta,\nnon che controlla.",
   },
   {
-    positionClass: "top-[50%] right-[2%] sm:top-[42%] sm:right-[1%] sm:left-auto",
-    widthClass: "w-[42vw] max-w-[320px] sm:w-[21vw] sm:max-w-[260px]",
+    // bottom-right
+    positionClass: "-bottom-[6%] -right-[8%] sm:-bottom-[8%] sm:-right-[10%]",
+    widthClass: "w-[46vw] max-w-[300px] sm:w-[26vw] sm:max-w-[320px]",
     variant: "a",
     delay: "1.7s",
     rotate: 3,
@@ -82,7 +87,6 @@ function CloudShape({ c }: { c: Cloud }) {
             filter: "drop-shadow(0 10px 20px rgba(80, 90, 130, 0.15))",
           }}
         />
-        {/* Inner text plate: sits on the flat "heart" of the cloud (measured body center ~53%) */}
         <div
           className="absolute flex items-center justify-center"
           style={{
@@ -110,13 +114,10 @@ function CloudShape({ c }: { c: Cloud }) {
             {c.text}
           </p>
         </div>
-
       </div>
     </div>
   );
 }
-
-
 
 function useBlink(minMs: number, maxMs: number) {
   const [closed, setClosed] = useState(false);
@@ -166,7 +167,6 @@ function usePixelSize() {
   useEffect(() => {
     const update = () => {
       const vmin = Math.min(window.innerWidth, window.innerHeight);
-      // bigger on mobile: ~6px at 390 vmin, ~8px at 760, capped at 10
       setPx(Math.max(6, Math.min(10, Math.round(vmin * 0.012))));
     };
     update();
@@ -220,6 +220,38 @@ function FlatEye({ className, closed, pixelSize }: { className?: string; closed:
   );
 }
 
+// Small header logo: two static eyes, ink pixels on cream.
+function EyeLogo() {
+  const px = 2;
+  const gap = 1;
+  return (
+    <div className="flex items-center gap-[6px]" aria-label="R.O.S.S." role="img">
+      {[0, 1].map((i) => (
+        <div
+          key={i}
+          style={{
+            display: "grid",
+            gridTemplateColumns: `repeat(${COLS}, ${px}px)`,
+            gap,
+          }}
+        >
+          {FULL_ROWS.map((row, r) =>
+            row.map((on, c) => (
+              <div
+                key={`${r}-${c}`}
+                style={{
+                  width: px,
+                  height: px,
+                  background: on ? "#1C1A14" : "transparent",
+                }}
+              />
+            ))
+          )}
+        </div>
+      ))}
+    </div>
+  );
+}
 
 function Index() {
   const [email, setEmail] = useState("");
@@ -245,16 +277,14 @@ function Index() {
     }
   };
 
-
   return (
     <main
       className="relative w-full overflow-x-hidden"
       style={{
         background:
-          "linear-gradient(180deg, #F6F3ED 0vh, #F6F3ED 40vh, #fdecc9 55vh, #EF9F27 80vh, #5DCAA5 110vh, #3a9e7e 160vh, #1C1A14 240vh, #1C1A14 400vh)",
+          "linear-gradient(180deg, #F6F3ED 0vh, #F6F3ED 35vh, #cfe9d9 75vh, #5DCAA5 130vh, #5DCAA5 200vh, #1C1A14 320vh, #1C1A14 400vh)",
         backgroundRepeat: "no-repeat",
       }}
-
     >
       {/* Grain overlay */}
       <div
@@ -269,19 +299,14 @@ function Index() {
         }}
       />
 
-      {/* HERO — first screen */}
+      {/* HERO */}
       <section className="relative z-10 h-screen w-full overflow-hidden">
-
-
-
-        {/* Clouds */}
-        <div className="absolute inset-0 pointer-events-none z-10">
-          {CLOUDS.map((c, i) => (
-            <CloudShape key={i} c={c} />
-          ))}
+        {/* Header logo (eyes as brand mark) */}
+        <div className="absolute top-4 left-4 sm:top-6 sm:left-6 z-30">
+          <EyeLogo />
         </div>
 
-        {/* Centered content (headline + email) — sits ABOVE the horizon */}
+        {/* Centered content */}
         <div className="relative z-20 h-full flex flex-col items-center justify-center px-5 sm:px-6 pb-[34vh] sm:pb-[36vh]">
           <h1
             className="text-center max-w-3xl"
@@ -332,86 +357,100 @@ function Index() {
             {status === "success" && "Grazie, ti scriveremo presto."}
             {status === "error" && "Qualcosa è andato storto, riprova."}
           </div>
-
         </div>
 
         {/* Scroll hint */}
         <div
           className="absolute bottom-4 left-1/2 -translate-x-1/2 z-30 text-[10px] tracking-[0.25em] uppercase animate-bounce pointer-events-none"
-          style={{ color: "rgba(246,243,237,0.8)" }}
+          style={{ color: "rgba(28,26,20,0.7)" }}
         >
           ↓ scroll
         </div>
 
-        {/* Flat pixel eyes on the horizon */}
+        {/* Eyes on the horizon */}
         <FlatEye className="left-[38%] sm:left-[43%]" closed={eyesClosed} pixelSize={pixelSize} />
         <FlatEye className="left-[62%] sm:left-[57%]" closed={eyesClosed} pixelSize={pixelSize} />
       </section>
 
-      {/* NARRATIVE — revealed on scroll, inherits gradient from main */}
-      <section
-        className="relative w-full py-24 sm:py-32 px-6 sm:px-8"
-        style={{
-          color: "#F6F3ED",
-        }}
-      >
+      {/* NARRATIVE — glass card framed by clouds */}
+      <section className="relative w-full py-24 sm:py-32 px-6 sm:px-8">
+        <div className="relative max-w-2xl mx-auto">
+          {/* Clouds cluster around the card */}
+          <div className="absolute inset-0 pointer-events-none z-0">
+            {CLOUDS.map((c, i) => (
+              <CloudShape key={i} c={c} />
+            ))}
+          </div>
+
+          {/* Glass card */}
+          <div
+            className="relative z-10 rounded-[20px] p-6 sm:p-12 space-y-6"
+            style={{
+              background: "rgba(255,255,255,0.55)",
+              backdropFilter: "blur(20px) saturate(140%)",
+              border: "1px solid rgba(255,255,255,0.5)",
+              boxShadow: "0 20px 60px -20px rgba(28,26,20,0.18)",
+              fontFamily: '"DM Sans", system-ui, sans-serif',
+              fontSize: "clamp(1.1rem, 1.3vw, 1.3rem)",
+              fontWeight: 400,
+              lineHeight: 1.65,
+              letterSpacing: "-0.005em",
+              color: "#1C1A14",
+            }}
+          >
+            <p>
+              Le soluzioni che esistono oggi per chi vive solo in età avanzata nascono tutte dalla stessa domanda: come faccio a sapere se sta bene? Sensori di movimento, promemoria per le medicine, chiamate per sapere se ha fatto tutto quello che doveva. La cura pensata come sorveglianza riduce le persone ad un rischio da tenere d’occhio.
+            </p>
+
+            <p className="italic" style={{ fontFamily: 'Georgia, "Times New Roman", serif' }}>
+              <strong>R.O.S.S. parte da una domanda diversa: e se lo strumento più potente non fosse il monitoraggio, ma la relazione?</strong>
+            </p>
+
+            <p>
+              Non un sensore che segnala una caduta dopo che è già successa. Qualcosa che, prima ancora, tenga viva la parte di una persona che nessun dispositivo di sicurezza saprebbe mai toccare: <strong>i ricordi, le storie, la voglia di raccontarsi a qualcuno che ascolta davvero.</strong>
+            </p>
+
+            <p>
+              Stiamo costruendo un compagno che stimola cognitivamente chi vive solo attraverso conversazioni adattive, personalizzate su una base di conoscenza biografica che guida ogni dialogo: la famiglia, le passioni, la storia di vita di ciascuno. Non un assistente che fa a tutti le stesse domande. Un'intelligenza che impara chi ha davanti: cosa ha fatto per una vita intera, chi ama, quali canzoni riportano a galla un ricordo preciso.
+            </p>
+
+            <p>
+              Oggi, tra chi vive solo e la propria famiglia, la maggior parte delle parole scambiate riguarda la cura: ha mangiato, ha preso le medicine, che cosa ha detto il medico, bisognerebbe andare a trovarlo. È un problema reale e non lo eliminiamo. Ma quando si parla solo di questo, <strong>si diventa ciechi</strong> a tutto il resto e l'affetto, i ricordi, la voglia di raccontarsi spariscono sotto il peso della preoccupazione.
+            </p>
+
+            <p>
+              R.O.S.S. ricostruisce quello che la paura ha eroso: vogliamo che almeno le conversazioni tornino ad essere sulle persone, non sulla gestione.
+            </p>
+
+            <p>
+              Il modo in cui una persona racconta la propria giornata, quanto ha voglia di parlare, cosa sceglie di raccontare, quali ricordi torna a cercare, diventano lo stimolo cognitivo di cui ha bisogno e, per chi le vuole bene, un segnale di come sta.
+            </p>
+
+            <p>Non un dato biometrico. Una narrazione.</p>
+
+            <p>
+              Oggi le famiglie parlano dei propri cari, non con loro. Ci si chiama tra familiari, ci si organizza, ci si preoccupa e chi vive solo viene interpellato solo per confermare cosa ha fatto o non ha fatto.
+            </p>
+
+            <p>
+              R.O.S.S. lo rimette al centro della conversazione, non ai margini di una gestione.
+            </p>
+          </div>
+        </div>
+
+        {/* Closing line — on the dark tail of the gradient, light text */}
         <div
-          className="max-w-2xl mx-auto space-y-6"
+          className="relative z-10 max-w-2xl mx-auto mt-32 sm:mt-48 text-center"
           style={{
-            fontFamily: '"DM Sans", system-ui, sans-serif',
-            fontSize: "clamp(1.1rem, 1.3vw, 1.3rem)",
-            fontWeight: 400,
-            lineHeight: 1.65,
-            letterSpacing: "-0.005em",
+            fontFamily: 'Georgia, "Times New Roman", serif',
+            color: "#F6F3ED",
+            fontSize: "clamp(1.4rem, 2vw, 1.9rem)",
+            lineHeight: 1.35,
           }}
         >
-
-          <p>
-            Le soluzioni che esistono oggi per chi vive solo in età avanzata nascono tutte dalla stessa domanda: come faccio a sapere se sta bene? Sensori di movimento, promemoria per le medicine, chiamate per sapere se ha fatto tutto quello che doveva. La cura pensata come sorveglianza riduce le persone ad un rischio da tenere d’occhio.
-          </p>
-
-          <p className="italic" style={{ fontFamily: 'Georgia, "Times New Roman", serif' }}>
-            <strong>R.O.S.S. parte da una domanda diversa: e se lo strumento più potente non fosse il monitoraggio, ma la relazione?</strong>
-          </p>
-
-          <p>
-            Non un sensore che segnala una caduta dopo che è già successa. Qualcosa che, prima ancora, tenga viva la parte di una persona che nessun dispositivo di sicurezza saprebbe mai toccare: <strong>i ricordi, le storie, la voglia di raccontarsi a qualcuno che ascolta davvero.</strong>
-          </p>
-
-          <p>
-            Stiamo costruendo un compagno che stimola cognitivamente chi vive solo attraverso conversazioni adattive, personalizzate su una base di conoscenza biografica che guida ogni dialogo: la famiglia, le passioni, la storia di vita di ciascuno. Non un assistente che fa a tutti le stesse domande. Un'intelligenza che impara chi ha davanti: cosa ha fatto per una vita intera, chi ama, quali canzoni riportano a galla un ricordo preciso.
-          </p>
-
-          <p>
-            Oggi, tra chi vive solo e la propria famiglia, la maggior parte delle parole scambiate riguarda la cura: ha mangiato, ha preso le medicine, che cosa ha detto il medico, bisognerebbe andare a trovarlo. È un problema reale e non lo eliminiamo. Ma quando si parla solo di questo, <strong>si diventa ciechi</strong> a tutto il resto e l'affetto, i ricordi, la voglia di raccontarsi spariscono sotto il peso della preoccupazione.
-          </p>
-
-          <p>
-            R.O.S.S. ricostruisce quello che la paura ha eroso: vogliamo che almeno le conversazioni tornino ad essere sulle persone, non sulla gestione.
-          </p>
-
-          <p>
-            Il modo in cui una persona racconta la propria giornata, quanto ha voglia di parlare, cosa sceglie di raccontare, quali ricordi torna a cercare, diventano lo stimolo cognitivo di cui ha bisogno e, per chi le vuole bene, un segnale di come sta.
-          </p>
-
-          <p>
-            Non un dato biometrico. Una narrazione.
-          </p>
-
-          <p>
-            Oggi le famiglie parlano dei propri cari, non con loro. Ci si chiama tra familiari, ci si organizza, ci si preoccupa e chi vive solo viene interpellato solo per confermare cosa ha fatto o non ha fatto.
-          </p>
-
-          <p>
-            R.O.S.S. lo rimette al centro della conversazione, non ai margini di una gestione.
-          </p>
-
-          <p style={{ fontSize: "clamp(1.25rem, 1.65vw, 1.5rem)", fontWeight: 500, lineHeight: 1.4 }}>
-            <strong>Per questo R.O.S.S. non sorveglia. Dà voce.</strong>
-          </p>
+          <strong>Per questo R.O.S.S. non sorveglia. Dà voce.</strong>
         </div>
       </section>
-
     </main>
   );
 }
