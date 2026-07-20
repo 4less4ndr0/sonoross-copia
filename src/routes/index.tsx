@@ -416,7 +416,7 @@ function Index() {
             </p>
 
             <p>
-              Non un sensore che segnala una caduta dopo che è già successa. Qualcosa che, prima ancora, tenga viva la parte di una persona che nessun dispositivo di sicurezza saprebbe mai toccare: <strong style={{ color: "var(--ross-sage-dark)" }}>i ricordi, le storie, la voglia di raccontarsi a qualcuno che ascolta davvero.</strong>
+              Non un sensore che segnala una caduta dopo che è già successa. Qualcosa che, prima ancora, tenga viva la parte di una persona che nessun dispositivo di sicurezza saprebbe mai toccare: <strong className="ross-highlight">i ricordi, le storie, la voglia di raccontarsi a qualcuno che ascolta davvero.</strong>
             </p>
 
             <p>
