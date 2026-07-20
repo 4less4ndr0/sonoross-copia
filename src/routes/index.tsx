@@ -262,6 +262,67 @@ function EyeLogo() {
   );
 }
 
+type Bubble = {
+  left: string;
+  top: string;
+  size: string;
+  delay: string;
+  duration: string;
+  floatClass: "float-a" | "float-b" | "float-c" | "float-d";
+};
+
+const BUBBLES: Bubble[] = [
+  { left: "6%", top: "18%", size: "clamp(14px, 2.2vw, 26px)", delay: "0s", duration: "8s", floatClass: "float-a" },
+  { left: "18%", top: "8%", size: "clamp(18px, 2.8vw, 32px)", delay: "0.7s", duration: "10s", floatClass: "float-b" },
+  { left: "32%", top: "4%", size: "clamp(12px, 1.8vw, 20px)", delay: "1.4s", duration: "7s", floatClass: "float-c" },
+  { left: "50%", top: "0%", size: "clamp(22px, 3.2vw, 38px)", delay: "2.1s", duration: "11s", floatClass: "float-d" },
+  { left: "68%", top: "6%", size: "clamp(14px, 2.2vw, 26px)", delay: "0.3s", duration: "9s", floatClass: "float-a" },
+  { left: "84%", top: "16%", size: "clamp(18px, 2.6vw, 30px)", delay: "1.1s", duration: "8s", floatClass: "float-b" },
+  { left: "92%", top: "34%", size: "clamp(16px, 2.4vw, 28px)", delay: "1.8s", duration: "10s", floatClass: "float-c" },
+  { left: "88%", top: "56%", size: "clamp(12px, 1.8vw, 22px)", delay: "0.5s", duration: "7s", floatClass: "float-d" },
+  { left: "72%", top: "74%", size: "clamp(20px, 3vw, 36px)", delay: "2.5s", duration: "9s", floatClass: "float-a" },
+  { left: "52%", top: "86%", size: "clamp(14px, 2.2vw, 26px)", delay: "0.9s", duration: "11s", floatClass: "float-b" },
+  { left: "30%", top: "82%", size: "clamp(18px, 2.6vw, 30px)", delay: "1.6s", duration: "8s", floatClass: "float-c" },
+  { left: "12%", top: "68%", size: "clamp(16px, 2.4vw, 28px)", delay: "2.3s", duration: "10s", floatClass: "float-d" },
+  { left: "2%", top: "48%", size: "clamp(22px, 3.2vw, 38px)", delay: "0.2s", duration: "9s", floatClass: "float-a" },
+  { left: "8%", top: "32%", size: "clamp(12px, 1.8vw, 22px)", delay: "1.9s", duration: "7s", floatClass: "float-b" },
+  { left: "42%", top: "14%", size: "clamp(14px, 2vw, 24px)", delay: "1.2s", duration: "8s", floatClass: "float-c" },
+  { left: "58%", top: "20%", size: "clamp(16px, 2.2vw, 28px)", delay: "0.6s", duration: "10s", floatClass: "float-d" },
+];
+
+function BubbleCluster() {
+  return (
+    <div
+      aria-hidden
+      className="absolute left-1/2 -translate-x-1/2 pointer-events-none"
+      style={{
+        top: "80%",
+        transform: "translate(-50%, -50%)",
+        width: "clamp(280px, 58vw, 520px)",
+        height: "clamp(170px, 26vh, 250px)",
+        zIndex: 0,
+      }}
+    >
+      {BUBBLES.map((b, i) => (
+        <div
+          key={i}
+          className={`absolute rounded-full ${b.floatClass}`}
+          style={{
+            left: b.left,
+            top: b.top,
+            width: b.size,
+            height: b.size,
+            backgroundColor: "var(--ross-teal-light)",
+            animationDelay: b.delay,
+            animationDuration: b.duration,
+            opacity: 0.95,
+          }}
+        />
+      ))}
+    </div>
+  );
+}
+
 function Index() {
   const [email, setEmail] = useState("");
   const [status, setStatus] = useState<"idle" | "loading" | "success" | "error">("idle");
@@ -382,6 +443,9 @@ function Index() {
         >
           ↓ scroll
         </div>
+
+        {/* Bubble cluster framing the eyes */}
+        <BubbleCluster />
 
         {/* Eyes on the horizon */}
         <FlatEye className="left-[38%] sm:left-[43%]" closed={eyesClosed} pixelSize={pixelSize} />
