@@ -223,11 +223,26 @@ function FlatEye({ className, closed, pixelSize }: { className?: string; closed:
 
 function Index() {
   const [email, setEmail] = useState("");
+  const [status, setStatus] = useState<"idle" | "loading" | "success" | "error">("idle");
   const eyesClosed = useBlink(2500, 6000);
   const pixelSize = usePixelSize();
+  const submit = useServerFn(submitLead);
 
-  const onSubmit = (e: FormEvent) => {
+  const onSubmit = async (e: FormEvent) => {
     e.preventDefault();
+    if (status === "loading") return;
+    setStatus("loading");
+    try {
+      const res = await submit({ data: { email } });
+      if (res.ok) {
+        setStatus("success");
+        setEmail("");
+      } else {
+        setStatus("error");
+      }
+    } catch {
+      setStatus("error");
+    }
   };
 
 
