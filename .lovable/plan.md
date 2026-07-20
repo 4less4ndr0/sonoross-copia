@@ -1,15 +1,22 @@
 ## Obiettivo
-Capire se il database Notion è già raggiungibile con la connessione OAuth attuale, senza farti fare azioni inutili su Notion.
+Rimuovere completamente la sfumatura radiale "sole" all'orizzonte e sostituirla con un gradiente lineare verticale morbido Cream → Terra → Teal → Ink, arricchito da una texture grain sottile per dare profondità senza alone.
 
-## Passi
-1. Invocare `submitLead` con un'email di test (`stack_modern--invoke-server-function` → `/_serverFn/...` tramite il client — in pratica un POST all'endpoint interno).
-2. Leggere `stack_modern--server-function-logs` filtrando `Notion` per vedere lo status HTTP e il body di risposta del gateway.
-3. Interpretare il risultato:
-   - **200 OK** → tutto ok, il DB è accessibile. Nessuna azione da parte tua.
-   - **404 `object_not_found`** → il DB non è nel set di pagine autorizzate. Serve una delle due:
-     a. Ri-autorizzare Notion da Lovable includendo il DB nella lista pagine.
-     b. Aggiungerlo manualmente da Notion (`···` → `Connections` → cerca "Lovable" — non "lovable", il nome esatto della integrazione).
-   - **400 `validation_error` su properties** → il DB non ha una colonna `Email` di tipo Title o `Source` Rich text. Ti dico esattamente quale property manca e la sistemi (o rimuovo `Source` dal payload).
-4. In base al risultato, agisco: se serve un fix codice (es. togliere `Source`), lo faccio; se serve un'azione tua su Notion, te la descrivo con precisione.
+## Modifiche a `src/routes/index.tsx`
 
-Nessuna modifica al codice in questa fase — solo diagnosi.
+1. **Background del `<main>`**: eliminare il layer `radial-gradient(...)` iniziale. Tenere solo il `linear-gradient` verticale, ribilanciando le stop così la transizione sia liscia:
+   - 0–40vh: `#F6F3ED` (Cream, area hero/testo)
+   - 55vh: `#fdecc9` (crema calda)
+   - 80vh: `#EF9F27` (Terra)
+   - 110vh: `#5DCAA5` (Teal)
+   - 160vh: `#3a9e7e` (Teal scuro)
+   - 240–400vh: `#1C1A14` (Ink)
+
+2. **Horizon layer (il div assoluto con il secondo radial)**: sostituirlo con una banda lineare orizzontale sottile (Terra→Teal) posizionata dove prima c'era il glow, oppure rimuoverlo del tutto lasciando che sia il gradiente principale a fare l'orizzonte. Scelta: **rimuoverlo**, il gradient del `main` è già sufficiente.
+
+3. **Grain overlay**: aggiungere un `div` fisso a tutta pagina con un SVG noise inline come `background-image`, `opacity: 0.06`, `mix-blend-mode: overlay`, `pointer-events: none`, `z-index` sopra il gradient ma sotto i contenuti. Implementato via data-URI SVG `feTurbulence` per evitare asset esterni.
+
+## Cosa NON tocco
+Font (Georgia, Instrument Serif, DM Sans), occhi FlatEye, posizioni delle nuvole, layout del contact lead, testo del manifesto, form email.
+
+## Verifica
+Ricaricare `/`, controllare che non ci sia più l'alone circolare arancione, che lo scroll mantenga transizione continua Cream→Ink, e che la grana sia percepibile ma discreta.
