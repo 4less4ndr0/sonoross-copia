@@ -225,7 +225,14 @@ function EyeLogo() {
   const px = 2;
   const gap = 1;
   return (
-    <div className="flex items-center gap-[6px]" aria-label="R.O.S.S." role="img">
+    <div
+      className="flex items-center gap-[6px]"
+      aria-label="R.O.S.S."
+      role="img"
+      style={{
+        filter: "drop-shadow(0 1px 5px rgba(28,26,20,0.12))",
+      }}
+    >
       {[0, 1].map((i) => (
         <div
           key={i}
