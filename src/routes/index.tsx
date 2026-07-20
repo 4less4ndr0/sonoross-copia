@@ -262,92 +262,34 @@ function EyeLogo() {
   );
 }
 
-type Bubble = {
-  left: string;
-  top: string;
-  size: string;
-  delay: string;
-  duration: string;
-  floatClass: "float-a" | "float-b" | "float-c" | "float-d";
-};
 
-const BUBBLES: Bubble[] = [
-  // Top arc
-  { left: "18%", top: "8%",  size: "clamp(28px, 3.8vw, 52px)", delay: "0s",   duration: "9s",  floatClass: "float-a" },
-  { left: "28%", top: "2%",  size: "clamp(36px, 4.6vw, 64px)", delay: "0.6s", duration: "11s", floatClass: "float-b" },
-  { left: "40%", top: "0%",  size: "clamp(30px, 4vw, 56px)",   delay: "1.3s", duration: "8s",  floatClass: "float-c" },
-  { left: "52%", top: "2%",  size: "clamp(42px, 5.2vw, 72px)", delay: "2.0s", duration: "10s", floatClass: "float-d" },
-  { left: "64%", top: "4%",  size: "clamp(32px, 4.2vw, 58px)", delay: "0.4s", duration: "9s",  floatClass: "float-a" },
-  { left: "76%", top: "10%", size: "clamp(26px, 3.4vw, 46px)", delay: "1.1s", duration: "8s",  floatClass: "float-b" },
-  // Upper middle
-  { left: "10%", top: "22%", size: "clamp(32px, 4.2vw, 58px)", delay: "1.7s", duration: "10s", floatClass: "float-c" },
-  { left: "22%", top: "18%", size: "clamp(40px, 5vw, 70px)",   delay: "0.2s", duration: "9s",  floatClass: "float-d" },
-  { left: "34%", top: "16%", size: "clamp(30px, 4vw, 54px)",   delay: "0.9s", duration: "8s",  floatClass: "float-a" },
-  { left: "58%", top: "16%", size: "clamp(34px, 4.4vw, 60px)", delay: "1.5s", duration: "11s", floatClass: "float-b" },
-  { left: "72%", top: "20%", size: "clamp(38px, 4.8vw, 66px)", delay: "0.3s", duration: "9s",  floatClass: "float-c" },
-  { left: "84%", top: "26%", size: "clamp(28px, 3.6vw, 48px)", delay: "1.0s", duration: "8s",  floatClass: "float-d" },
-  // Sides around eyes
-  { left: "4%",  top: "40%", size: "clamp(30px, 4vw, 54px)",   delay: "1.8s", duration: "10s", floatClass: "float-a" },
-  { left: "14%", top: "44%", size: "clamp(24px, 3.2vw, 42px)", delay: "0.5s", duration: "9s",  floatClass: "float-b" },
-  { left: "88%", top: "44%", size: "clamp(32px, 4.2vw, 58px)", delay: "1.4s", duration: "10s", floatClass: "float-c" },
-  { left: "78%", top: "48%", size: "clamp(26px, 3.4vw, 46px)", delay: "2.1s", duration: "8s",  floatClass: "float-d" },
-  // Bottom arc
-  { left: "20%", top: "68%", size: "clamp(28px, 3.6vw, 50px)", delay: "0.8s", duration: "9s",  floatClass: "float-a" },
-  { left: "34%", top: "76%", size: "clamp(34px, 4.4vw, 60px)", delay: "1.6s", duration: "11s", floatClass: "float-b" },
-  { left: "50%", top: "80%", size: "clamp(24px, 3.2vw, 42px)", delay: "0.3s", duration: "8s",  floatClass: "float-c" },
-  { left: "64%", top: "74%", size: "clamp(30px, 4vw, 54px)",   delay: "1.2s", duration: "10s", floatClass: "float-d" },
-  { left: "78%", top: "68%", size: "clamp(22px, 3vw, 40px)",   delay: "2.0s", duration: "9s",  floatClass: "float-a" },
-];
 
-function BubbleCluster() {
+
+function GridBackdrop() {
+  // Graph-paper grid in #97C459 that fades to transparent at the edges (radial mask).
+  const line = "rgba(151, 196, 89, 0.55)";
+  const cell = "44px";
   return (
     <div
       aria-hidden
-      className="absolute left-1/2 -translate-x-1/2 pointer-events-none"
+      className="absolute inset-0 pointer-events-none"
       style={{
-        top: "78%",
-        transform: "translate(-50%, -50%)",
-        width: "clamp(340px, 68vw, 720px)",
-        height: "clamp(220px, 34vh, 340px)",
         zIndex: 0,
+        backgroundImage: `
+          linear-gradient(to right, ${line} 1px, transparent 1px),
+          linear-gradient(to bottom, ${line} 1px, transparent 1px)
+        `,
+        backgroundSize: `${cell} ${cell}, ${cell} ${cell}`,
+        WebkitMaskImage:
+          "radial-gradient(ellipse 55% 55% at 50% 50%, #000 0%, rgba(0,0,0,0.85) 40%, rgba(0,0,0,0.35) 70%, transparent 100%)",
+        maskImage:
+          "radial-gradient(ellipse 55% 55% at 50% 50%, #000 0%, rgba(0,0,0,0.85) 40%, rgba(0,0,0,0.35) 70%, transparent 100%)",
       }}
-    >
-      {BUBBLES.map((b, i) => (
-        <div
-          key={i}
-          className={`absolute rounded-full ${b.floatClass}`}
-          style={{
-            left: b.left,
-            top: b.top,
-            width: b.size,
-            height: b.size,
-            background:
-              "radial-gradient(circle at 30% 25%, rgba(255,255,255,0.9) 0%, rgba(255,255,255,0.35) 12%, #b6d97a 35%, #97C459 60%, #6f9a3a 100%)",
-            boxShadow:
-              "inset -6px -8px 14px rgba(60,90,20,0.35), inset 4px 6px 10px rgba(255,255,255,0.45), 0 6px 14px rgba(60,90,20,0.18)",
-            animationDelay: b.delay,
-            animationDuration: b.duration,
-          }}
-        >
-          <span
-            aria-hidden
-            className="absolute rounded-full"
-            style={{
-              top: "10%",
-              left: "18%",
-              width: "42%",
-              height: "28%",
-              background:
-                "radial-gradient(ellipse at center, rgba(255,255,255,0.95) 0%, rgba(255,255,255,0) 70%)",
-              filter: "blur(1px)",
-            }}
-          />
-        </div>
-      ))}
-
-    </div>
+    />
   );
 }
+
+
 
 function Index() {
   const [email, setEmail] = useState("");
@@ -470,8 +412,9 @@ function Index() {
           ↓ scroll
         </div>
 
-        {/* Bubble cluster framing the eyes */}
-        <BubbleCluster />
+        {/* Faded grid background */}
+        <GridBackdrop />
+
 
         {/* Eyes on the horizon */}
         <FlatEye className="left-[38%] sm:left-[43%]" closed={eyesClosed} pixelSize={pixelSize} />
