@@ -272,22 +272,31 @@ type Bubble = {
 };
 
 const BUBBLES: Bubble[] = [
-  { left: "6%", top: "18%", size: "clamp(14px, 2.2vw, 26px)", delay: "0s", duration: "8s", floatClass: "float-a" },
-  { left: "18%", top: "8%", size: "clamp(18px, 2.8vw, 32px)", delay: "0.7s", duration: "10s", floatClass: "float-b" },
-  { left: "32%", top: "4%", size: "clamp(12px, 1.8vw, 20px)", delay: "1.4s", duration: "7s", floatClass: "float-c" },
-  { left: "50%", top: "0%", size: "clamp(22px, 3.2vw, 38px)", delay: "2.1s", duration: "11s", floatClass: "float-d" },
-  { left: "68%", top: "6%", size: "clamp(14px, 2.2vw, 26px)", delay: "0.3s", duration: "9s", floatClass: "float-a" },
-  { left: "84%", top: "16%", size: "clamp(18px, 2.6vw, 30px)", delay: "1.1s", duration: "8s", floatClass: "float-b" },
-  { left: "92%", top: "34%", size: "clamp(16px, 2.4vw, 28px)", delay: "1.8s", duration: "10s", floatClass: "float-c" },
-  { left: "88%", top: "56%", size: "clamp(12px, 1.8vw, 22px)", delay: "0.5s", duration: "7s", floatClass: "float-d" },
-  { left: "72%", top: "74%", size: "clamp(20px, 3vw, 36px)", delay: "2.5s", duration: "9s", floatClass: "float-a" },
-  { left: "52%", top: "86%", size: "clamp(14px, 2.2vw, 26px)", delay: "0.9s", duration: "11s", floatClass: "float-b" },
-  { left: "30%", top: "82%", size: "clamp(18px, 2.6vw, 30px)", delay: "1.6s", duration: "8s", floatClass: "float-c" },
-  { left: "12%", top: "68%", size: "clamp(16px, 2.4vw, 28px)", delay: "2.3s", duration: "10s", floatClass: "float-d" },
-  { left: "2%", top: "48%", size: "clamp(22px, 3.2vw, 38px)", delay: "0.2s", duration: "9s", floatClass: "float-a" },
-  { left: "8%", top: "32%", size: "clamp(12px, 1.8vw, 22px)", delay: "1.9s", duration: "7s", floatClass: "float-b" },
-  { left: "42%", top: "14%", size: "clamp(14px, 2vw, 24px)", delay: "1.2s", duration: "8s", floatClass: "float-c" },
-  { left: "58%", top: "20%", size: "clamp(16px, 2.2vw, 28px)", delay: "0.6s", duration: "10s", floatClass: "float-d" },
+  // Top arc
+  { left: "18%", top: "8%",  size: "clamp(28px, 3.8vw, 52px)", delay: "0s",   duration: "9s",  floatClass: "float-a" },
+  { left: "28%", top: "2%",  size: "clamp(36px, 4.6vw, 64px)", delay: "0.6s", duration: "11s", floatClass: "float-b" },
+  { left: "40%", top: "0%",  size: "clamp(30px, 4vw, 56px)",   delay: "1.3s", duration: "8s",  floatClass: "float-c" },
+  { left: "52%", top: "2%",  size: "clamp(42px, 5.2vw, 72px)", delay: "2.0s", duration: "10s", floatClass: "float-d" },
+  { left: "64%", top: "4%",  size: "clamp(32px, 4.2vw, 58px)", delay: "0.4s", duration: "9s",  floatClass: "float-a" },
+  { left: "76%", top: "10%", size: "clamp(26px, 3.4vw, 46px)", delay: "1.1s", duration: "8s",  floatClass: "float-b" },
+  // Upper middle
+  { left: "10%", top: "22%", size: "clamp(32px, 4.2vw, 58px)", delay: "1.7s", duration: "10s", floatClass: "float-c" },
+  { left: "22%", top: "18%", size: "clamp(40px, 5vw, 70px)",   delay: "0.2s", duration: "9s",  floatClass: "float-d" },
+  { left: "34%", top: "16%", size: "clamp(30px, 4vw, 54px)",   delay: "0.9s", duration: "8s",  floatClass: "float-a" },
+  { left: "58%", top: "16%", size: "clamp(34px, 4.4vw, 60px)", delay: "1.5s", duration: "11s", floatClass: "float-b" },
+  { left: "72%", top: "20%", size: "clamp(38px, 4.8vw, 66px)", delay: "0.3s", duration: "9s",  floatClass: "float-c" },
+  { left: "84%", top: "26%", size: "clamp(28px, 3.6vw, 48px)", delay: "1.0s", duration: "8s",  floatClass: "float-d" },
+  // Sides around eyes
+  { left: "4%",  top: "40%", size: "clamp(30px, 4vw, 54px)",   delay: "1.8s", duration: "10s", floatClass: "float-a" },
+  { left: "14%", top: "44%", size: "clamp(24px, 3.2vw, 42px)", delay: "0.5s", duration: "9s",  floatClass: "float-b" },
+  { left: "88%", top: "44%", size: "clamp(32px, 4.2vw, 58px)", delay: "1.4s", duration: "10s", floatClass: "float-c" },
+  { left: "78%", top: "48%", size: "clamp(26px, 3.4vw, 46px)", delay: "2.1s", duration: "8s",  floatClass: "float-d" },
+  // Bottom arc
+  { left: "20%", top: "68%", size: "clamp(28px, 3.6vw, 50px)", delay: "0.8s", duration: "9s",  floatClass: "float-a" },
+  { left: "34%", top: "76%", size: "clamp(34px, 4.4vw, 60px)", delay: "1.6s", duration: "11s", floatClass: "float-b" },
+  { left: "50%", top: "80%", size: "clamp(24px, 3.2vw, 42px)", delay: "0.3s", duration: "8s",  floatClass: "float-c" },
+  { left: "64%", top: "74%", size: "clamp(30px, 4vw, 54px)",   delay: "1.2s", duration: "10s", floatClass: "float-d" },
+  { left: "78%", top: "68%", size: "clamp(22px, 3vw, 40px)",   delay: "2.0s", duration: "9s",  floatClass: "float-a" },
 ];
 
 function BubbleCluster() {
@@ -296,10 +305,10 @@ function BubbleCluster() {
       aria-hidden
       className="absolute left-1/2 -translate-x-1/2 pointer-events-none"
       style={{
-        top: "80%",
+        top: "78%",
         transform: "translate(-50%, -50%)",
-        width: "clamp(280px, 58vw, 520px)",
-        height: "clamp(170px, 26vh, 250px)",
+        width: "clamp(340px, 68vw, 720px)",
+        height: "clamp(220px, 34vh, 340px)",
         zIndex: 0,
       }}
     >
