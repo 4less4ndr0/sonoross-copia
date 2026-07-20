@@ -102,7 +102,7 @@ function CloudShape({ c }: { c: Cloud }) {
           style={{
             fontFamily: '"Instrument Serif", serif',
             color: "#1a1a1a",
-            fontSize: "clamp(1.5rem, 7cqi, 1.9rem)",
+            fontSize: "clamp(0.85rem, 6cqi, 1.4rem)",
             lineHeight: 1.2,
             letterSpacing: "-0.01em",
             whiteSpace: "pre-line",
