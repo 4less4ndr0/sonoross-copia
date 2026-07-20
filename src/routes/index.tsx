@@ -359,7 +359,7 @@ function Index() {
           className="max-w-2xl mx-auto space-y-6"
           style={{
             fontFamily: '"DM Sans", system-ui, sans-serif',
-            fontSize: "clamp(1rem, 1.15vw, 1.15rem)",
+            fontSize: "clamp(1.1rem, 1.3vw, 1.3rem)",
             fontWeight: 400,
             lineHeight: 1.65,
             letterSpacing: "-0.005em",
