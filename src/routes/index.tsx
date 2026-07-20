@@ -286,7 +286,7 @@ function Index() {
           <h1
             className="text-center text-neutral-900 max-w-3xl"
             style={{
-              fontFamily: '"Instrument Serif", serif',
+              fontFamily: 'Georgia, "Times New Roman", serif',
               fontWeight: 400,
               fontSize: "clamp(2rem, 7vw, 4.5rem)",
               lineHeight: 1.05,
@@ -362,7 +362,7 @@ function Index() {
             Le soluzioni che esistono oggi per chi vive solo in età avanzata nascono tutte dalla stessa domanda: come faccio a sapere se sta bene? Sensori di movimento, promemoria per le medicine, chiamate per sapere se ha fatto tutto quello che doveva. La cura pensata come sorveglianza riduce le persone ad un rischio da tenere d’occhio.
           </p>
 
-          <p>
+          <p style={{ fontFamily: 'Georgia, "Times New Roman", serif' }}>
             <strong>R.O.S.S. parte da una domanda diversa: e se lo strumento più potente non fosse il monitoraggio, ma la relazione?</strong>
           </p>
 
