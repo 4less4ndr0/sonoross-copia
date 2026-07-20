@@ -406,7 +406,7 @@ function Index() {
 
         {/* Scroll hint */}
         <div
-          className="absolute bottom-4 left-1/2 -translate-x-1/2 z-30 text-[10px] tracking-[0.25em] uppercase animate-bounce pointer-events-none"
+          className="absolute bottom-32 sm:bottom-40 left-1/2 -translate-x-1/2 z-30 text-[10px] tracking-[0.25em] uppercase animate-bounce pointer-events-none"
           style={{ color: "rgba(28,26,20,0.7)" }}
         >
           ↓ scroll
