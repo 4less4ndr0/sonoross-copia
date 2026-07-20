@@ -457,7 +457,7 @@ function Index() {
             lineHeight: 1.35,
           }}
         >
-          <strong style={{ color: "var(--ross-sage-dark)" }}>Per questo R.O.S.S. non sorveglia. Dà voce.</strong>
+          <strong className="ross-highlight">Per questo R.O.S.S. non sorveglia. Dà voce.</strong>
         </div>
       </section>
     </main>
