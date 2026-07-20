@@ -140,7 +140,9 @@ function CloudShape({
   onToggle: (i: number) => void;
   isDesktop: boolean;
 }) {
+  const [isHover, setIsHover] = useState(false);
   const baseSlot = isDesktop ? c.desktop : c.mobile;
+  const peek = isHover && !isActive;
   const style: React.CSSProperties = isActive
     ? {
         top: "0",
@@ -155,8 +157,11 @@ function CloudShape({
       }
     : {
         ...slotToStyle(baseSlot),
-        zIndex: anyActive ? 1 : 5,
-        opacity: anyActive ? 0.55 : 1,
+        transform: peek
+          ? `rotate(0deg) scale(1.06)`
+          : `rotate(${baseSlot.rotate}deg)`,
+        zIndex: peek ? 50 : anyActive ? 1 : 5,
+        opacity: peek ? 1 : anyActive ? 0.55 : 1,
         transition: TRANSITION,
         animationDelay: c.delay,
       };
@@ -165,11 +170,13 @@ function CloudShape({
     <button
       type="button"
       onClick={() => onToggle(index)}
+      onMouseEnter={() => setIsHover(true)}
+      onMouseLeave={() => setIsHover(false)}
+      onFocus={() => setIsHover(true)}
+      onBlur={() => setIsHover(false)}
       aria-expanded={isActive}
       aria-label={c.text}
-      className={`group absolute float-${c.variant} pointer-events-auto cursor-pointer text-left focus:outline-none focus-visible:ring-2 focus-visible:ring-[#EF9F27] rounded-[20px] ${
-        !isActive && !anyActive ? "hover:scale-[1.04] hover:z-20" : ""
-      }`}
+      className={`group absolute float-${c.variant} pointer-events-auto cursor-pointer text-left focus:outline-none focus-visible:ring-2 focus-visible:ring-[#EF9F27] rounded-[20px]`}
       style={style}
     >
       <div
@@ -178,9 +185,10 @@ function CloudShape({
         style={{
           background: "rgba(239, 159, 39, 0.45)",
           filter: "blur(44px)",
-          opacity: isActive ? 1 : anyActive ? 0.35 : 0.8,
+          opacity: isActive || peek ? 1 : anyActive ? 0.35 : 0.8,
         }}
       />
+
 
       <div
         className="relative flex flex-col items-center justify-center text-center rounded-[20px] transition-all duration-500 ease-[cubic-bezier(0.22,1,0.36,1)]"
