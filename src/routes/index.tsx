@@ -357,19 +357,6 @@ function Index() {
             letterSpacing: "-0.005em",
           }}
         >
-          <h2
-            className="text-center"
-            style={{
-              fontFamily: '"DM Sans", system-ui, sans-serif',
-              fontSize: "clamp(1.75rem, 3vw, 2.5rem)",
-              fontWeight: 600,
-              lineHeight: 1.2,
-              letterSpacing: "-0.02em",
-              marginBottom: "2.5rem",
-            }}
-          >
-            Manifesto ROSS
-          </h2>
 
           <p>
             Le soluzioni che esistono oggi per chi vive solo in età avanzata nascono tutte dalla stessa domanda: come faccio a sapere se sta bene? Sensori di movimento, promemoria per le medicine, chiamate per sapere se ha fatto tutto quello che doveva. La cura pensata come sorveglianza riduce le persone ad un rischio da tenere d’occhio.
