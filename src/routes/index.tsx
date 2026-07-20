@@ -425,6 +425,15 @@ function Index() {
       <section className="relative w-full py-24 sm:py-32 px-6 sm:px-8">
         <div className="relative w-[70vw] max-w-6xl mx-auto">
 
+          {/* Soft sage glow behind the glass card */}
+          <div
+            aria-hidden
+            className="absolute -inset-8 -z-10 rounded-[28px] pointer-events-none"
+            style={{
+              background: "rgba(232, 245, 211, 0.22)",
+              filter: "blur(60px)",
+            }}
+          />
 
           {/* Glass card */}
           <div
@@ -433,7 +442,6 @@ function Index() {
               background: "rgba(255,255,255,0.55)",
               backdropFilter: "blur(20px) saturate(140%)",
               border: "1px solid rgba(255,255,255,0.5)",
-              boxShadow: "0 20px 60px -20px rgba(28,26,20,0.18)",
               fontFamily: '"DM Sans", system-ui, sans-serif',
               fontSize: "clamp(1.1rem, 1.3vw, 1.3rem)",
               fontWeight: 400,
