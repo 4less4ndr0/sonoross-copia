@@ -86,7 +86,7 @@ function CloudShape({ c }: { c: Cloud }) {
 
       {/* Glass card */}
       <div
-        className="relative flex items-center justify-center text-center rounded-[20px] p-5 sm:p-6 aspect-[4/3]"
+        className="relative flex items-center justify-center text-center rounded-[20px] aspect-[4/3]"
         style={{
           background: "rgba(255,255,255,0.55)",
           backdropFilter: "blur(20px) saturate(140%)",
@@ -94,6 +94,8 @@ function CloudShape({ c }: { c: Cloud }) {
           border: "1px solid rgba(255,255,255,0.5)",
           transform: `rotate(${c.rotate}deg)`,
           boxShadow: "0 10px 30px rgba(28,26,20,0.06)",
+          containerType: "inline-size",
+          padding: "clamp(12px, 5cqi, 26px)",
         }}
       >
         <p
@@ -101,8 +103,8 @@ function CloudShape({ c }: { c: Cloud }) {
           style={{
             fontFamily: '"Instrument Serif", serif',
             color: "#1a1a1a",
-            fontSize: "clamp(0.95rem, 1.7vw, 1.35rem)",
-            lineHeight: 1.15,
+            fontSize: "clamp(0.9rem, 5cqi, 1.3rem)",
+            lineHeight: 1.2,
             letterSpacing: "-0.01em",
             whiteSpace: "pre-line",
             textWrap: "balance",
