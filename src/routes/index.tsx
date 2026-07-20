@@ -324,9 +324,6 @@ function GridBackdrop() {
 }
 
 
-    </div>
-  );
-}
 
 function Index() {
   const [email, setEmail] = useState("");
