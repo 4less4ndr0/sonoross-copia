@@ -173,3 +173,12 @@
 .float-c { animation: float-c 7s ease-in-out infinite; }
 .float-d { animation: float-d 11s ease-in-out infinite; }
 
+.ross-highlight {
+  color: var(--ross-ink);
+  background-color: var(--ross-sage-light);
+  padding: 0.08em 0.28em;
+  border-radius: 0.18em;
+  box-decoration-break: clone;
+  -webkit-box-decoration-break: clone;
+}
+
