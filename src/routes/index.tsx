@@ -64,10 +64,10 @@ function CloudShape({ c }: { c: Cloud }) {
     >
       <div
         aria-hidden
-        className="absolute -inset-6 rounded-[28px] pointer-events-none transition-opacity duration-500 opacity-70 group-hover:opacity-100"
+        className="absolute -inset-8 rounded-[32px] pointer-events-none transition-opacity duration-500 opacity-80 group-hover:opacity-100"
         style={{
-          background: "rgba(232, 245, 211, 0.35)",
-          filter: "blur(40px)",
+          background: "rgba(239, 159, 39, 0.45)",
+          filter: "blur(44px)",
         }}
       />
 
