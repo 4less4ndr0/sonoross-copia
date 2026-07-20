@@ -77,10 +77,10 @@ function CloudShape({ c }: { c: Cloud }) {
       {/* Soft sage glow behind the glass card */}
       <div
         aria-hidden
-        className="absolute -inset-5 rounded-[28px] pointer-events-none"
+        className="absolute -inset-6 rounded-[28px] pointer-events-none"
         style={{
-          background: "rgba(232, 245, 211, 0.18)",
-          filter: "blur(36px)",
+          background: "rgba(232, 245, 211, 0.23)",
+          filter: "blur(40px)",
         }}
       />
 
