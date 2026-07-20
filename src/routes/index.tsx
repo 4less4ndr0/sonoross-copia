@@ -392,7 +392,7 @@ function Index() {
 
       {/* NARRATIVE */}
       <section className="relative w-full py-24 sm:py-32 px-6 sm:px-8">
-        <div className="relative w-[70vw] max-w-6xl mx-auto">
+        <div className="relative w-[58vw] max-w-5xl mx-auto">
           {/* Cloud cards tucked BEHIND the manifesto glass card */}
           <div className="absolute inset-0 z-0 pointer-events-none">
             {CLOUDS.map((c, i) => (
