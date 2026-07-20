@@ -343,7 +343,7 @@ function Index() {
         </div>
 
         {/* Centered content */}
-        <div className="relative z-20 h-full flex flex-col items-center justify-center px-5 sm:px-6 pb-[34vh] sm:pb-[36vh]">
+        <div className="relative z-20 h-full flex flex-col items-center justify-center px-5 sm:px-6 pb-[18vh] sm:pb-[20vh]">
           <div className="relative w-full max-w-3xl">
             {/* Clouds cluster around the headline + form */}
             <div className="absolute inset-0 pointer-events-none z-0 -mx-[8vw] sm:-mx-[14vw] -my-[10vh] sm:-my-[14vh]">
