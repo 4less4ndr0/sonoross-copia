@@ -1,6 +1,8 @@
 import { createFileRoute } from "@tanstack/react-router";
+import { useServerFn } from "@tanstack/react-start";
 import { useEffect, useState, type FormEvent } from "react";
 import cloudAsset from "@/assets/cloud.png.asset.json";
+import { submitLead } from "@/lib/leads.functions";
 
 export const Route = createFileRoute("/")({
   component: Index,
