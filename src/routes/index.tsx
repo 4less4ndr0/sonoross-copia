@@ -167,10 +167,8 @@ function FlatEye({ className, closed, pixelSize }: { className?: string; closed:
 
   return (
     <div
-      className={`absolute ${className ?? ""}`}
+      className={className ?? ""}
       style={{
-        top: "80%",
-        transform: "translate(-50%, -50%)",
         width: COLS * pixelSize + (COLS - 1) * gap,
         height: ROWS_COUNT * pixelSize + (ROWS_COUNT - 1) * gap,
         filter:
