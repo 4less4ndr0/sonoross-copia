@@ -21,18 +21,18 @@ type Cloud = {
 // Clouds grouped around the manifesto glass card (framing it, not decoration).
 const CLOUDS: Cloud[] = [
   {
-    // top-left, above card, partially behind
-    positionClass: "-top-[6%] -left-[6%] sm:-top-[8%] sm:-left-[10%]",
-    widthClass: "w-[46vw] max-w-[300px] sm:w-[26vw] sm:max-w-[320px]",
+    // top-left, framing the manifesto card
+    positionClass: "-top-[18%] -left-[8%] sm:-top-[22%] sm:-left-[14%]",
+    widthClass: "w-[42vw] max-w-[280px] sm:w-[22vw] sm:max-w-[300px]",
     variant: "a",
     delay: "0s",
     rotate: -3,
     text: "Per chi ha ancora\ntante cose da raccontare.",
   },
   {
-    // top-right, above card, partially behind
-    positionClass: "-top-[4%] -right-[6%] sm:-top-[10%] sm:-right-[10%]",
-    widthClass: "w-[46vw] max-w-[300px] sm:w-[26vw] sm:max-w-[320px]",
+    // top-right, framing the manifesto card
+    positionClass: "-top-[16%] -right-[8%] sm:-top-[20%] sm:-right-[14%]",
+    widthClass: "w-[42vw] max-w-[280px] sm:w-[22vw] sm:max-w-[300px]",
     variant: "b",
     delay: "1.1s",
     rotate: 2,
@@ -40,8 +40,8 @@ const CLOUDS: Cloud[] = [
   },
   {
     // center-back, only desktop, larger and behind, raised between the two top clouds
-    positionClass: "-top-[5%] left-1/2 -translate-x-1/2",
-    widthClass: "w-[38vw] max-w-[420px]",
+    positionClass: "-top-[18%] left-1/2 -translate-x-1/2",
+    widthClass: "w-[34vw] max-w-[380px]",
     variant: "c",
     delay: "2.2s",
     rotate: 2,
@@ -50,8 +50,8 @@ const CLOUDS: Cloud[] = [
   },
   {
     // bottom-left
-    positionClass: "-bottom-[4%] -left-[8%] sm:-bottom-[6%] sm:-left-[10%]",
-    widthClass: "w-[46vw] max-w-[300px] sm:w-[26vw] sm:max-w-[320px]",
+    positionClass: "-bottom-[14%] -left-[8%] sm:-bottom-[18%] sm:-left-[14%]",
+    widthClass: "w-[42vw] max-w-[280px] sm:w-[22vw] sm:max-w-[300px]",
     variant: "d",
     delay: "0.6s",
     rotate: -1,
@@ -59,8 +59,8 @@ const CLOUDS: Cloud[] = [
   },
   {
     // bottom-right
-    positionClass: "-bottom-[6%] -right-[8%] sm:-bottom-[8%] sm:-right-[10%]",
-    widthClass: "w-[46vw] max-w-[300px] sm:w-[26vw] sm:max-w-[320px]",
+    positionClass: "-bottom-[16%] -right-[8%] sm:-bottom-[20%] sm:-right-[14%]",
+    widthClass: "w-[42vw] max-w-[280px] sm:w-[22vw] sm:max-w-[300px]",
     variant: "a",
     delay: "1.7s",
     rotate: 3,
@@ -338,13 +338,6 @@ function Index() {
         {/* Centered content */}
         <div className="relative z-20 h-full flex flex-col items-center justify-center px-5 sm:px-6 pb-[18vh] sm:pb-[20vh]">
           <div className="relative w-full max-w-3xl mt-[10vh] sm:mt-[12vh]">
-            {/* Clouds cluster around the headline + form */}
-            <div className="absolute inset-0 pointer-events-none z-0 -mx-[8vw] sm:-mx-[14vw] -my-[10vh] sm:-my-[14vh]">
-              {CLOUDS.map((c, i) => (
-                <CloudShape key={i} c={c} />
-              ))}
-            </div>
-
             <h1
               className="relative z-10 text-center"
               style={{
@@ -417,6 +410,12 @@ function Index() {
       {/* NARRATIVE */}
       <section className="relative w-full py-24 sm:py-32 px-6 sm:px-8">
         <div className="relative w-[70vw] max-w-6xl mx-auto">
+          {/* Cloud cards framing the manifesto glass card */}
+          <div className="absolute inset-0 pointer-events-none z-0 -mx-[4vw] sm:-mx-[8vw]">
+            {CLOUDS.map((c, i) => (
+              <CloudShape key={i} c={c} />
+            ))}
+          </div>
 
           {/* Soft sage glow behind the glass card */}
           <div
