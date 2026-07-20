@@ -299,51 +299,30 @@ const BUBBLES: Bubble[] = [
   { left: "78%", top: "68%", size: "clamp(22px, 3vw, 40px)",   delay: "2.0s", duration: "9s",  floatClass: "float-a" },
 ];
 
-function BubbleCluster() {
+function GridBackdrop() {
+  // Graph-paper grid in #97C459 that fades to transparent at the edges (radial mask).
+  const line = "rgba(151, 196, 89, 0.55)";
+  const cell = "44px";
   return (
     <div
       aria-hidden
-      className="absolute left-1/2 -translate-x-1/2 pointer-events-none"
+      className="absolute inset-0 pointer-events-none"
       style={{
-        top: "78%",
-        transform: "translate(-50%, -50%)",
-        width: "clamp(340px, 68vw, 720px)",
-        height: "clamp(220px, 34vh, 340px)",
         zIndex: 0,
+        backgroundImage: `
+          linear-gradient(to right, ${line} 1px, transparent 1px),
+          linear-gradient(to bottom, ${line} 1px, transparent 1px)
+        `,
+        backgroundSize: `${cell} ${cell}, ${cell} ${cell}`,
+        WebkitMaskImage:
+          "radial-gradient(ellipse 55% 55% at 50% 50%, #000 0%, rgba(0,0,0,0.85) 40%, rgba(0,0,0,0.35) 70%, transparent 100%)",
+        maskImage:
+          "radial-gradient(ellipse 55% 55% at 50% 50%, #000 0%, rgba(0,0,0,0.85) 40%, rgba(0,0,0,0.35) 70%, transparent 100%)",
       }}
-    >
-      {BUBBLES.map((b, i) => (
-        <div
-          key={i}
-          className={`absolute rounded-full ${b.floatClass}`}
-          style={{
-            left: b.left,
-            top: b.top,
-            width: b.size,
-            height: b.size,
-            background:
-              "radial-gradient(circle at 30% 25%, rgba(255,255,255,0.9) 0%, rgba(255,255,255,0.35) 12%, #b6d97a 35%, #97C459 60%, #6f9a3a 100%)",
-            boxShadow:
-              "inset -6px -8px 14px rgba(60,90,20,0.35), inset 4px 6px 10px rgba(255,255,255,0.45), 0 6px 14px rgba(60,90,20,0.18)",
-            animationDelay: b.delay,
-            animationDuration: b.duration,
-          }}
-        >
-          <span
-            aria-hidden
-            className="absolute rounded-full"
-            style={{
-              top: "10%",
-              left: "18%",
-              width: "42%",
-              height: "28%",
-              background:
-                "radial-gradient(ellipse at center, rgba(255,255,255,0.95) 0%, rgba(255,255,255,0) 70%)",
-              filter: "blur(1px)",
-            }}
-          />
-        </div>
-      ))}
+    />
+  );
+}
+
 
     </div>
   );
