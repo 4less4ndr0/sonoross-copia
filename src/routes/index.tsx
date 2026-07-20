@@ -251,7 +251,7 @@ function Index() {
       className="relative w-full overflow-x-hidden"
       style={{
         background:
-          "radial-gradient(ellipse 92vw 78vh at 50% 100vh, #ffd166 0%, #ff9b3d 22%, #f4506c 46%, #d94892 68%, rgba(217,72,146,0) 100%), linear-gradient(180deg, #faf7f2 0vh, #faf7f2 50vh, #f7c8b0 72vh, #ec8ea6 88vh, #d94892 108vh, #c43d82 138vh, #8d2d66 190vh, #3a1230 270vh, #3a1230 400vh)",
+          "radial-gradient(ellipse 92vw 78vh at 50% 100vh, #EF9F27 0%, #b87215 24%, #5DCAA5 52%, #3a9e7e 74%, rgba(58,158,126,0) 100%), linear-gradient(180deg, #F6F3ED 0vh, #F6F3ED 50vh, #fdecc9 74vh, #EF9F27 96vh, #b87215 128vh, #3a9e7e 180vh, #1C1A14 260vh, #1C1A14 400vh)",
         backgroundRepeat: "no-repeat",
       }}
 
@@ -265,7 +265,7 @@ function Index() {
           transform: "translateX(-50%)",
           borderRadius: "50%",
           background:
-            "radial-gradient(ellipse at 50% 44%, #ffd166 0%, #ff9b3d 22%, #f4506c 46%, #d94892 68%, rgba(217,72,146,0) 94%)",
+            "radial-gradient(ellipse at 50% 44%, #EF9F27 0%, #b87215 24%, #5DCAA5 52%, #3a9e7e 74%, rgba(58,158,126,0) 94%)",
           filter: "blur(8px)",
         }}
       />
@@ -284,12 +284,13 @@ function Index() {
         {/* Centered content (headline + email) — sits ABOVE the horizon */}
         <div className="relative z-20 h-full flex flex-col items-center justify-center px-5 sm:px-6 pb-[34vh] sm:pb-[36vh]">
           <h1
-            className="text-center text-neutral-900 max-w-3xl"
+            className="text-center max-w-3xl"
             style={{
               fontFamily: 'Georgia, "Times New Roman", serif',
               fontWeight: 400,
               fontSize: "clamp(2rem, 7vw, 4.5rem)",
               lineHeight: 1.05,
+              color: "#1C1A14",
             }}
           >
             Perché nessuno dovrebbe invecchiare solo.
@@ -297,7 +298,11 @@ function Index() {
 
           <form
             onSubmit={onSubmit}
-            className="mt-6 sm:mt-8 flex items-center gap-2 bg-white rounded-full pl-5 sm:pl-6 pr-2 py-2 shadow-sm border border-neutral-200 w-full max-w-md"
+            className="mt-6 sm:mt-8 flex items-center gap-2 rounded-full pl-5 sm:pl-6 pr-2 py-2 shadow-sm w-full max-w-md"
+            style={{
+              backgroundColor: "#F6F3ED",
+              border: "1px solid rgba(28,26,20,0.14)",
+            }}
           >
             <input
               type="email"
@@ -306,20 +311,22 @@ function Index() {
               onChange={(e) => setEmail(e.target.value)}
               placeholder="Il tuo indirizzo email"
               disabled={status === "loading"}
-              className="flex-1 min-w-0 bg-transparent outline-none text-neutral-800 placeholder:text-neutral-400 py-2 disabled:opacity-60"
+              className="flex-1 min-w-0 bg-transparent outline-none py-2 disabled:opacity-60 placeholder:text-neutral-500"
+              style={{ color: "#1C1A14" }}
             />
             <button
               type="submit"
               aria-label="Iscriviti"
               disabled={status === "loading"}
-              className="shrink-0 rounded-full bg-neutral-900 text-white w-10 h-10 flex items-center justify-center hover:bg-neutral-700 transition-colors disabled:opacity-60"
+              className="shrink-0 rounded-full w-10 h-10 flex items-center justify-center transition-opacity disabled:opacity-60 hover:opacity-90"
+              style={{ backgroundColor: "#1C1A14", color: "#F6F3ED" }}
             >
               →
             </button>
           </form>
           <div
             className="mt-3 h-5 text-sm text-center"
-            style={{ fontFamily: '"DM Sans", system-ui, sans-serif', color: "#3a1230" }}
+            style={{ fontFamily: '"DM Sans", system-ui, sans-serif', color: "#1C1A14" }}
             aria-live="polite"
           >
             {status === "success" && "Grazie, ti scriveremo presto."}
@@ -330,7 +337,8 @@ function Index() {
 
         {/* Scroll hint */}
         <div
-          className="absolute bottom-4 left-1/2 -translate-x-1/2 z-30 text-white/70 text-[10px] tracking-[0.25em] uppercase animate-bounce pointer-events-none"
+          className="absolute bottom-4 left-1/2 -translate-x-1/2 z-30 text-[10px] tracking-[0.25em] uppercase animate-bounce pointer-events-none"
+          style={{ color: "rgba(246,243,237,0.8)" }}
         >
           ↓ scroll
         </div>
@@ -344,7 +352,7 @@ function Index() {
       <section
         className="relative w-full py-24 sm:py-32 px-6 sm:px-8"
         style={{
-          color: "#faf1e6",
+          color: "#F6F3ED",
         }}
       >
         <div
