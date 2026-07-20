@@ -337,11 +337,6 @@ function Index() {
 
       {/* HERO */}
       <section className="relative z-10 h-screen w-full overflow-hidden">
-        {/* Header logo (eyes as brand mark) */}
-        <div className="absolute top-4 left-4 sm:top-6 sm:left-6 z-30">
-          <EyeLogo />
-        </div>
-
         {/* Centered content */}
         <div className="relative z-20 h-full flex flex-col items-center justify-center px-5 sm:px-6 pb-[18vh] sm:pb-[20vh]">
           <div className="relative w-full max-w-3xl">
