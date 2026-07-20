@@ -399,15 +399,6 @@ function Index() {
             ))}
           </div>
 
-          {/* Soft sage glow behind the glass card */}
-          <div
-            aria-hidden
-            className="absolute -inset-16 rounded-[28px] pointer-events-none z-0"
-            style={{
-              background: "rgba(107, 142, 90, 0.28)",
-              filter: "blur(60px)",
-            }}
-          />
 
           {/* Glass card — sits above the clouds so they only peek from the sides */}
           <div
@@ -416,6 +407,7 @@ function Index() {
               background: "rgba(255,255,255,0.55)",
               backdropFilter: "blur(20px) saturate(140%)",
               border: "1px solid rgba(255,255,255,0.5)",
+              boxShadow: "0 24px 70px rgba(28, 26, 20, 0.12)",
               fontFamily: '"DM Sans", system-ui, sans-serif',
               fontSize: "clamp(1.1rem, 1.3vw, 1.3rem)",
               fontWeight: 400,
