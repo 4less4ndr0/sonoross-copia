@@ -1,36 +1,15 @@
 ## Obiettivo
-Salvare le email inviate dalla form della landing nel tuo database Notion:
-`REDACTED_DB_ID`
+Capire se il database Notion è già raggiungibile con la connessione OAuth attuale, senza farti fare azioni inutili su Notion.
 
 ## Passi
+1. Invocare `submitLead` con un'email di test (`stack_modern--invoke-server-function` → `/_serverFn/...` tramite il client — in pratica un POST all'endpoint interno).
+2. Leggere `stack_modern--server-function-logs` filtrando `Notion` per vedere lo status HTTP e il body di risposta del gateway.
+3. Interpretare il risultato:
+   - **200 OK** → tutto ok, il DB è accessibile. Nessuna azione da parte tua.
+   - **404 `object_not_found`** → il DB non è nel set di pagine autorizzate. Serve una delle due:
+     a. Ri-autorizzare Notion da Lovable includendo il DB nella lista pagine.
+     b. Aggiungerlo manualmente da Notion (`···` → `Connections` → cerca "Lovable" — non "lovable", il nome esatto della integrazione).
+   - **400 `validation_error` su properties** → il DB non ha una colonna `Email` di tipo Title o `Source` Rich text. Ti dico esattamente quale property manca e la sistemi (o rimuovo `Source` dal payload).
+4. In base al risultato, agisco: se serve un fix codice (es. togliere `Source`), lo faccio; se serve un'azione tua su Notion, te la descrivo con precisione.
 
-1. **Collegare Notion** (App connector di workspace) tramite `standard_connectors--connect` con `connector_id: notion`. L'OAuth ti chiederà di scegliere quali pagine condividere con l'integrazione — devi includere il database indicato.
-
-2. **Preparare il database Notion**. Deve avere almeno queste proprietà (nomi esatti, case-sensitive):
-   - `Email` — tipo **Title** (colonna principale)
-   - `Created` — tipo **Date** (opzionale, altrimenti basta `created_time` automatico di Notion)
-   - `Source` — tipo **Rich text** (opzionale, verrà valorizzato con "landing")
-   
-   Se il DB ha nomi diversi, dimmelo e li adatto nel codice.
-
-3. **Server function** `submitLead` in `src/lib/leads.functions.ts`:
-   - Validazione email con Zod (trim, formato, max 255).
-   - `POST REDACTED_GATEWAY/v1/pages` con:
-     - headers: `Authorization: Bearer ${LOVABLE_API_KEY}`, `X-Connection-Api-Key: ${NOTION_API_KEY}`, `Content-Type: application/json`
-     - body: `{ parent: { database_id: "REDACTED_DB_ID" }, properties: { Email: { title: [{ text: { content: email } }] }, Source: { rich_text: [{ text: { content: "landing" } }] } } }`
-   - Gestione errori: se il gateway risponde non-OK, log server-side + ritorno `{ ok: false, error }`.
-   - Il database ID va hardcoded come costante (non è un segreto: sta nell'URL).
-
-4. **Wiring della form** in `src/routes/index.tsx`:
-   - `useServerFn(submitLead)` nell'`onSubmit`.
-   - Stati `idle | loading | success | error` per abilitare/disabilitare il bottone e mostrare un piccolo messaggio sotto la form ("Grazie, ti scriveremo presto." / "Qualcosa è andato storto, riprova.").
-   - Nessun altro cambio grafico.
-
-5. **Verifica**: invocare `submitLead` con `stack_modern--invoke-server-function` per confermare che una riga compaia nel DB Notion.
-
-## Note
-- Il gateway Notion inietta automaticamente `Notion-Version`, non lo setto.
-- L'endpoint non è pubblico: essendo una `createServerFn`, viene chiamato tramite RPC dal client — nessuno può leggere il `LOVABLE_API_KEY`.
-- Se in futuro vuoi anche un campo `Nome`/`Consenso GDPR`, si aggiunge una property in Notion e un campo nella form.
-
-Confermi che procedo? Al via, il primo tool call sarà il collegamento a Notion.
+Nessuna modifica al codice in questa fase — solo diagnosi.
