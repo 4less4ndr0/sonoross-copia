@@ -350,7 +350,7 @@ function Index() {
                 aria-label="Iscriviti"
                 disabled={status === "loading"}
                 className="shrink-0 rounded-full w-10 h-10 flex items-center justify-center transition-opacity disabled:opacity-60 hover:opacity-90"
-                style={{ backgroundColor: "var(--ross-sage-dark)", color: "#F6F3ED" }}
+                style={{ backgroundColor: "var(--ross-terra)", color: "var(--ross-ink)" }}
               >
                 →
               </button>
@@ -405,11 +405,11 @@ function Index() {
             </p>
 
             <p className="italic" style={{ fontFamily: 'Georgia, "Times New Roman", serif' }}>
-              <strong>R.O.S.S. parte da una domanda diversa: e se lo strumento più potente non fosse il monitoraggio, ma la relazione?</strong>
+              <strong style={{ color: "var(--ross-sage-dark)" }}>R.O.S.S. parte da una domanda diversa: e se lo strumento più potente non fosse il monitoraggio, ma la relazione?</strong>
             </p>
 
             <p>
-              Non un sensore che segnala una caduta dopo che è già successa. Qualcosa che, prima ancora, tenga viva la parte di una persona che nessun dispositivo di sicurezza saprebbe mai toccare: <strong>i ricordi, le storie, la voglia di raccontarsi a qualcuno che ascolta davvero.</strong>
+              Non un sensore che segnala una caduta dopo che è già successa. Qualcosa che, prima ancora, tenga viva la parte di una persona che nessun dispositivo di sicurezza saprebbe mai toccare: <strong style={{ color: "var(--ross-sage-dark)" }}>i ricordi, le storie, la voglia di raccontarsi a qualcuno che ascolta davvero.</strong>
             </p>
 
             <p>
@@ -417,7 +417,7 @@ function Index() {
             </p>
 
             <p>
-              Oggi, tra chi vive solo e la propria famiglia, la maggior parte delle parole scambiate riguarda la cura: ha mangiato, ha preso le medicine, che cosa ha detto il medico, bisognerebbe andare a trovarlo. È un problema reale e non lo eliminiamo. Ma quando si parla solo di questo, <strong>si diventa ciechi</strong> a tutto il resto e l'affetto, i ricordi, la voglia di raccontarsi spariscono sotto il peso della preoccupazione.
+              Oggi, tra chi vive solo e la propria famiglia, la maggior parte delle parole scambiate riguarda la cura: ha mangiato, ha preso le medicine, che cosa ha detto il medico, bisognerebbe andare a trovarlo. È un problema reale e non lo eliminiamo. Ma quando si parla solo di questo, <strong style={{ color: "var(--ross-sage-dark)" }}>si diventa ciechi</strong> a tutto il resto e l'affetto, i ricordi, la voglia di raccontarsi spariscono sotto il peso della preoccupazione.
             </p>
 
             <p>
@@ -450,7 +450,7 @@ function Index() {
             lineHeight: 1.35,
           }}
         >
-          <strong>Per questo R.O.S.S. non sorveglia. Dà voce.</strong>
+          <strong style={{ color: "var(--ross-sage-dark)" }}>Per questo R.O.S.S. non sorveglia. Dà voce.</strong>
         </div>
       </section>
     </main>
