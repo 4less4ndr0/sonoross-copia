@@ -492,7 +492,7 @@ function Index() {
 
         {/* Closing line — on the dark tail of the gradient, light text */}
         <div
-          className="relative z-10 max-w-2xl mx-auto mt-32 sm:mt-48 text-center"
+          className="relative z-10 max-w-2xl mx-auto mt-10 sm:mt-14 text-center"
           style={{
             fontFamily: 'Georgia, "Times New Roman", serif',
             color: "#1C1A14",
