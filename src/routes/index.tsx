@@ -160,9 +160,10 @@ function CloudShape({
         transform: peek
           ? `rotate(0deg) scale(1.06)`
           : `rotate(${baseSlot.rotate}deg)`,
-        zIndex: peek ? 50 : anyActive ? 1 : 5,
-        opacity: peek ? 1 : anyActive ? 0.55 : 1,
+        zIndex: peek ? 50 : 5,
+        opacity: 1,
         transition: TRANSITION,
+
         animationDelay: c.delay,
       };
 

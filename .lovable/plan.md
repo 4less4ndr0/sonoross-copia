@@ -1,28 +1,15 @@
-## Obiettivo
+## Problema
 
-Quando l'utente passa il mouse su una delle 4 card laterali ("chi/cosa/come/perché"), la card in hover deve venire portata **davanti** a tutto il resto — inclusa la card del manifesto e la card eventualmente "aperta" (attiva dopo il click) — così da essere completamente leggibile senza doverci cliccare.
+Quando una card viene aperta (click → si sposta al centro sostituendo il manifesto), le altre 3 card laterali vengono attenuate: `opacity: 0.55` e `z-index: 1`, con anche l'alone terracotta dietro portato a 0.35. Risultato: solo la card attiva e la manifesto rimpicciolita risultano ben leggibili, le altre 3 quasi spariscono.
 
-## Comportamento attuale
+L'utente vuole che, con una card aperta, **anche le altre 3 restino ben visibili** nei loro slot laterali.
 
-- Stato di riposo: card dietro alla manifesto (`z-index: 5`), solo un lembo sporge.
-- Hover a riposo: `hover:scale-[1.04] hover:z-20` — sale a z=20, ma la manifesto card è `z-10`, quindi già ora dovrebbe stare sopra la manifesto… tranne che quando c'è una card attiva (`anyActive`) l'hover viene disabilitato e lo z-index scende a `1` con opacità 0.55.
-- Card attiva (click): `z-index: 30`.
+## Modifica a `src/routes/index.tsx` → `CloudShape`
 
-Problemi:
-1. Quando una card è già aperta, le altre 3 non rispondono più all'hover (classe hover rimossa) e restano sotto → l'utente non può "sbirciare" un'altra card senza prima chiudere quella attiva.
-2. L'hover z=20 non basta a coprire la card attiva (z=30).
+Rimuovere il "dimming" delle card inattive quando `anyActive`:
 
-## Modifiche a `src/routes/index.tsx` → `CloudShape`
+- Card non attiva, non in hover: `opacity: 1` (invece di `anyActive ? 0.55 : 1`).
+- Card non attiva, non in hover: `zIndex: 5` (invece di `anyActive ? 1 : 5`). Resta comunque sotto la card attiva (z=30) e sotto la card in hover (z=50).
+- Alone terracotta dietro (`background rgba(239,159,39,0.45)`): riportare l'opacità della card non-attiva a 0.8 (invece di `anyActive ? 0.35 : 0.8`), lasciando 1 per attiva/hover.
 
-1. Aggiungere stato locale `isHover` nella card (`onMouseEnter`/`onMouseLeave`, più `onFocus`/`onBlur` per accessibilità tastiera).
-2. Rimuovere l'hover via classe Tailwind e gestirlo nello style oggetto, così funziona anche quando `anyActive` è true:
-   - Se `isHover && !isActive`: `zIndex: 50` (sopra a tutto, incluse le card attive a 30), `opacity: 1` (annulla il dimming da `anyActive`), `transform: rotate(0deg) scale(1.06)` per un leggero "pop", alone terracotta a piena intensità.
-   - Mantenere posizione del slot (top/left/right/width) invariata: la card resta ancorata al bordo, non salta al centro. Sporgerà semplicemente sopra la manifesto card e sopra la card attiva.
-3. La card **attiva** (post-click) mantiene il comportamento attuale (va al centro, z=30). Se si passa in hover su un'altra card mentre una è attiva, quella in hover appare sopra (z=50) come "peek", senza chiudere l'attiva.
-4. La transizione già presente (`TRANSITION` + 500ms interna) copre `transform`/`opacity`, quindi il pop è animato senza altre modifiche.
-
-## Fuori scopo
-
-- Nessun cambio al click/swap con la card manifesto.
-- Nessun cambio a posizioni, font, contenuti, glow della manifesto, layout responsive.
-- Nessun cambio al resto della pagina.
+Nessun altro cambiamento: click/swap, hover-pop (z=50), posizioni, font, manifesto card e layout responsive restano invariati.
