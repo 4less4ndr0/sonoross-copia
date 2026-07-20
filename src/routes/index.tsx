@@ -444,6 +444,9 @@ function Index() {
           ↓ scroll
         </div>
 
+        {/* Bubble cluster framing the eyes */}
+        <BubbleCluster />
+
         {/* Eyes on the horizon */}
         <FlatEye className="left-[38%] sm:left-[43%]" closed={eyesClosed} pixelSize={pixelSize} />
         <FlatEye className="left-[62%] sm:left-[57%]" closed={eyesClosed} pixelSize={pixelSize} />
