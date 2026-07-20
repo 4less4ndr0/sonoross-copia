@@ -412,7 +412,7 @@ function Index() {
             </p>
 
             <p className="italic" style={{ fontFamily: 'Georgia, "Times New Roman", serif' }}>
-              <strong style={{ color: "var(--ross-sage-dark)" }}>R.O.S.S. parte da una domanda diversa: e se lo strumento più potente non fosse il monitoraggio, ma la relazione?</strong>
+              <strong>R.O.S.S. parte da una domanda diversa: e se lo strumento più potente non fosse il monitoraggio, ma la relazione?</strong>
             </p>
 
             <p>
