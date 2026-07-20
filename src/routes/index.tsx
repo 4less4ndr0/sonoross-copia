@@ -39,8 +39,8 @@ const CLOUDS: Cloud[] = [
     text: "La distanza\nnon deve significare silenzio.",
   },
   {
-    // center-back, only desktop, larger and behind
-    positionClass: "top-[30%] left-1/2 -translate-x-1/2",
+    // center-back, only desktop, larger and behind, raised between the two top clouds
+    positionClass: "-top-[5%] left-1/2 -translate-x-1/2",
     widthClass: "w-[38vw] max-w-[420px]",
     variant: "c",
     delay: "2.2s",
