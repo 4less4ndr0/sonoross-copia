@@ -22,7 +22,7 @@ type Cloud = {
 const CLOUDS: Cloud[] = [
   {
     // left side, upper
-    positionClass: "top-[4%] -left-[6%] sm:top-[8%] sm:-left-[2%]",
+    positionClass: "top-[4%] -left-[6%] sm:top-[8%] sm:-left-[6%]",
     widthClass: "w-[20vw] max-w-[120px] sm:w-[12vw] sm:max-w-[170px]",
     variant: "a",
     delay: "0s",
@@ -31,7 +31,7 @@ const CLOUDS: Cloud[] = [
   },
   {
     // left side, middle
-    positionClass: "top-[42%] -left-[8%] sm:top-[44%] sm:-left-[4%]",
+    positionClass: "top-[42%] -left-[8%] sm:top-[44%] sm:-left-[8%]",
     widthClass: "w-[20vw] max-w-[120px] sm:w-[12vw] sm:max-w-[170px]",
     variant: "b",
     delay: "1.1s",
@@ -40,7 +40,7 @@ const CLOUDS: Cloud[] = [
   },
   {
     // left side, lower
-    positionClass: "top-[80%] -left-[6%] sm:top-[82%] sm:-left-[2%]",
+    positionClass: "top-[80%] -left-[6%] sm:top-[82%] sm:-left-[6%]",
     widthClass: "w-[20vw] max-w-[120px] sm:w-[12vw] sm:max-w-[170px]",
     variant: "c",
     delay: "2.2s",
@@ -49,7 +49,7 @@ const CLOUDS: Cloud[] = [
   },
   {
     // right side, upper
-    positionClass: "top-[22%] -right-[6%] sm:top-[26%] sm:-right-[2%]",
+    positionClass: "top-[22%] -right-[6%] sm:top-[26%] sm:-right-[6%]",
     widthClass: "w-[20vw] max-w-[120px] sm:w-[12vw] sm:max-w-[170px]",
     variant: "d",
     delay: "0.6s",
@@ -58,7 +58,7 @@ const CLOUDS: Cloud[] = [
   },
   {
     // right side, lower
-    positionClass: "top-[62%] -right-[6%] sm:top-[64%] sm:-right-[2%]",
+    positionClass: "top-[62%] -right-[6%] sm:top-[64%] sm:-right-[6%]",
     widthClass: "w-[20vw] max-w-[120px] sm:w-[12vw] sm:max-w-[170px]",
     variant: "a",
     delay: "1.7s",
