@@ -18,49 +18,48 @@ type Cloud = {
   hideOnMobile?: boolean;
 };
 
-// Clouds grouped around the manifesto glass card (framing it, not decoration).
+// Clouds line the sides of the manifesto glass card, smaller and vertically staggered.
 const CLOUDS: Cloud[] = [
   {
-    // top-left, framing the manifesto card
-    positionClass: "-top-[18%] -left-[8%] sm:-top-[22%] sm:-left-[14%]",
-    widthClass: "w-[42vw] max-w-[280px] sm:w-[22vw] sm:max-w-[300px]",
+    // left side, upper
+    positionClass: "top-[2%] -left-[12%] sm:top-[4%] sm:-left-[20%]",
+    widthClass: "w-[28vw] max-w-[150px] sm:w-[16vw] sm:max-w-[220px]",
     variant: "a",
     delay: "0s",
     rotate: -3,
     text: "Per chi ha ancora\ntante cose da raccontare.",
   },
   {
-    // top-right, framing the manifesto card
-    positionClass: "-top-[16%] -right-[8%] sm:-top-[20%] sm:-right-[14%]",
-    widthClass: "w-[42vw] max-w-[280px] sm:w-[22vw] sm:max-w-[300px]",
+    // left side, middle
+    positionClass: "top-[40%] -left-[14%] sm:top-[42%] sm:-left-[22%]",
+    widthClass: "w-[28vw] max-w-[150px] sm:w-[16vw] sm:max-w-[220px]",
     variant: "b",
     delay: "1.1s",
     rotate: 2,
     text: "La distanza\nnon deve significare silenzio.",
   },
   {
-    // center-back, only desktop, larger and behind, raised between the two top clouds
-    positionClass: "-top-[18%] left-1/2 -translate-x-1/2",
-    widthClass: "w-[34vw] max-w-[380px]",
+    // left side, lower
+    positionClass: "top-[78%] -left-[12%] sm:top-[80%] sm:-left-[20%]",
+    widthClass: "w-[28vw] max-w-[150px] sm:w-[16vw] sm:max-w-[220px]",
     variant: "c",
     delay: "2.2s",
     rotate: 2,
     text: "Chi ama, vuole sapere\ncome stai davvero.",
-    hideOnMobile: true,
   },
   {
-    // bottom-left
-    positionClass: "-bottom-[14%] -left-[8%] sm:-bottom-[18%] sm:-left-[14%]",
-    widthClass: "w-[42vw] max-w-[280px] sm:w-[22vw] sm:max-w-[300px]",
+    // right side, upper
+    positionClass: "top-[20%] -right-[12%] sm:top-[24%] sm:-right-[20%]",
+    widthClass: "w-[28vw] max-w-[150px] sm:w-[16vw] sm:max-w-[220px]",
     variant: "d",
     delay: "0.6s",
     rotate: -1,
     text: "Una compagnia che ascolta,\nnon che controlla.",
   },
   {
-    // bottom-right
-    positionClass: "-bottom-[16%] -right-[8%] sm:-bottom-[20%] sm:-right-[14%]",
-    widthClass: "w-[42vw] max-w-[280px] sm:w-[22vw] sm:max-w-[300px]",
+    // right side, lower
+    positionClass: "top-[60%] -right-[12%] sm:top-[62%] sm:-right-[20%]",
+    widthClass: "w-[28vw] max-w-[150px] sm:w-[16vw] sm:max-w-[220px]",
     variant: "a",
     delay: "1.7s",
     rotate: 3,
