@@ -9,10 +9,8 @@ import {
 } from "@tanstack/react-router";
 import { useEffect, type ReactNode } from "react";
 
-import appCss from "../styles.css?url";
+import "../styles.css";
 import { reportLovableError } from "../lib/lovable-error-reporting";
-
-const appCssHref = import.meta.env.DEV ? "/src/styles.css?direct" : appCss;
 
 function NotFoundComponent() {
   return (
@@ -91,7 +89,6 @@ export const Route = createRootRouteWithContext<{ queryClient: QueryClient }>()(
       { name: "twitter:image", content: "https://pub-bb2e103a32db4e198524a2e9ed8f35b4.r2.dev/fa2ba5b9-2e52-4b57-aba7-36717b6070e6/id-preview-59e9ec18--REDACTED_PROJECT_ID.lovable.app-1783036644269.png" },
     ],
     links: [
-      { rel: "stylesheet", href: appCssHref },
       { rel: "preconnect", href: "https://fonts.googleapis.com" },
       { rel: "preconnect", href: "https://fonts.gstatic.com", crossOrigin: "anonymous" },
       { rel: "stylesheet", href: "https://fonts.googleapis.com/css2?family=Instrument+Serif:ital@0;1&family=DM+Sans:wght@300;400;500;600&display=swap" },
