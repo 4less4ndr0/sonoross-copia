@@ -95,6 +95,13 @@
   --sidebar-accent-foreground: oklch(0.208 0.042 265.755);
   --sidebar-border: oklch(0.929 0.013 255.508);
   --sidebar-ring: oklch(0.704 0.04 256.788);
+
+  /* R.O.S.S. design system */
+  --ross-cream: #F6F3ED;
+  --ross-ink: #1C1A14;
+  --ross-terra: #EF9F27;
+  --ross-teal: #5DCAA5;
+  --ross-sage-dark: #4A5D50;
 }
 
 .dark {

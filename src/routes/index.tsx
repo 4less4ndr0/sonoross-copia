@@ -350,7 +350,7 @@ function Index() {
                 aria-label="Iscriviti"
                 disabled={status === "loading"}
                 className="shrink-0 rounded-full w-10 h-10 flex items-center justify-center transition-opacity disabled:opacity-60 hover:opacity-90"
-                style={{ backgroundColor: "#1C1A14", color: "#F6F3ED" }}
+                style={{ backgroundColor: "var(--ross-sage-dark)", color: "#F6F3ED" }}
               >
                 →
               </button>
