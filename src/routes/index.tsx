@@ -22,46 +22,39 @@ type Cloud = {
 // from the sides. On hover each card flies to the center and reveals its text.
 const CLOUDS: Cloud[] = [
   {
-    positionClass: "top-[4%] -left-[5%] sm:top-[6%] sm:-left-[6%]",
+    positionClass: "top-[8%] -left-[5%] sm:top-[10%] sm:-left-[6%]",
     widthClass: "w-[22vw] max-w-[140px] sm:w-[16vw] sm:max-w-[210px]",
     variant: "a",
     delay: "0s",
     rotateClass: "-rotate-[4deg]",
-    text: "Per chi ha ancora\ntante cose da raccontare.",
+    text: "chi",
   },
   {
-    positionClass: "top-[40%] -left-[7%] sm:top-[42%] sm:-left-[7%]",
+    positionClass: "top-[64%] -left-[6%] sm:top-[66%] sm:-left-[7%]",
     widthClass: "w-[22vw] max-w-[140px] sm:w-[16vw] sm:max-w-[210px]",
     variant: "b",
     delay: "1.1s",
     rotateClass: "rotate-[3deg]",
-    text: "La distanza\nnon deve significare silenzio.",
+    text: "cosa",
   },
   {
-    positionClass: "top-[76%] -left-[5%] sm:top-[78%] sm:-left-[6%]",
-    widthClass: "w-[22vw] max-w-[140px] sm:w-[16vw] sm:max-w-[210px]",
-    variant: "c",
-    delay: "2.2s",
-    rotateClass: "rotate-[2deg]",
-    text: "Chi ama, vuole sapere\ncome stai davvero.",
-  },
-  {
-    positionClass: "top-[20%] -right-[6%] sm:top-[22%] sm:-right-[6%]",
+    positionClass: "top-[18%] -right-[6%] sm:top-[20%] sm:-right-[6%]",
     widthClass: "w-[22vw] max-w-[140px] sm:w-[16vw] sm:max-w-[210px]",
     variant: "d",
     delay: "0.6s",
     rotateClass: "-rotate-[2deg]",
-    text: "Una compagnia che ascolta,\nnon che controlla.",
+    text: "come",
   },
   {
-    positionClass: "top-[60%] -right-[5%] sm:top-[62%] sm:-right-[6%]",
+    positionClass: "top-[70%] -right-[5%] sm:top-[72%] sm:-right-[6%]",
     widthClass: "w-[22vw] max-w-[140px] sm:w-[16vw] sm:max-w-[210px]",
     variant: "a",
     delay: "1.7s",
     rotateClass: "rotate-[4deg]",
-    text: "Ogni giorno ha\nuna storia da raccontare.",
+    text: "perché",
   },
 ];
+
 
 function CloudShape({ c }: { c: Cloud }) {
   return (
