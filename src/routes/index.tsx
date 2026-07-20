@@ -282,7 +282,7 @@ function Index() {
       className="relative w-full overflow-x-hidden"
       style={{
         background:
-          "linear-gradient(180deg, #F6F3ED 0vh, #F6F3ED 35vh, #cfe9d9 75vh, #5DCAA5 130vh, #5DCAA5 200vh, #1C1A14 320vh, #1C1A14 400vh)",
+          "linear-gradient(180deg, #F6F3ED 0vh, #F6F3ED 35vh, #EF9F27 130vh, #EF9F27 200vh, #1C1A14 320vh, #1C1A14 400vh)",
         backgroundRepeat: "no-repeat",
       }}
     >
@@ -383,7 +383,7 @@ function Index() {
 
       {/* NARRATIVE */}
       <section className="relative w-full py-24 sm:py-32 px-6 sm:px-8">
-        <div className="relative max-w-2xl mx-auto">
+        <div className="relative w-[70vw] max-w-6xl mx-auto">
 
 
           {/* Glass card */}
