@@ -29,7 +29,7 @@ export const submitLead = createServerFn({ method: "POST" })
         parent: { database_id: NOTION_DATABASE_ID },
         properties: {
           Email: {
-            title: [{ text: { content: data.email } }],
+            email: data.email,
           },
           Source: {
             rich_text: [{ text: { content: "landing" } }],
