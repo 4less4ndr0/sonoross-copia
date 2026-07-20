@@ -251,24 +251,24 @@ function Index() {
       className="relative w-full overflow-x-hidden"
       style={{
         background:
-          "radial-gradient(ellipse 92vw 78vh at 50% 100vh, #EF9F27 0%, #b87215 24%, #5DCAA5 52%, #3a9e7e 74%, rgba(58,158,126,0) 100%), linear-gradient(180deg, #F6F3ED 0vh, #F6F3ED 50vh, #fdecc9 74vh, #EF9F27 96vh, #b87215 128vh, #3a9e7e 180vh, #1C1A14 260vh, #1C1A14 400vh)",
+          "linear-gradient(180deg, #F6F3ED 0vh, #F6F3ED 40vh, #fdecc9 55vh, #EF9F27 80vh, #5DCAA5 110vh, #3a9e7e 160vh, #1C1A14 240vh, #1C1A14 400vh)",
         backgroundRepeat: "no-repeat",
       }}
 
     >
+      {/* Grain overlay */}
       <div
-        className="absolute left-1/2 pointer-events-none z-0"
+        aria-hidden
+        className="pointer-events-none fixed inset-0 z-[5]"
         style={{
-          top: "calc(100vh - clamp(240px, 36vh, 410px))",
-          width: "min(168vw, 1500px)",
-          height: "clamp(560px, 82vh, 820px)",
-          transform: "translateX(-50%)",
-          borderRadius: "50%",
-          background:
-            "radial-gradient(ellipse at 50% 44%, #EF9F27 0%, #b87215 24%, #5DCAA5 52%, #3a9e7e 74%, rgba(58,158,126,0) 94%)",
-          filter: "blur(8px)",
+          backgroundImage:
+            "url(\"data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='240' height='240'><filter id='n'><feTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='2' stitchTiles='stitch'/><feColorMatrix values='0 0 0 0 0  0 0 0 0 0  0 0 0 0 0  0 0 0 0.6 0'/></filter><rect width='100%' height='100%' filter='url(%23n)'/></svg>\")",
+          backgroundSize: "240px 240px",
+          opacity: 0.08,
+          mixBlendMode: "overlay",
         }}
       />
+
       {/* HERO — first screen */}
       <section className="relative z-10 h-screen w-full overflow-hidden">
 
