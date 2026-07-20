@@ -428,16 +428,16 @@ function Index() {
           {/* Soft sage glow behind the glass card */}
           <div
             aria-hidden
-            className="absolute -inset-8 -z-10 rounded-[28px] pointer-events-none"
+            className="absolute -inset-16 rounded-[28px] pointer-events-none"
             style={{
-              background: "rgba(232, 245, 211, 0.35)",
+              background: "rgba(232, 245, 211, 0.7)",
               filter: "blur(60px)",
             }}
           />
 
           {/* Glass card */}
           <div
-            className="relative z-10 rounded-[20px] p-6 sm:p-12 space-y-6"
+            className="relative rounded-[20px] p-6 sm:p-12 space-y-6"
             style={{
               background: "rgba(255,255,255,0.55)",
               backdropFilter: "blur(20px) saturate(140%)",
