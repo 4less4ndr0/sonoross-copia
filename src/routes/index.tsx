@@ -186,7 +186,7 @@ function CloudShape({
         style={{
           background: "rgba(239, 159, 39, 0.45)",
           filter: "blur(44px)",
-          opacity: isActive || peek ? 1 : anyActive ? 0.35 : 0.8,
+          opacity: isActive || peek ? 1 : 0.8,
         }}
       />
 
