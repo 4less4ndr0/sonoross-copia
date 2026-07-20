@@ -83,20 +83,18 @@ function CloudShape({ c }: { c: Cloud }) {
           padding: "clamp(12px, 5cqi, 26px)",
         }}
       >
-        <p
-          className="text-center"
+        <h3
+          className="text-center m-0 font-normal"
           style={{
             fontFamily: '"Instrument Serif", serif',
             color: "#1a1a1a",
-            fontSize: "clamp(0.85rem, 6cqi, 1.5rem)",
-            lineHeight: 1.2,
-            letterSpacing: "-0.01em",
-            whiteSpace: "pre-line",
-            textWrap: "balance",
+            fontSize: "clamp(1.4rem, 14cqi, 3rem)",
+            lineHeight: 1.1,
+            letterSpacing: "-0.02em",
           }}
         >
           {c.text}
-        </p>
+        </h3>
       </div>
     </div>
   );
