@@ -192,6 +192,8 @@ function FlatEye({ className, closed, pixelSize }: { className?: string; closed:
         transform: "translate(-50%, -50%)",
         width: COLS * pixelSize + (COLS - 1) * gap,
         height: ROWS_COUNT * pixelSize + (ROWS_COUNT - 1) * gap,
+        filter:
+          "drop-shadow(0 2px 3px rgba(28,26,20,0.35)) drop-shadow(0 0 1px rgba(28,26,20,0.45))",
       }}
     >
       <div
