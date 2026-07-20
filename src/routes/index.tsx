@@ -13,56 +13,52 @@ type Cloud = {
   widthClass: string;
   variant: "a" | "b" | "c" | "d";
   delay: string;
-  rotate: number;
+  rotateClass: string;
   text: string;
   hideOnMobile?: boolean;
 };
 
-// Clouds line the sides of the manifesto glass card, smaller and close to the borders.
+// Clouds sit BEHIND the manifesto glass card; only a small portion peeks out
+// from the sides. On hover each card flies to the center and reveals its text.
 const CLOUDS: Cloud[] = [
   {
-    // left side, upper
-    positionClass: "top-[4%] -left-[10%] sm:top-[8%] sm:-left-[6%]",
-    widthClass: "w-[16vw] max-w-[90px] sm:w-[12vw] sm:max-w-[170px]",
+    positionClass: "top-[4%] -left-[5%] sm:top-[6%] sm:-left-[6%]",
+    widthClass: "w-[22vw] max-w-[140px] sm:w-[16vw] sm:max-w-[210px]",
     variant: "a",
     delay: "0s",
-    rotate: -3,
+    rotateClass: "-rotate-[4deg]",
     text: "Per chi ha ancora\ntante cose da raccontare.",
   },
   {
-    // left side, middle
-    positionClass: "top-[42%] -left-[12%] sm:top-[44%] sm:-left-[8%]",
-    widthClass: "w-[16vw] max-w-[90px] sm:w-[12vw] sm:max-w-[170px]",
+    positionClass: "top-[40%] -left-[7%] sm:top-[42%] sm:-left-[7%]",
+    widthClass: "w-[22vw] max-w-[140px] sm:w-[16vw] sm:max-w-[210px]",
     variant: "b",
     delay: "1.1s",
-    rotate: 2,
+    rotateClass: "rotate-[3deg]",
     text: "La distanza\nnon deve significare silenzio.",
   },
   {
-    // left side, lower
-    positionClass: "top-[80%] -left-[10%] sm:top-[82%] sm:-left-[6%]",
-    widthClass: "w-[16vw] max-w-[90px] sm:w-[12vw] sm:max-w-[170px]",
+    positionClass: "top-[76%] -left-[5%] sm:top-[78%] sm:-left-[6%]",
+    widthClass: "w-[22vw] max-w-[140px] sm:w-[16vw] sm:max-w-[210px]",
     variant: "c",
     delay: "2.2s",
-    rotate: 2,
+    rotateClass: "rotate-[2deg]",
     text: "Chi ama, vuole sapere\ncome stai davvero.",
   },
   {
-    // right side, upper
-    positionClass: "top-[22%] -right-[10%] sm:top-[26%] sm:-right-[6%]",
-    widthClass: "w-[16vw] max-w-[90px] sm:w-[12vw] sm:max-w-[170px]",
+    positionClass: "top-[20%] -right-[6%] sm:top-[22%] sm:-right-[6%]",
+    widthClass: "w-[22vw] max-w-[140px] sm:w-[16vw] sm:max-w-[210px]",
     variant: "d",
     delay: "0.6s",
-    rotate: -1,
+    rotateClass: "-rotate-[2deg]",
     text: "Una compagnia che ascolta,\nnon che controlla.",
   },
   {
-    // right side, lower
-    positionClass: "top-[62%] -right-[10%] sm:top-[64%] sm:-right-[6%]",
-    widthClass: "w-[16vw] max-w-[90px] sm:w-[12vw] sm:max-w-[170px]",
+    positionClass: "top-[60%] -right-[5%] sm:top-[62%] sm:-right-[6%]",
+    widthClass: "w-[22vw] max-w-[140px] sm:w-[16vw] sm:max-w-[210px]",
     variant: "a",
     delay: "1.7s",
-    rotate: 3,
+    rotateClass: "rotate-[4deg]",
     text: "Ogni giorno ha\nuna storia da raccontare.",
   },
 ];
@@ -70,29 +66,26 @@ const CLOUDS: Cloud[] = [
 function CloudShape({ c }: { c: Cloud }) {
   return (
     <div
-      className={`absolute ${c.positionClass} ${c.widthClass} float-${c.variant} ${c.hideOnMobile ? "hidden sm:block" : ""}`}
+      className={`group absolute ${c.positionClass} ${c.widthClass} float-${c.variant} pointer-events-auto cursor-pointer transition-all duration-500 ease-[cubic-bezier(0.22,1,0.36,1)] hover:!top-1/2 hover:!left-1/2 hover:!right-auto hover:!bottom-auto hover:!-translate-x-1/2 hover:!-translate-y-1/2 hover:!w-[min(78vw,460px)] hover:!max-w-none hover:z-40 ${c.hideOnMobile ? "hidden sm:block" : ""}`}
       style={{ animationDelay: c.delay }}
     >
-      {/* Soft sage glow behind the glass card */}
       <div
         aria-hidden
-        className="absolute -inset-6 rounded-[28px] pointer-events-none"
+        className="absolute -inset-6 rounded-[28px] pointer-events-none transition-opacity duration-500 opacity-70 group-hover:opacity-100"
         style={{
-          background: "rgba(232, 245, 211, 0.23)",
+          background: "rgba(232, 245, 211, 0.35)",
           filter: "blur(40px)",
         }}
       />
 
-      {/* Glass card */}
       <div
-        className="relative flex items-center justify-center text-center rounded-[20px] aspect-[4/3]"
+        className={`relative flex items-center justify-center text-center rounded-[20px] aspect-[4/3] transition-transform duration-500 ease-[cubic-bezier(0.22,1,0.36,1)] ${c.rotateClass} group-hover:!rotate-0 group-hover:scale-[1.02]`}
         style={{
-          background: "rgba(255,255,255,0.55)",
+          background: "rgba(255,255,255,0.65)",
           backdropFilter: "blur(20px) saturate(140%)",
           WebkitBackdropFilter: "blur(20px) saturate(140%)",
-          border: "1px solid rgba(255,255,255,0.5)",
-          transform: `rotate(${c.rotate}deg)`,
-          boxShadow: "0 10px 30px rgba(28,26,20,0.06)",
+          border: "1px solid rgba(255,255,255,0.6)",
+          boxShadow: "0 10px 30px rgba(28,26,20,0.08)",
           containerType: "inline-size",
           padding: "clamp(12px, 5cqi, 26px)",
         }}
@@ -102,7 +95,7 @@ function CloudShape({ c }: { c: Cloud }) {
           style={{
             fontFamily: '"Instrument Serif", serif',
             color: "#1a1a1a",
-            fontSize: "clamp(0.85rem, 6cqi, 1.4rem)",
+            fontSize: "clamp(0.85rem, 6cqi, 1.5rem)",
             lineHeight: 1.2,
             letterSpacing: "-0.01em",
             whiteSpace: "pre-line",
