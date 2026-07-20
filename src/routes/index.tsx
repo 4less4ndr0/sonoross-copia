@@ -402,8 +402,8 @@ function Index() {
       {/* NARRATIVE */}
       <section className="relative w-full py-24 sm:py-32 px-6 sm:px-8">
         <div className="relative w-[70vw] max-w-6xl mx-auto">
-          {/* Cloud cards framing the manifesto glass card */}
-          <div className="absolute inset-0 pointer-events-none z-0 -mx-[4vw] sm:-mx-[8vw]">
+          {/* Cloud cards tucked BEHIND the manifesto glass card */}
+          <div className="absolute inset-0 z-0 pointer-events-none">
             {CLOUDS.map((c, i) => (
               <CloudShape key={i} c={c} />
             ))}
@@ -412,16 +412,16 @@ function Index() {
           {/* Soft sage glow behind the glass card */}
           <div
             aria-hidden
-            className="absolute -inset-16 rounded-[28px] pointer-events-none"
+            className="absolute -inset-16 rounded-[28px] pointer-events-none z-0"
             style={{
               background: "rgba(232, 245, 211, 0.23)",
               filter: "blur(60px)",
             }}
           />
 
-          {/* Glass card */}
+          {/* Glass card — sits above the clouds so they only peek from the sides */}
           <div
-            className="relative rounded-[20px] p-6 sm:p-12 space-y-6"
+            className="relative z-10 rounded-[20px] p-6 sm:p-12 space-y-6"
             style={{
               background: "rgba(255,255,255,0.55)",
               backdropFilter: "blur(20px) saturate(140%)",
