@@ -1,6 +1,8 @@
 import { createFileRoute } from "@tanstack/react-router";
+import { useServerFn } from "@tanstack/react-start";
 import { useEffect, useState, type FormEvent } from "react";
 import cloudAsset from "@/assets/cloud.png.asset.json";
+import { submitLead } from "@/lib/leads.functions";
 
 export const Route = createFileRoute("/")({
   component: Index,
@@ -221,11 +223,26 @@ function FlatEye({ className, closed, pixelSize }: { className?: string; closed:
 
 function Index() {
   const [email, setEmail] = useState("");
+  const [status, setStatus] = useState<"idle" | "loading" | "success" | "error">("idle");
   const eyesClosed = useBlink(2500, 6000);
   const pixelSize = usePixelSize();
+  const submit = useServerFn(submitLead);
 
-  const onSubmit = (e: FormEvent) => {
+  const onSubmit = async (e: FormEvent) => {
     e.preventDefault();
+    if (status === "loading") return;
+    setStatus("loading");
+    try {
+      const res = await submit({ data: { email } });
+      if (res.ok) {
+        setStatus("success");
+        setEmail("");
+      } else {
+        setStatus("error");
+      }
+    } catch {
+      setStatus("error");
+    }
   };
 
 
@@ -286,16 +303,27 @@ function Index() {
               value={email}
               onChange={(e) => setEmail(e.target.value)}
               placeholder="Il tuo indirizzo email"
-              className="flex-1 min-w-0 bg-transparent outline-none text-neutral-800 placeholder:text-neutral-400 py-2"
+              disabled={status === "loading"}
+              className="flex-1 min-w-0 bg-transparent outline-none text-neutral-800 placeholder:text-neutral-400 py-2 disabled:opacity-60"
             />
             <button
               type="submit"
               aria-label="Iscriviti"
-              className="shrink-0 rounded-full bg-neutral-900 text-white w-10 h-10 flex items-center justify-center hover:bg-neutral-700 transition-colors"
+              disabled={status === "loading"}
+              className="shrink-0 rounded-full bg-neutral-900 text-white w-10 h-10 flex items-center justify-center hover:bg-neutral-700 transition-colors disabled:opacity-60"
             >
               →
             </button>
           </form>
+          <div
+            className="mt-3 h-5 text-sm text-center"
+            style={{ fontFamily: '"DM Sans", system-ui, sans-serif', color: "#3a1230" }}
+            aria-live="polite"
+          >
+            {status === "success" && "Grazie, ti scriveremo presto."}
+            {status === "error" && "Qualcosa è andato storto, riprova."}
+          </div>
+
         </div>
 
         {/* Scroll hint */}
