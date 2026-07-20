@@ -251,8 +251,10 @@ function Index() {
       className="relative w-full overflow-x-hidden"
       style={{
         background:
-          "radial-gradient(ellipse 92vw 78vh at 50% 100vh, #ffd166 0%, #ff9b3d 22%, #f4506c 46%, #d94892 68%, rgba(217,72,146,0) 100%), linear-gradient(180deg, #faf7f2 0vh, #faf7f2 50vh, #f7c8b0 72vh, #ec8ea6 88vh, #d94892 108vh, #c43d82 138vh, #8d2d66 190vh, #3a1230 270vh)",
+          "radial-gradient(ellipse 92vw 78vh at 50% 100vh, #ffd166 0%, #ff9b3d 22%, #f4506c 46%, #d94892 68%, rgba(217,72,146,0) 100%), linear-gradient(180deg, #faf7f2 0vh, #faf7f2 50vh, #f7c8b0 72vh, #ec8ea6 88vh, #d94892 108vh, #c43d82 138vh, #8d2d66 190vh, #3a1230 270vh, #3a1230 400vh)",
+        backgroundRepeat: "no-repeat",
       }}
+
     >
       <div
         className="absolute left-1/2 pointer-events-none z-0"
@@ -355,46 +357,66 @@ function Index() {
             letterSpacing: "-0.005em",
           }}
         >
+          <h2
+            className="text-center"
+            style={{
+              fontFamily: '"DM Sans", system-ui, sans-serif',
+              fontSize: "clamp(1.75rem, 3vw, 2.5rem)",
+              fontWeight: 600,
+              lineHeight: 1.2,
+              letterSpacing: "-0.02em",
+              marginBottom: "2.5rem",
+            }}
+          >
+            Manifesto ROSS
+          </h2>
 
           <p>
-            Ogni giorno, in migliaia di case, una telefonata si riduce a un controllo:
-            ha mangiato? ha preso le medicine? è uscito? si è fatto male?
-          </p>
-
-          <p>In famiglia ci si scrive per organizzarsi —</p>
-          <ul className="list-none space-y-2 pl-6" style={{ opacity: 0.92 }}>
-            <li>— chi va a trovarlo questo weekend</li>
-            <li>— chi ha sentito il medico</li>
-            <li>— chi si sente in colpa per non essere abbastanza presente.</li>
-          </ul>
-
-          <p>
-            Viene interpellato solo per confermare cosa è successo o non è successo.
-            Non gli si chiede più come sta davvero. Il problema pratico occupa tutto lo spazio.
-          </p>
-
-          <p>
-            Ma il problema non è mai stato solo la sicurezza.
-            Le soluzioni che esistono oggi — sensori, promemoria, dispositivi di controllo —
-            nascono tutte dalla stessa domanda: <em>come monitorarlo?</em>
-          </p>
-
-          <p style={{ fontSize: "clamp(1.35rem, 2.2vw, 1.75rem)", lineHeight: 1.3 }}>
-            E se lo strumento più potente non fosse clinico, ma relazionale?
+            Le soluzioni che esistono oggi per chi vive solo in età avanzata nascono tutte dalla stessa domanda: come faccio a sapere se sta bene? Sensori di movimento, promemoria per le medicine, chiamate per sapere se ha fatto tutto quello che doveva. La cura pensata come sorveglianza riduce le persone ad un rischio da tenere d’occhio.
           </p>
 
           <p>
-            La parte più difficile della solitudine non è il rischio fisico.
-            È che nessuno gli chiede più di raccontare — e quando qualcuno lo fa,
-            lui torna a stare meglio, a ricordare, a parlare.
+            <strong>R.O.S.S. parte da una domanda diversa: e se lo strumento più potente non fosse il monitoraggio, ma la relazione?</strong>
           </p>
 
           <p>
-            <strong style={{ fontWeight: 400, letterSpacing: "0.02em" }}>R.O.S.S.</strong>{" "}
-            nasce per riportare al centro la famiglia con la propria storia, i ricordi e le persone che ne fanno parte.
+            Non un sensore che segnala una caduta dopo che è già successa. Qualcosa che, prima ancora, tenga viva la parte di una persona che nessun dispositivo di sicurezza saprebbe mai toccare: <strong>i ricordi, le storie, la voglia di raccontarsi a qualcuno che ascolta davvero.</strong>
+          </p>
+
+          <p>
+            Stiamo costruendo un compagno che stimola cognitivamente chi vive solo attraverso conversazioni adattive, personalizzate su una base di conoscenza biografica che guida ogni dialogo: la famiglia, le passioni, la storia di vita di ciascuno. Non un assistente che fa a tutti le stesse domande. Un'intelligenza che impara chi ha davanti: cosa ha fatto per una vita intera, chi ama, quali canzoni riportano a galla un ricordo preciso.
+          </p>
+
+          <p>
+            Oggi, tra chi vive solo e la propria famiglia, la maggior parte delle parole scambiate riguarda la cura: ha mangiato, ha preso le medicine, che cosa ha detto il medico, bisognerebbe andare a trovarlo. È un problema reale e non lo eliminiamo. Ma quando si parla solo di questo, <strong>si diventa ciechi</strong> a tutto il resto e l'affetto, i ricordi, la voglia di raccontarsi spariscono sotto il peso della preoccupazione.
+          </p>
+
+          <p>
+            R.O.S.S. ricostruisce quello che la paura ha eroso: vogliamo che almeno le conversazioni tornino ad essere sulle persone, non sulla gestione.
+          </p>
+
+          <p>
+            Il modo in cui una persona racconta la propria giornata, quanto ha voglia di parlare, cosa sceglie di raccontare, quali ricordi torna a cercare, diventano lo stimolo cognitivo di cui ha bisogno e, per chi le vuole bene, un segnale di come sta.
+          </p>
+
+          <p>
+            Non un dato biometrico. Una narrazione.
+          </p>
+
+          <p>
+            Oggi le famiglie parlano dei propri cari, non con loro. Ci si chiama tra familiari, ci si organizza, ci si preoccupa e chi vive solo viene interpellato solo per confermare cosa ha fatto o non ha fatto.
+          </p>
+
+          <p>
+            R.O.S.S. lo rimette al centro della conversazione, non ai margini di una gestione.
+          </p>
+
+          <p style={{ fontSize: "clamp(1.15rem, 1.5vw, 1.35rem)", fontWeight: 500, lineHeight: 1.4 }}>
+            <strong>Per questo R.O.S.S. non sorveglia. Dà voce.</strong>
           </p>
         </div>
       </section>
+
     </main>
   );
 }
