@@ -368,9 +368,32 @@ function GridBackdrop() {
 function Index() {
   const [email, setEmail] = useState("");
   const [status, setStatus] = useState<"idle" | "loading" | "success" | "error">("idle");
+  const [activeCloud, setActiveCloud] = useState<number | null>(null);
   const eyesClosed = useBlink(2500, 6000);
   const pixelSize = usePixelSize();
+  const isDesktop = useIsDesktop();
   const submit = useServerFn(submitLead);
+
+  const anyActive = activeCloud !== null;
+  const activeSlot =
+    activeCloud !== null
+      ? isDesktop
+        ? CLOUDS[activeCloud].desktop
+        : CLOUDS[activeCloud].mobile
+      : null;
+
+  const toggleCloud = (i: number) =>
+    setActiveCloud((prev) => (prev === i ? null : i));
+
+  useEffect(() => {
+    if (!anyActive) return;
+    const onKey = (e: KeyboardEvent) => {
+      if (e.key === "Escape") setActiveCloud(null);
+    };
+    window.addEventListener("keydown", onKey);
+    return () => window.removeEventListener("keydown", onKey);
+  }, [anyActive]);
+
 
   const onSubmit = async (e: FormEvent) => {
     e.preventDefault();
