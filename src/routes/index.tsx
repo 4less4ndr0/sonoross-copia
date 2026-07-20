@@ -445,7 +445,7 @@ function Index() {
           className="relative z-10 max-w-2xl mx-auto mt-32 sm:mt-48 text-center"
           style={{
             fontFamily: 'Georgia, "Times New Roman", serif',
-            color: "#F6F3ED",
+            color: "#1C1A14",
             fontSize: "clamp(1.4rem, 2vw, 1.9rem)",
             lineHeight: 1.35,
           }}
