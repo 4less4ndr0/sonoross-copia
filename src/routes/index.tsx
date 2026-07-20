@@ -18,49 +18,48 @@ type Cloud = {
   hideOnMobile?: boolean;
 };
 
-// Clouds grouped around the manifesto glass card (framing it, not decoration).
+// Clouds line the sides of the manifesto glass card, smaller and close to the borders.
 const CLOUDS: Cloud[] = [
   {
-    // top-left, framing the manifesto card
-    positionClass: "-top-[18%] -left-[8%] sm:-top-[22%] sm:-left-[14%]",
-    widthClass: "w-[42vw] max-w-[280px] sm:w-[22vw] sm:max-w-[300px]",
+    // left side, upper
+    positionClass: "top-[4%] -left-[10%] sm:top-[8%] sm:-left-[6%]",
+    widthClass: "w-[16vw] max-w-[90px] sm:w-[12vw] sm:max-w-[170px]",
     variant: "a",
     delay: "0s",
     rotate: -3,
     text: "Per chi ha ancora\ntante cose da raccontare.",
   },
   {
-    // top-right, framing the manifesto card
-    positionClass: "-top-[16%] -right-[8%] sm:-top-[20%] sm:-right-[14%]",
-    widthClass: "w-[42vw] max-w-[280px] sm:w-[22vw] sm:max-w-[300px]",
+    // left side, middle
+    positionClass: "top-[42%] -left-[12%] sm:top-[44%] sm:-left-[8%]",
+    widthClass: "w-[16vw] max-w-[90px] sm:w-[12vw] sm:max-w-[170px]",
     variant: "b",
     delay: "1.1s",
     rotate: 2,
     text: "La distanza\nnon deve significare silenzio.",
   },
   {
-    // center-back, only desktop, larger and behind, raised between the two top clouds
-    positionClass: "-top-[18%] left-1/2 -translate-x-1/2",
-    widthClass: "w-[34vw] max-w-[380px]",
+    // left side, lower
+    positionClass: "top-[80%] -left-[10%] sm:top-[82%] sm:-left-[6%]",
+    widthClass: "w-[16vw] max-w-[90px] sm:w-[12vw] sm:max-w-[170px]",
     variant: "c",
     delay: "2.2s",
     rotate: 2,
     text: "Chi ama, vuole sapere\ncome stai davvero.",
-    hideOnMobile: true,
   },
   {
-    // bottom-left
-    positionClass: "-bottom-[14%] -left-[8%] sm:-bottom-[18%] sm:-left-[14%]",
-    widthClass: "w-[42vw] max-w-[280px] sm:w-[22vw] sm:max-w-[300px]",
+    // right side, upper
+    positionClass: "top-[22%] -right-[10%] sm:top-[26%] sm:-right-[6%]",
+    widthClass: "w-[16vw] max-w-[90px] sm:w-[12vw] sm:max-w-[170px]",
     variant: "d",
     delay: "0.6s",
     rotate: -1,
     text: "Una compagnia che ascolta,\nnon che controlla.",
   },
   {
-    // bottom-right
-    positionClass: "-bottom-[16%] -right-[8%] sm:-bottom-[20%] sm:-right-[14%]",
-    widthClass: "w-[42vw] max-w-[280px] sm:w-[22vw] sm:max-w-[300px]",
+    // right side, lower
+    positionClass: "top-[62%] -right-[10%] sm:top-[64%] sm:-right-[6%]",
+    widthClass: "w-[16vw] max-w-[90px] sm:w-[12vw] sm:max-w-[170px]",
     variant: "a",
     delay: "1.7s",
     rotate: 3,
@@ -103,7 +102,7 @@ function CloudShape({ c }: { c: Cloud }) {
           style={{
             fontFamily: '"Instrument Serif", serif',
             color: "#1a1a1a",
-            fontSize: "clamp(1.5rem, 7cqi, 1.9rem)",
+            fontSize: "clamp(0.85rem, 6cqi, 1.4rem)",
             lineHeight: 1.2,
             letterSpacing: "-0.01em",
             whiteSpace: "pre-line",
