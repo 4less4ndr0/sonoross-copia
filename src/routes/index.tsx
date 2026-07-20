@@ -308,54 +308,63 @@ function Index() {
 
         {/* Centered content */}
         <div className="relative z-20 h-full flex flex-col items-center justify-center px-5 sm:px-6 pb-[34vh] sm:pb-[36vh]">
-          <h1
-            className="text-center max-w-3xl"
-            style={{
-              fontFamily: 'Georgia, "Times New Roman", serif',
-              fontWeight: 400,
-              fontSize: "clamp(2rem, 7vw, 4.5rem)",
-              lineHeight: 1.05,
-              color: "#1C1A14",
-            }}
-          >
-            Perché nessuno dovrebbe invecchiare solo.
-          </h1>
+          <div className="relative w-full max-w-3xl">
+            {/* Clouds cluster around the headline + form */}
+            <div className="absolute inset-0 pointer-events-none z-0 -mx-[8vw] sm:-mx-[14vw] -my-[10vh] sm:-my-[14vh]">
+              {CLOUDS.map((c, i) => (
+                <CloudShape key={i} c={c} />
+              ))}
+            </div>
 
-          <form
-            onSubmit={onSubmit}
-            className="mt-6 sm:mt-8 flex items-center gap-2 rounded-full pl-5 sm:pl-6 pr-2 py-2 shadow-sm w-full max-w-md"
-            style={{
-              backgroundColor: "#F6F3ED",
-              border: "1px solid rgba(28,26,20,0.14)",
-            }}
-          >
-            <input
-              type="email"
-              required
-              value={email}
-              onChange={(e) => setEmail(e.target.value)}
-              placeholder="Il tuo indirizzo email"
-              disabled={status === "loading"}
-              className="flex-1 min-w-0 bg-transparent outline-none py-2 disabled:opacity-60 placeholder:text-neutral-500"
-              style={{ color: "#1C1A14" }}
-            />
-            <button
-              type="submit"
-              aria-label="Iscriviti"
-              disabled={status === "loading"}
-              className="shrink-0 rounded-full w-10 h-10 flex items-center justify-center transition-opacity disabled:opacity-60 hover:opacity-90"
-              style={{ backgroundColor: "#1C1A14", color: "#F6F3ED" }}
+            <h1
+              className="relative z-10 text-center"
+              style={{
+                fontFamily: 'Georgia, "Times New Roman", serif',
+                fontWeight: 400,
+                fontSize: "clamp(2rem, 7vw, 4.5rem)",
+                lineHeight: 1.05,
+                color: "#1C1A14",
+              }}
             >
-              →
-            </button>
-          </form>
-          <div
-            className="mt-3 h-5 text-sm text-center"
-            style={{ fontFamily: '"DM Sans", system-ui, sans-serif', color: "#1C1A14" }}
-            aria-live="polite"
-          >
-            {status === "success" && "Grazie, ti scriveremo presto."}
-            {status === "error" && "Qualcosa è andato storto, riprova."}
+              Perché nessuno dovrebbe invecchiare solo.
+            </h1>
+
+            <form
+              onSubmit={onSubmit}
+              className="relative z-10 mx-auto mt-6 sm:mt-8 flex items-center gap-2 rounded-full pl-5 sm:pl-6 pr-2 py-2 shadow-sm w-full max-w-md"
+              style={{
+                backgroundColor: "#F6F3ED",
+                border: "1px solid rgba(28,26,20,0.14)",
+              }}
+            >
+              <input
+                type="email"
+                required
+                value={email}
+                onChange={(e) => setEmail(e.target.value)}
+                placeholder="Il tuo indirizzo email"
+                disabled={status === "loading"}
+                className="flex-1 min-w-0 bg-transparent outline-none py-2 disabled:opacity-60 placeholder:text-neutral-500"
+                style={{ color: "#1C1A14" }}
+              />
+              <button
+                type="submit"
+                aria-label="Iscriviti"
+                disabled={status === "loading"}
+                className="shrink-0 rounded-full w-10 h-10 flex items-center justify-center transition-opacity disabled:opacity-60 hover:opacity-90"
+                style={{ backgroundColor: "#1C1A14", color: "#F6F3ED" }}
+              >
+                →
+              </button>
+            </form>
+            <div
+              className="relative z-10 mt-3 h-5 text-sm text-center"
+              style={{ fontFamily: '"DM Sans", system-ui, sans-serif', color: "#1C1A14" }}
+              aria-live="polite"
+            >
+              {status === "success" && "Grazie, ti scriveremo presto."}
+              {status === "error" && "Qualcosa è andato storto, riprova."}
+            </div>
           </div>
         </div>
 
@@ -372,15 +381,10 @@ function Index() {
         <FlatEye className="left-[62%] sm:left-[57%]" closed={eyesClosed} pixelSize={pixelSize} />
       </section>
 
-      {/* NARRATIVE — glass card framed by clouds */}
+      {/* NARRATIVE */}
       <section className="relative w-full py-24 sm:py-32 px-6 sm:px-8">
         <div className="relative max-w-2xl mx-auto">
-          {/* Clouds cluster around the card */}
-          <div className="absolute inset-0 pointer-events-none z-0">
-            {CLOUDS.map((c, i) => (
-              <CloudShape key={i} c={c} />
-            ))}
-          </div>
+
 
           {/* Glass card */}
           <div
