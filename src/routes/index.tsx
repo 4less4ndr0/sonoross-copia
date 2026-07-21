@@ -514,7 +514,8 @@ function SwapCard({
           )}
         </div>
       </div>
-    </button>
+    </div>
+
   );
 }
 
