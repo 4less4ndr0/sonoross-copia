@@ -642,8 +642,7 @@ function Index() {
   const submit = useServerFn(submitLead);
 
   const activeCardData = activeCard !== null ? CARDS[activeCard] : null;
-  const activeCloud = activeCloudIndex !== null ? CLOUDS[activeCloudIndex] : null;
-  const activeCloudCard = activeCloud ? CARDS[activeCloud.cardIndex] : null;
+
 
   useEffect(() => {
     const onKey = (e: KeyboardEvent) => {
