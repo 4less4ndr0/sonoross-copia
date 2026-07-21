@@ -334,21 +334,25 @@ function SwapCard({
             }}
           />
 
-          {card.bodyIndexes.map((idx) => {
-            const p = MANIFESTO_PARAGRAPHS[idx];
-            if (!p) return null;
-            return p.italic ? (
-              <p
-                key={idx}
-                className="italic"
-                style={{ fontFamily: 'Georgia, "Times New Roman", serif' }}
-              >
-                <strong>{p.text}</strong>
-              </p>
-            ) : (
-              <p key={idx} dangerouslySetInnerHTML={{ __html: p.html ?? p.text }} />
-            );
-          })}
+          {card.title === "chi" ? (
+            <ChiContent />
+          ) : (
+            card.bodyIndexes.map((idx) => {
+              const p = MANIFESTO_PARAGRAPHS[idx];
+              if (!p) return null;
+              return p.italic ? (
+                <p
+                  key={idx}
+                  className="italic"
+                  style={{ fontFamily: 'Georgia, "Times New Roman", serif' }}
+                >
+                  <strong>{p.text}</strong>
+                </p>
+              ) : (
+                <p key={idx} dangerouslySetInnerHTML={{ __html: p.html ?? p.text }} />
+              );
+            })
+          )}
         </div>
       </div>
     </button>
