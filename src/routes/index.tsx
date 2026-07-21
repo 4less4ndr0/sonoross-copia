@@ -415,18 +415,31 @@ function SwapCard({
               "linear-gradient(to top, rgba(28,26,20,0.72) 0%, rgba(28,26,20,0.35) 40%, rgba(28,26,20,0) 65%)",
           }}
         />
-        <h3
-          className="absolute left-4 right-16 bottom-3 m-0 font-normal text-white"
-          style={{
-            fontFamily: '"Instrument Serif", serif',
-            fontSize: "clamp(1.75rem, 14cqi, 3.25rem)",
-            lineHeight: 1.02,
-            letterSpacing: "-0.02em",
-            textShadow: "0 2px 12px rgba(0,0,0,0.35)",
-          }}
-        >
-          {card.title}
-        </h3>
+        <div className="absolute left-4 right-16 bottom-3">
+          <h3
+            className="m-0 font-normal text-white"
+            style={{
+              fontFamily: '"Instrument Serif", serif',
+              fontSize: "clamp(1.75rem, 14cqi, 3.25rem)",
+              lineHeight: 1.02,
+              letterSpacing: "-0.02em",
+              textShadow: "0 2px 12px rgba(0,0,0,0.35)",
+            }}
+          >
+            {card.title}
+          </h3>
+          <p
+            className="m-0 text-white/90"
+            style={{
+              fontFamily: '"DM Sans", system-ui, sans-serif',
+              fontSize: "clamp(0.75rem, 2.2cqi, 1rem)",
+              lineHeight: 1.3,
+              textShadow: "0 1px 8px rgba(0,0,0,0.35)",
+            }}
+          >
+            {card.subtitle}
+          </p>
+        </div>
         <span
           aria-hidden
           className="absolute right-3 bottom-3 flex items-center justify-center rounded-full text-white"
