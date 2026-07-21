@@ -654,6 +654,7 @@ function Index() {
   
   const eyesClosed = useBlink(1200, 2800);
   const pixelSize = usePixelSize();
+  const eyePixelSize = useEyePixelSize();
   const submit = useServerFn(submitLead);
 
   const activeCardData = activeCard !== null ? CARDS[activeCard] : null;
