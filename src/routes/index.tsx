@@ -549,12 +549,15 @@ const FULL_ROWS = [
 ];
 const ROWS_COUNT = FULL_ROWS.length;
 
-function usePixelSize() {
-  const [px, setPx] = useState(6);
+function useEyePixelSize() {
+  const [px, setPx] = useState(18);
   useEffect(() => {
     const update = () => {
-      const vmin = Math.min(window.innerWidth, window.innerHeight);
-      setPx(Math.max(6, Math.min(10, Math.round(vmin * 0.012))));
+      const w = window.innerWidth;
+      if (w < 640) setPx(12);
+      else if (w < 1024) setPx(16);
+      else if (w < 1536) setPx(22);
+      else setPx(26);
     };
     update();
     window.addEventListener("resize", update);
@@ -636,7 +639,7 @@ function Index() {
   const [activeCard, setActiveCard] = useState<number | null>(null);
   
   const eyesClosed = useBlink(1200, 2800);
-  const pixelSize = usePixelSize();
+  const eyePixelSize = useEyePixelSize();
   const submit = useServerFn(submitLead);
 
   const activeCardData = activeCard !== null ? CARDS[activeCard] : null;
@@ -692,7 +695,13 @@ function Index() {
       {/* HERO */}
       <section className="relative z-10 h-screen w-full overflow-hidden">
         <div className="relative z-20 h-full flex flex-col items-center justify-center px-5 sm:px-6 pb-[18vh] sm:pb-[20vh]">
-          <div className="relative w-full max-w-3xl mt-[10vh] sm:mt-[12vh]">
+          <div className="relative w-full max-w-3xl mt-[6vh] sm:mt-[8vh]">
+            {/* Eyes — centered above the headline */}
+            <div className="flex justify-center items-end gap-3 sm:gap-5 mb-4 sm:mb-7 pointer-events-none">
+              <FlatEye closed={eyesClosed} pixelSize={eyePixelSize} />
+              <FlatEye closed={eyesClosed} pixelSize={eyePixelSize} />
+            </div>
+
             <h1
               className="relative z-10 text-center text-[clamp(2.75rem,10vw,4.5rem)] sm:text-[clamp(2rem,7vw,4.5rem)]"
               style={{
@@ -755,11 +764,6 @@ function Index() {
         </div>
 
         <GridBackdrop />
-
-        <div className="absolute top-5 left-5 sm:top-6 sm:left-8 z-40 flex items-start gap-2 pointer-events-none">
-          <FlatEye closed={eyesClosed} pixelSize={3} />
-          <FlatEye closed={eyesClosed} pixelSize={3} />
-        </div>
 
       </section>
 
