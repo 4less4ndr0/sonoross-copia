@@ -363,12 +363,17 @@ function CardModal({
 
   useEffect(() => {
     if (isOpen) {
-      // enter on next frame so the initial styles commit first
       const raf = requestAnimationFrame(() => setVisible(true));
-      return () => cancelAnimationFrame(raf);
+      const prev = document.body.style.overflow;
+      document.body.style.overflow = "hidden";
+      return () => {
+        cancelAnimationFrame(raf);
+        document.body.style.overflow = prev;
+      };
     }
     setVisible(false);
   }, [isOpen]);
+
 
   return (
     <div
