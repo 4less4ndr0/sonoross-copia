@@ -748,66 +748,20 @@ function Index() {
         </div>
       </section>
 
-      {/* CARDS section — mobile: stacked; desktop: manifesto glass + floating clouds */}
+      {/* CARDS section — mobile: stacked; desktop: 2x2 mosaic */}
       <section className="relative z-10 w-full py-20 sm:py-28 px-5 sm:px-6">
-        {/* MOBILE: 5 stacked cards */}
+        {/* MOBILE: stacked cards */}
         <div className="sm:hidden mx-auto max-w-[640px] flex flex-col gap-5">
           {CARDS.map((c, i) => (
             <StackCard key={i} card={c} onOpen={() => setActiveCard(i)} />
           ))}
         </div>
 
-        {/* DESKTOP: manifesto glass card at center with 4 floating cloud cards around */}
-        <div className="hidden sm:block">
-          <div className="relative w-[58vw] max-w-5xl mx-auto">
-            {/* Sizer: keeps wrapper the same height as the manifesto */}
-            <div
-              aria-hidden
-              className="invisible pointer-events-none rounded-[20px] p-6 sm:p-12 space-y-6"
-              style={{
-                fontFamily: '"DM Sans", system-ui, sans-serif',
-                fontSize: "clamp(1.1rem, 1.3vw, 1.3rem)",
-                lineHeight: 1.65,
-              }}
-            >
-              {MANIFESTO_PARAGRAPHS.map((p, i) => (
-                <p key={i}>{p.text}</p>
-              ))}
-            </div>
-
-            {/* 5 SwapCards — manifesto + 4 clouds. Persistent DOM nodes swap
-                between side and center slots via CSS transitions. */}
-            <SwapCard
-              card={CARDS[0]}
-              sideSlot={
-                activeCloudIndex !== null
-                  ? CLOUDS[activeCloudIndex].slot
-                  : CLOUDS[0].slot
-              }
-              isActive={activeCloudIndex === null}
-              onClick={() =>
-                activeCloudIndex !== null && setActiveCloudIndex(null)
-              }
-              floatVariant="c"
-              floatDelay="0s"
-            />
-            {CLOUDS.map((c, i) => (
-              <SwapCard
-                key={i}
-                card={CARDS[c.cardIndex]}
-                sideSlot={c.slot}
-                isActive={activeCloudIndex === i}
-                onClick={() =>
-                  activeCloudIndex === i
-                    ? setActiveCloudIndex(null)
-                    : setActiveCloudIndex(i)
-                }
-                floatVariant={c.variant}
-                floatDelay={c.delay}
-              />
-            ))}
-
-          </div>
+        {/* DESKTOP: 2x2 mosaic */}
+        <div className="hidden sm:grid grid-cols-2 gap-8 lg:gap-10 mx-auto w-[min(90vw,1200px)]">
+          {CARDS.map((c, i) => (
+            <StackCard key={i} card={c} onOpen={() => setActiveCard(i)} />
+          ))}
         </div>
 
         <div
