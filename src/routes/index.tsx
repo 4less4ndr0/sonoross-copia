@@ -85,7 +85,6 @@ const CARDS: Card[] = [
   },
 ];
 
-const _UNUSED_CARDS_END = null;
 
 type TeamMember = { name: string; role: string; bio: string };
 
