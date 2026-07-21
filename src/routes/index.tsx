@@ -79,7 +79,7 @@ const CARDS: Card[] = [
   },
   {
     title: "come",
-    subtitle: "Conversazioni che ascoltano.",
+    subtitle: "quello che facciamo e faremo",
     image: cloudCome,
     bodyIndexes: [4, 5, 6],
   },
