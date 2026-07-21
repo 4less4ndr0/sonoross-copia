@@ -1,15 +1,21 @@
-## Problema
+## Obiettivo
+Aumentare la dimensione del titolo/headline "Perché nessuno dovrebbe invecchiare solo." su mobile in modo che occupi meglio lo spazio verticale disponibile, senza toccare altri elementi della landing page.
 
-Quando una card viene aperta (click → si sposta al centro sostituendo il manifesto), le altre 3 card laterali vengono attenuate: `opacity: 0.55` e `z-index: 1`, con anche l'alone terracotta dietro portato a 0.35. Risultato: solo la card attiva e la manifesto rimpicciolita risultano ben leggibili, le altre 3 quasi spariscono.
+## Stato attuato
+In `src/routes/index.tsx` l’H1 hero ha:
+```tsx
+fontSize: "clamp(2rem, 7vw, 4.5rem)",
+lineHeight: 1.05,
+```
+Su un viewport mobile di ~393 px, `7vw` vale circa 27–28 px, quindi il `min` di `2rem` (32 px) domina. Il risultato è un titolo relativamente piccolo rispetto all’altezza dello schermo.
 
-L'utente vuole che, con una card aperta, **anche le altre 3 restino ben visibili** nei loro slot laterali.
+## Modifica proposta
+1. **Aumentare il font-size mobile dell’H1 hero** portandolo a un valore che occupi più spazio verticale, es. `clamp(2.75rem, 10vw, 4.5rem)` o, in alternativa, usare una regola Tailwind responsive (`text-[...] sm:text-[...]`) per avere un controllo più netto tra mobile e desktop.
+2. **Verificare il line-height** mantenendo `1.05` o leggermente più aperto (`1.08`) se il testo più grande risultasse troppo compatto.
+3. **Controllare il padding/margin** circostante (`pb-[18vh]`, `mt-[10vh]`, `mt-6` del form) per assicurarsi che il titolo ingrandito non spinga il form o gli occhi fuori posizione; se necessario, ridurre leggermente i margini solo su mobile.
+4. **Non modificare** font family, colore, posizionamento centrato, occhi, nuvole/card, manifesto, CTA, gradiente/sfondo.
 
-## Modifica a `src/routes/index.tsx` → `CloudShape`
-
-Rimuovere il "dimming" delle card inattive quando `anyActive`:
-
-- Card non attiva, non in hover: `opacity: 1` (invece di `anyActive ? 0.55 : 1`).
-- Card non attiva, non in hover: `zIndex: 5` (invece di `anyActive ? 1 : 5`). Resta comunque sotto la card attiva (z=30) e sotto la card in hover (z=50).
-- Alone terracotta dietro (`background rgba(239,159,39,0.45)`): riportare l'opacità della card non-attiva a 0.8 (invece di `anyActive ? 0.35 : 0.8`), lasciando 1 per attiva/hover.
-
-Nessun altro cambiamento: click/swap, hover-pop (z=50), posizioni, font, manifesto card e layout responsive restano invariati.
+## Criterio di accettazione
+- Su mobile (viewport < 640 px) il titolo appare visibilmente più grande e riempie meglio la parte alta della hero.
+- Gli elementi sottostanti (form email, occhi, scroll hint) restano visibili e ben posizionati, senza sovrapposizioni.
+- Su desktop non cambia nulla o cambia in modo impercettibile.

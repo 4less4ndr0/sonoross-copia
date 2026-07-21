@@ -487,11 +487,10 @@ function Index() {
         <div className="relative z-20 h-full flex flex-col items-center justify-center px-5 sm:px-6 pb-[18vh] sm:pb-[20vh]">
           <div className="relative w-full max-w-3xl mt-[10vh] sm:mt-[12vh]">
             <h1
-              className="relative z-10 text-center"
+              className="relative z-10 text-center text-[clamp(2.75rem,10vw,4.5rem)] sm:text-[clamp(2rem,7vw,4.5rem)]"
               style={{
                 fontFamily: 'Georgia, "Times New Roman", serif',
                 fontWeight: 400,
-                fontSize: "clamp(2rem, 7vw, 4.5rem)",
                 lineHeight: 1.05,
                 color: "#1C1A14",
               }}
