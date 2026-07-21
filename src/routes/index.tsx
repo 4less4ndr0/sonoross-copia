@@ -343,14 +343,24 @@ function SwapCard({
   const translateY = peek ? -4 : 0;
 
   return (
-    <button
-      type="button"
-      onClick={onClick}
+    <div
+      role="button"
+      tabIndex={0}
+      onClick={() => {
+        if (!isActive) onClick();
+      }}
+      onKeyDown={(e) => {
+        if (!isActive && (e.key === "Enter" || e.key === " ")) {
+          e.preventDefault();
+          onClick();
+        }
+      }}
       onMouseEnter={() => setIsHover(true)}
       onMouseLeave={() => setIsHover(false)}
       onFocus={() => setIsHover(true)}
       onBlur={() => setIsHover(false)}
-      aria-label={isActive ? `Chiudi ${card.title}` : `Apri ${card.title}`}
+      aria-label={isActive ? card.title : `Apri ${card.title}`}
+      aria-expanded={isActive}
       className={`absolute rounded-[20px] text-left focus:outline-none focus-visible:ring-2 focus-visible:ring-[#EF9F27] ${!isActive ? `float-${floatVariant}` : ""}`}
       style={{
         top: slot.top,
@@ -360,7 +370,7 @@ function SwapCard({
         transform: `rotate(${rotate}deg) scale(${scale}) translateY(${translateY}px)`,
         zIndex: isActive ? 20 : peek ? 50 : 5,
         transition: SWAP_TRANSITION,
-        cursor: "pointer",
+        cursor: isActive ? "default" : "pointer",
         animationDelay: floatDelay,
         animationPlayState: isHover || isActive ? "paused" : "running",
       }}
