@@ -91,98 +91,106 @@ const CARDS: Card[] = [
 ];
 
 
-// Desktop-only cloud cards (chi/cosa/come/perché) — indices map to CARDS[1..4]
+// Desktop-only slots. Each side slot is expressed with left+width+height so
+// CSS can interpolate smoothly between side and center on state change.
 type Slot = {
   top: string;
-  left?: string;
-  right?: string;
+  left: string;
   width: string;
-  maxWidth?: string;
+  height: string;
   rotate: number;
+};
+
+const SIDE_W = "min(22vw, 300px)";
+const SIDE_H = "calc(min(22vw, 300px) * 1.25)"; // aspect 4:5
+
+const CENTER_SLOT: Slot = {
+  top: "0",
+  left: "0",
+  width: "100%",
+  height: "100%",
+  rotate: 0,
 };
 
 type Cloud = {
   variant: "a" | "b" | "c" | "d";
   delay: string;
-  text: string;
-  image: string;
-  cardIndex: number; // index into CARDS for the modal
+  cardIndex: number; // index into CARDS (1..4 for chi/cosa/come/perché)
   slot: Slot;
 };
 
+// Side slots for the 4 non-manifesto cards. Right-anchored slots are converted
+// to a left-based calc() so transitions animate on a single property.
 const CLOUDS: Cloud[] = [
   {
     variant: "a",
     delay: "0s",
-    text: "chi",
-    image: cloudChi,
-    cardIndex: 1,
-    slot: { top: "10%", left: "-22%", width: "22vw", maxWidth: "300px", rotate: -4 },
+    cardIndex: 1, // chi
+    slot: { top: "10%", left: "-22%", width: SIDE_W, height: SIDE_H, rotate: -4 },
   },
   {
     variant: "b",
     delay: "1.1s",
-    text: "cosa",
-    image: cloudCosa,
-    cardIndex: 2,
-    slot: { top: "66%", left: "-23%", width: "22vw", maxWidth: "300px", rotate: 3 },
+    cardIndex: 2, // cosa
+    slot: { top: "66%", left: "-23%", width: SIDE_W, height: SIDE_H, rotate: 3 },
   },
   {
     variant: "d",
     delay: "0.6s",
-    text: "come",
-    image: cloudCome,
-    cardIndex: 3,
-    slot: { top: "20%", right: "-22%", width: "22vw", maxWidth: "300px", rotate: -2 },
+    cardIndex: 3, // come
+    slot: {
+      top: "20%",
+      left: `calc(100% + 22% - ${SIDE_W})`,
+      width: SIDE_W,
+      height: SIDE_H,
+      rotate: -2,
+    },
   },
   {
     variant: "a",
     delay: "1.7s",
-    text: "perché",
-    image: cloudPerche,
-    cardIndex: 4,
-    slot: { top: "72%", right: "-23%", width: "22vw", maxWidth: "300px", rotate: 4 },
+    cardIndex: 4, // perché
+    slot: {
+      top: "72%",
+      left: `calc(100% + 23% - ${SIDE_W})`,
+      width: SIDE_W,
+      height: SIDE_H,
+      rotate: 4,
+    },
   },
 ];
 
 const EASE = "cubic-bezier(0.22,1,0.36,1)";
-const HOVER_TRANSITION =
-  `transform 480ms ${EASE}, opacity 300ms ease, box-shadow 400ms ease`;
+const SWAP_TRANSITION = [
+  `top 600ms ${EASE}`,
+  `left 600ms ${EASE}`,
+  `width 600ms ${EASE}`,
+  `height 600ms ${EASE}`,
+  `transform 480ms ${EASE}`,
+  `box-shadow 400ms ease`,
+].join(", ");
 
-function CloudShape({
-  variant,
-  delay,
-  text,
-  image,
-  slot,
+function SwapCard({
+  card,
+  sideSlot,
+  isActive,
   onClick,
-  animate = true,
+  floatVariant,
+  floatDelay,
 }: {
-  variant: "a" | "b" | "c" | "d";
-  delay: string;
-  text: string;
-  image: string;
-  slot: Slot;
+  card: Card;
+  sideSlot: Slot;
+  isActive: boolean;
   onClick: () => void;
-  animate?: boolean;
+  floatVariant: "a" | "b" | "c" | "d";
+  floatDelay: string;
 }) {
   const [isHover, setIsHover] = useState(false);
-  const style: React.CSSProperties = {
-    top: slot.top,
-    left: slot.left,
-    right: slot.right,
-    width: slot.width,
-    maxWidth: slot.maxWidth,
-    transform: isHover
-      ? `rotate(0deg) scale(1.06) translateY(-4px)`
-      : `rotate(${slot.rotate}deg)`,
-    zIndex: isHover ? 50 : 5,
-    opacity: 1,
-    transition: HOVER_TRANSITION,
-    willChange: "transform",
-    animationPlayState: isHover ? "paused" : "running",
-    animationDelay: delay,
-  };
+  const slot = isActive ? CENTER_SLOT : sideSlot;
+  const peek = isHover && !isActive;
+  const rotate = isActive || peek ? 0 : sideSlot.rotate;
+  const scale = peek ? 1.06 : 1;
+  const translateY = peek ? -4 : 0;
 
   return (
     <button
@@ -192,33 +200,50 @@ function CloudShape({
       onMouseLeave={() => setIsHover(false)}
       onFocus={() => setIsHover(true)}
       onBlur={() => setIsHover(false)}
-      aria-label={`Apri ${text}`}
-      className={`group absolute ${animate ? `float-${variant}` : ""} pointer-events-auto cursor-pointer text-left focus:outline-none focus-visible:ring-2 focus-visible:ring-[#EF9F27] rounded-[20px]`}
-      style={style}
+      aria-label={isActive ? `Chiudi ${card.title}` : `Apri ${card.title}`}
+      className={`absolute rounded-[20px] text-left focus:outline-none focus-visible:ring-2 focus-visible:ring-[#EF9F27] ${!isActive ? `float-${floatVariant}` : ""}`}
+      style={{
+        top: slot.top,
+        left: slot.left,
+        width: slot.width,
+        height: slot.height,
+        transform: `rotate(${rotate}deg) scale(${scale}) translateY(${translateY}px)`,
+        zIndex: isActive ? 20 : peek ? 50 : 5,
+        transition: SWAP_TRANSITION,
+        cursor: "pointer",
+        animationDelay: floatDelay,
+        animationPlayState: isHover || isActive ? "paused" : "running",
+      }}
     >
+      {/* Terracotta halo — fades out when active */}
       <div
         aria-hidden
-        className="absolute -inset-8 rounded-[32px] pointer-events-none transition-opacity duration-500"
+        className="absolute -inset-8 rounded-[32px] pointer-events-none"
         style={{
           background: "rgba(239, 159, 39, 0.45)",
           filter: "blur(44px)",
-          opacity: isHover ? 1 : 0.8,
+          opacity: isActive ? 0 : isHover ? 1 : 0.8,
+          transition: "opacity 400ms ease",
+          zIndex: -1,
         }}
       />
+
+      {/* IMAGE LAYER (visible when not active) */}
       <div
-        className="relative overflow-hidden rounded-[20px]"
+        aria-hidden={isActive}
+        className="absolute inset-0 rounded-[20px] overflow-hidden"
         style={{
-          aspectRatio: "4 / 5",
+          opacity: isActive ? 0 : 1,
+          transition: "opacity 300ms ease",
+          pointerEvents: isActive ? "none" : "auto",
           boxShadow: "0 10px 30px rgba(28,26,20,0.18)",
           border: "1px solid rgba(255,255,255,0.5)",
         }}
       >
         <img
-          src={image}
+          src={card.image}
           alt=""
           loading="lazy"
-          width={800}
-          height={1000}
           className="absolute inset-0 w-full h-full object-cover"
         />
         <div
@@ -239,7 +264,7 @@ function CloudShape({
             textShadow: "0 2px 12px rgba(0,0,0,0.35)",
           }}
         >
-          {text}
+          {card.title}
         </h3>
         <span
           aria-hidden
@@ -258,9 +283,54 @@ function CloudShape({
           +
         </span>
       </div>
+
+      {/* GLASS LAYER (visible when active) */}
+      <div
+        aria-hidden={!isActive}
+        className="absolute inset-0 rounded-[20px] overflow-hidden"
+        style={{
+          opacity: isActive ? 1 : 0,
+          transition: "opacity 300ms ease",
+          pointerEvents: isActive ? "auto" : "none",
+          background: "rgba(255,255,255,0.55)",
+          backdropFilter: "blur(20px) saturate(140%)",
+          WebkitBackdropFilter: "blur(20px) saturate(140%)",
+          border: "1px solid rgba(255,255,255,0.5)",
+          boxShadow: "0 24px 70px rgba(28, 26, 20, 0.12)",
+        }}
+      >
+        <div
+          className="p-6 sm:p-12 space-y-6"
+          style={{
+            fontFamily: '"DM Sans", system-ui, sans-serif',
+            fontSize: "clamp(1.1rem, 1.3vw, 1.3rem)",
+            fontWeight: 400,
+            lineHeight: 1.65,
+            letterSpacing: "-0.005em",
+            color: "#1C1A14",
+          }}
+        >
+          {card.bodyIndexes.map((idx) => {
+            const p = MANIFESTO_PARAGRAPHS[idx];
+            if (!p) return null;
+            return p.italic ? (
+              <p
+                key={idx}
+                className="italic"
+                style={{ fontFamily: 'Georgia, "Times New Roman", serif' }}
+              >
+                <strong>{p.text}</strong>
+              </p>
+            ) : (
+              <p key={idx} dangerouslySetInnerHTML={{ __html: p.html ?? p.text }} />
+            );
+          })}
+        </div>
+      </div>
     </button>
   );
 }
+
 
 
 
@@ -572,8 +642,7 @@ function Index() {
   const submit = useServerFn(submitLead);
 
   const activeCardData = activeCard !== null ? CARDS[activeCard] : null;
-  const activeCloud = activeCloudIndex !== null ? CLOUDS[activeCloudIndex] : null;
-  const activeCloudCard = activeCloud ? CARDS[activeCloud.cardIndex] : null;
+
 
   useEffect(() => {
     const onKey = (e: KeyboardEvent) => {
@@ -728,104 +797,38 @@ function Index() {
               ))}
             </div>
 
-            {/* Non-active cloud cards along the manifesto borders */}
-            {CLOUDS.map((c, i) =>
-              i === activeCloudIndex ? null : (
-                <CloudShape
-                  key={i}
-                  variant={c.variant}
-                  delay={c.delay}
-                  text={c.text}
-                  image={c.image}
-                  slot={c.slot}
-                  onClick={() => setActiveCloudIndex(i)}
-                />
-              )
-            )}
-
-            {/* Manifesto — either centered (default) or occupying the active cloud's slot */}
-            {activeCloud ? (
-              <CloudShape
-                variant="a"
-                delay="0s"
-                text="manifesto"
-                image={cloudManifesto}
-                slot={activeCloud.slot}
-                animate={false}
-                onClick={() => setActiveCloudIndex(null)}
+            {/* 5 SwapCards — manifesto + 4 clouds. Persistent DOM nodes swap
+                between side and center slots via CSS transitions. */}
+            <SwapCard
+              card={CARDS[0]}
+              sideSlot={
+                activeCloudIndex !== null
+                  ? CLOUDS[activeCloudIndex].slot
+                  : CLOUDS[0].slot
+              }
+              isActive={activeCloudIndex === null}
+              onClick={() =>
+                activeCloudIndex !== null && setActiveCloudIndex(null)
+              }
+              floatVariant="c"
+              floatDelay="0s"
+            />
+            {CLOUDS.map((c, i) => (
+              <SwapCard
+                key={i}
+                card={CARDS[c.cardIndex]}
+                sideSlot={c.slot}
+                isActive={activeCloudIndex === i}
+                onClick={() =>
+                  activeCloudIndex === i
+                    ? setActiveCloudIndex(null)
+                    : setActiveCloudIndex(i)
+                }
+                floatVariant={c.variant}
+                floatDelay={c.delay}
               />
-            ) : null}
+            ))}
 
-            {/* Center glass card — shows manifesto text or the active cloud's body */}
-            <div className="absolute inset-0" style={{ zIndex: 10 }}>
-              <button
-                type="button"
-                onClick={() => activeCloudIndex !== null && setActiveCloudIndex(null)}
-                aria-label={activeCloud ? "Torna al manifesto" : undefined}
-                tabIndex={activeCloud ? 0 : -1}
-                className="relative block w-full text-left rounded-[20px] p-6 sm:p-12 space-y-6 focus:outline-none focus-visible:ring-2 focus-visible:ring-[#EF9F27]"
-                style={{
-                  background: "rgba(255,255,255,0.55)",
-                  backdropFilter: "blur(20px) saturate(140%)",
-                  border: "1px solid rgba(255,255,255,0.5)",
-                  boxShadow: "0 24px 70px rgba(28, 26, 20, 0.12)",
-                  fontFamily: '"DM Sans", system-ui, sans-serif',
-                  fontSize: "clamp(1.1rem, 1.3vw, 1.3rem)",
-                  fontWeight: 400,
-                  lineHeight: 1.65,
-                  letterSpacing: "-0.005em",
-                  color: "#1C1A14",
-                  cursor: activeCloud ? "pointer" : "default",
-                  transition: "background 300ms ease",
-                }}
-              >
-                {activeCloud && activeCloudCard ? (
-                  <>
-                    <h2
-                      className="m-0 font-normal"
-                      style={{
-                        fontFamily: '"Instrument Serif", serif',
-                        fontSize: "clamp(2.5rem, 5vw, 4rem)",
-                        lineHeight: 1.02,
-                        letterSpacing: "-0.02em",
-                        color: "#1C1A14",
-                      }}
-                    >
-                      {activeCloud.text}
-                    </h2>
-                    {activeCloudCard.bodyIndexes.map((idx) => {
-                      const p = MANIFESTO_PARAGRAPHS[idx];
-                      if (!p) return null;
-                      return p.italic ? (
-                        <p
-                          key={idx}
-                          className="italic"
-                          style={{ fontFamily: 'Georgia, "Times New Roman", serif' }}
-                        >
-                          <strong>{p.text}</strong>
-                        </p>
-                      ) : (
-                        <p key={idx} dangerouslySetInnerHTML={{ __html: p.html ?? p.text }} />
-                      );
-                    })}
-                  </>
-                ) : (
-                  MANIFESTO_PARAGRAPHS.map((p, i) =>
-                    p.italic ? (
-                      <p
-                        key={i}
-                        className="italic"
-                        style={{ fontFamily: 'Georgia, "Times New Roman", serif' }}
-                      >
-                        <strong>{p.text}</strong>
-                      </p>
-                    ) : (
-                      <p key={i} dangerouslySetInnerHTML={{ __html: p.html ?? p.text }} />
-                    )
-                  )
-                )}
-              </button>
-            </div>
           </div>
         </div>
 
