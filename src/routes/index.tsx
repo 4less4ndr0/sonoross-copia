@@ -416,13 +416,22 @@ function StackCard({
           background: "rgba(255,255,255,0.22)",
           backdropFilter: "blur(10px)",
           border: "1px solid rgba(255,255,255,0.5)",
-          fontFamily: '"DM Sans", system-ui, sans-serif',
-          fontSize: "1.5rem",
-          lineHeight: 1,
         }}
       >
-        +
+        <svg
+          viewBox="0 0 24 24"
+          fill="none"
+          stroke="currentColor"
+          strokeWidth="2"
+          strokeLinecap="round"
+          strokeLinejoin="round"
+          style={{ width: "44%", height: "44%" }}
+        >
+          <path d="M7 17 17 7" />
+          <path d="M8 7h9v9" />
+        </svg>
       </span>
+
     </button>
   );
 }
