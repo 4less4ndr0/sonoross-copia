@@ -549,20 +549,6 @@ const FULL_ROWS = [
 ];
 const ROWS_COUNT = FULL_ROWS.length;
 
-function usePixelSize() {
-  const [px, setPx] = useState(6);
-  useEffect(() => {
-    const update = () => {
-      const vmin = Math.min(window.innerWidth, window.innerHeight);
-      setPx(Math.max(6, Math.min(10, Math.round(vmin * 0.012))));
-    };
-    update();
-    window.addEventListener("resize", update);
-    return () => window.removeEventListener("resize", update);
-  }, []);
-  return px;
-}
-
 function useEyePixelSize() {
   const [px, setPx] = useState(18);
   useEffect(() => {
