@@ -666,6 +666,9 @@ function Index() {
   const submit = useServerFn(submitLead);
 
   const activeCardData = activeCard !== null ? CARDS[activeCard] : null;
+  const lastCardRef = useRef<Card | null>(null);
+  if (activeCardData) lastCardRef.current = activeCardData;
+  const displayedCard = activeCardData ?? lastCardRef.current;
 
 
   useEffect(() => {
