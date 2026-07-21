@@ -214,7 +214,7 @@ function CloudShape({
         }}
       >
         <img
-          src={c.image}
+          src={image}
           alt=""
           loading="lazy"
           width={800}
