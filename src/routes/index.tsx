@@ -761,16 +761,10 @@ function Index() {
           <FlatEye closed={eyesClosed} pixelSize={3} />
         </div>
 
-        <div
-          className="absolute bottom-8 left-1/2 -translate-x-1/2 z-30 text-[10px] tracking-[0.25em] uppercase animate-bounce pointer-events-none"
-          style={{ color: "rgba(28,26,20,0.7)" }}
-        >
-          ↓ scroll
-        </div>
       </section>
 
       {/* CARDS section — mobile: stacked; desktop: 2x2 mosaic */}
-      <section className="relative z-10 w-full py-20 sm:py-28 px-5 sm:px-6">
+      <section className="relative z-20 w-full -mt-[12vh] sm:-mt-[16vh] pt-4 sm:pt-6 pb-20 sm:pb-28 px-5 sm:px-6">
         {/* MOBILE: stacked cards */}
         <div className="sm:hidden mx-auto max-w-[640px] flex flex-col gap-5">
           {CARDS.map((c, i) => (
