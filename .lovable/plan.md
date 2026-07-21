@@ -1,12 +1,13 @@
-## Obiettivo
-Il bottone di chiusura (×) in alto a destra delle card aperte in mobile è troppo chiaro e poco leggibile su sfondo cream. Aumentarne il contrasto senza toccare altro.
+## Modifica sottotitoli card
 
-## Modifica
-In `src/routes/index.tsx`, nel bottone di chiusura del `CardModal`:
-- Sfondo: da bianco/glass semi-trasparente → ink (#1C1A14) pieno
-- Icona ×: cream (#F6F3ED), stroke leggermente più spesso
-- Bordo: rimosso (o ink stesso colore)
-- Ombra: leggera drop-shadow ink 20% per staccarlo dallo sfondo card
-- Dimensione e posizione invariate
+Aggiornare i sottotitoli (campo `subtitle`) delle card `CARDS` in `src/routes/index.tsx`:
 
-Nessun'altra modifica: font, layout, animazioni, contenuti e comportamento restano identici.
+- **cosa**: da `"Un compagno, non un sensore."` → `"il cuore di R.O.S.S."`
+- **perché**: da `"Rimettere al centro."` → `"perché lo stiamo facendo"`
+
+La card `chi` resta invariata (`"Le persone al centro."`).
+
+### Dettagli tecnici
+- Il testo viene già renderizzato automaticamente dai componenti `SwapCard` (desktop) e `StackCard` (mobile) attraverso il campo `subtitle` dell'oggetto `Card`.
+- Non sono necessarie modifiche a stili, animazioni, font o logica di swap/modal.
+- Verifica: controllare che in desktop e mobile i sottotitoli delle card "cosa" e "perché" appaiano con il nuovo testo, sia in stato chiuso che aperto.
