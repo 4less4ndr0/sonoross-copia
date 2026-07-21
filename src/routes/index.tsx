@@ -460,7 +460,7 @@ function SwapCard({
         }}
       >
         <div
-          className="p-6 sm:p-12 space-y-6"
+          className="p-6 sm:p-12 space-y-6 absolute inset-0 overflow-y-auto overscroll-contain"
           style={{
             fontFamily: '"DM Sans", system-ui, sans-serif',
             fontSize: "clamp(1.1rem, 1.3vw, 1.3rem)",
