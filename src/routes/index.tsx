@@ -78,18 +78,14 @@ const CARDS: Card[] = [
     bodyIndexes: [2, 3],
   },
   {
-    title: "come",
-    subtitle: "quello che facciamo e faremo",
-    image: cloudCome,
-    bodyIndexes: [4, 5, 6],
-  },
-  {
     title: "perché",
     subtitle: "perché lo stiamo facendo",
     image: cloudPerche,
     bodyIndexes: [7, 8, 9],
   },
 ];
+
+const _UNUSED_CARDS_END = null;
 
 type TeamMember = { name: string; role: string; bio: string };
 
