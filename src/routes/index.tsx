@@ -563,6 +563,23 @@ function usePixelSize() {
   return px;
 }
 
+function useEyePixelSize() {
+  const [px, setPx] = useState(18);
+  useEffect(() => {
+    const update = () => {
+      const w = window.innerWidth;
+      if (w < 640) setPx(12);
+      else if (w < 1024) setPx(16);
+      else if (w < 1536) setPx(22);
+      else setPx(26);
+    };
+    update();
+    window.addEventListener("resize", update);
+    return () => window.removeEventListener("resize", update);
+  }, []);
+  return px;
+}
+
 function FlatEye({ className, closed, pixelSize }: { className?: string; closed: boolean; pixelSize: number }) {
   const gap = 1;
   const rows = closed
