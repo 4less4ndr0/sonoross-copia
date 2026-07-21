@@ -3,6 +3,11 @@ import { useServerFn } from "@tanstack/react-start";
 import { useEffect, useState, type FormEvent } from "react";
 
 import { submitLead } from "@/lib/leads.functions";
+import cloudChi from "@/assets/cloud-chi.jpg";
+import cloudCosa from "@/assets/cloud-cosa.jpg";
+import cloudCome from "@/assets/cloud-come.jpg";
+import cloudPerche from "@/assets/cloud-perche.jpg";
+
 
 export const Route = createFileRoute("/")({
   component: Index,
