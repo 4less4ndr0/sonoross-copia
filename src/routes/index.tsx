@@ -319,7 +319,14 @@ function SwapCard({
             letterSpacing: "-0.005em",
             color: "#1C1A14",
           }}
-        >
+          <img
+            src={card.image}
+            alt={card.title}
+            loading="lazy"
+            className="w-full object-cover rounded-[14px]"
+            style={{ height: "clamp(180px, 22vh, 320px)", marginBottom: "0.5rem" }}
+          />
+
           {card.bodyIndexes.map((idx) => {
             const p = MANIFESTO_PARAGRAPHS[idx];
             if (!p) return null;
