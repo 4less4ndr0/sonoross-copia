@@ -420,21 +420,39 @@ function StackCard({
 
 function CardModal({
   card,
+  isOpen,
   onClose,
 }: {
   card: Card;
+  isOpen: boolean;
   onClose: () => void;
 }) {
+  const [visible, setVisible] = useState(false);
+
+  useEffect(() => {
+    if (isOpen) {
+      // enter on next frame so the initial styles commit first
+      const raf = requestAnimationFrame(() => setVisible(true));
+      return () => cancelAnimationFrame(raf);
+    }
+    setVisible(false);
+  }, [isOpen]);
+
   return (
     <div
-      className="fixed inset-0 z-[100] flex items-center justify-center p-4 sm:p-8 animate-fade-in"
+      className="fixed inset-0 z-[100] flex items-center justify-center p-4 sm:p-8"
       role="dialog"
       aria-modal="true"
       aria-label={card.title}
       onClick={onClose}
       style={{
-        background: "rgba(28,26,20,0.55)",
-        backdropFilter: "blur(8px)",
+        background: visible ? "rgba(28,26,20,0.55)" : "rgba(28,26,20,0)",
+        backdropFilter: visible ? "blur(8px)" : "blur(0px)",
+        WebkitBackdropFilter: visible ? "blur(8px)" : "blur(0px)",
+        opacity: visible ? 1 : 0,
+        pointerEvents: isOpen ? "auto" : "none",
+        transition:
+          "opacity 280ms ease, background-color 280ms ease, backdrop-filter 280ms ease",
       }}
     >
       <div
@@ -444,6 +462,12 @@ function CardModal({
           background: "rgba(246,243,237,0.98)",
           border: "1px solid rgba(255,255,255,0.6)",
           boxShadow: "0 30px 80px rgba(28,26,20,0.35)",
+          transform: visible
+            ? "translateY(0) scale(1)"
+            : "translateY(24px) scale(0.96)",
+          opacity: visible ? 1 : 0,
+          transition:
+            "transform 320ms cubic-bezier(0.22,1,0.36,1), opacity 260ms ease",
         }}
       >
         <button
