@@ -550,14 +550,14 @@ const FULL_ROWS = [
 const ROWS_COUNT = FULL_ROWS.length;
 
 function useEyePixelSize() {
-  const [px, setPx] = useState(18);
+  const [px, setPx] = useState(9);
   useEffect(() => {
     const update = () => {
       const w = window.innerWidth;
-      if (w < 640) setPx(12);
-      else if (w < 1024) setPx(16);
-      else if (w < 1536) setPx(22);
-      else setPx(26);
+      if (w < 640) setPx(6);
+      else if (w < 1024) setPx(8);
+      else if (w < 1536) setPx(11);
+      else setPx(13);
     };
     update();
     window.addEventListener("resize", update);
