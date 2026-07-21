@@ -797,104 +797,38 @@ function Index() {
               ))}
             </div>
 
-            {/* Non-active cloud cards along the manifesto borders */}
-            {CLOUDS.map((c, i) =>
-              i === activeCloudIndex ? null : (
-                <CloudShape
-                  key={i}
-                  variant={c.variant}
-                  delay={c.delay}
-                  text={c.text}
-                  image={c.image}
-                  slot={c.slot}
-                  onClick={() => setActiveCloudIndex(i)}
-                />
-              )
-            )}
-
-            {/* Manifesto — either centered (default) or occupying the active cloud's slot */}
-            {activeCloud ? (
-              <CloudShape
-                variant="a"
-                delay="0s"
-                text="manifesto"
-                image={cloudManifesto}
-                slot={activeCloud.slot}
-                animate={false}
-                onClick={() => setActiveCloudIndex(null)}
+            {/* 5 SwapCards — manifesto + 4 clouds. Persistent DOM nodes swap
+                between side and center slots via CSS transitions. */}
+            <SwapCard
+              card={CARDS[0]}
+              sideSlot={
+                activeCloudIndex !== null
+                  ? CLOUDS[activeCloudIndex].slot
+                  : CLOUDS[0].slot
+              }
+              isActive={activeCloudIndex === null}
+              onClick={() =>
+                activeCloudIndex !== null && setActiveCloudIndex(null)
+              }
+              floatVariant="c"
+              floatDelay="0s"
+            />
+            {CLOUDS.map((c, i) => (
+              <SwapCard
+                key={i}
+                card={CARDS[c.cardIndex]}
+                sideSlot={c.slot}
+                isActive={activeCloudIndex === i}
+                onClick={() =>
+                  activeCloudIndex === i
+                    ? setActiveCloudIndex(null)
+                    : setActiveCloudIndex(i)
+                }
+                floatVariant={c.variant}
+                floatDelay={c.delay}
               />
-            ) : null}
+            ))}
 
-            {/* Center glass card — shows manifesto text or the active cloud's body */}
-            <div className="absolute inset-0" style={{ zIndex: 10 }}>
-              <button
-                type="button"
-                onClick={() => activeCloudIndex !== null && setActiveCloudIndex(null)}
-                aria-label={activeCloud ? "Torna al manifesto" : undefined}
-                tabIndex={activeCloud ? 0 : -1}
-                className="relative block w-full text-left rounded-[20px] p-6 sm:p-12 space-y-6 focus:outline-none focus-visible:ring-2 focus-visible:ring-[#EF9F27]"
-                style={{
-                  background: "rgba(255,255,255,0.55)",
-                  backdropFilter: "blur(20px) saturate(140%)",
-                  border: "1px solid rgba(255,255,255,0.5)",
-                  boxShadow: "0 24px 70px rgba(28, 26, 20, 0.12)",
-                  fontFamily: '"DM Sans", system-ui, sans-serif',
-                  fontSize: "clamp(1.1rem, 1.3vw, 1.3rem)",
-                  fontWeight: 400,
-                  lineHeight: 1.65,
-                  letterSpacing: "-0.005em",
-                  color: "#1C1A14",
-                  cursor: activeCloud ? "pointer" : "default",
-                  transition: "background 300ms ease",
-                }}
-              >
-                {activeCloud && activeCloudCard ? (
-                  <>
-                    <h2
-                      className="m-0 font-normal"
-                      style={{
-                        fontFamily: '"Instrument Serif", serif',
-                        fontSize: "clamp(2.5rem, 5vw, 4rem)",
-                        lineHeight: 1.02,
-                        letterSpacing: "-0.02em",
-                        color: "#1C1A14",
-                      }}
-                    >
-                      {activeCloud.text}
-                    </h2>
-                    {activeCloudCard.bodyIndexes.map((idx) => {
-                      const p = MANIFESTO_PARAGRAPHS[idx];
-                      if (!p) return null;
-                      return p.italic ? (
-                        <p
-                          key={idx}
-                          className="italic"
-                          style={{ fontFamily: 'Georgia, "Times New Roman", serif' }}
-                        >
-                          <strong>{p.text}</strong>
-                        </p>
-                      ) : (
-                        <p key={idx} dangerouslySetInnerHTML={{ __html: p.html ?? p.text }} />
-                      );
-                    })}
-                  </>
-                ) : (
-                  MANIFESTO_PARAGRAPHS.map((p, i) =>
-                    p.italic ? (
-                      <p
-                        key={i}
-                        className="italic"
-                        style={{ fontFamily: 'Georgia, "Times New Roman", serif' }}
-                      >
-                        <strong>{p.text}</strong>
-                      </p>
-                    ) : (
-                      <p key={i} dangerouslySetInnerHTML={{ __html: p.html ?? p.text }} />
-                    )
-                  )
-                )}
-              </button>
-            </div>
           </div>
         </div>
 
