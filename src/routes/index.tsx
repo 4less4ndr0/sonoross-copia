@@ -598,13 +598,8 @@ function Index() {
           ))}
 
           {/* Manifesto glass card — absolute, swaps with clouds */}
-          <button
-            type="button"
-            onClick={anyActive ? () => setActiveCloud(null) : undefined}
-            aria-label={anyActive ? "Torna al manifesto" : "Manifesto"}
-            className={`absolute text-left rounded-[20px] p-6 sm:p-12 space-y-6 focus:outline-none ${
-              anyActive ? "cursor-pointer" : "cursor-default"
-            }`}
+          <div
+            className="absolute"
             style={{
               top: anyActive && activeSlot ? activeSlot.top : "0",
               left: anyActive && activeSlot ? activeSlot.left : "0",
@@ -613,8 +608,28 @@ function Index() {
               width: anyActive && activeSlot ? activeSlot.width : "auto",
               maxWidth: anyActive && activeSlot ? activeSlot.maxWidth : "none",
               transform: anyActive && activeSlot ? `rotate(${activeSlot.rotate}deg)` : "rotate(0deg)",
-              aspectRatio: anyActive ? "4 / 3" : undefined,
               zIndex: 10,
+              transition: TRANSITION,
+            }}
+          >
+            <div
+              aria-hidden
+              className="absolute -inset-8 rounded-[32px] pointer-events-none transition-opacity duration-500"
+              style={{
+                background: "rgba(239, 159, 39, 0.45)",
+                filter: "blur(44px)",
+                opacity: anyActive ? 0.8 : 0,
+              }}
+            />
+          <button
+            type="button"
+            onClick={anyActive ? () => setActiveCloud(null) : undefined}
+            aria-label={anyActive ? "Torna al manifesto" : "Manifesto"}
+            className={`relative w-full text-left rounded-[20px] p-6 sm:p-12 space-y-6 focus:outline-none ${
+              anyActive ? "cursor-pointer" : "cursor-default"
+            }`}
+            style={{
+              aspectRatio: anyActive ? "4 / 3" : undefined,
               transition: TRANSITION,
               background: "rgba(255,255,255,0.55)",
               backdropFilter: "blur(20px) saturate(140%)",
@@ -662,6 +677,7 @@ function Index() {
               )
             )}
           </button>
+          </div>
         </div>
 
 
