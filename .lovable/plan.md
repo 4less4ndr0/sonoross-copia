@@ -1,5 +1,5 @@
-## Sostituzione immagine card Manifesto
+Nella card Manifesto aperta, l'immagine è renderizzata con `object-cover` che di default centra verticalmente e mostra il cielo/albero in alto. La foto in orientamento portrait viene croppata in landscape → serve spostare il punto focale in basso per inquadrare la fascia con edificio + orizzonte (l'area cerchiata in rosso).
 
-1. Carica `user-uploads://IMG_9700.JPG` come asset CDN → `src/assets/cloud-manifesto.jpeg.asset.json` (via `lovable-assets create`).
-2. Rimuovi il vecchio pointer/asset del manifesto (se esistente).
-3. In `src/routes/index.tsx`: aggiorna l'import dell'immagine della card Manifesto per puntare al nuovo asset, mantenendo lo stesso trattamento visivo (cover image in cima al contenuto sia nel desktop `SwapCard` che nel mobile `CardModal`) già applicato a "chi" e alle altre card.
+**Modifica:** in `src/routes/index.tsx`, aggiungere `object-position: 50% 72%` (circa) all'`<img>` della cover dentro `SwapCard` (desktop) e `CardModal` (mobile), applicato solo quando la card è la "manifesto". Le altre card mantengono il default (`center`).
+
+Proporzioni invariate, nessun crop dell'immagine originale — solo il framing del contenitore cambia.
