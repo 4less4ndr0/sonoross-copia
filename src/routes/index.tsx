@@ -566,20 +566,24 @@ function Index() {
   const [email, setEmail] = useState("");
   const [status, setStatus] = useState<"idle" | "loading" | "success" | "error">("idle");
   const [activeCard, setActiveCard] = useState<number | null>(null);
+  const [activeCloudIndex, setActiveCloudIndex] = useState<number | null>(null);
   const eyesClosed = useBlink(2500, 6000);
   const pixelSize = usePixelSize();
   const submit = useServerFn(submitLead);
 
   const activeCardData = activeCard !== null ? CARDS[activeCard] : null;
+  const activeCloud = activeCloudIndex !== null ? CLOUDS[activeCloudIndex] : null;
+  const activeCloudCard = activeCloud ? CARDS[activeCloud.cardIndex] : null;
 
   useEffect(() => {
-    if (activeCard === null) return;
     const onKey = (e: KeyboardEvent) => {
-      if (e.key === "Escape") setActiveCard(null);
+      if (e.key !== "Escape") return;
+      if (activeCard !== null) setActiveCard(null);
+      if (activeCloudIndex !== null) setActiveCloudIndex(null);
     };
     window.addEventListener("keydown", onKey);
     return () => window.removeEventListener("keydown", onKey);
-  }, [activeCard]);
+  }, [activeCard, activeCloudIndex]);
 
   const onSubmit = async (e: FormEvent) => {
     e.preventDefault();
