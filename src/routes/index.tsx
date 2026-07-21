@@ -728,15 +728,42 @@ function Index() {
               ))}
             </div>
 
-            {/* Cloud cards along the manifesto borders */}
-            {CLOUDS.map((c, i) => (
-              <CloudShape key={i} c={c} onOpen={(idx) => setActiveCard(idx)} />
-            ))}
+            {/* Non-active cloud cards along the manifesto borders */}
+            {CLOUDS.map((c, i) =>
+              i === activeCloudIndex ? null : (
+                <CloudShape
+                  key={i}
+                  variant={c.variant}
+                  delay={c.delay}
+                  text={c.text}
+                  image={c.image}
+                  slot={c.slot}
+                  onClick={() => setActiveCloudIndex(i)}
+                />
+              )
+            )}
 
-            {/* Manifesto glass card */}
+            {/* Manifesto — either centered (default) or occupying the active cloud's slot */}
+            {activeCloud ? (
+              <CloudShape
+                variant="a"
+                delay="0s"
+                text="manifesto"
+                image={cloudManifesto}
+                slot={activeCloud.slot}
+                animate={false}
+                onClick={() => setActiveCloudIndex(null)}
+              />
+            ) : null}
+
+            {/* Center glass card — shows manifesto text or the active cloud's body */}
             <div className="absolute inset-0" style={{ zIndex: 10 }}>
-              <div
-                className="relative w-full rounded-[20px] p-6 sm:p-12 space-y-6"
+              <button
+                type="button"
+                onClick={() => activeCloudIndex !== null && setActiveCloudIndex(null)}
+                aria-label={activeCloud ? "Torna al manifesto" : undefined}
+                tabIndex={activeCloud ? 0 : -1}
+                className="relative block w-full text-left rounded-[20px] p-6 sm:p-12 space-y-6 focus:outline-none focus-visible:ring-2 focus-visible:ring-[#EF9F27]"
                 style={{
                   background: "rgba(255,255,255,0.55)",
                   backdropFilter: "blur(20px) saturate(140%)",
@@ -748,22 +775,56 @@ function Index() {
                   lineHeight: 1.65,
                   letterSpacing: "-0.005em",
                   color: "#1C1A14",
+                  cursor: activeCloud ? "pointer" : "default",
+                  transition: "background 300ms ease",
                 }}
               >
-                {MANIFESTO_PARAGRAPHS.map((p, i) =>
-                  p.italic ? (
-                    <p
-                      key={i}
-                      className="italic"
-                      style={{ fontFamily: 'Georgia, "Times New Roman", serif' }}
+                {activeCloud && activeCloudCard ? (
+                  <>
+                    <h2
+                      className="m-0 font-normal"
+                      style={{
+                        fontFamily: '"Instrument Serif", serif',
+                        fontSize: "clamp(2.5rem, 5vw, 4rem)",
+                        lineHeight: 1.02,
+                        letterSpacing: "-0.02em",
+                        color: "#1C1A14",
+                      }}
                     >
-                      <strong>{p.text}</strong>
-                    </p>
-                  ) : (
-                    <p key={i} dangerouslySetInnerHTML={{ __html: p.html ?? p.text }} />
+                      {activeCloud.text}
+                    </h2>
+                    {activeCloudCard.bodyIndexes.map((idx) => {
+                      const p = MANIFESTO_PARAGRAPHS[idx];
+                      if (!p) return null;
+                      return p.italic ? (
+                        <p
+                          key={idx}
+                          className="italic"
+                          style={{ fontFamily: 'Georgia, "Times New Roman", serif' }}
+                        >
+                          <strong>{p.text}</strong>
+                        </p>
+                      ) : (
+                        <p key={idx} dangerouslySetInnerHTML={{ __html: p.html ?? p.text }} />
+                      );
+                    })}
+                  </>
+                ) : (
+                  MANIFESTO_PARAGRAPHS.map((p, i) =>
+                    p.italic ? (
+                      <p
+                        key={i}
+                        className="italic"
+                        style={{ fontFamily: 'Georgia, "Times New Roman", serif' }}
+                      >
+                        <strong>{p.text}</strong>
+                      </p>
+                    ) : (
+                      <p key={i} dangerouslySetInnerHTML={{ __html: p.html ?? p.text }} />
+                    )
                   )
                 )}
-              </div>
+              </button>
             </div>
           </div>
         </div>
