@@ -327,7 +327,11 @@ function SwapCard({
             alt={card.title}
             loading="lazy"
             className="w-full object-cover rounded-[14px]"
-            style={{ height: "clamp(180px, 22vh, 320px)", marginBottom: "0.5rem" }}
+            style={{
+              height: "clamp(180px, 22vh, 320px)",
+              marginBottom: "0.5rem",
+              objectPosition: card.title === "manifesto" ? "50% 72%" : "center",
+            }}
           />
 
           {card.bodyIndexes.map((idx) => {
