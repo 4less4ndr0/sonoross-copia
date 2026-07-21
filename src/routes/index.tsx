@@ -673,85 +673,39 @@ function Index() {
             ))}
           </div>
 
-          {/* Cloud cards — absolute, click to swap with manifesto */}
+          {/* Cloud cards — anchored along the manifesto borders, click opens modal */}
           {CLOUDS.map((c, i) => (
             <CloudShape
               key={i}
               c={c}
               index={i}
-              isActive={activeCloud === i}
-              anyActive={anyActive}
-              onToggle={toggleCloud}
+              onOpen={openCloud}
               isDesktop={isDesktop}
             />
           ))}
 
-          {/* Manifesto glass card — absolute, swaps with clouds */}
+          {/* Manifesto glass card — fixed in place */}
           <div
-            className="absolute"
-            style={{
-              top: anyActive && activeSlot ? activeSlot.top : "0",
-              left: anyActive && activeSlot ? activeSlot.left : "0",
-              right: anyActive && activeSlot ? activeSlot.right : "0",
-              bottom: anyActive ? "auto" : "0",
-              width: anyActive && activeSlot ? activeSlot.width : "auto",
-              maxWidth: anyActive && activeSlot ? activeSlot.maxWidth : "none",
-              transform: anyActive && activeSlot ? `rotate(${activeSlot.rotate}deg)` : "rotate(0deg)",
-              zIndex: 10,
-              transition: TRANSITION,
-            }}
+            className="absolute inset-0"
+            style={{ zIndex: 10 }}
           >
             <div
-              aria-hidden
-              className="absolute -inset-8 rounded-[32px] pointer-events-none transition-opacity duration-500"
+              className="relative w-full rounded-[20px] p-6 sm:p-12 space-y-6"
               style={{
-                background: "rgba(239, 159, 39, 0.45)",
-                filter: "blur(44px)",
-                opacity: anyActive ? 0.8 : 0,
+                background: "rgba(255,255,255,0.55)",
+                backdropFilter: "blur(20px) saturate(140%)",
+                WebkitBackdropFilter: "blur(20px) saturate(140%)",
+                border: "1px solid rgba(255,255,255,0.5)",
+                boxShadow: "0 24px 70px rgba(28, 26, 20, 0.12)",
+                fontFamily: '"DM Sans", system-ui, sans-serif',
+                fontSize: "clamp(1.1rem, 1.3vw, 1.3rem)",
+                fontWeight: 400,
+                lineHeight: 1.65,
+                letterSpacing: "-0.005em",
+                color: "#1C1A14",
               }}
-            />
-          <button
-            type="button"
-            onClick={anyActive ? () => setActiveCloud(null) : undefined}
-            aria-label={anyActive ? "Torna al manifesto" : "Manifesto"}
-            className={`relative w-full text-left rounded-[20px] p-6 sm:p-12 space-y-6 focus:outline-none ${
-              anyActive ? "cursor-pointer" : "cursor-default"
-            }`}
-            style={{
-              aspectRatio: anyActive ? "4 / 3" : undefined,
-              transition: TRANSITION,
-              background: "rgba(255,255,255,0.55)",
-              backdropFilter: "blur(20px) saturate(140%)",
-              WebkitBackdropFilter: "blur(20px) saturate(140%)",
-              border: "1px solid rgba(255,255,255,0.5)",
-              boxShadow: "0 24px 70px rgba(28, 26, 20, 0.12)",
-              fontFamily: '"DM Sans", system-ui, sans-serif',
-              fontSize: anyActive ? "clamp(0.75rem, 1.1cqi, 1rem)" : "clamp(1.1rem, 1.3vw, 1.3rem)",
-              fontWeight: 400,
-              lineHeight: 1.65,
-              letterSpacing: "-0.005em",
-              color: "#1C1A14",
-              overflow: "hidden",
-              containerType: "inline-size",
-            }}
-          >
-            {anyActive ? (
-              <div className="flex flex-col items-center justify-center text-center h-full animate-fade-in">
-                <h3
-                  className="m-0 font-normal"
-                  style={{
-                    fontFamily: '"Instrument Serif", serif',
-                    color: "#1a1a1a",
-                    fontSize: "clamp(2rem, 20cqi, 4.5rem)",
-                    lineHeight: 1.05,
-                    letterSpacing: "-0.02em",
-                  }}
-                >
-                  manifesto
-                </h3>
-              </div>
-            ) : (
-              MANIFESTO_PARAGRAPHS.map((p, i) =>
+            >
+              {MANIFESTO_PARAGRAPHS.map((p, i) =>
                 p.italic ? (
                   <p
                     key={i}
@@ -763,14 +717,12 @@ function Index() {
                 ) : (
                   <p key={i} dangerouslySetInnerHTML={{ __html: p.html ?? p.text }} />
                 )
-              )
-            )}
-          </button>
+              )}
+            </div>
           </div>
         </div>
 
-
-        {/* Closing line — on the dark tail of the gradient, light text */}
+        {/* Closing line */}
         <div
           className="relative z-10 max-w-2xl mx-auto mt-10 sm:mt-14 text-center"
           style={{
@@ -783,6 +735,11 @@ function Index() {
           <strong className="ross-highlight">Per questo R.O.S.S. non sorveglia. Dà voce.</strong>
         </div>
       </section>
+
+      {activeCloudData && (
+        <CloudModal cloud={activeCloudData} onClose={closeCloud} />
+      )}
     </main>
   );
 }
+
