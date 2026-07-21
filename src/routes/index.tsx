@@ -246,6 +246,7 @@ function SwapCard({
           alt=""
           loading="lazy"
           className="absolute inset-0 w-full h-full object-cover"
+          style={{ objectPosition: card.title === "manifesto" ? "50% 72%" : "center" }}
         />
         <div
           aria-hidden
