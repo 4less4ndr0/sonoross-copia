@@ -111,8 +111,11 @@ function useIsDesktop() {
   return isDesktop;
 }
 
+const EASE = "cubic-bezier(0.22,1,0.36,1)";
 const TRANSITION =
-  "top 600ms cubic-bezier(0.22,1,0.36,1), left 600ms cubic-bezier(0.22,1,0.36,1), right 600ms cubic-bezier(0.22,1,0.36,1), bottom 600ms cubic-bezier(0.22,1,0.36,1), width 600ms cubic-bezier(0.22,1,0.36,1), max-width 600ms cubic-bezier(0.22,1,0.36,1), transform 600ms cubic-bezier(0.22,1,0.36,1), opacity 400ms ease";
+  `top 600ms ${EASE}, left 600ms ${EASE}, right 600ms ${EASE}, bottom 600ms ${EASE}, width 600ms ${EASE}, max-width 600ms ${EASE}, transform 480ms ${EASE}, opacity 400ms ease, z-index 0ms`;
+const HOVER_TRANSITION =
+  `transform 480ms ${EASE}, opacity 300ms ease, box-shadow 400ms ease`;
 
 function slotToStyle(s: Slot): React.CSSProperties {
   return {
