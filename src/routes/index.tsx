@@ -243,6 +243,16 @@ function ChiContent() {
     </div>
   );
 }
+
+function PercheContent() {
+  return (
+    <div className="space-y-5">
+      {PERCHE_PARAGRAPHS.map((p, i) => (
+        <p key={i}>{p}</p>
+      ))}
+    </div>
+  );
+}
 function StackCard({
   card,
   onOpen,
