@@ -319,7 +319,9 @@ function SwapCard({
             letterSpacing: "-0.005em",
             color: "#1C1A14",
           }}
+        >
           <img
+
             src={card.image}
             alt={card.title}
             loading="lazy"
