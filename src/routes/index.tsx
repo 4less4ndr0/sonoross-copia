@@ -62,19 +62,21 @@ type Cloud = {
   variant: "a" | "b" | "c" | "d";
   delay: string;
   text: string;
-  body: string;
+  image: string;
+  bodyIndexes: number[]; // which manifesto paragraphs to show in the modal
   desktop: Slot;
   mobile: Slot;
 };
 
-// Clouds sit BEHIND the manifesto glass card; only a small portion peeks out.
-// On click they SWAP with the manifesto card.
+// Clouds are anchored image-cards along the borders of the manifesto glass card.
+// Click opens a centered modal with the section content.
 const CLOUDS: Cloud[] = [
   {
     variant: "a",
     delay: "0s",
     text: "chi",
-    body: "Chi vive solo, non chi va sorvegliato. Al centro c'è la persona, con la sua storia, non un rischio da monitorare.",
+    image: cloudChi,
+    bodyIndexes: [0, 1],
     desktop: { top: "10%", left: "-22%", width: "22vw", maxWidth: "300px", rotate: -4 },
     mobile:  { top: "8%",  left: "-16%", width: "34vw", maxWidth: "220px", rotate: -4 },
   },
@@ -82,7 +84,8 @@ const CLOUDS: Cloud[] = [
     variant: "b",
     delay: "1.1s",
     text: "cosa",
-    body: "Un compagno conversazionale che stimola cognitivamente attraverso il racconto: ricordi, passioni, storia di vita.",
+    image: cloudCosa,
+    bodyIndexes: [2, 3],
     desktop: { top: "66%", left: "-23%", width: "22vw", maxWidth: "300px", rotate: 3 },
     mobile:  { top: "64%", left: "-17%", width: "34vw", maxWidth: "220px", rotate: 3 },
   },
@@ -90,7 +93,8 @@ const CLOUDS: Cloud[] = [
     variant: "d",
     delay: "0.6s",
     text: "come",
-    body: "Adattandosi a chi ha davanti: famiglia, passioni, biografia. Non domande uguali per tutti, un dialogo su misura.",
+    image: cloudCome,
+    bodyIndexes: [4, 5, 6],
     desktop: { top: "20%", right: "-22%", width: "22vw", maxWidth: "300px", rotate: -2 },
     mobile:  { top: "18%", right: "-17%", width: "34vw", maxWidth: "220px", rotate: -2 },
   },
@@ -98,7 +102,8 @@ const CLOUDS: Cloud[] = [
     variant: "a",
     delay: "1.7s",
     text: "perché",
-    body: "Perché la relazione, non il monitoraggio, è lo strumento più potente di cura. Rimettere le persone al centro.",
+    image: cloudPerche,
+    bodyIndexes: [7, 8, 9],
     desktop: { top: "72%", right: "-23%", width: "22vw", maxWidth: "300px", rotate: 4 },
     mobile:  { top: "70%", right: "-16%", width: "34vw", maxWidth: "220px", rotate: 4 },
   },
@@ -117,8 +122,6 @@ function useIsDesktop() {
 }
 
 const EASE = "cubic-bezier(0.22,1,0.36,1)";
-const TRANSITION =
-  `top 600ms ${EASE}, left 600ms ${EASE}, right 600ms ${EASE}, bottom 600ms ${EASE}, width 600ms ${EASE}, max-width 600ms ${EASE}, transform 480ms ${EASE}, opacity 400ms ease, z-index 0ms`;
 const HOVER_TRANSITION =
   `transform 480ms ${EASE}, opacity 300ms ease, box-shadow 400ms ease`;
 
@@ -136,117 +139,204 @@ function slotToStyle(s: Slot): React.CSSProperties {
 function CloudShape({
   c,
   index,
-  isActive,
-  anyActive,
-  onToggle,
+  onOpen,
   isDesktop,
 }: {
   c: Cloud;
   index: number;
-  isActive: boolean;
-  anyActive: boolean;
-  onToggle: (i: number) => void;
+  onOpen: (i: number) => void;
   isDesktop: boolean;
 }) {
   const [isHover, setIsHover] = useState(false);
   const baseSlot = isDesktop ? c.desktop : c.mobile;
-  const peek = isHover && !isActive;
-  const style: React.CSSProperties = isActive
-    ? {
-        top: "0",
-        left: "0",
-        right: "0",
-        width: "auto",
-        maxWidth: "none",
-        transform: "rotate(0deg)",
-        zIndex: 30,
-        transition: TRANSITION,
-        animationDelay: c.delay,
-      }
-    : {
-        ...slotToStyle(baseSlot),
-        transform: peek
-          ? `rotate(0deg) scale(1.06) translateY(-4px)`
-          : `rotate(${baseSlot.rotate}deg)`,
-        zIndex: peek ? 50 : 5,
-        opacity: 1,
-        transition: anyActive ? TRANSITION : HOVER_TRANSITION,
-        willChange: "transform",
-        animationPlayState: peek ? "paused" : "running",
-        animationDelay: c.delay,
-      };
+  const style: React.CSSProperties = {
+    ...slotToStyle(baseSlot),
+    transform: isHover
+      ? `rotate(0deg) scale(1.06) translateY(-4px)`
+      : `rotate(${baseSlot.rotate}deg)`,
+    zIndex: isHover ? 50 : 5,
+    opacity: 1,
+    transition: HOVER_TRANSITION,
+    willChange: "transform",
+    animationPlayState: isHover ? "paused" : "running",
+    animationDelay: c.delay,
+  };
 
   return (
     <button
       type="button"
-      onClick={() => onToggle(index)}
+      onClick={() => onOpen(index)}
       onMouseEnter={() => setIsHover(true)}
       onMouseLeave={() => setIsHover(false)}
       onFocus={() => setIsHover(true)}
       onBlur={() => setIsHover(false)}
-      aria-expanded={isActive}
-      aria-label={c.text}
+      aria-label={`Apri ${c.text}`}
       className={`group absolute float-${c.variant} pointer-events-auto cursor-pointer text-left focus:outline-none focus-visible:ring-2 focus-visible:ring-[#EF9F27] rounded-[20px]`}
       style={style}
     >
+      {/* terracotta halo */}
       <div
         aria-hidden
         className="absolute -inset-8 rounded-[32px] pointer-events-none transition-opacity duration-500"
         style={{
           background: "rgba(239, 159, 39, 0.45)",
           filter: "blur(44px)",
-          opacity: isActive || peek ? 1 : 0.8,
+          opacity: isHover ? 1 : 0.8,
         }}
       />
 
-
+      {/* image card */}
       <div
-        className="relative flex flex-col items-center justify-center text-center rounded-[20px] transition-all duration-500 ease-[cubic-bezier(0.22,1,0.36,1)]"
+        className="relative overflow-hidden rounded-[20px]"
         style={{
-          background: "rgba(255,255,255,0.65)",
-          backdropFilter: "blur(20px) saturate(140%)",
-          WebkitBackdropFilter: "blur(20px) saturate(140%)",
-          border: "1px solid rgba(255,255,255,0.6)",
-          boxShadow: "0 10px 30px rgba(28,26,20,0.08)",
-          containerType: "inline-size",
-          padding: isActive ? "clamp(32px, 5cqi, 64px)" : "clamp(14px, 6cqi, 32px)",
-          aspectRatio: isActive ? "auto" : "4 / 3",
-          minHeight: isActive ? "100%" : undefined,
-          gap: isActive ? "1.5rem" : 0,
+          aspectRatio: "4 / 5",
+          boxShadow: "0 10px 30px rgba(28,26,20,0.18)",
+          border: "1px solid rgba(255,255,255,0.5)",
         }}
       >
+        <img
+          src={c.image}
+          alt=""
+          loading="lazy"
+          width={800}
+          height={1000}
+          className="absolute inset-0 w-full h-full object-cover"
+        />
+        {/* bottom gradient for legibility */}
+        <div
+          aria-hidden
+          className="absolute inset-0"
+          style={{
+            background:
+              "linear-gradient(to top, rgba(28,26,20,0.72) 0%, rgba(28,26,20,0.35) 40%, rgba(28,26,20,0) 65%)",
+          }}
+        />
+        {/* title bottom-left */}
         <h3
-          className="m-0 font-normal"
+          className="absolute left-4 right-16 bottom-3 m-0 font-normal text-white"
           style={{
             fontFamily: '"Instrument Serif", serif',
-            color: "#1a1a1a",
-            fontSize: isActive
-              ? "clamp(3rem, 8cqi, 6rem)"
-              : "clamp(2.4rem, 22cqi, 5rem)",
-            lineHeight: 1.05,
+            fontSize: "clamp(1.75rem, 14cqi, 3.25rem)",
+            lineHeight: 1.02,
             letterSpacing: "-0.02em",
+            textShadow: "0 2px 12px rgba(0,0,0,0.35)",
           }}
         >
           {c.text}
         </h3>
-        {isActive && (
-          <p
-            className="max-w-2xl animate-fade-in"
-            style={{
-              fontFamily: '"DM Sans", system-ui, sans-serif',
-              color: "#1C1A14",
-              fontSize: "clamp(1rem, 1.4cqi, 1.4rem)",
-              lineHeight: 1.55,
-              opacity: 0.85,
-            }}
-          >
-            {c.body}
-          </p>
-        )}
+        {/* + button bottom-right */}
+        <span
+          aria-hidden
+          className="absolute right-3 bottom-3 flex items-center justify-center rounded-full text-white"
+          style={{
+            width: "clamp(28px, 12cqi, 44px)",
+            height: "clamp(28px, 12cqi, 44px)",
+            background: "rgba(255,255,255,0.22)",
+            backdropFilter: "blur(10px)",
+            WebkitBackdropFilter: "blur(10px)",
+            border: "1px solid rgba(255,255,255,0.5)",
+            fontFamily: '"DM Sans", system-ui, sans-serif',
+            fontSize: "clamp(1rem, 6cqi, 1.5rem)",
+            lineHeight: 1,
+          }}
+        >
+          +
+        </span>
       </div>
     </button>
   );
 }
+
+function CloudModal({
+  cloud,
+  onClose,
+}: {
+  cloud: Cloud;
+  onClose: () => void;
+}) {
+  return (
+    <div
+      className="fixed inset-0 z-[100] flex items-center justify-center p-4 sm:p-8 animate-fade-in"
+      role="dialog"
+      aria-modal="true"
+      aria-label={cloud.text}
+      onClick={onClose}
+      style={{
+        background: "rgba(28,26,20,0.55)",
+        backdropFilter: "blur(8px)",
+        WebkitBackdropFilter: "blur(8px)",
+      }}
+    >
+      <div
+        onClick={(e) => e.stopPropagation()}
+        className="relative w-full max-w-3xl max-h-[90vh] overflow-y-auto rounded-[20px]"
+        style={{
+          background: "rgba(246,243,237,0.98)",
+          border: "1px solid rgba(255,255,255,0.6)",
+          boxShadow: "0 30px 80px rgba(28,26,20,0.35)",
+        }}
+      >
+        <button
+          type="button"
+          onClick={onClose}
+          aria-label="Chiudi"
+          className="absolute top-4 right-4 z-10 flex items-center justify-center rounded-full w-10 h-10 hover:opacity-80 transition"
+          style={{
+            background: "rgba(28,26,20,0.08)",
+            color: "#1C1A14",
+            fontFamily: '"DM Sans", system-ui, sans-serif',
+            fontSize: "1.25rem",
+          }}
+        >
+          ×
+        </button>
+        <div className="p-8 sm:p-12">
+          <h2
+            className="m-0 font-normal"
+            style={{
+              fontFamily: '"Instrument Serif", serif',
+              color: "#1C1A14",
+              fontSize: "clamp(2.5rem, 6vw, 4rem)",
+              lineHeight: 1.05,
+              letterSpacing: "-0.02em",
+            }}
+          >
+            {cloud.text}
+          </h2>
+          <div
+            className="mt-6 space-y-5"
+            style={{
+              fontFamily: '"DM Sans", system-ui, sans-serif',
+              color: "#1C1A14",
+              fontSize: "clamp(1rem, 1.15vw, 1.15rem)",
+              lineHeight: 1.65,
+            }}
+          >
+            {cloud.bodyIndexes.map((idx) => {
+              const p = MANIFESTO_PARAGRAPHS[idx];
+              if (!p) return null;
+              if (p.italic) {
+                return (
+                  <p
+                    key={idx}
+                    className="italic"
+                    style={{ fontFamily: 'Georgia, "Times New Roman", serif' }}
+                  >
+                    <strong>{p.text}</strong>
+                  </p>
+                );
+              }
+              return (
+                <p key={idx} dangerouslySetInnerHTML={{ __html: p.html ?? p.text }} />
+              );
+            })}
+          </div>
+        </div>
+      </div>
+    </div>
+  );
+}
+
 
 
 function useBlink(minMs: number, maxMs: number) {
