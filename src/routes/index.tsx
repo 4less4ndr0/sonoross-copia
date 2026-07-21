@@ -320,6 +320,15 @@ function SwapCard({
             color: "#1C1A14",
           }}
         >
+          <img
+
+            src={card.image}
+            alt={card.title}
+            loading="lazy"
+            className="w-full object-cover rounded-[14px]"
+            style={{ height: "clamp(180px, 22vh, 320px)", marginBottom: "0.5rem" }}
+          />
+
           {card.bodyIndexes.map((idx) => {
             const p = MANIFESTO_PARAGRAPHS[idx];
             if (!p) return null;
@@ -516,6 +525,14 @@ function CardModal({
           >
             {card.title}
           </h2>
+          <img
+            src={card.image}
+            alt={card.title}
+            loading="lazy"
+            className="w-full object-cover rounded-[16px] mt-6"
+            style={{ height: "clamp(200px, 40vw, 360px)" }}
+          />
+
           <div
             className="mt-6 space-y-5"
             style={{

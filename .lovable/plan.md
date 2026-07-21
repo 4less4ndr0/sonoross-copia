@@ -1,31 +1,32 @@
-## Fix: transizione fluida sulla apertura/chiusura card in mobile
+## Obiettivo
 
-### Diagnosi
-Il modale mobile (`CardModal`, riga 421) monta/smonta immediatamente al click su una `StackCard`. L'overlay usa `animate-fade-in` (0.3s solo entrata), il pannello interno non ha animazione, e alla chiusura sparisce di colpo perché il componente viene rimosso subito da `activeCardData && <CardModal ... />`.
+Quando una card viene aperta (desktop swap = card centrale, mobile = modal), l'immagine di copertina (`card.image`) — oggi visibile solo sulla copertina che scompare all'apertura — deve essere inserita anche dentro il contenuto, ingrandita, come "immagine allegata" al testo. Comportamento identico per manifesto, chi, cosa, come, perché.
 
-### Modifiche (solo `src/routes/index.tsx`, mobile only)
+## Cosa cambia
 
-1. **Stato transitorio nel modale**
-   - `CardModal` gestisce internamente `isVisible` (default `false`, diventa `true` al primo mount con `requestAnimationFrame`).
-   - Aggiungere prop `isOpen` esterno: quando diventa `false`, il modale parte in `isVisible=false` e chiama `onClose` solo dopo la durata dell'animazione (~300ms) via `setTimeout`.
+### 1) Desktop — `SwapCard`, glass layer (src/routes/index.tsx, ~riga 312-338)
 
-2. **Handler di chiusura ritardato**
-   - Nuovo stato locale `isClosing`. `handleClose` imposta `isClosing=true` → dopo 300ms chiama `onClose` del parent (che azzera `activeCard`). Click su overlay, tasto ×, tasto Escape passano tutti da `handleClose`.
+Dentro il contenitore glass, sopra i paragrafi, aggiungere un blocco immagine:
 
-3. **Transizioni CSS sui due layer del modale**
-   - Overlay (`fixed inset-0`): `opacity` + `backdrop-filter` con `transition: opacity 280ms ease, backdrop-filter 280ms ease`. Rimuovere `animate-fade-in`. `opacity: isVisible && !isClosing ? 1 : 0`.
-   - Pannello card: `transition: transform 320ms cubic-bezier(0.22,1,0.36,1), opacity 260ms ease`. Da `translateY(24px) scale(0.96)` + `opacity 0` a `translateY(0) scale(1)` + `opacity 1`. Alla chiusura torna sotto.
+- `<img src={card.image}>` con `alt` = `card.title`
+- larghezza piena della card, altezza fissa proporzionale (es. `aspect-[16/9]` oppure `height: clamp(180px, 22vh, 320px)`)
+- `object-fit: cover`, `border-radius: 14px`, margine sotto per staccarla dal testo
+- `loading="lazy"`
+- Nessuna modifica alla copertina esistente (image layer che sfuma out quando `isActive`).
 
-4. **Feedback al tocco sulla `StackCard`**
-   - Aggiungere `active:scale-[0.98] transition-transform duration-200` alla `StackCard` per un tap responsivo prima dell'apertura del modale.
+### 2) Mobile — `CardModal` (src/routes/index.tsx, ~riga 506-547)
 
-5. **Cleanup Escape / keydown**
-   - L'`useEffect` in `Index` che chiude su Escape continua a chiamare `setActiveCard(null)` — passa comunque dal nuovo flusso perché il modale rileva il cambio `isOpen → false` e anima l'uscita. Quindi: cambio API di `CardModal` da "unmount immediato" a "controllo con `isOpen`", e in `Index` renderizzare sempre `<CardModal>` (montato) quando `activeCardData` è mai stato aperto? Alternativa più pulita:
-     - `Index` mantiene `activeCard` + un nuovo `pendingCloseCard` (o mantiene il dato durante l'uscita). Concretamente: `activeCard` viene azzerato solo dopo il fade-out. Per farlo, `CardModal` accetta `card` + `isOpen` + `onClose`; `Index` mette `isOpen = activeCard !== null` e memorizza `lastCard` per continuare a mostrare la card durante l'uscita (`const displayed = activeCardData ?? lastCardRef.current`).
+Dentro il pannello, subito sotto il titolo e prima del blocco paragrafi, aggiungere lo stesso `<img>`:
 
-### Vincoli
-- Nessun tocco a: desktop swap system, hero, occhi, form email, sezione finale, `MANIFESTO_PARAGRAPHS`, `CARDS`, immagini, `StackCard` layout (solo aggiunta `active:` per feedback tap).
-- Nessuna libreria nuova: solo CSS transitions + timer.
+- larghezza piena, altezza `clamp(200px, 40vw, 360px)`, `object-cover`, `border-radius: 16px`
+- `alt` = `card.title`, `loading="lazy"`
 
-### Risultato atteso
-Su mobile: tap su una card → overlay sfuma in ~280ms e il pannello sale da sotto con leggero scale-up. Tap su ×, overlay o Escape → pannello scende e overlay sfuma, poi il modale viene smontato. Nessuno "scatto".
+### 3) Nessuna altra modifica
+
+- Non tocco layout copertina, halo, animazione di swap, transizioni del modal.
+- Non tocco font, testi, `MANIFESTO_PARAGRAPHS`, posizionamento cloud.
+- L'immagine del manifesto (`cloudManifesto`) apparirà anch'essa nella sua card aperta — coerente con la richiesta "lo stesso comportamento a tutte le card".
+
+## Dettagli tecnici
+
+File toccato: solo `src/routes/index.tsx`. Due inserimenti JSX (`<img>`), nessun cambio a stati/props. `card.image` è già disponibile in entrambi i componenti tramite la prop `card`.
