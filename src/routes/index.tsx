@@ -161,12 +161,13 @@ function CloudShape({
     : {
         ...slotToStyle(baseSlot),
         transform: peek
-          ? `rotate(0deg) scale(1.06)`
+          ? `rotate(0deg) scale(1.06) translateY(-4px)`
           : `rotate(${baseSlot.rotate}deg)`,
         zIndex: peek ? 50 : 5,
         opacity: 1,
-        transition: TRANSITION,
-
+        transition: anyActive ? TRANSITION : HOVER_TRANSITION,
+        willChange: "transform",
+        animationPlayState: peek ? "paused" : "running",
         animationDelay: c.delay,
       };
 
