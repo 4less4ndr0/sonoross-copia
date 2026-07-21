@@ -125,6 +125,14 @@ const CHI_BLOCK1_PARAGRAPHS: string[] = [
   "Oggi siamo più che sicuri di poter portare a termine questa sfida e di farlo in un modo che nessuno, finora, è ancora riuscito a fare come lo vogliamo fare noi.",
 ];
 
+const PERCHE_PARAGRAPHS: string[] = [
+  "Siamo quattro persone che vivono lontano da casa — chi da Cagliari, chi da Roma, chi da Bergamo, finiti tutti qui in Veneto per lo stesso percorso. Abbiamo tutti a casa qualcuno di cui vogliamo essere tranquilli che stia bene.",
+  "Non è un problema astratto: è qualcosa che già ci tocca e ci toccherà sempre di più.",
+  "Le soluzioni che esistono oggi, quando le abbiamo guardate da vicino, non sono mai quelle che si scelgono. Sono quelle che si subiscono: qualcosa che si dimentica di indossare, qualcosa che sembra un controllo, non un aiuto, e niente che faccia venire voglia di dire \"sì, questo lo voglio\".",
+  "R.O.S.S. nasce dalla voglia di costruire qualcosa che si sceglie, non che si subisce, che dia sostegno senza aggiungere ansia a una fase della vita che dovrebbe essere vissuta con più leggerezza, per chi la vive in prima persona e per chi le sta intorno.",
+  "È fase che non aspetta che siamo pronti, arriva comunque. Noi vogliamo costruire qualcosa di buono ad aspettarla.",
+];
+
 function ChiEyebrow({ children }: { children: React.ReactNode }) {
   return (
     <div
@@ -232,6 +240,16 @@ function ChiContent() {
           ))}
         </div>
       </section>
+    </div>
+  );
+}
+
+function PercheContent() {
+  return (
+    <div className="space-y-5">
+      {PERCHE_PARAGRAPHS.map((p, i) => (
+        <p key={i}>{p}</p>
+      ))}
     </div>
   );
 }
@@ -478,6 +496,8 @@ function CardModal({
           >
             {card.title === "chi" ? (
               <ChiContent />
+            ) : card.title === "perché" ? (
+              <PercheContent />
             ) : (
               card.bodyIndexes.map((idx) => {
                 const p = MANIFESTO_PARAGRAPHS[idx];
