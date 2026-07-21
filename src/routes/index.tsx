@@ -653,7 +653,6 @@ function Index() {
   const [activeCard, setActiveCard] = useState<number | null>(null);
   
   const eyesClosed = useBlink(1200, 2800);
-  const pixelSize = usePixelSize();
   const eyePixelSize = useEyePixelSize();
   const submit = useServerFn(submitLead);
 
