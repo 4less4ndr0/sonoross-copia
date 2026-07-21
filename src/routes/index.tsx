@@ -567,7 +567,7 @@ function FlatEye({ className, closed, pixelSize }: { className?: string; closed:
   const gap = 1;
   const rows = closed
     ? FULL_ROWS.map(() => Array(COLS).fill(0)).map((r, i) =>
-        i === 6 || i === 7 ? [0, 0, 0, 1, 1, 0, 0, 0] : r
+        i === 6 || i === 7 ? [0, 1, 1, 1, 1, 1, 1, 0] : r
       )
     : FULL_ROWS;
 
