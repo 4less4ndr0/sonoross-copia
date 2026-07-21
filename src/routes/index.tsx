@@ -7,7 +7,8 @@ import cloudChiAsset from "@/assets/cloud-chi.jpeg.asset.json";
 const cloudChi = cloudChiAsset.url;
 import cloudCosa from "@/assets/cloud-cosa.jpg";
 
-import cloudPerche from "@/assets/cloud-perche.jpg";
+import cloudPercheAsset from "@/assets/cloud-perche.jpg.asset.json";
+const cloudPerche = cloudPercheAsset.url;
 import cloudManifesto from "@/assets/cloud-manifesto.jpeg.asset.json";
 
 
