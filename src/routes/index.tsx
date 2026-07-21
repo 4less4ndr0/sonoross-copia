@@ -668,23 +668,33 @@ function CardModal({
             "transform 320ms cubic-bezier(0.22,1,0.36,1), opacity 260ms ease",
         }}
       >
-        <button
-          type="button"
-          onClick={onClose}
-          aria-label="Chiudi"
-          className="absolute top-4 right-4 z-10 flex items-center justify-center rounded-full w-10 h-10 hover:opacity-90 transition"
-          style={{
-            background: "#1C1A14",
-            color: "#F6F3ED",
-            fontFamily: '"DM Sans", system-ui, sans-serif',
-            fontSize: "1.35rem",
-            lineHeight: 1,
-            fontWeight: 500,
-            boxShadow: "0 2px 8px rgba(28,26,20,0.2)",
-          }}
+        <div
+          className="sticky top-0 z-10 flex justify-end pointer-events-none"
+          style={{ height: 0 }}
         >
-          ×
-        </button>
+          <button
+            type="button"
+            onClick={onClose}
+            aria-label="Chiudi"
+            className="pointer-events-auto flex items-center justify-center rounded-full w-10 h-10 hover:opacity-90 transition"
+            style={{
+              marginTop: "1rem",
+              marginRight: "1rem",
+              background: "rgba(255,255,255,0.55)",
+              backdropFilter: "blur(14px) saturate(160%)",
+              border: "1px solid rgba(255,255,255,0.7)",
+              color: "#1C1A14",
+              fontFamily: '"DM Sans", system-ui, sans-serif',
+              fontSize: "1.25rem",
+              lineHeight: 1,
+              fontWeight: 500,
+              boxShadow:
+                "0 4px 14px rgba(28,26,20,0.12), inset 0 1px 0 rgba(255,255,255,0.8)",
+            }}
+          >
+            ×
+          </button>
+        </div>
         <div className="p-8 sm:p-12">
           <h2
             className="m-0 font-normal"
