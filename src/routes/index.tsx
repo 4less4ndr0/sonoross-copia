@@ -493,8 +493,19 @@ function SwapCard({
             color: "#1C1A14",
           }}
         >
+          <h2
+            className="m-0 font-normal"
+            style={{
+              fontFamily: '"Instrument Serif", serif',
+              color: "#1C1A14",
+              fontSize: "clamp(2.25rem, 4vw, 3.5rem)",
+              lineHeight: 1.05,
+              letterSpacing: "-0.02em",
+            }}
+          >
+            {card.title}
+          </h2>
           <img
-
             src={card.image}
             alt={card.title}
             loading="lazy"
