@@ -1,14 +1,40 @@
-Problema riscontrato: nelle card desktop in stato "piccolo" (SwapCard, image layer) viene mostrato solo il titolo (es. "chi"), non il sottotitolo. Per questo l'utente non vede la modifica richiesta.
+Ho capito: solo in **desktop**, sostituiamo l'attuale sistema swap (card centrale + laterali floating) con una **griglia mosaico 2×2**, card grandi e statiche. Mobile resta identico.
 
-Cosa fare:
+## Layout desktop
 
-1. Aggiornare il dato della card "chi" nel `CARDS` array: sottotitolo da "Le persone al centro." a "il team dietro a R.O.S.S.".
-2. Nel componente `SwapCard`, all'interno dello strato immagine (stato non attivo / card piccola), aggiungere il rendering del `card.subtitle` sotto il titolo `h3`.
-   - Font: DM Sans (coerente con il resto).
-   - Colore: bianco/white-90 con text-shadow per leggibilità sulle immagini.
-   - Dimensione: leggermente più piccola del titolo, in clamp, in modo che sia "in piccolo" come richiesto.
-   - Posizione: sotto il titolo, sempre in basso a sinistra, rispettando lo spazio del bottone freccia a destra.
-3. Mantenere invariato il rendering del sottotitolo nelle card mobile (`StackCard`), che già funziona.
-4. Verificare che i vincoli esistenti restino rispettati: nessuna modifica a font degli occhi, posizionamento nuvole/card, border-radius, glass effect, struttura verticale e copy principale.
+```text
++-------------------+-------------------+
+|                   |                   |
+|       chi         |     manifesto     |
+|                   |                   |
++-------------------+-------------------+
+|                   |                   |
+|      cosa         |      perché       |
+|                   |                   |
++-------------------+-------------------+
+```
 
-File coinvolto: `src/routes/index.tsx`.
+- Rimuovo la card **come** dall'array `CARDS` (solo su desktop rimane visibile la selezione a 4; su mobile valuto se rimuoverla anche lì — di default la tolgo ovunque, dimmi se invece la vuoi tenere in mobile).
+- Ordine fisso: `chi`, `manifesto` (riga 1), `cosa`, `perché` (riga 2).
+- Card di uguale dimensione, gap coerente col resto, radius 18–20px come ora.
+
+## Interazioni
+
+- **Niente più floating / animazioni idle**: le card sono ferme.
+- **Niente più swap centrale**: al click la card si apre come modal/overlay al centro (stesso trattamento glass/scroll interno che c'è ora quando è "attiva"), sopra la griglia. Chiusura con X sticky, come già fatto per mobile — riuso lo stesso componente `CardModal` anche in desktop.
+- **Halo terracotta**: sparisce dallo stato idle, appare **solo su `:hover**` della card (transizione morbida di opacità).
+- Micro-feedback su hover: leggero `scale`/lift opzionale, coerente con il resto — se preferisci zero movimento anche in hover, lo tolgo.
+
+## File coinvolti
+
+- `src/routes/index.tsx`:
+  - `CARDS`: rimuovo `come`.
+  - Sezione desktop: sostituisco il blocco `SwapCard` + slot laterali con una `<div class="grid grid-cols-2 gap-...">` di 4 card.
+  - Riuso `CardModal` per l'apertura in desktop (stesso comportamento del mobile).
+  - Rimuovo stato `activeId`/logica swap desktop e classi `float-*` sulle card.
+  - Halo: da sempre-visibile a `opacity-0 group-hover:opacity-100 transition`.
+
+## Da confermare
+
+1. La card **come** va rimossa anche da mobile, o solo da desktop? SI
+2. In desktop, apertura come **modal overlay centrale** (come mobile) va bene? O preferisci che la card cliccata si espanda "in place" dentro la griglia? Va bene come modal overlay centrale
