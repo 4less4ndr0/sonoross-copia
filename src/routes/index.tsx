@@ -61,6 +61,12 @@ type Card = {
 
 const CARDS: Card[] = [
   {
+    title: "cosa",
+    subtitle: "il cuore di R.O.S.S.",
+    image: cloudCosa,
+    bodyIndexes: [2, 3],
+  },
+  {
     title: "chi",
     subtitle: "il team dietro a R.O.S.S.",
     image: cloudChi,
@@ -71,12 +77,6 @@ const CARDS: Card[] = [
     subtitle: "perché esistiamo",
     image: cloudManifesto.url,
     bodyIndexes: [0, 1, 2, 3, 4, 5, 6, 7, 8, 9],
-  },
-  {
-    title: "cosa",
-    subtitle: "il cuore di R.O.S.S.",
-    image: cloudCosa,
-    bodyIndexes: [2, 3],
   },
   {
     title: "perché",
