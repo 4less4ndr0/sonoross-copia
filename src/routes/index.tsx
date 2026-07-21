@@ -672,12 +672,15 @@ function CardModal({
           type="button"
           onClick={onClose}
           aria-label="Chiudi"
-          className="absolute top-4 right-4 z-10 flex items-center justify-center rounded-full w-10 h-10 hover:opacity-80 transition"
+          className="absolute top-4 right-4 z-10 flex items-center justify-center rounded-full w-10 h-10 hover:opacity-90 transition"
           style={{
-            background: "rgba(28,26,20,0.08)",
-            color: "#1C1A14",
+            background: "#1C1A14",
+            color: "#F6F3ED",
             fontFamily: '"DM Sans", system-ui, sans-serif',
-            fontSize: "1.25rem",
+            fontSize: "1.35rem",
+            lineHeight: 1,
+            fontWeight: 500,
+            boxShadow: "0 2px 8px rgba(28,26,20,0.2)",
           }}
         >
           ×
