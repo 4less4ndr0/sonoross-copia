@@ -873,8 +873,12 @@ function Index() {
       </section>
 
 
-      {activeCardData && (
-        <CardModal card={activeCardData} onClose={() => setActiveCard(null)} />
+      {displayedCard && (
+        <CardModal
+          card={displayedCard}
+          isOpen={activeCard !== null}
+          onClose={() => setActiveCard(null)}
+        />
       )}
     </main>
   );
