@@ -710,7 +710,13 @@ function Index() {
       {/* HERO */}
       <section className="relative z-10 h-screen w-full overflow-hidden">
         <div className="relative z-20 h-full flex flex-col items-center justify-center px-5 sm:px-6 pb-[18vh] sm:pb-[20vh]">
-          <div className="relative w-full max-w-3xl mt-[10vh] sm:mt-[12vh]">
+          <div className="relative w-full max-w-3xl mt-[6vh] sm:mt-[8vh]">
+            {/* Eyes — centered above the headline */}
+            <div className="flex justify-center items-end gap-3 sm:gap-5 mb-4 sm:mb-7 pointer-events-none">
+              <FlatEye closed={eyesClosed} pixelSize={eyePixelSize} />
+              <FlatEye closed={eyesClosed} pixelSize={eyePixelSize} />
+            </div>
+
             <h1
               className="relative z-10 text-center text-[clamp(2.75rem,10vw,4.5rem)] sm:text-[clamp(2rem,7vw,4.5rem)]"
               style={{
@@ -773,11 +779,6 @@ function Index() {
         </div>
 
         <GridBackdrop />
-
-        <div className="absolute top-5 left-5 sm:top-6 sm:left-8 z-40 flex items-start gap-2 pointer-events-none">
-          <FlatEye closed={eyesClosed} pixelSize={3} />
-          <FlatEye closed={eyesClosed} pixelSize={3} />
-        </div>
 
       </section>
 
