@@ -351,14 +351,17 @@ function SwapCard({
       onFocus={() => setIsHover(true)}
       onBlur={() => setIsHover(false)}
       aria-label={isActive ? `Chiudi ${card.title}` : `Apri ${card.title}`}
-      className={`absolute rounded-[20px] text-left focus:outline-none focus-visible:ring-2 focus-visible:ring-[#EF9F27] ${!isActive ? `float-${floatVariant}` : ""}`}
+      className={`rounded-[20px] text-left focus:outline-none focus-visible:ring-2 focus-visible:ring-[#EF9F27] ${!isActive ? `float-${floatVariant}` : ""}`}
       style={{
-        top: slot.top,
-        left: slot.left,
-        width: slot.width,
-        height: slot.height,
-        transform: `rotate(${rotate}deg) scale(${scale}) translateY(${translateY}px)`,
-        zIndex: isActive ? 20 : peek ? 50 : 5,
+        position: isActive ? "fixed" : "absolute",
+        top: isActive ? "6vh" : slot.top,
+        left: isActive ? "5vw" : slot.left,
+        width: isActive ? "90vw" : slot.width,
+        height: isActive ? "88vh" : slot.height,
+        transform: isActive
+          ? "none"
+          : `rotate(${rotate}deg) scale(${scale}) translateY(${translateY}px)`,
+        zIndex: isActive ? 60 : peek ? 50 : 5,
         transition: SWAP_TRANSITION,
         cursor: "pointer",
         animationDelay: floatDelay,

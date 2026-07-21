@@ -1,28 +1,24 @@
-## Obiettivo
-Sostituire il contenuto della card "chi" con la nuova copy (Blocco 1 + team), rendendo le 4 bio del team dei dropdown apribili.
+## Problema
 
-## Cosa cambia (solo card "chi", desktop + mobile)
+Attualmente la card attiva ha scroll interno (`overflow-y-auto` + `overscroll-contain`) dentro uno slot ad altezza fissa. La sezione hero è `h-screen overflow-hidden`, quindi non c'è alcuno scroll di pagina a cui "passare il testimone" quando si arriva in fondo.
 
-**Blocco 1 — "Da dove è iniziato tutto"**
-- Eyebrow: `DA DOVE È INIZIATO TUTTO`
-- Heading (Georgia italic, coerente con manifesto): `11 Aprile 2026`
-- 6 paragrafi della copy fornita.
+## Opzioni
 
-**Blocco 2 — "Il team"**
-- Eyebrow: `CHI SIAMO`
-- Heading: `Il team dietro al progetto`
-- 4 righe dropdown, una per persona:
-  - Header cliccabile: **Nome** — Ruolo, con chevron che ruota all'apertura.
-  - Body espanso: bio completa.
-- Persone: Alessandro Di Mauro, Federico Sassu Verdieri, Luca Marzotto, Alessandra Beretta.
-- Tutti chiusi di default, apertura indipendente (più di uno può stare aperto contemporaneamente).
+**A. Chain scroll verso la pagina (comportamento chiesto letteralmente)**
+Trasformare la hero da `h-screen overflow-hidden` a contenitore che può crescere quando una card è attiva, così la pagina scrolla naturalmente oltre il viewport. Quando si chiude la card, si torna al layout one-pager.
+- Pro: comportamento richiesto esatto.
+- Contro: rompe l'illusione "no scroll" della landing e le altre 4 card restano appese al loro slot mentre la pagina scrolla (visivamente strano) — a meno di nasconderle o fissarle.
 
-Font/colori invariati: Georgia italic per gli heading, DM Sans per body, ink `#1C1A14`, eyebrow in sage dark `#3B6D11` uppercase tracking-wide. Nessuna modifica alle altre card, all'immagine di copertina della "chi", al layout swap desktop o alla modale mobile.
+**B. Card attiva a tutto viewport (modale desktop)**
+Quando si clicca una card, si espande a occupare quasi tutto il viewport (es. `90vw × 85vh`) sopra le altre, con scroll interno che così basta e non risulta più "tagliata". Le altre card restano al loro posto sotto.
+- Pro: risolve il taglio senza introdurre scroll di pagina, coerente con l'idea one-pager.
+- Contro: cambia l'interazione swap attuale (la manifesto non va più nello slot laterale, resta dietro).
 
-## Note dalla bozza ricevuta
-La bozza contiene note interne da verificare (refuso "tre ragazzi e una ragazza", cognome Federico "Sassu Verdieri", bio non ancora riviste). Uso i testi così come sono nel file — se vuoi correzioni prima della pubblicazione, dimmi cosa cambiare e le aggiorno.
+**C. Slot desktop più alto**
+Alzare l'altezza dello slot centrale (es. da attuale ~60vh a ~78vh) così il contenuto della card "chi" (l'unica lunga) rientra o richiede molto meno scroll. Mantiene lo scroll interno come fallback.
+- Pro: minimo intervento, mantiene tutto il layout attuale.
+- Contro: non è "scroll di pagina", è solo più spazio.
 
-## Implementazione tecnica
-1. In `src/routes/index.tsx`, aggiungo un rendering condizionale: se `card.title === "chi"` renderizzo un nuovo componente `<ChiContent />` invece del loop `card.bodyIndexes.map(...)`. Applicato in entrambi i punti di render (SwapCard desktop ~riga 337 e CardModal mobile ~riga 554), così il comportamento è identico sui due layout.
-2. `ChiContent` usa `<details>/<summary>` nativo per i dropdown (accessibile, nessuna libreria) con styling Tailwind: header full-width, separatore sottile ink/10, chevron SVG che ruota via `group-open:rotate-180`.
-3. Nessuna modifica a `MANIFESTO_PARAGRAPHS`, `CARDS` config (a parte eventualmente svuotare `bodyIndexes` di chi che diventa inutilizzato), o al sistema swap.
+## Domanda
+
+Quale preferisci? La A è quella che hai descritto letteralmente ma cambia la sensazione della landing; la B è probabilmente quella che risolve meglio senza rompere l'estetica one-pager.
