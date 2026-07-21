@@ -761,12 +761,6 @@ function Index() {
           <FlatEye closed={eyesClosed} pixelSize={3} />
         </div>
 
-        <div
-          className="absolute bottom-8 left-1/2 -translate-x-1/2 z-30 text-[10px] tracking-[0.25em] uppercase animate-bounce pointer-events-none"
-          style={{ color: "rgba(28,26,20,0.7)" }}
-        >
-          ↓ scroll
-        </div>
       </section>
 
       {/* CARDS section — mobile: stacked; desktop: 2x2 mosaic */}
