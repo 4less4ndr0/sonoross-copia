@@ -100,7 +100,7 @@ const TEAM: TeamMember[] = [
     bio: "Porta l'esperienza di chi ha già portato un progetto al pareggio — da founder di una startup ai funnel di crescita per editoria e no-profit. Il filo conduttore è sempre lo stesso: imparare facendo. Nella tesi di laurea ha scritto di memoria e nostalgia nel marketing digitale — un tema che, senza saperlo, anticipava quello su cui lavora oggi.\n\nIn R.O.S.S. è co-founder e il punto di contatto tra prodotto, business e persone: cura la visione di prodotto, la comunicazione e i pitch — è lui a portare R.O.S.S. fuori dalla stanza e a raccontarlo a chi ancora non lo conosce.",
   },
   {
-    name: "Federico Sassu Verdieri",
+    name: "Federico Sassu Verderi",
     role: "Finance & Investor Relations",
     bio: "Trasforma le idee in modelli e le domande più scomode in risposte precise. È il punto di riferimento per numeri, proiezioni e relazioni con investitori — quando si parla di sostenibilità economica del progetto, è lui il primo interlocutore.",
   },
@@ -117,15 +117,15 @@ const TEAM: TeamMember[] = [
 ];
 
 const CHI_BLOCK1_PARAGRAPHS: string[] = [
-  "Tutto è iniziato in un Hackathon H-FARM. Ci siamo conosciuti al Master — tre ragazzi e una ragazza, background diversi tra loro e lontani dal settore che oggi ci occupa ogni giorno. In 24 ore abbiamo messo insieme un'idea che non riuscivamo a lasciare lì.",
+  "Ci siamo conosciuti al Master in H-FARM College, background diversi tra loro e lontani dal settore che oggi ci occupa ogni giorno. In 24 ore, al Hackathon di H-FARM abbiamo messo insieme un'idea che non riuscivamo a lasciare lì.",
   "La sfida era migliorare le condizioni della terza età. Abbiamo cercato: di soluzioni tecniche e cliniche il mondo ne è pieno.",
-  "Continuando le ricerche, abbiamo capito che molte di queste vengono percepite come ostiche — come monitoraggio, come controllo, non come qualcosa di positivo. Quasi una violazione della privacy, dell'autonomia di chi le usa. Ci siamo interrogati a lungo, cercando un'alternativa. Abbiamo ipotizzato la conversazione al centro: non come funzione accessoria, ma come stimolo cognitivo vero e proprio.",
-  "Studiando l'argomento abbiamo capito perché: far raccontare ricordi ed esperienze vissute — quella che in clinica si chiama reminiscenza guidata — funziona davvero sulla memoria, e funziona ancora meglio proprio nelle fasi iniziali del declino cognitivo, quelle in cui si può ancora intervenire. Esisteva già come terapia. Nessuno, però, la stava portando nella quotidianità di chi vive solo, ogni giorno, invece che in una seduta occasionale.",
-  "Abbiamo deciso di costruirla noi: il concept, il design dell'interazione, un prototipo funzionante dell'app.",
-  "R.O.S.S. era la risposta a un problema che vedevamo intorno a noi.",
-  "Il progetto è stato selezionato tra i migliori dell'hackathon. I primi tempi, con il supporto di H-Health — la parte del venture builder di H-FARM inserita nel contesto medico — li abbiamo passati a capire meglio cosa volevamo davvero costruire. E soprattutto abbiamo avuto una conferma: nel contesto giusto, con il supporto giusto, le nostre competenze erano perfettamente in grado di risolvere questo problema.",
-  "Da quella conferma non ci siamo più fermati: è la cosa su cui lavoriamo, fissi, tutti i giorni.",
-  "Oggi siamo più che sicuri di poter portare a termine questa sfida — e di farlo in un modo che nessuno, finora, è ancora riuscito a fare come lo vogliamo fare noi.",
+  "Continuando le ricerche, abbiamo capito che molte di queste vengono percepite come ostiche, di monitoraggio, controllo, non come qualcosa di positivo. Quasi una violazione della privacy, dell'autonomia di chi ne ha bisogno. Ci siamo interrogati a lungo, cercando un'alternativa, ipotizzando che forse la conversazione potesse essere l'elemento da mettere al centro: non come funzione accessoria, ma come stimolo cognitivo vero e proprio.",
+  "Studiando l'argomento abbiamo capito perché: far raccontare ricordi ed esperienze vissute funziona davvero sulla memoria. Esisteva già come terapia, come reminiscenza guidata, ma nessuno la stava portando nella quotidianità di chi vive solo, ogni giorno, invece che in una seduta occasionale.",
+  "Abbiamo deciso di accettare questa sfida dal concept, al design dell'interazione, fino ad un prototipo.",
+  "Ecco come è nato R.O.S.S.",
+  "Il progetto è stato selezionato tra i migliori dell'hackathon. I primi tempi, con il supporto di H-ealth, la parte del venture builder di H-FARM inserita nel contesto medico, li abbiamo passati a capire meglio cosa volevamo davvero costruire. E soprattutto abbiamo avuto una conferma: nel contesto giusto, con il supporto giusto, le nostre competenze erano perfettamente in grado di risolvere questo problema.",
+  "Da quella conferma non ci siamo più fermati: è ciò su cui lavoriamo, fissi, tutti i giorni.",
+  "Oggi siamo più che sicuri di poter portare a termine questa sfida e di farlo in un modo che nessuno, finora, è ancora riuscito a fare come lo vogliamo fare noi.",
 ];
 
 function ChiEyebrow({ children }: { children: React.ReactNode }) {
