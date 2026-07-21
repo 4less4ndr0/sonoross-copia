@@ -382,9 +382,12 @@ function CardModal({
         onClick={(e) => e.stopPropagation()}
         className="relative w-full max-w-3xl max-h-[90vh] overflow-y-auto rounded-[20px]"
         style={{
-          background: "rgba(246,243,237,0.98)",
-          border: "1px solid rgba(255,255,255,0.6)",
-          boxShadow: "0 30px 80px rgba(28,26,20,0.35)",
+          background: "rgba(246,243,237,0.35)",
+          backdropFilter: "blur(28px) saturate(180%)",
+          WebkitBackdropFilter: "blur(28px) saturate(180%)",
+          border: "1px solid rgba(255,255,255,0.55)",
+          boxShadow:
+            "0 30px 80px rgba(28,26,20,0.28), inset 0 1px 0 rgba(255,255,255,0.6)",
           transform: visible
             ? "translateY(0) scale(1)"
             : "translateY(24px) scale(0.96)",
