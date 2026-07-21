@@ -266,78 +266,77 @@ function StackCard({
           boxShadow: "0 14px 40px rgba(28,26,20,0.18)",
           border: "1px solid rgba(255,255,255,0.5)",
         }}
-      />
-
-      <img
-        src={card.image}
-        alt=""
-        loading="lazy"
-        width={1024}
-        height={640}
-        className="absolute inset-0 w-full h-full object-cover transition-transform duration-700 group-hover:scale-105"
-        style={{ objectPosition: card.title === "manifesto" ? "50% 55%" : "center" }}
-      />
-      {/* bottom gradient for legibility */}
-      <div
-        aria-hidden
-        className="absolute inset-0"
-        style={{
-          background:
-            "linear-gradient(to top, rgba(28,26,20,0.78) 0%, rgba(28,26,20,0.45) 35%, rgba(28,26,20,0) 65%)",
-        }}
-      />
-      {/* title + subtitle bottom-left */}
-      <div className="absolute left-6 right-24 bottom-5 sm:left-8 sm:right-28 sm:bottom-7">
-        <h3
-          className="m-0 font-normal text-white"
-          style={{
-            fontFamily: '"Instrument Serif", serif',
-            fontSize: "clamp(2.25rem, 6.5vw, 4rem)",
-            lineHeight: 1.02,
-            letterSpacing: "-0.02em",
-            textShadow: "0 2px 14px rgba(0,0,0,0.4)",
-          }}
-        >
-          {card.title}
-        </h3>
-        <p
-          className="mt-1 sm:mt-2 m-0 text-white/90"
-          style={{
-            fontFamily: '"DM Sans", system-ui, sans-serif',
-            fontSize: "clamp(0.95rem, 1.4vw, 1.15rem)",
-            lineHeight: 1.35,
-            textShadow: "0 1px 8px rgba(0,0,0,0.35)",
-          }}
-        >
-          {card.subtitle}
-        </p>
-      </div>
-      {/* + button bottom-right */}
-      <span
-        aria-hidden
-        className="absolute right-5 bottom-5 sm:right-7 sm:bottom-7 flex items-center justify-center rounded-full text-white transition-transform duration-500 group-hover:scale-110"
-        style={{
-          width: "clamp(44px, 5vw, 56px)",
-          height: "clamp(44px, 5vw, 56px)",
-          background: "rgba(255,255,255,0.22)",
-          backdropFilter: "blur(10px)",
-          border: "1px solid rgba(255,255,255,0.5)",
-        }}
       >
-        <svg
-          viewBox="0 0 24 24"
-          fill="none"
-          stroke="currentColor"
-          strokeWidth="2"
-          strokeLinecap="round"
-          strokeLinejoin="round"
-          style={{ width: "44%", height: "44%" }}
+        <img
+          src={card.image}
+          alt=""
+          loading="lazy"
+          width={1024}
+          height={640}
+          className="absolute inset-0 w-full h-full object-cover transition-transform duration-700 group-hover:scale-105"
+          style={{ objectPosition: card.title === "manifesto" ? "50% 55%" : "center" }}
+        />
+        {/* bottom gradient for legibility */}
+        <span
+          aria-hidden
+          className="absolute inset-0 block"
+          style={{
+            background:
+              "linear-gradient(to top, rgba(28,26,20,0.78) 0%, rgba(28,26,20,0.45) 35%, rgba(28,26,20,0) 65%)",
+          }}
+        />
+        {/* title + subtitle bottom-left */}
+        <span className="absolute left-6 right-24 bottom-5 sm:left-8 sm:right-28 sm:bottom-7 block">
+          <span
+            className="m-0 font-normal text-white block"
+            style={{
+              fontFamily: '"Instrument Serif", serif',
+              fontSize: "clamp(2.25rem, 6.5vw, 4rem)",
+              lineHeight: 1.02,
+              letterSpacing: "-0.02em",
+              textShadow: "0 2px 14px rgba(0,0,0,0.4)",
+            }}
+          >
+            {card.title}
+          </span>
+          <span
+            className="mt-1 sm:mt-2 m-0 text-white/90 block"
+            style={{
+              fontFamily: '"DM Sans", system-ui, sans-serif',
+              fontSize: "clamp(0.95rem, 1.4vw, 1.15rem)",
+              lineHeight: 1.35,
+              textShadow: "0 1px 8px rgba(0,0,0,0.35)",
+            }}
+          >
+            {card.subtitle}
+          </span>
+        </span>
+        {/* arrow bottom-right */}
+        <span
+          aria-hidden
+          className="absolute right-5 bottom-5 sm:right-7 sm:bottom-7 flex items-center justify-center rounded-full text-white transition-transform duration-500 group-hover:scale-110"
+          style={{
+            width: "clamp(44px, 5vw, 56px)",
+            height: "clamp(44px, 5vw, 56px)",
+            background: "rgba(255,255,255,0.22)",
+            backdropFilter: "blur(10px)",
+            border: "1px solid rgba(255,255,255,0.5)",
+          }}
         >
-          <path d="M7 17 17 7" />
-          <path d="M8 7h9v9" />
-        </svg>
+          <svg
+            viewBox="0 0 24 24"
+            fill="none"
+            stroke="currentColor"
+            strokeWidth="2"
+            strokeLinecap="round"
+            strokeLinejoin="round"
+            style={{ width: "44%", height: "44%" }}
+          >
+            <path d="M7 17 17 7" />
+            <path d="M8 7h9v9" />
+          </svg>
+        </span>
       </span>
-
     </button>
   );
 }
