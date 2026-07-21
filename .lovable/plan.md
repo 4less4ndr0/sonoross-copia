@@ -1,44 +1,31 @@
-## Fix: swap desktop con transizione smooth (no scatti)
+## Fix: transizione fluida sulla apertura/chiusura card in mobile
 
 ### Diagnosi
-Oggi lo swap è a scatti perché ogni stato monta/smonta nodi DOM diversi: la cloud attiva è un `CloudShape` nello slot laterale, la glass card centrale è un `<button>` separato. Le CSS transitions non interpolano tra nodi diversi → cambio istantaneo.
+Il modale mobile (`CardModal`, riga 421) monta/smonta immediatamente al click su una `StackCard`. L'overlay usa `animate-fade-in` (0.3s solo entrata), il pannello interno non ha animazione, e alla chiusura sparisce di colpo perché il componente viene rimosso subito da `activeCardData && <CardModal ... />`.
 
-### Obiettivo
-Ogni card (manifesto + chi/cosa/come/perché) diventa **un singolo nodo DOM persistente** che si sposta e cambia forma tra slot laterale e slot centrale con transizione CSS unica. Il contenuto interno (image-card ↔ glass text) cross-fade in place.
+### Modifiche (solo `src/routes/index.tsx`, mobile only)
 
-### Modifiche (solo desktop, `src/routes/index.tsx`)
+1. **Stato transitorio nel modale**
+   - `CardModal` gestisce internamente `isVisible` (default `false`, diventa `true` al primo mount con `requestAnimationFrame`).
+   - Aggiungere prop `isOpen` esterno: quando diventa `false`, il modale parte in `isVisible=false` e chiama `onClose` solo dopo la durata dell'animazione (~300ms) via `setTimeout`.
 
-1. **Nuovo componente `SwapCard`** sostituisce sia `CloudShape` sia il `<button>` centrale nel ramo desktop. Un unico `<button>` absolute per ciascuna delle 5 card, sempre montato.
+2. **Handler di chiusura ritardato**
+   - Nuovo stato locale `isClosing`. `handleClose` imposta `isClosing=true` → dopo 300ms chiama `onClose` del parent (che azzera `activeCard`). Click su overlay, tasto ×, tasto Escape passano tutti da `handleClose`.
 
-2. **Slot**
-   - `CENTER_SLOT`: copre l'area del wrapper 58vw (top/left/right = 0, larghezza piena, altezza data dal sizer invisibile con `MANIFESTO_PARAGRAPHS`).
-   - `sideSlot`: gli slot attuali di `CLOUDS` per le 4 cloud; quando attiva una cloud, il manifesto usa lo `sideSlot` della cloud che ha lasciato il centro.
+3. **Transizioni CSS sui due layer del modale**
+   - Overlay (`fixed inset-0`): `opacity` + `backdrop-filter` con `transition: opacity 280ms ease, backdrop-filter 280ms ease`. Rimuovere `animate-fade-in`. `opacity: isVisible && !isClosing ? 1 : 0`.
+   - Pannello card: `transition: transform 320ms cubic-bezier(0.22,1,0.36,1), opacity 260ms ease`. Da `translateY(24px) scale(0.96)` + `opacity 0` a `translateY(0) scale(1)` + `opacity 1`. Alla chiusura torna sotto.
 
-3. **Rendering condizionale interno (cross-fade, non unmount)**
-   - Layer A "image-card": immagine + gradient + H3 + pulsante `+`. `opacity: isActive ? 0 : 1`, `pointer-events: none` se attiva.
-   - Layer B "glass content": glass background + titolo Instrument Serif + paragrafi da `card.bodyIndexes` (stessa formattazione della manifesto: italic, `ross-highlight`, ecc.). `opacity: isActive ? 1 : 0`.
-   - Il fondo del `<button>` transita da "image dominante" a "glass" via `background` + `backdrop-filter` con transition.
+4. **Feedback al tocco sulla `StackCard`**
+   - Aggiungere `active:scale-[0.98] transition-transform duration-200` alla `StackCard` per un tap responsivo prima dell'apertura del modale.
 
-4. **Transizioni**
-   - Movimento/dimensione (top/left/right/width/height/transform/border-radius): ~600ms `cubic-bezier(0.22,1,0.36,1)`.
-   - Cross-fade contenuto: ~300ms ease.
-   - Hover "peek" (rotate 0, scale 1.06, z-index 50) resta solo su card non attiva; disabilitato sulla card centrale.
-
-5. **Stato**
-   - `activeCloudIndex: number | null` invariato (0..3 → CLOUDS[i]).
-   - `activeCard = activeCloudIndex === null ? "manifesto" : CLOUDS[activeCloudIndex]`.
-   - Rendering: map su 5 card (manifesto + 4 cloud) → `SwapCard` con `isActive` calcolato e `slot` scelto tra `CENTER_SLOT` e `sideSlot`.
-   - Click su card non attiva: `setActiveCloudIndex(i)` (o `null` se manifesto). Click su card attiva: `setActiveCloudIndex(null)` (torna allo stato iniziale con manifesto al centro).
-
-6. **Sizer**
-   - Il sizer invisibile con `MANIFESTO_PARAGRAPHS` resta per dare altezza al wrapper — così `CENTER_SLOT` ha altezza stabile e le transizioni size non collassano.
+5. **Cleanup Escape / keydown**
+   - L'`useEffect` in `Index` che chiude su Escape continua a chiamare `setActiveCard(null)` — passa comunque dal nuovo flusso perché il modale rileva il cambio `isOpen → false` e anima l'uscita. Quindi: cambio API di `CardModal` da "unmount immediato" a "controllo con `isOpen`", e in `Index` renderizzare sempre `<CardModal>` (montato) quando `activeCardData` è mai stato aperto? Alternativa più pulita:
+     - `Index` mantiene `activeCard` + un nuovo `pendingCloseCard` (o mantiene il dato durante l'uscita). Concretamente: `activeCard` viene azzerato solo dopo il fade-out. Per farlo, `CardModal` accetta `card` + `isOpen` + `onClose`; `Index` mette `isOpen = activeCard !== null` e memorizza `lastCard` per continuare a mostrare la card durante l'uscita (`const displayed = activeCardData ?? lastCardRef.current`).
 
 ### Vincoli
-- Nessun tocco a: mobile stack + `CardModal`, font, palette, hero, form email, occhi/orizzonte, sezione finale, `MANIFESTO_PARAGRAPHS`, animazioni `float-*`, layout attuale degli slot laterali.
-- Nessuna nuova libreria: solo CSS transitions su nodi persistenti.
-
-### File toccato
-- `src/routes/index.tsx` (unico).
+- Nessun tocco a: desktop swap system, hero, occhi, form email, sezione finale, `MANIFESTO_PARAGRAPHS`, `CARDS`, immagini, `StackCard` layout (solo aggiunta `active:` per feedback tap).
+- Nessuna libreria nuova: solo CSS transitions + timer.
 
 ### Risultato atteso
-Cliccando una cloud laterale: quella cloud scivola al centro trasformandosi da image-card in glass card con il testo che appare in cross-fade; contemporaneamente il manifesto scivola nello slot appena liberato diventando image-card. Tutto sugli stessi nodi DOM → interpolazione smooth.
+Su mobile: tap su una card → overlay sfuma in ~280ms e il pannello sale da sotto con leggero scale-up. Tap su ×, overlay o Escape → pannello scende e overlay sfuma, poi il modale viene smontato. Nessuno "scatto".
