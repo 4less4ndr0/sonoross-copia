@@ -5,7 +5,8 @@ import { useEffect, useRef, useState, type FormEvent } from "react";
 import { submitLead } from "@/lib/leads.functions";
 import cloudChiAsset from "@/assets/cloud-chi.jpeg.asset.json";
 const cloudChi = cloudChiAsset.url;
-import cloudCosa from "@/assets/cloud-cosa.jpg";
+import cloudCosaAsset from "@/assets/cloud-cosa.jpg.asset.json";
+const cloudCosa = cloudCosaAsset.url;
 
 import cloudPercheAsset from "@/assets/cloud-perche.jpg.asset.json";
 const cloudPerche = cloudPercheAsset.url;
@@ -275,7 +276,14 @@ function StackCard({
           width={1024}
           height={640}
           className="absolute inset-0 w-full h-full object-cover transition-transform duration-700 group-hover:scale-105"
-          style={{ objectPosition: card.title === "manifesto" ? "50% 55%" : "center" }}
+          style={{
+            objectPosition:
+              card.title === "manifesto"
+                ? "50% 55%"
+                : card.title === "cosa"
+                  ? "30% 62%"
+                  : "center",
+          }}
         />
         {/* bottom gradient for legibility */}
         <span
@@ -445,7 +453,12 @@ function CardModal({
             className="w-full object-cover rounded-[16px] mt-6"
             style={{
               height: "clamp(200px, 40vw, 360px)",
-              objectPosition: card.title === "manifesto" ? "50% 55%" : "center",
+              objectPosition:
+                card.title === "manifesto"
+                  ? "50% 55%"
+                  : card.title === "cosa"
+                    ? "30% 62%"
+                    : "center",
             }}
           />
 
