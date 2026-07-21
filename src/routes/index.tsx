@@ -518,25 +518,20 @@ function Index() {
   const isDesktop = useIsDesktop();
   const submit = useServerFn(submitLead);
 
-  const anyActive = activeCloud !== null;
-  const activeSlot =
-    activeCloud !== null
-      ? isDesktop
-        ? CLOUDS[activeCloud].desktop
-        : CLOUDS[activeCloud].mobile
-      : null;
+  const activeCloudData = activeCloud !== null ? CLOUDS[activeCloud] : null;
 
-  const toggleCloud = (i: number) =>
-    setActiveCloud((prev) => (prev === i ? null : i));
+  const openCloud = (i: number) => setActiveCloud(i);
+  const closeCloud = () => setActiveCloud(null);
 
   useEffect(() => {
-    if (!anyActive) return;
+    if (activeCloud === null) return;
     const onKey = (e: KeyboardEvent) => {
       if (e.key === "Escape") setActiveCloud(null);
     };
     window.addEventListener("keydown", onKey);
     return () => window.removeEventListener("keydown", onKey);
-  }, [anyActive]);
+  }, [activeCloud]);
+
 
 
   const onSubmit = async (e: FormEvent) => {
