@@ -246,7 +246,7 @@ function SwapCard({
           alt=""
           loading="lazy"
           className="absolute inset-0 w-full h-full object-cover"
-          style={{ objectPosition: card.title === "manifesto" ? "50% 72%" : "center" }}
+          style={{ objectPosition: card.title === "manifesto" ? "50% 55%" : "center" }}
         />
         <div
           aria-hidden
@@ -330,7 +330,7 @@ function SwapCard({
             style={{
               height: "clamp(180px, 22vh, 320px)",
               marginBottom: "0.5rem",
-              objectPosition: card.title === "manifesto" ? "50% 72%" : "center",
+              objectPosition: card.title === "manifesto" ? "50% 55%" : "center",
             }}
           />
 
@@ -385,7 +385,7 @@ function StackCard({
         width={1024}
         height={640}
         className="absolute inset-0 w-full h-full object-cover transition-transform duration-700 group-hover:scale-105"
-        style={{ objectPosition: card.title === "manifesto" ? "50% 72%" : "center" }}
+        style={{ objectPosition: card.title === "manifesto" ? "50% 55%" : "center" }}
       />
       {/* bottom gradient for legibility */}
       <div
@@ -538,7 +538,7 @@ function CardModal({
             className="w-full object-cover rounded-[16px] mt-6"
             style={{
               height: "clamp(200px, 40vw, 360px)",
-              objectPosition: card.title === "manifesto" ? "50% 72%" : "center",
+              objectPosition: card.title === "manifesto" ? "50% 55%" : "center",
             }}
           />
 
