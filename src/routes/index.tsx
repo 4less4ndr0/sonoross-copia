@@ -635,7 +635,7 @@ function Index() {
   const [status, setStatus] = useState<"idle" | "loading" | "success" | "error">("idle");
   const [activeCard, setActiveCard] = useState<number | null>(null);
   
-  const eyesClosed = useBlink(2500, 6000);
+  const eyesClosed = useBlink(1200, 2800);
   const pixelSize = usePixelSize();
   const submit = useServerFn(submitLead);
 
