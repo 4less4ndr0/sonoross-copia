@@ -347,7 +347,7 @@ function StackCard({
       type="button"
       onClick={onOpen}
       aria-label={`Apri ${card.title}`}
-      className="group relative w-full text-left overflow-hidden rounded-[20px] focus:outline-none focus-visible:ring-2 focus-visible:ring-[#EF9F27] transition-transform duration-500 hover:-translate-y-1"
+      className="group relative w-full text-left overflow-hidden rounded-[20px] focus:outline-none focus-visible:ring-2 focus-visible:ring-[#EF9F27] transition-transform duration-300 ease-out hover:-translate-y-1 active:scale-[0.98]"
       style={{
         aspectRatio: "16 / 10",
         boxShadow: "0 14px 40px rgba(28,26,20,0.18)",
