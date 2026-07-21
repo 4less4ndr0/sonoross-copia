@@ -6,7 +6,7 @@ import { submitLead } from "@/lib/leads.functions";
 import cloudChiAsset from "@/assets/cloud-chi.jpeg.asset.json";
 const cloudChi = cloudChiAsset.url;
 import cloudCosa from "@/assets/cloud-cosa.jpg";
-import cloudCome from "@/assets/cloud-come.jpg";
+
 import cloudPerche from "@/assets/cloud-perche.jpg";
 import cloudManifesto from "@/assets/cloud-manifesto.jpeg.asset.json";
 
