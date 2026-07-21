@@ -688,12 +688,71 @@ function Index() {
         </div>
       </section>
 
-      {/* STACKED CARDS */}
+      {/* CARDS section — mobile: stacked; desktop: manifesto glass + floating clouds */}
       <section className="relative z-10 w-full py-20 sm:py-28 px-5 sm:px-6">
-        <div className="mx-auto max-w-[640px] flex flex-col gap-5 sm:gap-6">
+        {/* MOBILE: 5 stacked cards */}
+        <div className="sm:hidden mx-auto max-w-[640px] flex flex-col gap-5">
           {CARDS.map((c, i) => (
             <StackCard key={i} card={c} onOpen={() => setActiveCard(i)} />
           ))}
+        </div>
+
+        {/* DESKTOP: manifesto glass card at center with 4 floating cloud cards around */}
+        <div className="hidden sm:block">
+          <div className="relative w-[58vw] max-w-5xl mx-auto">
+            {/* Sizer: keeps wrapper the same height as the manifesto */}
+            <div
+              aria-hidden
+              className="invisible pointer-events-none rounded-[20px] p-6 sm:p-12 space-y-6"
+              style={{
+                fontFamily: '"DM Sans", system-ui, sans-serif',
+                fontSize: "clamp(1.1rem, 1.3vw, 1.3rem)",
+                lineHeight: 1.65,
+              }}
+            >
+              {MANIFESTO_PARAGRAPHS.map((p, i) => (
+                <p key={i}>{p.text}</p>
+              ))}
+            </div>
+
+            {/* Cloud cards along the manifesto borders */}
+            {CLOUDS.map((c, i) => (
+              <CloudShape key={i} c={c} onOpen={(idx) => setActiveCard(idx)} />
+            ))}
+
+            {/* Manifesto glass card */}
+            <div className="absolute inset-0" style={{ zIndex: 10 }}>
+              <div
+                className="relative w-full rounded-[20px] p-6 sm:p-12 space-y-6"
+                style={{
+                  background: "rgba(255,255,255,0.55)",
+                  backdropFilter: "blur(20px) saturate(140%)",
+                  border: "1px solid rgba(255,255,255,0.5)",
+                  boxShadow: "0 24px 70px rgba(28, 26, 20, 0.12)",
+                  fontFamily: '"DM Sans", system-ui, sans-serif',
+                  fontSize: "clamp(1.1rem, 1.3vw, 1.3rem)",
+                  fontWeight: 400,
+                  lineHeight: 1.65,
+                  letterSpacing: "-0.005em",
+                  color: "#1C1A14",
+                }}
+              >
+                {MANIFESTO_PARAGRAPHS.map((p, i) =>
+                  p.italic ? (
+                    <p
+                      key={i}
+                      className="italic"
+                      style={{ fontFamily: 'Georgia, "Times New Roman", serif' }}
+                    >
+                      <strong>{p.text}</strong>
+                    </p>
+                  ) : (
+                    <p key={i} dangerouslySetInnerHTML={{ __html: p.html ?? p.text }} />
+                  )
+                )}
+              </div>
+            </div>
+          </div>
         </div>
 
         <div
@@ -708,6 +767,7 @@ function Index() {
           <strong className="ross-highlight">Per questo R.O.S.S. non sorveglia. Dà voce.</strong>
         </div>
       </section>
+
 
       {activeCardData && (
         <CardModal card={activeCardData} onClose={() => setActiveCard(null)} />
