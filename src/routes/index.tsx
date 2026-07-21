@@ -626,11 +626,10 @@ function Index() {
     const onKey = (e: KeyboardEvent) => {
       if (e.key !== "Escape") return;
       if (activeCard !== null) setActiveCard(null);
-      if (activeCloudIndex !== null) setActiveCloudIndex(null);
     };
     window.addEventListener("keydown", onKey);
     return () => window.removeEventListener("keydown", onKey);
-  }, [activeCard, activeCloudIndex]);
+  }, [activeCard]);
 
   const onSubmit = async (e: FormEvent) => {
     e.preventDefault();
