@@ -91,6 +91,155 @@ const CARDS: Card[] = [
   },
 ];
 
+type TeamMember = { name: string; role: string; bio: string };
+
+const TEAM: TeamMember[] = [
+  {
+    name: "Alessandro Di Mauro",
+    role: "Co-Founder & Product Manager",
+    bio: "Porta l'esperienza di chi ha già portato un progetto al pareggio — da founder di una startup ai funnel di crescita per editoria e no-profit. Il filo conduttore è sempre lo stesso: imparare facendo. Nella tesi di laurea ha scritto di memoria e nostalgia nel marketing digitale — un tema che, senza saperlo, anticipava quello su cui lavora oggi.\n\nIn R.O.S.S. è co-founder e il punto di contatto tra prodotto, business e persone: cura la visione di prodotto, la comunicazione e i pitch — è lui a portare R.O.S.S. fuori dalla stanza e a raccontarlo a chi ancora non lo conosce.",
+  },
+  {
+    name: "Federico Sassu Verdieri",
+    role: "Finance & Investor Relations",
+    bio: "Trasforma le idee in modelli e le domande più scomode in risposte precise. È il punto di riferimento per numeri, proiezioni e relazioni con investitori — quando si parla di sostenibilità economica del progetto, è lui il primo interlocutore.",
+  },
+  {
+    name: "Luca Marzotto",
+    role: "Technical Lead",
+    bio: "Costruisce l'architettura tecnica di R.O.S.S. — dal modello linguistico che gira on-device al modo in cui il sistema ascolta e risponde. Prima della tecnologia ha lavorato in contesti ad alta pressione relazionale, cucina e sala, un'esperienza che gli dà un modo di spiegare il tecnico raro in un profilo così verticale.",
+  },
+  {
+    name: "Alessandra Beretta",
+    role: "Project Manager",
+    bio: "È il ponte con il mondo medico e sanitario — parla con geriatri, RSA, neuropsicologi con la credibilità e l'empatia che quel mondo richiede. Internamente, è lei che tiene il progetto in ordine: scadenze, priorità, il lavoro che non si vede ma che tiene tutto in piedi.",
+  },
+];
+
+const CHI_BLOCK1_PARAGRAPHS: string[] = [
+  "Tutto è iniziato in un Hackathon H-FARM. Ci siamo conosciuti al Master — tre ragazzi e una ragazza, background diversi tra loro e lontani dal settore che oggi ci occupa ogni giorno. In 24 ore abbiamo messo insieme un'idea che non riuscivamo a lasciare lì.",
+  "La sfida era migliorare le condizioni della terza età. Abbiamo cercato: di soluzioni tecniche e cliniche il mondo ne è pieno.",
+  "Continuando le ricerche, abbiamo capito che molte di queste vengono percepite come ostiche — come monitoraggio, come controllo, non come qualcosa di positivo. Quasi una violazione della privacy, dell'autonomia di chi le usa. Ci siamo interrogati a lungo, cercando un'alternativa. Abbiamo ipotizzato la conversazione al centro: non come funzione accessoria, ma come stimolo cognitivo vero e proprio.",
+  "Studiando l'argomento abbiamo capito perché: far raccontare ricordi ed esperienze vissute — quella che in clinica si chiama reminiscenza guidata — funziona davvero sulla memoria, e funziona ancora meglio proprio nelle fasi iniziali del declino cognitivo, quelle in cui si può ancora intervenire. Esisteva già come terapia. Nessuno, però, la stava portando nella quotidianità di chi vive solo, ogni giorno, invece che in una seduta occasionale.",
+  "Abbiamo deciso di costruirla noi: il concept, il design dell'interazione, un prototipo funzionante dell'app.",
+  "R.O.S.S. era la risposta a un problema che vedevamo intorno a noi.",
+  "Il progetto è stato selezionato tra i migliori dell'hackathon. I primi tempi, con il supporto di H-Health — la parte del venture builder di H-FARM inserita nel contesto medico — li abbiamo passati a capire meglio cosa volevamo davvero costruire. E soprattutto abbiamo avuto una conferma: nel contesto giusto, con il supporto giusto, le nostre competenze erano perfettamente in grado di risolvere questo problema.",
+  "Da quella conferma non ci siamo più fermati: è la cosa su cui lavoriamo, fissi, tutti i giorni.",
+  "Oggi siamo più che sicuri di poter portare a termine questa sfida — e di farlo in un modo che nessuno, finora, è ancora riuscito a fare come lo vogliamo fare noi.",
+];
+
+function ChiEyebrow({ children }: { children: React.ReactNode }) {
+  return (
+    <div
+      style={{
+        fontFamily: '"DM Sans", system-ui, sans-serif',
+        color: "#3B6D11",
+        fontSize: "0.72em",
+        fontWeight: 600,
+        letterSpacing: "0.14em",
+        textTransform: "uppercase",
+        marginBottom: "0.5rem",
+      }}
+    >
+      {children}
+    </div>
+  );
+}
+
+function ChiHeading({ children }: { children: React.ReactNode }) {
+  return (
+    <h3
+      className="italic"
+      style={{
+        fontFamily: 'Georgia, "Times New Roman", serif',
+        fontSize: "clamp(1.6rem, 2.4vw, 2.2rem)",
+        lineHeight: 1.15,
+        fontWeight: 400,
+        color: "#1C1A14",
+        marginBottom: "1rem",
+      }}
+    >
+      {children}
+    </h3>
+  );
+}
+
+function ChiContent() {
+  return (
+    <div className="space-y-8">
+      <section>
+        <ChiEyebrow>Da dove è iniziato tutto</ChiEyebrow>
+        <ChiHeading>11 Aprile 2026</ChiHeading>
+        <div className="space-y-4">
+          {CHI_BLOCK1_PARAGRAPHS.map((p, i) => (
+            <p key={i}>{p}</p>
+          ))}
+        </div>
+      </section>
+
+      <section>
+        <ChiEyebrow>Chi siamo</ChiEyebrow>
+        <ChiHeading>Il team dietro al progetto</ChiHeading>
+        <div className="border-t" style={{ borderColor: "rgba(28,26,20,0.12)" }}>
+          {TEAM.map((m) => (
+            <details
+              key={m.name}
+              className="group border-b"
+              style={{ borderColor: "rgba(28,26,20,0.12)" }}
+            >
+              <summary
+                className="flex items-center justify-between gap-4 cursor-pointer list-none py-4"
+                style={{ outline: "none" }}
+              >
+                <span className="flex flex-col sm:flex-row sm:items-baseline sm:gap-2">
+                  <span
+                    style={{
+                      fontFamily: 'Georgia, "Times New Roman", serif',
+                      fontStyle: "italic",
+                      fontSize: "1.1em",
+                      color: "#1C1A14",
+                    }}
+                  >
+                    {m.name}
+                  </span>
+                  <span
+                    style={{
+                      fontFamily: '"DM Sans", system-ui, sans-serif',
+                      color: "#3B6D11",
+                      fontSize: "0.88em",
+                    }}
+                  >
+                    {m.role}
+                  </span>
+                </span>
+                <svg
+                  width="18"
+                  height="18"
+                  viewBox="0 0 24 24"
+                  fill="none"
+                  stroke="#1C1A14"
+                  strokeWidth="2"
+                  strokeLinecap="round"
+                  strokeLinejoin="round"
+                  className="shrink-0 transition-transform duration-300 group-open:rotate-180"
+                >
+                  <polyline points="6 9 12 15 18 9" />
+                </svg>
+              </summary>
+              <div className="pb-5 pr-8 space-y-3" style={{ fontSize: "0.96em" }}>
+                {m.bio.split("\n\n").map((para, i) => (
+                  <p key={i}>{para}</p>
+                ))}
+              </div>
+            </details>
+          ))}
+        </div>
+      </section>
+    </div>
+  );
+}
+
+
 
 // Desktop-only slots. Each side slot is expressed with left+width+height so
 // CSS can interpolate smoothly between side and center on state change.
@@ -334,21 +483,25 @@ function SwapCard({
             }}
           />
 
-          {card.bodyIndexes.map((idx) => {
-            const p = MANIFESTO_PARAGRAPHS[idx];
-            if (!p) return null;
-            return p.italic ? (
-              <p
-                key={idx}
-                className="italic"
-                style={{ fontFamily: 'Georgia, "Times New Roman", serif' }}
-              >
-                <strong>{p.text}</strong>
-              </p>
-            ) : (
-              <p key={idx} dangerouslySetInnerHTML={{ __html: p.html ?? p.text }} />
-            );
-          })}
+          {card.title === "chi" ? (
+            <ChiContent />
+          ) : (
+            card.bodyIndexes.map((idx) => {
+              const p = MANIFESTO_PARAGRAPHS[idx];
+              if (!p) return null;
+              return p.italic ? (
+                <p
+                  key={idx}
+                  className="italic"
+                  style={{ fontFamily: 'Georgia, "Times New Roman", serif' }}
+                >
+                  <strong>{p.text}</strong>
+                </p>
+              ) : (
+                <p key={idx} dangerouslySetInnerHTML={{ __html: p.html ?? p.text }} />
+              );
+            })
+          )}
         </div>
       </div>
     </button>
@@ -551,24 +704,28 @@ function CardModal({
               lineHeight: 1.65,
             }}
           >
-            {card.bodyIndexes.map((idx) => {
-              const p = MANIFESTO_PARAGRAPHS[idx];
-              if (!p) return null;
-              if (p.italic) {
+            {card.title === "chi" ? (
+              <ChiContent />
+            ) : (
+              card.bodyIndexes.map((idx) => {
+                const p = MANIFESTO_PARAGRAPHS[idx];
+                if (!p) return null;
+                if (p.italic) {
+                  return (
+                    <p
+                      key={idx}
+                      className="italic"
+                      style={{ fontFamily: 'Georgia, "Times New Roman", serif' }}
+                    >
+                      <strong>{p.text}</strong>
+                    </p>
+                  );
+                }
                 return (
-                  <p
-                    key={idx}
-                    className="italic"
-                    style={{ fontFamily: 'Georgia, "Times New Roman", serif' }}
-                  >
-                    <strong>{p.text}</strong>
-                  </p>
+                  <p key={idx} dangerouslySetInnerHTML={{ __html: p.html ?? p.text }} />
                 );
-              }
-              return (
-                <p key={idx} dangerouslySetInnerHTML={{ __html: p.html ?? p.text }} />
-              );
-            })}
+              })
+            )}
           </div>
         </div>
       </div>
