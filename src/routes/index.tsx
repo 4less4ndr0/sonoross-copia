@@ -67,7 +67,7 @@ const CARDS: Card[] = [
   },
   {
     title: "chi",
-    subtitle: "Le persone al centro.",
+    subtitle: "il team dietro a R.O.S.S.",
     image: cloudChi,
     bodyIndexes: [0, 1],
   },

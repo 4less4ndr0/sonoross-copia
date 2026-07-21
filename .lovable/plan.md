@@ -1,13 +1,14 @@
-## Modifica sottotitoli card
+Problema riscontrato: nelle card desktop in stato "piccolo" (SwapCard, image layer) viene mostrato solo il titolo (es. "chi"), non il sottotitolo. Per questo l'utente non vede la modifica richiesta.
 
-Aggiornare i sottotitoli (campo `subtitle`) delle card `CARDS` in `src/routes/index.tsx`:
+Cosa fare:
 
-- **cosa**: da `"Un compagno, non un sensore."` → `"il cuore di R.O.S.S."`
-- **perché**: da `"Rimettere al centro."` → `"perché lo stiamo facendo"`
+1. Aggiornare il dato della card "chi" nel `CARDS` array: sottotitolo da "Le persone al centro." a "il team dietro a R.O.S.S.".
+2. Nel componente `SwapCard`, all'interno dello strato immagine (stato non attivo / card piccola), aggiungere il rendering del `card.subtitle` sotto il titolo `h3`.
+   - Font: DM Sans (coerente con il resto).
+   - Colore: bianco/white-90 con text-shadow per leggibilità sulle immagini.
+   - Dimensione: leggermente più piccola del titolo, in clamp, in modo che sia "in piccolo" come richiesto.
+   - Posizione: sotto il titolo, sempre in basso a sinistra, rispettando lo spazio del bottone freccia a destra.
+3. Mantenere invariato il rendering del sottotitolo nelle card mobile (`StackCard`), che già funziona.
+4. Verificare che i vincoli esistenti restino rispettati: nessuna modifica a font degli occhi, posizionamento nuvole/card, border-radius, glass effect, struttura verticale e copy principale.
 
-La card `chi` resta invariata (`"Le persone al centro."`).
-
-### Dettagli tecnici
-- Il testo viene già renderizzato automaticamente dai componenti `SwapCard` (desktop) e `StackCard` (mobile) attraverso il campo `subtitle` dell'oggetto `Card`.
-- Non sono necessarie modifiche a stili, animazioni, font o logica di swap/modal.
-- Verifica: controllare che in desktop e mobile i sottotitoli delle card "cosa" e "perché" appaiano con il nuovo testo, sia in stato chiuso che aperto.
+File coinvolto: `src/routes/index.tsx`.
