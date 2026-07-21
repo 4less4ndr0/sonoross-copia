@@ -150,41 +150,50 @@ const HOVER_TRANSITION =
   `transform 480ms ${EASE}, opacity 300ms ease, box-shadow 400ms ease`;
 
 function CloudShape({
-  c,
-  onOpen,
+  variant,
+  delay,
+  text,
+  image,
+  slot,
+  onClick,
+  animate = true,
 }: {
-  c: Cloud;
-  onOpen: (i: number) => void;
+  variant: "a" | "b" | "c" | "d";
+  delay: string;
+  text: string;
+  image: string;
+  slot: Slot;
+  onClick: () => void;
+  animate?: boolean;
 }) {
   const [isHover, setIsHover] = useState(false);
-  const s = c.slot;
   const style: React.CSSProperties = {
-    top: s.top,
-    left: s.left,
-    right: s.right,
-    width: s.width,
-    maxWidth: s.maxWidth,
+    top: slot.top,
+    left: slot.left,
+    right: slot.right,
+    width: slot.width,
+    maxWidth: slot.maxWidth,
     transform: isHover
       ? `rotate(0deg) scale(1.06) translateY(-4px)`
-      : `rotate(${s.rotate}deg)`,
+      : `rotate(${slot.rotate}deg)`,
     zIndex: isHover ? 50 : 5,
     opacity: 1,
     transition: HOVER_TRANSITION,
     willChange: "transform",
     animationPlayState: isHover ? "paused" : "running",
-    animationDelay: c.delay,
+    animationDelay: delay,
   };
 
   return (
     <button
       type="button"
-      onClick={() => onOpen(c.cardIndex)}
+      onClick={onClick}
       onMouseEnter={() => setIsHover(true)}
       onMouseLeave={() => setIsHover(false)}
       onFocus={() => setIsHover(true)}
       onBlur={() => setIsHover(false)}
-      aria-label={`Apri ${c.text}`}
-      className={`group absolute float-${c.variant} pointer-events-auto cursor-pointer text-left focus:outline-none focus-visible:ring-2 focus-visible:ring-[#EF9F27] rounded-[20px]`}
+      aria-label={`Apri ${text}`}
+      className={`group absolute ${animate ? `float-${variant}` : ""} pointer-events-auto cursor-pointer text-left focus:outline-none focus-visible:ring-2 focus-visible:ring-[#EF9F27] rounded-[20px]`}
       style={style}
     >
       <div
