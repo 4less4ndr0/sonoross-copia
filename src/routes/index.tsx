@@ -73,7 +73,7 @@ const CARDS: Card[] = [
   },
   {
     title: "cosa",
-    subtitle: "Un compagno, non un sensore.",
+    subtitle: "il cuore di R.O.S.S.",
     image: cloudCosa,
     bodyIndexes: [2, 3],
   },
@@ -85,7 +85,7 @@ const CARDS: Card[] = [
   },
   {
     title: "perché",
-    subtitle: "Rimettere al centro.",
+    subtitle: "perché lo stiamo facendo",
     image: cloudPerche,
     bodyIndexes: [7, 8, 9],
   },
