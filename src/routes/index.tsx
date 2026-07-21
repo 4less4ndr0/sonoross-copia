@@ -8,7 +8,7 @@ const cloudChi = cloudChiAsset.url;
 import cloudCosa from "@/assets/cloud-cosa.jpg";
 import cloudCome from "@/assets/cloud-come.jpg";
 import cloudPerche from "@/assets/cloud-perche.jpg";
-import cloudManifesto from "@/assets/cloud-manifesto.jpg";
+import cloudManifesto from "@/assets/cloud-manifesto.jpeg.asset.json";
 
 
 export const Route = createFileRoute("/")({
@@ -62,7 +62,7 @@ const CARDS: Card[] = [
   {
     title: "manifesto",
     subtitle: "Perché esistiamo.",
-    image: cloudManifesto,
+    image: cloudManifesto.url,
     bodyIndexes: [0, 1, 2, 3, 4, 5, 6, 7, 8, 9],
   },
   {
