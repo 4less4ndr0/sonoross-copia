@@ -101,17 +101,17 @@ const TEAM: TeamMember[] = [
   },
   {
     name: "Federico Sassu Verderi",
-    role: "Finance & Investor Relations",
+    role: "Co-Founder & Finance & Investor Relations",
     bio: "Trasforma le idee in modelli e le domande più scomode in risposte precise. È il punto di riferimento per numeri, proiezioni e relazioni con investitori — quando si parla di sostenibilità economica del progetto, è lui il primo interlocutore.",
   },
   {
     name: "Luca Marzotto",
-    role: "Technical Lead",
+    role: "Co-Founder & Technical Lead",
     bio: "Costruisce l'architettura tecnica di R.O.S.S. — dal modello linguistico che gira on-device al modo in cui il sistema ascolta e risponde. Prima della tecnologia ha lavorato in contesti ad alta pressione relazionale, cucina e sala, un'esperienza che gli dà un modo di spiegare il tecnico raro in un profilo così verticale.",
   },
   {
     name: "Alessandra Beretta",
-    role: "Project Manager",
+    role: "Co-Founder & Project Manager",
     bio: "È il ponte con il mondo medico e sanitario — parla con geriatri, RSA, neuropsicologi con la credibilità e l'empatia che quel mondo richiede. Internamente, è lei che tiene il progetto in ordine: scadenze, priorità, il lavoro che non si vede ma che tiene tutto in piedi.",
   },
 ];
