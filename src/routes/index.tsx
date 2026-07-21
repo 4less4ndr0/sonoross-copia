@@ -756,17 +756,16 @@ function Index() {
 
         <GridBackdrop />
 
-        <div className="absolute top-[78%] left-1/2 -translate-x-1/2 z-30 flex flex-col items-center gap-6 pointer-events-none">
-          <div className="flex items-start gap-[10vw] sm:gap-[12vw]">
-            <FlatEye closed={eyesClosed} pixelSize={pixelSize} />
-            <FlatEye closed={eyesClosed} pixelSize={pixelSize} />
-          </div>
-          <div
-            className="text-[10px] tracking-[0.25em] uppercase animate-bounce"
-            style={{ color: "rgba(28,26,20,0.7)" }}
-          >
-            ↓ scroll
-          </div>
+        <div className="absolute top-5 left-5 sm:top-6 sm:left-8 z-40 flex items-start gap-2 pointer-events-none">
+          <FlatEye closed={eyesClosed} pixelSize={3} />
+          <FlatEye closed={eyesClosed} pixelSize={3} />
+        </div>
+
+        <div
+          className="absolute bottom-8 left-1/2 -translate-x-1/2 z-30 text-[10px] tracking-[0.25em] uppercase animate-bounce pointer-events-none"
+          style={{ color: "rgba(28,26,20,0.7)" }}
+        >
+          ↓ scroll
         </div>
       </section>
 
