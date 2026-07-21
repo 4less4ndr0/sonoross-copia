@@ -550,14 +550,14 @@ const FULL_ROWS = [
 const ROWS_COUNT = FULL_ROWS.length;
 
 function useEyePixelSize() {
-  const [px, setPx] = useState(9);
+  const [px, setPx] = useState(8);
   useEffect(() => {
     const update = () => {
       const w = window.innerWidth;
-      if (w < 640) setPx(6);
-      else if (w < 1024) setPx(8);
-      else if (w < 1536) setPx(11);
-      else setPx(13);
+      if (w < 640) setPx(5);
+      else if (w < 1024) setPx(7);
+      else if (w < 1536) setPx(10);
+      else setPx(12);
     };
     update();
     window.addEventListener("resize", update);
@@ -695,9 +695,9 @@ function Index() {
       {/* HERO */}
       <section className="relative z-10 h-screen w-full overflow-hidden">
         <div className="relative z-20 h-full flex flex-col items-center justify-center px-5 sm:px-6 pb-[18vh] sm:pb-[20vh]">
-          <div className="relative w-full max-w-3xl mt-[6vh] sm:mt-[8vh]">
+          <div className="relative w-full max-w-3xl mt-[5vh] sm:mt-[7vh]">
             {/* Eyes — centered above the headline */}
-            <div className="flex justify-center items-end gap-3 sm:gap-5 mb-4 sm:mb-7 pointer-events-none">
+            <div className="flex justify-center items-end gap-3 sm:gap-5 mb-2 sm:mb-4 pointer-events-none">
               <FlatEye closed={eyesClosed} pixelSize={eyePixelSize} />
               <FlatEye closed={eyesClosed} pixelSize={eyePixelSize} />
             </div>
