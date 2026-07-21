@@ -555,24 +555,28 @@ function CardModal({
               lineHeight: 1.65,
             }}
           >
-            {card.bodyIndexes.map((idx) => {
-              const p = MANIFESTO_PARAGRAPHS[idx];
-              if (!p) return null;
-              if (p.italic) {
+            {card.title === "chi" ? (
+              <ChiContent />
+            ) : (
+              card.bodyIndexes.map((idx) => {
+                const p = MANIFESTO_PARAGRAPHS[idx];
+                if (!p) return null;
+                if (p.italic) {
+                  return (
+                    <p
+                      key={idx}
+                      className="italic"
+                      style={{ fontFamily: 'Georgia, "Times New Roman", serif' }}
+                    >
+                      <strong>{p.text}</strong>
+                    </p>
+                  );
+                }
                 return (
-                  <p
-                    key={idx}
-                    className="italic"
-                    style={{ fontFamily: 'Georgia, "Times New Roman", serif' }}
-                  >
-                    <strong>{p.text}</strong>
-                  </p>
+                  <p key={idx} dangerouslySetInnerHTML={{ __html: p.html ?? p.text }} />
                 );
-              }
-              return (
-                <p key={idx} dangerouslySetInnerHTML={{ __html: p.html ?? p.text }} />
-              );
-            })}
+              })
+            )}
           </div>
         </div>
       </div>
