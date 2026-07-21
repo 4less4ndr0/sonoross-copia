@@ -7,6 +7,7 @@ import cloudChi from "@/assets/cloud-chi.jpg";
 import cloudCosa from "@/assets/cloud-cosa.jpg";
 import cloudCome from "@/assets/cloud-come.jpg";
 import cloudPerche from "@/assets/cloud-perche.jpg";
+import cloudManifesto from "@/assets/cloud-manifesto.jpg";
 
 
 export const Route = createFileRoute("/")({
@@ -49,209 +50,135 @@ const MANIFESTO_PARAGRAPHS: ManifestoParagraph[] = [
 ];
 
 
-type Slot = {
-  top: string;
-  left?: string;
-  right?: string;
-  width: string;
-  maxWidth?: string;
-  rotate: number;
-};
-
-type Cloud = {
-  variant: "a" | "b" | "c" | "d";
-  delay: string;
-  text: string;
+type Card = {
+  title: string;
+  subtitle: string;
   image: string;
-  bodyIndexes: number[]; // which manifesto paragraphs to show in the modal
-  desktop: Slot;
-  mobile: Slot;
+  bodyIndexes: number[];
 };
 
-// Clouds are anchored image-cards along the borders of the manifesto glass card.
-// Click opens a centered modal with the section content.
-const CLOUDS: Cloud[] = [
+const CARDS: Card[] = [
   {
-    variant: "a",
-    delay: "0s",
-    text: "chi",
+    title: "manifesto",
+    subtitle: "Perché esistiamo.",
+    image: cloudManifesto,
+    bodyIndexes: [0, 1, 2, 3, 4, 5, 6, 7, 8, 9],
+  },
+  {
+    title: "chi",
+    subtitle: "Le persone al centro.",
     image: cloudChi,
     bodyIndexes: [0, 1],
-    desktop: { top: "10%", left: "-22%", width: "22vw", maxWidth: "300px", rotate: -4 },
-    mobile:  { top: "8%",  left: "-16%", width: "34vw", maxWidth: "220px", rotate: -4 },
   },
   {
-    variant: "b",
-    delay: "1.1s",
-    text: "cosa",
+    title: "cosa",
+    subtitle: "Un compagno, non un sensore.",
     image: cloudCosa,
     bodyIndexes: [2, 3],
-    desktop: { top: "66%", left: "-23%", width: "22vw", maxWidth: "300px", rotate: 3 },
-    mobile:  { top: "64%", left: "-17%", width: "34vw", maxWidth: "220px", rotate: 3 },
   },
   {
-    variant: "d",
-    delay: "0.6s",
-    text: "come",
+    title: "come",
+    subtitle: "Conversazioni che ascoltano.",
     image: cloudCome,
     bodyIndexes: [4, 5, 6],
-    desktop: { top: "20%", right: "-22%", width: "22vw", maxWidth: "300px", rotate: -2 },
-    mobile:  { top: "18%", right: "-17%", width: "34vw", maxWidth: "220px", rotate: -2 },
   },
   {
-    variant: "a",
-    delay: "1.7s",
-    text: "perché",
+    title: "perché",
+    subtitle: "Rimettere al centro.",
     image: cloudPerche,
     bodyIndexes: [7, 8, 9],
-    desktop: { top: "72%", right: "-23%", width: "22vw", maxWidth: "300px", rotate: 4 },
-    mobile:  { top: "70%", right: "-16%", width: "34vw", maxWidth: "220px", rotate: 4 },
   },
 ];
 
-function useIsDesktop() {
-  const [isDesktop, setIsDesktop] = useState(false);
-  useEffect(() => {
-    const mq = window.matchMedia("(min-width: 640px)");
-    const on = () => setIsDesktop(mq.matches);
-    on();
-    mq.addEventListener("change", on);
-    return () => mq.removeEventListener("change", on);
-  }, []);
-  return isDesktop;
-}
 
-const EASE = "cubic-bezier(0.22,1,0.36,1)";
-const HOVER_TRANSITION =
-  `transform 480ms ${EASE}, opacity 300ms ease, box-shadow 400ms ease`;
-
-function slotToStyle(s: Slot): React.CSSProperties {
-  return {
-    top: s.top,
-    left: s.left,
-    right: s.right,
-    width: s.width,
-    maxWidth: s.maxWidth,
-    transform: `rotate(${s.rotate}deg)`,
-  };
-}
-
-function CloudShape({
-  c,
-  index,
+function StackCard({
+  card,
   onOpen,
-  isDesktop,
 }: {
-  c: Cloud;
-  index: number;
-  onOpen: (i: number) => void;
-  isDesktop: boolean;
+  card: Card;
+  onOpen: () => void;
 }) {
-  const [isHover, setIsHover] = useState(false);
-  const baseSlot = isDesktop ? c.desktop : c.mobile;
-  const style: React.CSSProperties = {
-    ...slotToStyle(baseSlot),
-    transform: isHover
-      ? `rotate(0deg) scale(1.06) translateY(-4px)`
-      : `rotate(${baseSlot.rotate}deg)`,
-    zIndex: isHover ? 50 : 5,
-    opacity: 1,
-    transition: HOVER_TRANSITION,
-    willChange: "transform",
-    animationPlayState: isHover ? "paused" : "running",
-    animationDelay: c.delay,
-  };
-
   return (
     <button
       type="button"
-      onClick={() => onOpen(index)}
-      onMouseEnter={() => setIsHover(true)}
-      onMouseLeave={() => setIsHover(false)}
-      onFocus={() => setIsHover(true)}
-      onBlur={() => setIsHover(false)}
-      aria-label={`Apri ${c.text}`}
-      className={`group absolute float-${c.variant} pointer-events-auto cursor-pointer text-left focus:outline-none focus-visible:ring-2 focus-visible:ring-[#EF9F27] rounded-[20px]`}
-      style={style}
+      onClick={onOpen}
+      aria-label={`Apri ${card.title}`}
+      className="group relative w-full text-left overflow-hidden rounded-[20px] focus:outline-none focus-visible:ring-2 focus-visible:ring-[#EF9F27] transition-transform duration-500 hover:-translate-y-1"
+      style={{
+        aspectRatio: "16 / 10",
+        boxShadow: "0 14px 40px rgba(28,26,20,0.18)",
+        border: "1px solid rgba(255,255,255,0.5)",
+      }}
     >
-      {/* terracotta halo */}
+      <img
+        src={card.image}
+        alt=""
+        loading="lazy"
+        width={1024}
+        height={640}
+        className="absolute inset-0 w-full h-full object-cover transition-transform duration-700 group-hover:scale-105"
+      />
+      {/* bottom gradient for legibility */}
       <div
         aria-hidden
-        className="absolute -inset-8 rounded-[32px] pointer-events-none transition-opacity duration-500"
+        className="absolute inset-0"
         style={{
-          background: "rgba(239, 159, 39, 0.45)",
-          filter: "blur(44px)",
-          opacity: isHover ? 1 : 0.8,
+          background:
+            "linear-gradient(to top, rgba(28,26,20,0.78) 0%, rgba(28,26,20,0.45) 35%, rgba(28,26,20,0) 65%)",
         }}
       />
-
-      {/* image card */}
-      <div
-        className="relative overflow-hidden rounded-[20px]"
-        style={{
-          aspectRatio: "4 / 5",
-          boxShadow: "0 10px 30px rgba(28,26,20,0.18)",
-          border: "1px solid rgba(255,255,255,0.5)",
-        }}
-      >
-        <img
-          src={c.image}
-          alt=""
-          loading="lazy"
-          width={800}
-          height={1000}
-          className="absolute inset-0 w-full h-full object-cover"
-        />
-        {/* bottom gradient for legibility */}
-        <div
-          aria-hidden
-          className="absolute inset-0"
-          style={{
-            background:
-              "linear-gradient(to top, rgba(28,26,20,0.72) 0%, rgba(28,26,20,0.35) 40%, rgba(28,26,20,0) 65%)",
-          }}
-        />
-        {/* title bottom-left */}
+      {/* title + subtitle bottom-left */}
+      <div className="absolute left-6 right-24 bottom-5 sm:left-8 sm:right-28 sm:bottom-7">
         <h3
-          className="absolute left-4 right-16 bottom-3 m-0 font-normal text-white"
+          className="m-0 font-normal text-white"
           style={{
             fontFamily: '"Instrument Serif", serif',
-            fontSize: "clamp(1.75rem, 14cqi, 3.25rem)",
+            fontSize: "clamp(2.25rem, 6.5vw, 4rem)",
             lineHeight: 1.02,
             letterSpacing: "-0.02em",
-            textShadow: "0 2px 12px rgba(0,0,0,0.35)",
+            textShadow: "0 2px 14px rgba(0,0,0,0.4)",
           }}
         >
-          {c.text}
+          {card.title}
         </h3>
-        {/* + button bottom-right */}
-        <span
-          aria-hidden
-          className="absolute right-3 bottom-3 flex items-center justify-center rounded-full text-white"
+        <p
+          className="mt-1 sm:mt-2 m-0 text-white/90"
           style={{
-            width: "clamp(28px, 12cqi, 44px)",
-            height: "clamp(28px, 12cqi, 44px)",
-            background: "rgba(255,255,255,0.22)",
-            backdropFilter: "blur(10px)",
-            WebkitBackdropFilter: "blur(10px)",
-            border: "1px solid rgba(255,255,255,0.5)",
             fontFamily: '"DM Sans", system-ui, sans-serif',
-            fontSize: "clamp(1rem, 6cqi, 1.5rem)",
-            lineHeight: 1,
+            fontSize: "clamp(0.95rem, 1.4vw, 1.15rem)",
+            lineHeight: 1.35,
+            textShadow: "0 1px 8px rgba(0,0,0,0.35)",
           }}
         >
-          +
-        </span>
+          {card.subtitle}
+        </p>
       </div>
+      {/* + button bottom-right */}
+      <span
+        aria-hidden
+        className="absolute right-5 bottom-5 sm:right-7 sm:bottom-7 flex items-center justify-center rounded-full text-white transition-transform duration-500 group-hover:scale-110"
+        style={{
+          width: "clamp(44px, 5vw, 56px)",
+          height: "clamp(44px, 5vw, 56px)",
+          background: "rgba(255,255,255,0.22)",
+          backdropFilter: "blur(10px)",
+          border: "1px solid rgba(255,255,255,0.5)",
+          fontFamily: '"DM Sans", system-ui, sans-serif',
+          fontSize: "1.5rem",
+          lineHeight: 1,
+        }}
+      >
+        +
+      </span>
     </button>
   );
 }
 
-function CloudModal({
-  cloud,
+function CardModal({
+  card,
   onClose,
 }: {
-  cloud: Cloud;
+  card: Card;
   onClose: () => void;
 }) {
   return (
@@ -259,12 +186,11 @@ function CloudModal({
       className="fixed inset-0 z-[100] flex items-center justify-center p-4 sm:p-8 animate-fade-in"
       role="dialog"
       aria-modal="true"
-      aria-label={cloud.text}
+      aria-label={card.title}
       onClick={onClose}
       style={{
         background: "rgba(28,26,20,0.55)",
         backdropFilter: "blur(8px)",
-        WebkitBackdropFilter: "blur(8px)",
       }}
     >
       <div
@@ -301,7 +227,7 @@ function CloudModal({
               letterSpacing: "-0.02em",
             }}
           >
-            {cloud.text}
+            {card.title}
           </h2>
           <div
             className="mt-6 space-y-5"
@@ -312,7 +238,7 @@ function CloudModal({
               lineHeight: 1.65,
             }}
           >
-            {cloud.bodyIndexes.map((idx) => {
+            {card.bodyIndexes.map((idx) => {
               const p = MANIFESTO_PARAGRAPHS[idx];
               if (!p) return null;
               if (p.italic) {
@@ -336,7 +262,6 @@ function CloudModal({
     </div>
   );
 }
-
 
 
 function useBlink(minMs: number, maxMs: number) {
@@ -440,51 +365,8 @@ function FlatEye({ className, closed, pixelSize }: { className?: string; closed:
   );
 }
 
-// Small header logo: two static eyes, ink pixels on cream.
-function EyeLogo() {
-  const px = 2;
-  const gap = 1;
-  return (
-    <div
-      className="flex items-center gap-[6px]"
-      aria-label="R.O.S.S."
-      role="img"
-      style={{
-        filter: "drop-shadow(0 1px 5px rgba(28,26,20,0.12))",
-      }}
-    >
-      {[0, 1].map((i) => (
-        <div
-          key={i}
-          style={{
-            display: "grid",
-            gridTemplateColumns: `repeat(${COLS}, ${px}px)`,
-            gap,
-          }}
-        >
-          {FULL_ROWS.map((row, r) =>
-            row.map((on, c) => (
-              <div
-                key={`${r}-${c}`}
-                style={{
-                  width: px,
-                  height: px,
-                  background: on ? "#1C1A14" : "transparent",
-                }}
-              />
-            ))
-          )}
-        </div>
-      ))}
-    </div>
-  );
-}
-
-
-
 
 function GridBackdrop() {
-  // Graph-paper grid in #97C459 that fades to transparent at the edges (radial mask).
   const line = "rgba(151, 196, 89, 0.22)";
   const cell = "44px";
   return (
@@ -498,8 +380,6 @@ function GridBackdrop() {
           linear-gradient(to bottom, ${line} 1px, transparent 1px)
         `,
         backgroundSize: `${cell} ${cell}, ${cell} ${cell}`,
-        WebkitMaskImage:
-          "radial-gradient(ellipse 55% 55% at 50% 50%, #000 0%, rgba(0,0,0,0.85) 40%, rgba(0,0,0,0.35) 70%, transparent 100%)",
         maskImage:
           "radial-gradient(ellipse 55% 55% at 50% 50%, #000 0%, rgba(0,0,0,0.85) 40%, rgba(0,0,0,0.35) 70%, transparent 100%)",
       }}
@@ -508,31 +388,24 @@ function GridBackdrop() {
 }
 
 
-
 function Index() {
   const [email, setEmail] = useState("");
   const [status, setStatus] = useState<"idle" | "loading" | "success" | "error">("idle");
-  const [activeCloud, setActiveCloud] = useState<number | null>(null);
+  const [activeCard, setActiveCard] = useState<number | null>(null);
   const eyesClosed = useBlink(2500, 6000);
   const pixelSize = usePixelSize();
-  const isDesktop = useIsDesktop();
   const submit = useServerFn(submitLead);
 
-  const activeCloudData = activeCloud !== null ? CLOUDS[activeCloud] : null;
-
-  const openCloud = (i: number) => setActiveCloud(i);
-  const closeCloud = () => setActiveCloud(null);
+  const activeCardData = activeCard !== null ? CARDS[activeCard] : null;
 
   useEffect(() => {
-    if (activeCloud === null) return;
+    if (activeCard === null) return;
     const onKey = (e: KeyboardEvent) => {
-      if (e.key === "Escape") setActiveCloud(null);
+      if (e.key === "Escape") setActiveCard(null);
     };
     window.addEventListener("keydown", onKey);
     return () => window.removeEventListener("keydown", onKey);
-  }, [activeCloud]);
-
-
+  }, [activeCard]);
 
   const onSubmit = async (e: FormEvent) => {
     e.preventDefault();
@@ -554,9 +427,7 @@ function Index() {
   return (
     <main
       className="relative w-full overflow-x-hidden"
-      style={{
-        background: "#F6F3ED",
-      }}
+      style={{ background: "#F6F3ED" }}
     >
       {/* Grain overlay */}
       <div
@@ -573,7 +444,6 @@ function Index() {
 
       {/* HERO */}
       <section className="relative z-10 h-screen w-full overflow-hidden">
-        {/* Centered content */}
         <div className="relative z-20 h-full flex flex-col items-center justify-center px-5 sm:px-6 pb-[18vh] sm:pb-[20vh]">
           <div className="relative w-full max-w-3xl mt-[10vh] sm:mt-[12vh]">
             <h1
@@ -637,10 +507,8 @@ function Index() {
           </div>
         </div>
 
-        {/* Faded grid background */}
         <GridBackdrop />
 
-        {/* Eyes + scroll hint grouped below the headline */}
         <div className="absolute top-[78%] left-1/2 -translate-x-1/2 z-30 flex flex-col items-center gap-6 pointer-events-none">
           <div className="flex items-start gap-[10vw] sm:gap-[12vw]">
             <FlatEye closed={eyesClosed} pixelSize={pixelSize} />
@@ -655,76 +523,16 @@ function Index() {
         </div>
       </section>
 
-      {/* NARRATIVE */}
-      <section className="relative w-full py-24 sm:py-32 px-6 sm:px-8">
-        <div className="relative w-[58vw] max-w-5xl mx-auto">
-          {/* Sizer: keeps the wrapper the same height as the full manifesto */}
-          <div
-            aria-hidden
-            className="invisible pointer-events-none rounded-[20px] p-6 sm:p-12 space-y-6"
-            style={{
-              fontFamily: '"DM Sans", system-ui, sans-serif',
-              fontSize: "clamp(1.1rem, 1.3vw, 1.3rem)",
-              lineHeight: 1.65,
-            }}
-          >
-            {MANIFESTO_PARAGRAPHS.map((p, i) => (
-              <p key={i}>{p.text}</p>
-            ))}
-          </div>
-
-          {/* Cloud cards — anchored along the manifesto borders, click opens modal */}
-          {CLOUDS.map((c, i) => (
-            <CloudShape
-              key={i}
-              c={c}
-              index={i}
-              onOpen={openCloud}
-              isDesktop={isDesktop}
-            />
+      {/* STACKED CARDS */}
+      <section className="relative z-10 w-full py-20 sm:py-28 px-5 sm:px-6">
+        <div className="mx-auto max-w-[640px] flex flex-col gap-5 sm:gap-6">
+          {CARDS.map((c, i) => (
+            <StackCard key={i} card={c} onOpen={() => setActiveCard(i)} />
           ))}
-
-          {/* Manifesto glass card — fixed in place */}
-          <div
-            className="absolute inset-0"
-            style={{ zIndex: 10 }}
-          >
-            <div
-              className="relative w-full rounded-[20px] p-6 sm:p-12 space-y-6"
-              style={{
-                background: "rgba(255,255,255,0.55)",
-                backdropFilter: "blur(20px) saturate(140%)",
-                WebkitBackdropFilter: "blur(20px) saturate(140%)",
-                border: "1px solid rgba(255,255,255,0.5)",
-                boxShadow: "0 24px 70px rgba(28, 26, 20, 0.12)",
-                fontFamily: '"DM Sans", system-ui, sans-serif',
-                fontSize: "clamp(1.1rem, 1.3vw, 1.3rem)",
-                fontWeight: 400,
-                lineHeight: 1.65,
-                letterSpacing: "-0.005em",
-                color: "#1C1A14",
-              }}
-            >
-              {MANIFESTO_PARAGRAPHS.map((p, i) =>
-                p.italic ? (
-                  <p
-                    key={i}
-                    className="italic"
-                    style={{ fontFamily: 'Georgia, "Times New Roman", serif' }}
-                  >
-                    <strong>{p.text}</strong>
-                  </p>
-                ) : (
-                  <p key={i} dangerouslySetInnerHTML={{ __html: p.html ?? p.text }} />
-                )
-              )}
-            </div>
-          </div>
         </div>
 
-        {/* Closing line */}
         <div
-          className="relative z-10 max-w-2xl mx-auto mt-10 sm:mt-14 text-center"
+          className="relative z-10 max-w-2xl mx-auto mt-14 sm:mt-20 text-center"
           style={{
             fontFamily: 'Georgia, "Times New Roman", serif',
             color: "#1C1A14",
@@ -736,10 +544,9 @@ function Index() {
         </div>
       </section>
 
-      {activeCloudData && (
-        <CloudModal cloud={activeCloudData} onClose={closeCloud} />
+      {activeCardData && (
+        <CardModal card={activeCardData} onClose={() => setActiveCard(null)} />
       )}
     </main>
   );
 }
-
