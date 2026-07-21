@@ -1,37 +1,33 @@
-## Nuovo layout card (stile Cordially)
+## Fix: layout responsive differenziato
 
-Sostituire completamente l'attuale struttura "manifesto centrale + 4 card laterali" con **5 card impilate verticalmente**, tutte della stessa dimensione, in stile Cordially (immagine allegata).
+La modifica precedente (5 card impilate) deve valere **solo su mobile**. Su desktop va ripristinato il layout precedente (manifesto glass card centrale + 4 cloud card ancorate ai bordi con hover peek e modale al click).
 
-### Struttura
-- 5 card in una colonna centrata (max-width ~640px), una sotto l'altra con gap uniforme (~24px).
-- Ogni card: stessa altezza (~280–320px desktop, ~220px mobile), border-radius 20px, immagine full-bleed di sfondo, overlay scuro in basso per leggibilità.
-- Contenuto card: titolo bianco grande (`Instrument Serif`) in basso-sinistra, breve sottotitolo/eyebrow sotto il titolo, bottone circolare "+" glass in basso-destra.
-- Le 5 card:
-  1. **Manifesto** — nuova immagine di sfondo (generata)
-  2. **Chi** — `cloud-chi.jpg`
-  3. **Cosa** — `cloud-cosa.jpg`
-  4. **Come** — `cloud-come.jpg`
-  5. **Perché** — `cloud-perche.jpg`
+### Approccio
+- Mantenere entrambe le implementazioni nello stesso file `src/routes/index.tsx`.
+- Usare l'hook `useIsDesktop()` (breakpoint 640px) — va reintrodotto — per switchare tra i due rendering nella sezione narrative.
+- Alternativa CSS: `hidden sm:block` / `sm:hidden` sui due wrapper. Preferisco questa via, così evito flicker SSR e non serve JS di gating.
 
-### Interazione
-- Click sulla card (o sul "+") → apre `CloudModal` esistente, centrato, con backdrop blur e testo completo della sezione.
-- Manifesto usa gli stessi `MANIFESTO_PARAGRAPHS` attualmente mostrati nella glass card.
-- Chiusura con ×, Esc, click sullo sfondo (già implementato).
+### Desktop (≥ 640px) — ripristino
+Ripristinare esattamente il blocco precedente:
+- Wrapper `w-[58vw] max-w-5xl` centrato con sizer invisibile che dà l'altezza al contenitore.
+- 4 `CloudShape` (chi, cosa, come, perché) posizionate in absolute lungo i bordi con `desktop` slot (top/left/right/rotate) e halo terracotta, hover peek (z-index 50, scale, rotate 0), floating animation `float-a/b/c/d`.
+- Glass card manifesto fissa al centro (`rgba(255,255,255,0.55)`, backdrop-blur, boxShadow attuale) che contiene i `MANIFESTO_PARAGRAPHS` inline (con `.ross-highlight`, italic Georgia per il paragrafo italic).
+- Click sulla cloud → apre `CardModal` (già esistente).
+- Nessuna manifesto card fra le 4 cloud su desktop: il manifesto è la glass card centrale, come prima.
 
-### Rimozioni
-- Rimuovere completamente: glass card manifesto fissa al centro, animazioni di swap/hover peek, halo terracotta di peek, offset/rotazioni di posizionamento assoluto delle cloud, floating animation.
-- Rimuovere lo stato `activeCloud`-relativo alla swap; mantenere solo `openCloud` per il modale.
+### Mobile (< 640px) — resta com'è ora
+- Colonna `max-w-[640px]` con 5 `StackCard` (manifesto + 4) impilate, aspect 16/10, click apre modale.
 
-### Cosa resta invariato
-- Hero (headline, form email, halo terracotta form).
-- Occhi FlatEye + indicatore scroll.
-- Sezione finale scura.
-- Font (Georgia/DM Sans/Instrument Serif), palette (cream/terracotta/sage/ink), border-radius 18–20px.
-- `CloudModal` e i testi `MANIFESTO_PARAGRAPHS`.
+### Componenti/stato
+- Reintrodurre `CloudShape` (image-card ancorato con slot desktop, halo, hover peek) accanto al `StackCard`.
+- Reintrodurre `type Cloud`/`Slot` e array `CLOUDS` (solo 4: chi/cosa/come/perché) con le stesse coordinate desktop del layout precedente.
+- `CARDS` per mobile resta com'è (5 elementi, incluso manifesto).
+- Modale unico `CardModal` condiviso: apertura da entrambi i layout tramite lo stesso stato `activeCard`. Su desktop, cliccando una cloud, si passa l'indice della card corrispondente in `CARDS` (offset +1, perché mobile ha manifesto a indice 0).
+- Chiusura Esc/× invariata.
 
-### Dettagli tecnici
-- Nuovo asset `src/assets/cloud-manifesto.jpg` generato via `imagegen` (editoriale, tono caldo, coerente con le altre 4).
-- `CLOUDS` array esteso a 5 elementi con `{ id, title, subtitle, image, bodyIndex }`; `manifesto` avrà `bodyIndex` che punta ai paragrafi manifesto (nuova sezione dedicata in `MANIFESTO_PARAGRAPHS` map, oppure campo `body` inline).
-- `CloudShape` semplificata: nessun position absolute, nessuna rotazione, nessuna animazione floating; solo hover scale leggero (1.02) + transizione shadow.
-- Layout: `<div className="mx-auto max-w-[640px] flex flex-col gap-6 px-4">`.
-- Mantenere responsive: su mobile stesse card, altezza ridotta.
+### Cosa NON cambia
+- Hero, form email, halo terracotta, occhi, scroll indicator, sezione finale scura, palette, font, `MANIFESTO_PARAGRAPHS`, `CloudModal`.
+- Nessun asset nuovo (l'immagine `cloud-manifesto.jpg` resta in progetto, usata solo dal layout mobile).
+
+### File toccato
+- `src/routes/index.tsx` — unico file modificato.

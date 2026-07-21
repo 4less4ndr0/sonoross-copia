@@ -91,6 +91,171 @@ const CARDS: Card[] = [
 ];
 
 
+// Desktop-only cloud cards (chi/cosa/come/perché) — indices map to CARDS[1..4]
+type Slot = {
+  top: string;
+  left?: string;
+  right?: string;
+  width: string;
+  maxWidth?: string;
+  rotate: number;
+};
+
+type Cloud = {
+  variant: "a" | "b" | "c" | "d";
+  delay: string;
+  text: string;
+  image: string;
+  cardIndex: number; // index into CARDS for the modal
+  slot: Slot;
+};
+
+const CLOUDS: Cloud[] = [
+  {
+    variant: "a",
+    delay: "0s",
+    text: "chi",
+    image: cloudChi,
+    cardIndex: 1,
+    slot: { top: "10%", left: "-22%", width: "22vw", maxWidth: "300px", rotate: -4 },
+  },
+  {
+    variant: "b",
+    delay: "1.1s",
+    text: "cosa",
+    image: cloudCosa,
+    cardIndex: 2,
+    slot: { top: "66%", left: "-23%", width: "22vw", maxWidth: "300px", rotate: 3 },
+  },
+  {
+    variant: "d",
+    delay: "0.6s",
+    text: "come",
+    image: cloudCome,
+    cardIndex: 3,
+    slot: { top: "20%", right: "-22%", width: "22vw", maxWidth: "300px", rotate: -2 },
+  },
+  {
+    variant: "a",
+    delay: "1.7s",
+    text: "perché",
+    image: cloudPerche,
+    cardIndex: 4,
+    slot: { top: "72%", right: "-23%", width: "22vw", maxWidth: "300px", rotate: 4 },
+  },
+];
+
+const EASE = "cubic-bezier(0.22,1,0.36,1)";
+const HOVER_TRANSITION =
+  `transform 480ms ${EASE}, opacity 300ms ease, box-shadow 400ms ease`;
+
+function CloudShape({
+  c,
+  onOpen,
+}: {
+  c: Cloud;
+  onOpen: (i: number) => void;
+}) {
+  const [isHover, setIsHover] = useState(false);
+  const s = c.slot;
+  const style: React.CSSProperties = {
+    top: s.top,
+    left: s.left,
+    right: s.right,
+    width: s.width,
+    maxWidth: s.maxWidth,
+    transform: isHover
+      ? `rotate(0deg) scale(1.06) translateY(-4px)`
+      : `rotate(${s.rotate}deg)`,
+    zIndex: isHover ? 50 : 5,
+    opacity: 1,
+    transition: HOVER_TRANSITION,
+    willChange: "transform",
+    animationPlayState: isHover ? "paused" : "running",
+    animationDelay: c.delay,
+  };
+
+  return (
+    <button
+      type="button"
+      onClick={() => onOpen(c.cardIndex)}
+      onMouseEnter={() => setIsHover(true)}
+      onMouseLeave={() => setIsHover(false)}
+      onFocus={() => setIsHover(true)}
+      onBlur={() => setIsHover(false)}
+      aria-label={`Apri ${c.text}`}
+      className={`group absolute float-${c.variant} pointer-events-auto cursor-pointer text-left focus:outline-none focus-visible:ring-2 focus-visible:ring-[#EF9F27] rounded-[20px]`}
+      style={style}
+    >
+      <div
+        aria-hidden
+        className="absolute -inset-8 rounded-[32px] pointer-events-none transition-opacity duration-500"
+        style={{
+          background: "rgba(239, 159, 39, 0.45)",
+          filter: "blur(44px)",
+          opacity: isHover ? 1 : 0.8,
+        }}
+      />
+      <div
+        className="relative overflow-hidden rounded-[20px]"
+        style={{
+          aspectRatio: "4 / 5",
+          boxShadow: "0 10px 30px rgba(28,26,20,0.18)",
+          border: "1px solid rgba(255,255,255,0.5)",
+        }}
+      >
+        <img
+          src={c.image}
+          alt=""
+          loading="lazy"
+          width={800}
+          height={1000}
+          className="absolute inset-0 w-full h-full object-cover"
+        />
+        <div
+          aria-hidden
+          className="absolute inset-0"
+          style={{
+            background:
+              "linear-gradient(to top, rgba(28,26,20,0.72) 0%, rgba(28,26,20,0.35) 40%, rgba(28,26,20,0) 65%)",
+          }}
+        />
+        <h3
+          className="absolute left-4 right-16 bottom-3 m-0 font-normal text-white"
+          style={{
+            fontFamily: '"Instrument Serif", serif',
+            fontSize: "clamp(1.75rem, 14cqi, 3.25rem)",
+            lineHeight: 1.02,
+            letterSpacing: "-0.02em",
+            textShadow: "0 2px 12px rgba(0,0,0,0.35)",
+          }}
+        >
+          {c.text}
+        </h3>
+        <span
+          aria-hidden
+          className="absolute right-3 bottom-3 flex items-center justify-center rounded-full text-white"
+          style={{
+            width: "clamp(28px, 12cqi, 44px)",
+            height: "clamp(28px, 12cqi, 44px)",
+            background: "rgba(255,255,255,0.22)",
+            backdropFilter: "blur(10px)",
+            border: "1px solid rgba(255,255,255,0.5)",
+            fontFamily: '"DM Sans", system-ui, sans-serif',
+            fontSize: "clamp(1rem, 6cqi, 1.5rem)",
+            lineHeight: 1,
+          }}
+        >
+          +
+        </span>
+      </div>
+    </button>
+  );
+}
+
+
+
+
 function StackCard({
   card,
   onOpen,
@@ -523,12 +688,71 @@ function Index() {
         </div>
       </section>
 
-      {/* STACKED CARDS */}
+      {/* CARDS section — mobile: stacked; desktop: manifesto glass + floating clouds */}
       <section className="relative z-10 w-full py-20 sm:py-28 px-5 sm:px-6">
-        <div className="mx-auto max-w-[640px] flex flex-col gap-5 sm:gap-6">
+        {/* MOBILE: 5 stacked cards */}
+        <div className="sm:hidden mx-auto max-w-[640px] flex flex-col gap-5">
           {CARDS.map((c, i) => (
             <StackCard key={i} card={c} onOpen={() => setActiveCard(i)} />
           ))}
+        </div>
+
+        {/* DESKTOP: manifesto glass card at center with 4 floating cloud cards around */}
+        <div className="hidden sm:block">
+          <div className="relative w-[58vw] max-w-5xl mx-auto">
+            {/* Sizer: keeps wrapper the same height as the manifesto */}
+            <div
+              aria-hidden
+              className="invisible pointer-events-none rounded-[20px] p-6 sm:p-12 space-y-6"
+              style={{
+                fontFamily: '"DM Sans", system-ui, sans-serif',
+                fontSize: "clamp(1.1rem, 1.3vw, 1.3rem)",
+                lineHeight: 1.65,
+              }}
+            >
+              {MANIFESTO_PARAGRAPHS.map((p, i) => (
+                <p key={i}>{p.text}</p>
+              ))}
+            </div>
+
+            {/* Cloud cards along the manifesto borders */}
+            {CLOUDS.map((c, i) => (
+              <CloudShape key={i} c={c} onOpen={(idx) => setActiveCard(idx)} />
+            ))}
+
+            {/* Manifesto glass card */}
+            <div className="absolute inset-0" style={{ zIndex: 10 }}>
+              <div
+                className="relative w-full rounded-[20px] p-6 sm:p-12 space-y-6"
+                style={{
+                  background: "rgba(255,255,255,0.55)",
+                  backdropFilter: "blur(20px) saturate(140%)",
+                  border: "1px solid rgba(255,255,255,0.5)",
+                  boxShadow: "0 24px 70px rgba(28, 26, 20, 0.12)",
+                  fontFamily: '"DM Sans", system-ui, sans-serif',
+                  fontSize: "clamp(1.1rem, 1.3vw, 1.3rem)",
+                  fontWeight: 400,
+                  lineHeight: 1.65,
+                  letterSpacing: "-0.005em",
+                  color: "#1C1A14",
+                }}
+              >
+                {MANIFESTO_PARAGRAPHS.map((p, i) =>
+                  p.italic ? (
+                    <p
+                      key={i}
+                      className="italic"
+                      style={{ fontFamily: 'Georgia, "Times New Roman", serif' }}
+                    >
+                      <strong>{p.text}</strong>
+                    </p>
+                  ) : (
+                    <p key={i} dangerouslySetInnerHTML={{ __html: p.html ?? p.text }} />
+                  )
+                )}
+              </div>
+            </div>
+          </div>
         </div>
 
         <div
@@ -543,6 +767,7 @@ function Index() {
           <strong className="ross-highlight">Per questo R.O.S.S. non sorveglia. Dà voce.</strong>
         </div>
       </section>
+
 
       {activeCardData && (
         <CardModal card={activeCardData} onClose={() => setActiveCard(null)} />
