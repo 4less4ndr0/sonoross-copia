@@ -1,18 +1,38 @@
-## Diagnosi
+## Obiettivo
+Spostare la coppia di occhi pixel-art dal logo in alto a sinistra al centro dell’hero, sopra la frase "Perché nessuno dovrebbe invecchiare solo.", ingrandendoli in modo proporzionato all’area del titolo e mantenendo l’animazione di blink sincrona.
 
-Il hook `useBlink` funziona ed è collegato: `eyesClosed` viene passato a entrambi i `FlatEye`. Il problema è nel rendering dello stato "chiuso" combinato con la nuova dimensione ridotta (pixelSize=3).
+## Modifiche previste
 
-Quando `closed` è true, `FlatEye` sostituisce tutte le righe con zeri tranne le righe 6 e 7, che vengono forzate a `[0,0,0,1,1,0,0,0]`. A pixelSize=3 significa che durante il blink si vedono solo 2 pixel bianchi larghi 6px — praticamente invisibili sul cream. Prima, con occhi grandi, quei 2 pixel erano abbastanza grossi da leggersi come "occhio chiuso"; ora scompaiono e basta, quindi sembra che il blink non avvenga.
+### 1. Posizionamento
+- Spostare i due `FlatEye` dentro il contenitore hero, sopra l’`<h1>`.
+- Centrarli orizzontalmente con `flex justify-center`.
+- Lasciarli `pointer-events-none` per non interferire con form/email.
 
-## Modifica proposta (solo `src/routes/index.tsx`, funzione `FlatEye`)
+### 2. Dimensione
+- Sostituire il `pixelSize={3}` fisso con una dimensione responsiva.
+- Usare un valore scalato in base alla viewport (es. `clamp`-like tramite `usePixelSize` o una nuova hook dedicata) in modo che:
+  - Desktop: gli occhi siano visibili ma non dominanti, proporzionati alla larghezza del titolo.
+  - Mobile: rimangano centrati e leggibili, ridotti rispetto al desktop.
+- Target indicativo: larghezza occhio ~180–260 px desktop, ~110–140 px mobile.
 
-Cambiare la rappresentazione dello stato chiuso da "2 pixel centrali" a una fessura orizzontale larga quanto l'occhio, così a qualsiasi dimensione il blink resta visibile:
+### 3. Stile e contrasto
+- Mantenere colore bianco, stroke sottile ink e drop-shadow esistenti.
+- Eventualmente rafforzare leggermente stroke/ombra se a dimensione maggiore servisse più definizione.
 
-- Righe 6 e 7 (le due centrali) → `[0, 1, 1, 1, 1, 1, 1, 0]` invece di `[0, 0, 0, 1, 1, 0, 0, 0]`.
-- Tutte le altre righe restano vuote come ora.
+### 4. Blink
+- Mantenere `useBlink(1200, 2800)` e passare lo stesso stato `closed` a entrambi gli occhi per il blink sincrono.
+- Non modificare la logica di chiusura.
 
-Risultato: durante il blink l'occhio si "schiaccia" in una linea orizzontale che copre la stessa larghezza dell'occhio aperto — leggibile anche a pixelSize=3.
+### 5. Layout e spaziature
+- Aggiungere margine inferiore tra occhi e titolo (`mb-4`/`mb-6`) e verificare che non tocchino il form né le card sotto.
+- Verificare che il layout desktop e mobile non rompa il centratura del titolo e del form email.
 
-## Fuori scopo
+## File coinvolti
+- `src/routes/index.tsx`
 
-Nessuna modifica a posizione, dimensione, timing del blink, o al resto della pagina.
+## Verifica
+- Anteprima desktop e mobile per confermare che:
+  - Gli occhi sono centrati sopra il headline.
+  - Il blink avviene regolarmente e in modo visibile.
+  - Non si sovrappongono al testo o al form.
+  - Il typecheck/build passa senza errori.
