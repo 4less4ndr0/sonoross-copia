@@ -266,7 +266,7 @@ function StackCard({
           boxShadow: "0 14px 40px rgba(28,26,20,0.18)",
           border: "1px solid rgba(255,255,255,0.5)",
         }}
-      >
+      />
 
       <img
         src={card.image}
