@@ -611,7 +611,7 @@ function Index() {
   const [email, setEmail] = useState("");
   const [status, setStatus] = useState<"idle" | "loading" | "success" | "error">("idle");
   const [activeCard, setActiveCard] = useState<number | null>(null);
-  const [activeCloudIndex, setActiveCloudIndex] = useState<number | null>(null);
+  
   const eyesClosed = useBlink(2500, 6000);
   const pixelSize = usePixelSize();
   const submit = useServerFn(submitLead);
