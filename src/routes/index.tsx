@@ -697,7 +697,7 @@ function Index() {
         <div className="relative z-20 h-full flex flex-col items-center justify-center px-5 sm:px-6 pb-[18vh] sm:pb-[20vh]">
           <div className="relative w-full max-w-3xl mt-[5vh] sm:mt-[7vh]">
             {/* Eyes — centered above the headline */}
-            <div className="flex justify-center items-end gap-3 sm:gap-5 mb-2 sm:mb-4 pointer-events-none">
+            <div className="flex justify-center items-end gap-3 sm:gap-5 mb-6 sm:mb-10 pointer-events-none">
               <FlatEye closed={eyesClosed} pixelSize={eyePixelSize} />
               <FlatEye closed={eyesClosed} pixelSize={eyePixelSize} />
             </div>
