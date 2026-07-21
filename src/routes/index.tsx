@@ -536,7 +536,10 @@ function CardModal({
             alt={card.title}
             loading="lazy"
             className="w-full object-cover rounded-[16px] mt-6"
-            style={{ height: "clamp(200px, 40vw, 360px)" }}
+            style={{
+              height: "clamp(200px, 40vw, 360px)",
+              objectPosition: card.title === "manifesto" ? "50% 72%" : "center",
+            }}
           />
 
           <div
