@@ -374,13 +374,13 @@ function StackCard({
 
       {/* Glass frame */}
       <span
-        className="relative z-10 block w-full rounded-[28px] p-3.5 sm:p-5"
+        className="relative z-10 block w-full rounded-[24px] p-2 sm:p-2.5"
         style={{
-          background: "rgba(255, 255, 255, 0.38)",
-          backdropFilter: "blur(18px)",
-          border: "2px solid rgba(255, 255, 255, 0.72)",
+          background: "rgba(255, 255, 255, 0.36)",
+          backdropFilter: "blur(16px)",
+          border: "1px solid rgba(255, 255, 255, 0.62)",
           boxShadow:
-            "0 24px 60px rgba(28,26,20,0.14), inset 0 1px 0 rgba(255,255,255,0.9)",
+            "0 20px 50px rgba(28,26,20,0.12), inset 0 1px 0 rgba(255,255,255,0.85)",
         }}
       >
         {/* Inner photo card */}
