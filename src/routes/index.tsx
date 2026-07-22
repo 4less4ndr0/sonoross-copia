@@ -309,7 +309,7 @@ function LeadForm() {
       <div
         aria-hidden
         className="absolute -inset-2 rounded-full pointer-events-none"
-        style={{ background: "rgba(239, 159, 39, 0.40)", filter: "blur(14px)" }}
+        style={{ background: "rgba(232, 245, 211, 0.55)", filter: "blur(16px)" }}
       />
       <form
         onSubmit={onSubmit}
