@@ -359,103 +359,115 @@ function StackCard({
       type="button"
       onClick={onOpen}
       aria-label={`Apri ${card.title}`}
-      className="group relative w-full text-left rounded-[20px] focus:outline-none focus-visible:ring-2 focus-visible:ring-[#EF9F27] transition-transform duration-300 ease-out hover:-translate-y-1 active:scale-[0.98]"
-      style={{
-        aspectRatio: "16 / 10",
-      }}
+      className="group relative w-full text-left rounded-[24px] focus:outline-none focus-visible:ring-2 focus-visible:ring-[#EF9F27] transition-transform duration-300 ease-out hover:-translate-y-1 active:scale-[0.98]"
     >
-      {/* Terracotta halo — hover only */}
+      {/* Terracotta halo — wraps the whole framed card on hover */}
       <span
         aria-hidden
-        className="absolute -inset-6 rounded-[32px] pointer-events-none opacity-0 group-hover:opacity-100 transition-opacity duration-500"
+        className="absolute -inset-7 rounded-[40px] pointer-events-none opacity-0 group-hover:opacity-100 transition-opacity duration-500"
         style={{
-          background: "rgba(239, 159, 39, 0.55)",
-          filter: "blur(40px)",
+          background: "rgba(239, 159, 39, 0.50)",
+          filter: "blur(44px)",
           zIndex: 0,
         }}
       />
+
+      {/* Glass frame */}
       <span
-        className="absolute inset-0 rounded-[20px] overflow-hidden block"
+        className="relative z-10 block w-full rounded-[24px] p-2 sm:p-2.5"
         style={{
-          boxShadow: "0 14px 40px rgba(28,26,20,0.18)",
-          border: "1px solid rgba(255,255,255,0.5)",
+          background: "rgba(255, 255, 255, 0.36)",
+          backdropFilter: "blur(16px)",
+          border: "1px solid rgba(255, 255, 255, 0.62)",
+          boxShadow:
+            "0 20px 50px rgba(28,26,20,0.12), inset 0 1px 0 rgba(255,255,255,0.85)",
         }}
       >
-        <img
-          src={card.image}
-          alt=""
-          loading="lazy"
-          width={1024}
-          height={640}
-          className="absolute inset-0 w-full h-full object-cover transition-transform duration-700 group-hover:scale-105"
-          style={{
-            objectPosition:
-              card.title === "Manifesto"
-                ? "50% 55%"
-                : card.title === "Cosa"
-                  ? "30% 62%"
-                  : "center",
-          }}
-        />
-        {/* bottom gradient for legibility */}
+        {/* Inner photo card */}
         <span
-          aria-hidden
-          className="absolute inset-0 block"
+          className="relative block w-full rounded-[20px] overflow-hidden"
           style={{
-            background:
-              "linear-gradient(to top, rgba(28,26,20,0.78) 0%, rgba(28,26,20,0.45) 35%, rgba(28,26,20,0) 65%)",
-          }}
-        />
-        {/* title + subtitle bottom-left */}
-        <span className="absolute left-6 right-24 bottom-5 sm:left-8 sm:right-28 sm:bottom-7 block">
-          <span
-            className="m-0 font-normal text-white block"
-            style={{
-              fontFamily: '"Instrument Serif", serif',
-              fontSize: "clamp(2.25rem, 6.5vw, 4rem)",
-              lineHeight: 1.02,
-              letterSpacing: "-0.02em",
-              textShadow: "0 2px 14px rgba(0,0,0,0.4)",
-            }}
-          >
-            {card.title}
-          </span>
-          <span
-            className="mt-1 sm:mt-2 m-0 text-white/90 block"
-            style={{
-              fontFamily: '"DM Sans", system-ui, sans-serif',
-              fontSize: "clamp(0.95rem, 1.4vw, 1.15rem)",
-              lineHeight: 1.35,
-              textShadow: "0 1px 8px rgba(0,0,0,0.35)",
-            }}
-          >
-            {card.subtitle}
-          </span>
-        </span>
-        {/* arrow bottom-right */}
-        <span
-          aria-hidden
-          className="absolute right-5 bottom-5 sm:right-7 sm:bottom-7 flex items-center justify-center rounded-full text-white transition-transform duration-500 group-hover:scale-110"
-          style={{
-            width: "clamp(44px, 5vw, 56px)",
-            height: "clamp(44px, 5vw, 56px)",
-            background: "rgba(255,255,255,0.22)",
-            backdropFilter: "blur(10px)",
+            aspectRatio: "16 / 10",
+            boxShadow: "0 14px 40px rgba(28,26,20,0.16)",
             border: "1px solid rgba(255,255,255,0.5)",
           }}
         >
-          <svg
-            viewBox="0 0 24 24"
-            fill="none"
-            stroke="currentColor"
-            strokeWidth="2"
-            strokeLinecap="round"
-            strokeLinejoin="round"
-            style={{ width: "44%", height: "44%" }}
+          <img
+            src={card.image}
+            alt=""
+            loading="lazy"
+            width={1024}
+            height={640}
+            className="absolute inset-0 w-full h-full object-cover transition-transform duration-700 group-hover:scale-105"
+            style={{
+              objectPosition:
+                card.title === "Manifesto"
+                  ? "50% 55%"
+                  : card.title === "Cosa"
+                    ? "30% 62%"
+                    : "center",
+            }}
+          />
+          {/* bottom gradient for legibility */}
+          <span
+            aria-hidden
+            className="absolute inset-0 block"
+            style={{
+              background:
+                "linear-gradient(to top, rgba(28,26,20,0.78) 0%, rgba(28,26,20,0.45) 35%, rgba(28,26,20,0) 65%)",
+            }}
+          />
+          {/* title + subtitle bottom-left */}
+          <span className="absolute left-5 right-20 bottom-4 sm:left-7 sm:right-24 sm:bottom-6 block">
+            <span
+              className="m-0 font-normal text-white block"
+              style={{
+                fontFamily: '"Instrument Serif", serif',
+                fontSize: "clamp(2.25rem, 6.5vw, 4rem)",
+                lineHeight: 1.02,
+                letterSpacing: "-0.02em",
+                textShadow: "0 2px 14px rgba(0,0,0,0.4)",
+              }}
+            >
+              {card.title}
+            </span>
+            <span
+              className="mt-1 sm:mt-2 m-0 text-white/90 block"
+              style={{
+                fontFamily: '"DM Sans", system-ui, sans-serif',
+                fontSize: "clamp(0.95rem, 1.4vw, 1.15rem)",
+                lineHeight: 1.35,
+                textShadow: "0 1px 8px rgba(0,0,0,0.35)",
+              }}
+            >
+              {card.subtitle}
+            </span>
+          </span>
+          {/* arrow bottom-right */}
+          <span
+            aria-hidden
+            className="absolute right-4 bottom-4 sm:right-6 sm:bottom-6 flex items-center justify-center rounded-full text-white transition-transform duration-500 group-hover:scale-110"
+            style={{
+              width: "clamp(44px, 5vw, 56px)",
+              height: "clamp(44px, 5vw, 56px)",
+              background: "rgba(255,255,255,0.22)",
+              backdropFilter: "blur(10px)",
+              border: "1px solid rgba(255,255,255,0.5)",
+            }}
           >
-            <path d="M7 17 17 7" />
-            <path d="M8 7h9v9" />
-          </svg>
+            <svg
+              viewBox="0 0 24 24"
+              fill="none"
+              stroke="currentColor"
+              strokeWidth="2"
+              strokeLinecap="round"
+              strokeLinejoin="round"
+              style={{ width: "44%", height: "44%" }}
+            >
+              <path d="M7 17 17 7" />
+              <path d="M8 7h9v9" />
+            </svg>
+          </span>
         </span>
       </span>
     </button>
