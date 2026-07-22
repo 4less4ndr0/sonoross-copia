@@ -133,6 +133,15 @@ const PERCHE_PARAGRAPHS: string[] = [
   "È una fase che non aspetta chi è pronto, arriva comunque. Noi vogliamo costruire qualcosa di buono ad aspettarla.",
 ];
 
+const COSA_PARAGRAPHS: string[] = [
+  "In questo momento stiamo imparando a conoscere il problema meglio di chiunque altro. Non partiamo da quello che pensiamo di sapere: partiamo da chi questo problema lo vive, lo osserva, lo affronta ogni giorno. Parliamo con chi ci lavora, con le famiglie che si dividono tra vita, lavoro e preoccupazione, con chi la solitudine non la studia sui libri ma la sente addosso. Ogni conversazione cambia qualcosa di quello che pensavamo di aver capito il giorno prima.",
+  "Potremmo costruire in un ufficio, decidere a tavolino cosa serve e presentarlo al mondo già finito. Sarebbe più veloce, ma un prodotto pensato per chi vive isolato, deciso senza mai ascoltare chi quell'isolamento lo vive, rischierebbe di ripetere lo stesso errore che vogliamo correggere. Per questo lavoriamo su due binari insieme: da una parte la validazione, capire e correggere la rotta; dall'altra lo sviluppo, costruire e sbagliare in fretta su qualcosa di reale invece che discuterne su qualcosa di ipotetico.",
+  "Stiamo lavorando a un prototipo. Non un'idea su carta, non una promessa in un pitch deck: qualcosa che esiste, che si può toccare, su cui possiamo raccogliere una reazione vera invece di un'opinione su un'ipotesi. Ogni versione è pensata per essere messa in discussione, non difesa. Se qualcosa non serve, la togliamo; se manca qualcosa che non avevamo previsto, la aggiungiamo. Preferiamo una direzione giusta trovata con qualche correzione a una direzione sbagliata seguita con sicurezza.",
+  "Crediamo che il modo in cui affrontiamo questo percorso conti quanto il risultato. Crediamo che nessuna soluzione possa funzionare se le persone restano fuori dalla stanza in cui si decide. Crediamo che la verità su cosa sappiamo, e cosa non sappiamo ancora, valga più di un annuncio perfetto ma vuoto.",
+  "Se hai una voce in questo mondo che tu ci lavori, che tu ci viva accanto, o che tu voglia solo dirci cosa ne pensi, ci interessa ascoltarla. Lasciaci la tua mail: non finirà in una newsletter automatica, ti contattiamo noi, di persona, per capire se hai voglia di aiutarci a definire meglio la direzione che stiamo prendendo. Non ti chiediamo di comprare niente. Ti chiediamo di aiutarci a non sbagliare.",
+  "E se quello che ti interessa è provare il prototipo appena sarà pronto, faccelo sapere: sarai tra i primi a saperlo.",
+];
+
 function ChiEyebrow({ children }: { children: React.ReactNode }) {
   return (
     <div
@@ -248,6 +257,16 @@ function PercheContent() {
   return (
     <div className="space-y-5">
       {PERCHE_PARAGRAPHS.map((p, i) => (
+        <p key={i}>{p}</p>
+      ))}
+    </div>
+  );
+}
+
+function CosaContent() {
+  return (
+    <div className="space-y-5">
+      {COSA_PARAGRAPHS.map((p, i) => (
         <p key={i}>{p}</p>
       ))}
     </div>
@@ -498,6 +517,8 @@ function CardModal({
               <ChiContent />
             ) : card.title === "perché" ? (
               <PercheContent />
+            ) : card.title === "cosa" ? (
+              <CosaContent />
             ) : (
               card.bodyIndexes.map((idx) => {
                 const p = MANIFESTO_PARAGRAPHS[idx];
