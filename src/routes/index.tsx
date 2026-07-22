@@ -309,7 +309,7 @@ function LeadForm() {
       <div
         aria-hidden
         className="absolute -inset-3 rounded-full pointer-events-none"
-        style={{ background: "rgba(232, 245, 211, 0.75)", filter: "blur(18px)" }}
+        style={{ background: "rgba(239, 159, 39, 0.75)", filter: "blur(18px)" }}
       />
       <form
         onSubmit={onSubmit}
@@ -331,7 +331,7 @@ function LeadForm() {
           aria-label="Iscriviti"
           disabled={status === "loading"}
           className="shrink-0 rounded-full w-10 h-10 flex items-center justify-center transition-opacity disabled:opacity-60 hover:opacity-90"
-          style={{ backgroundColor: "#3B6D11", color: "#e8f5d3" }}
+          style={{ backgroundColor: "#EF9F27", color: "#1C1A14" }}
         >
           →
         </button>
