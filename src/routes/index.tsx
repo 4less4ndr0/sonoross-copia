@@ -381,11 +381,11 @@ function StackCard({
       <span
         className="relative z-10 block w-full rounded-[24px] p-2 sm:p-2.5"
         style={{
-          background: "rgba(255, 255, 255, 0.36)",
+          background: "rgba(255, 255, 255, 0.32)",
           backdropFilter: "blur(16px)",
-          border: "1px solid rgba(255, 255, 255, 0.62)",
+          border: "1px solid rgba(232, 245, 211, 0.92)",
           boxShadow:
-            "0 20px 50px rgba(28,26,20,0.12), inset 0 1px 0 rgba(255,255,255,0.85)",
+            "0 20px 50px rgba(28,26,20,0.12), inset 0 1px 0 rgba(255,255,255,0.85), 0 0 0 1px rgba(232,245,211,0.35) inset",
         }}
       >
         {/* Inner photo card */}
