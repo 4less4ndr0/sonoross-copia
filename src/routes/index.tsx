@@ -309,7 +309,7 @@ function LeadForm() {
       <div
         aria-hidden
         className="absolute -inset-3 rounded-full pointer-events-none"
-        style={{ background: "rgba(232, 245, 211, 0.75)", filter: "blur(18px)" }}
+        style={{ background: "rgba(239, 159, 39, 0.75)", filter: "blur(18px)" }}
       />
       <form
         onSubmit={onSubmit}
@@ -331,7 +331,7 @@ function LeadForm() {
           aria-label="Iscriviti"
           disabled={status === "loading"}
           className="shrink-0 rounded-full w-10 h-10 flex items-center justify-center transition-opacity disabled:opacity-60 hover:opacity-90"
-          style={{ backgroundColor: "#3B6D11", color: "#e8f5d3" }}
+          style={{ backgroundColor: "#EF9F27", color: "#1C1A14" }}
         >
           →
         </button>
@@ -361,12 +361,12 @@ function StackCard({
       aria-label={`Apri ${card.title}`}
       className="group relative w-full text-left rounded-[24px] focus:outline-none focus-visible:ring-2 focus-visible:ring-[#EF9F27] transition-transform duration-300 ease-out hover:-translate-y-1 active:scale-[0.98]"
     >
-      {/* Light sage halo — wraps the whole framed card on hover */}
+      {/* Terracotta halo — wraps the whole framed card on hover */}
       <span
         aria-hidden
         className="absolute -inset-7 rounded-[40px] pointer-events-none opacity-0 group-hover:opacity-100 transition-opacity duration-500"
         style={{
-          background: "rgba(232, 245, 211, 0.75)",
+          background: "rgba(239, 159, 39, 0.75)",
           filter: "blur(44px)",
           zIndex: 0,
         }}
