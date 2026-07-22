@@ -451,14 +451,15 @@ function StackCard({
           {/* arrow bottom-right */}
           <span
             aria-hidden
-            className="absolute right-4 bottom-4 sm:right-6 sm:bottom-6 flex items-center justify-center rounded-full text-white transition-transform duration-500 group-hover:scale-110"
+            className="absolute right-4 bottom-4 sm:right-6 sm:bottom-6 flex items-center justify-center rounded-full transition-transform duration-500 group-hover:scale-110"
             style={{
               width: "clamp(44px, 5vw, 56px)",
               height: "clamp(44px, 5vw, 56px)",
-              background: "rgba(239, 159, 39, 0.32)",
+              background: "rgba(232, 245, 211, 0.35)",
               backdropFilter: "blur(10px) saturate(140%)",
-              border: "1px solid rgba(255, 220, 170, 0.55)",
-              boxShadow: "inset 0 1px 2px rgba(255,255,255,0.4), 0 2px 10px rgba(239,159,39,0.2)",
+              border: "1px solid rgba(232, 245, 211, 0.75)",
+              boxShadow: "inset 0 1px 2px rgba(255,255,255,0.45), 0 2px 10px rgba(232,245,211,0.25)",
+              color: "#1C1A14",
             }}
           >
             <svg
