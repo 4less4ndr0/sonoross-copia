@@ -330,12 +330,12 @@ function LeadForm() {
           type="submit"
           aria-label="Iscriviti"
           disabled={status === "loading"}
-          className="shrink-0 rounded-full w-10 h-10 flex items-center justify-center backdrop-blur-md transition-all disabled:opacity-60 hover:brightness-105 active:scale-95"
+          className="shrink-0 rounded-full w-10 h-10 flex items-center justify-center backdrop-blur-md transition-all disabled:opacity-60 hover:brightness-110 active:scale-95"
           style={{
-            backgroundColor: "rgba(232, 245, 211, 0.55)",
-            border: "1px solid rgba(232, 245, 211, 0.85)",
-            boxShadow: "inset 0 1px 2px rgba(255,255,255,0.5), 0 2px 10px rgba(232,245,211,0.35)",
-            color: "#1C1A14",
+            backgroundColor: "#3B6D11",
+            border: "1px solid rgba(255,255,255,0.35)",
+            boxShadow: "inset 0 1px 2px rgba(255,255,255,0.25), 0 4px 14px rgba(59,109,17,0.35)",
+            color: "#FFFFFF",
           }}
         >
           →
