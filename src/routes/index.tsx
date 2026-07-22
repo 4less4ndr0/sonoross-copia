@@ -262,6 +262,16 @@ function PercheContent() {
     </div>
   );
 }
+
+function CosaContent() {
+  return (
+    <div className="space-y-5">
+      {COSA_PARAGRAPHS.map((p, i) => (
+        <p key={i}>{p}</p>
+      ))}
+    </div>
+  );
+}
 function StackCard({
   card,
   onOpen,
