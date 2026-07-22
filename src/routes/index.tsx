@@ -517,6 +517,8 @@ function CardModal({
               <ChiContent />
             ) : card.title === "perché" ? (
               <PercheContent />
+            ) : card.title === "cosa" ? (
+              <CosaContent />
             ) : (
               card.bodyIndexes.map((idx) => {
                 const p = MANIFESTO_PARAGRAPHS[idx];
