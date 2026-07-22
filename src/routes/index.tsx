@@ -747,7 +747,7 @@ function FlatEye({ className, closed, pixelSize }: { className?: string; closed:
 
 
 function GridBackdrop() {
-  const line = "rgba(151, 196, 89, 0.22)";
+  const line = "rgba(242, 201, 138, 0.32)";
   const cell = "44px";
   return (
     <div
