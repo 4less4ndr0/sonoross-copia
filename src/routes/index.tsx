@@ -62,26 +62,26 @@ type Card = {
 
 const CARDS: Card[] = [
   {
-    title: "cosa",
-    subtitle: "il cuore di R.O.S.S.",
+    title: "Cosa",
+    subtitle: "Il cuore di R.O.S.S.",
     image: cloudCosa,
     bodyIndexes: [2, 3],
   },
   {
-    title: "chi",
-    subtitle: "il team dietro a R.O.S.S.",
+    title: "Chi",
+    subtitle: "Il team dietro a R.O.S.S.",
     image: cloudChi,
     bodyIndexes: [0, 1],
   },
   {
-    title: "manifesto",
-    subtitle: "perché esistiamo",
+    title: "Manifesto",
+    subtitle: "Perché esistiamo",
     image: cloudManifesto.url,
     bodyIndexes: [0, 1, 2, 3, 4, 5, 6, 7, 8, 9],
   },
   {
-    title: "perché",
-    subtitle: "perché lo stiamo facendo",
+    title: "Perché",
+    subtitle: "Perché lo stiamo facendo",
     image: cloudPerche,
     bodyIndexes: [7, 8, 9],
   },
@@ -390,9 +390,9 @@ function StackCard({
           className="absolute inset-0 w-full h-full object-cover transition-transform duration-700 group-hover:scale-105"
           style={{
             objectPosition:
-              card.title === "manifesto"
+              card.title === "Manifesto"
                 ? "50% 55%"
-                : card.title === "cosa"
+                : card.title === "Cosa"
                   ? "30% 62%"
                   : "center",
           }}
@@ -571,9 +571,9 @@ function CardModal({
             style={{
               height: "clamp(200px, 40vw, 360px)",
               objectPosition:
-                card.title === "manifesto"
+                card.title === "Manifesto"
                   ? "50% 55%"
-                  : card.title === "cosa"
+                  : card.title === "Cosa"
                     ? "30% 62%"
                     : "center",
             }}
@@ -588,11 +588,11 @@ function CardModal({
               lineHeight: 1.65,
             }}
           >
-            {card.title === "chi" ? (
+            {card.title === "Chi" ? (
               <ChiContent />
-            ) : card.title === "perché" ? (
+            ) : card.title === "Perché" ? (
               <PercheContent />
-            ) : card.title === "cosa" ? (
+            ) : card.title === "Cosa" ? (
               <CosaContent />
             ) : (
               card.bodyIndexes.map((idx) => {
