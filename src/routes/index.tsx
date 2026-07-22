@@ -459,7 +459,7 @@ function StackCard({
               backdropFilter: "blur(10px) saturate(140%)",
               border: "1px solid rgba(232, 245, 211, 0.75)",
               boxShadow: "inset 0 1px 2px rgba(255,255,255,0.45), 0 2px 10px rgba(232,245,211,0.25)",
-              color: "#1C1A14",
+              color: "#FFFFFF",
             }}
           >
             <svg
