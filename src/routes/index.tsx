@@ -455,10 +455,7 @@ function StackCard({
             style={{
               width: "clamp(44px, 5vw, 56px)",
               height: "clamp(44px, 5vw, 56px)",
-              background: "rgba(239, 159, 39, 0.32)",
-              backdropFilter: "blur(10px) saturate(140%)",
-              border: "1px solid rgba(255, 220, 170, 0.55)",
-              boxShadow: "inset 0 1px 2px rgba(255,255,255,0.4), 0 2px 10px rgba(239,159,39,0.2)",
+              background: "#EF9F27",
             }}
           >
             <svg
