@@ -750,13 +750,10 @@ function GridBackdrop() {
 
 
 function Index() {
-  const [email, setEmail] = useState("");
-  const [status, setStatus] = useState<"idle" | "loading" | "success" | "error">("idle");
   const [activeCard, setActiveCard] = useState<number | null>(null);
-  
+
   const eyesClosed = useBlink(1200, 2800);
   const eyePixelSize = useEyePixelSize();
-  const submit = useServerFn(submitLead);
 
   const activeCardData = activeCard !== null ? CARDS[activeCard] : null;
   const lastCardRef = useRef<Card | null>(null);
@@ -772,23 +769,6 @@ function Index() {
     window.addEventListener("keydown", onKey);
     return () => window.removeEventListener("keydown", onKey);
   }, [activeCard]);
-
-  const onSubmit = async (e: FormEvent) => {
-    e.preventDefault();
-    if (status === "loading") return;
-    setStatus("loading");
-    try {
-      const res = await submit({ data: { email } });
-      if (res.ok) {
-        setStatus("success");
-        setEmail("");
-      } else {
-        setStatus("error");
-      }
-    } catch {
-      setStatus("error");
-    }
-  };
 
   return (
     <main
