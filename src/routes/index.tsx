@@ -390,9 +390,9 @@ function StackCard({
           className="absolute inset-0 w-full h-full object-cover transition-transform duration-700 group-hover:scale-105"
           style={{
             objectPosition:
-              card.title === "manifesto"
+              card.title === "Manifesto"
                 ? "50% 55%"
-                : card.title === "cosa"
+                : card.title === "Cosa"
                   ? "30% 62%"
                   : "center",
           }}
@@ -571,9 +571,9 @@ function CardModal({
             style={{
               height: "clamp(200px, 40vw, 360px)",
               objectPosition:
-                card.title === "manifesto"
+                card.title === "Manifesto"
                   ? "50% 55%"
-                  : card.title === "cosa"
+                  : card.title === "Cosa"
                     ? "30% 62%"
                     : "center",
             }}
@@ -588,11 +588,11 @@ function CardModal({
               lineHeight: 1.65,
             }}
           >
-            {card.title === "chi" ? (
+            {card.title === "Chi" ? (
               <ChiContent />
-            ) : card.title === "perché" ? (
+            ) : card.title === "Perché" ? (
               <PercheContent />
-            ) : card.title === "cosa" ? (
+            ) : card.title === "Cosa" ? (
               <CosaContent />
             ) : (
               card.bodyIndexes.map((idx) => {
