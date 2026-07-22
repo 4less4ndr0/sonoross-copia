@@ -364,10 +364,10 @@ function StackCard({
       {/* Terracotta halo — wraps the whole framed card on hover */}
       <span
         aria-hidden
-        className="absolute -inset-7 rounded-[40px] pointer-events-none opacity-0 group-hover:opacity-100 transition-opacity duration-500"
+        className="absolute -inset-4 rounded-[34px] pointer-events-none opacity-0 group-hover:opacity-100 transition-opacity duration-500"
         style={{
-          background: "rgba(239, 159, 39, 0.75)",
-          filter: "blur(44px)",
+          background: "rgba(239, 159, 39, 0.28)",
+          filter: "blur(26px)",
           zIndex: 0,
         }}
       />
