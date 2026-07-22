@@ -309,7 +309,7 @@ function LeadForm() {
       <div
         aria-hidden
         className="absolute -inset-2 rounded-full pointer-events-none"
-        style={{ background: "rgba(232, 245, 211, 0.55)", filter: "blur(16px)" }}
+        style={{ background: "rgba(239, 159, 39, 0.40)", filter: "blur(14px)" }}
       />
       <form
         onSubmit={onSubmit}
@@ -330,13 +330,8 @@ function LeadForm() {
           type="submit"
           aria-label="Iscriviti"
           disabled={status === "loading"}
-          className="shrink-0 rounded-full w-10 h-10 flex items-center justify-center backdrop-blur-md transition-all disabled:opacity-60 hover:brightness-110 active:scale-95"
-          style={{
-            backgroundColor: "#3B6D11",
-            border: "1px solid rgba(255,255,255,0.35)",
-            boxShadow: "inset 0 1px 2px rgba(255,255,255,0.25), 0 4px 14px rgba(59,109,17,0.35)",
-            color: "#FFFFFF",
-          }}
+          className="shrink-0 rounded-full w-10 h-10 flex items-center justify-center transition-opacity disabled:opacity-60 hover:opacity-90"
+          style={{ backgroundColor: "#EF9F27", color: "#1C1A14" }}
         >
           →
         </button>
@@ -381,11 +376,11 @@ function StackCard({
       <span
         className="relative z-10 block w-full rounded-[24px] p-2 sm:p-2.5"
         style={{
-          background: "rgba(255, 255, 255, 0.32)",
+          background: "rgba(255, 255, 255, 0.36)",
           backdropFilter: "blur(16px)",
-          border: "1px solid rgba(232, 245, 211, 1.0)",
+          border: "1px solid rgba(255, 255, 255, 0.62)",
           boxShadow:
-            "0 20px 50px rgba(28,26,20,0.12), inset 0 1px 0 rgba(255,255,255,0.85), 0 0 0 1px rgba(232,245,211,0.45) inset",
+            "0 20px 50px rgba(28,26,20,0.12), inset 0 1px 0 rgba(255,255,255,0.85)",
         }}
       >
         {/* Inner photo card */}
@@ -451,15 +446,13 @@ function StackCard({
           {/* arrow bottom-right */}
           <span
             aria-hidden
-            className="absolute right-4 bottom-4 sm:right-6 sm:bottom-6 flex items-center justify-center rounded-full transition-transform duration-500 group-hover:scale-110"
+            className="absolute right-4 bottom-4 sm:right-6 sm:bottom-6 flex items-center justify-center rounded-full text-white transition-transform duration-500 group-hover:scale-110"
             style={{
               width: "clamp(44px, 5vw, 56px)",
               height: "clamp(44px, 5vw, 56px)",
-              background: "rgba(232, 245, 211, 0.35)",
-              backdropFilter: "blur(10px) saturate(140%)",
-              border: "1px solid rgba(232, 245, 211, 0.75)",
-              boxShadow: "inset 0 1px 2px rgba(255,255,255,0.45), 0 2px 10px rgba(232,245,211,0.25)",
-              color: "#FFFFFF",
+              background: "rgba(255,255,255,0.22)",
+              backdropFilter: "blur(10px)",
+              border: "1px solid rgba(255,255,255,0.5)",
             }}
           >
             <svg
@@ -747,7 +740,7 @@ function FlatEye({ className, closed, pixelSize }: { className?: string; closed:
 
 
 function GridBackdrop() {
-  const line = "rgba(242, 201, 138, 0.32)";
+  const line = "rgba(151, 196, 89, 0.22)";
   const cell = "44px";
   return (
     <div
