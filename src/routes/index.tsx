@@ -810,51 +810,8 @@ function Index() {
               Perché nessuno dovrebbe invecchiare solo.
             </h1>
 
-            <div className="relative z-10 mx-auto mt-6 sm:mt-8 w-full max-w-md">
-              <div
-                aria-hidden
-                className="absolute -inset-3 rounded-full pointer-events-none"
-                style={{
-                  background: "rgba(239, 159, 39, 0.55)",
-                  filter: "blur(18px)",
-                }}
-              />
-              <form
-                onSubmit={onSubmit}
-                className="relative z-10 flex items-center gap-2 rounded-full pl-5 sm:pl-6 pr-2 py-2 shadow-sm w-full"
-                style={{
-                  backgroundColor: "#F6F3ED",
-                  border: "1px solid rgba(28,26,20,0.14)",
-                }}
-              >
-                <input
-                  type="email"
-                  required
-                  value={email}
-                  onChange={(e) => setEmail(e.target.value)}
-                  placeholder="Il tuo indirizzo email"
-                  disabled={status === "loading"}
-                  className="flex-1 min-w-0 bg-transparent outline-none py-2 disabled:opacity-60 placeholder:text-neutral-500"
-                  style={{ color: "#1C1A14" }}
-                />
-                <button
-                  type="submit"
-                  aria-label="Iscriviti"
-                  disabled={status === "loading"}
-                  className="shrink-0 rounded-full w-10 h-10 flex items-center justify-center transition-opacity disabled:opacity-60 hover:opacity-90"
-                  style={{ backgroundColor: "var(--ross-terra)", color: "var(--ross-ink)" }}
-                >
-                  →
-                </button>
-              </form>
-            </div>
-            <div
-              className="relative z-10 mt-3 h-5 text-sm text-center"
-              style={{ fontFamily: '"DM Sans", system-ui, sans-serif', color: "#1C1A14" }}
-              aria-live="polite"
-            >
-              {status === "success" && "Grazie, ti scriveremo presto."}
-              {status === "error" && "Qualcosa è andato storto, riprova."}
+            <div className="relative z-10 mx-auto mt-6 sm:mt-8 w-full">
+              <LeadForm />
             </div>
           </div>
         </div>
