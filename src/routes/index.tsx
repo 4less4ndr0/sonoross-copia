@@ -331,7 +331,7 @@ function LeadForm() {
           aria-label="Iscriviti"
           disabled={status === "loading"}
           className="shrink-0 rounded-full w-10 h-10 flex items-center justify-center transition-opacity disabled:opacity-60 hover:opacity-90"
-          style={{ backgroundColor: "var(--ross-terra)", color: "var(--ross-ink)" }}
+          style={{ backgroundColor: "var(--ross-sage-dark)", color: "var(--ross-cream)" }}
         >
           →
         </button>
