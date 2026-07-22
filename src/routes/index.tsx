@@ -361,12 +361,12 @@ function StackCard({
       aria-label={`Apri ${card.title}`}
       className="group relative w-full text-left rounded-[24px] focus:outline-none focus-visible:ring-2 focus-visible:ring-[#EF9F27] transition-transform duration-300 ease-out hover:-translate-y-1 active:scale-[0.98]"
     >
-      {/* Light sage halo — wraps the whole framed card on hover */}
+      {/* Terracotta halo — wraps the whole framed card on hover */}
       <span
         aria-hidden
         className="absolute -inset-7 rounded-[40px] pointer-events-none opacity-0 group-hover:opacity-100 transition-opacity duration-500"
         style={{
-          background: "rgba(232, 245, 211, 0.75)",
+          background: "rgba(239, 159, 39, 0.75)",
           filter: "blur(44px)",
           zIndex: 0,
         }}
