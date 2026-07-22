@@ -308,8 +308,8 @@ function LeadForm() {
     <div className="relative mx-auto w-full max-w-md">
       <div
         aria-hidden
-        className="absolute -inset-3 rounded-full pointer-events-none"
-        style={{ background: "rgba(239, 159, 39, 0.75)", filter: "blur(18px)" }}
+        className="absolute -inset-2 rounded-full pointer-events-none"
+        style={{ background: "rgba(239, 159, 39, 0.30)", filter: "blur(14px)" }}
       />
       <form
         onSubmit={onSubmit}
