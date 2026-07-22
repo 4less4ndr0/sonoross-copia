@@ -267,16 +267,17 @@ function CosaContent() {
   const insertBeforeLast = COSA_PARAGRAPHS.length - 1;
   return (
     <div className="space-y-5">
-      {COSA_PARAGRAPHS.map((p, i) => (
-        <>
-          {i === insertBeforeLast && (
+      {COSA_PARAGRAPHS.flatMap((p, i) => {
+        const nodes = [<p key={`p-${i}`}>{p}</p>];
+        if (i === insertBeforeLast - 1) {
+          nodes.push(
             <div key={`lead-${i}`} className="py-2">
               <LeadForm />
-            </div>
-          )}
-          <p key={i}>{p}</p>
-        </>
-      ))}
+            </div>,
+          );
+        }
+        return nodes;
+      })}
     </div>
   );
 }
