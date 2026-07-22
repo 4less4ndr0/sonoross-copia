@@ -309,7 +309,7 @@ function LeadForm() {
       <div
         aria-hidden
         className="absolute -inset-3 rounded-full pointer-events-none"
-        style={{ background: "rgba(232, 245, 211, 0.55)", filter: "blur(18px)" }}
+        style={{ background: "rgba(232, 245, 211, 0.75)", filter: "blur(18px)" }}
       />
       <form
         onSubmit={onSubmit}
@@ -366,7 +366,7 @@ function StackCard({
         aria-hidden
         className="absolute -inset-7 rounded-[40px] pointer-events-none opacity-0 group-hover:opacity-100 transition-opacity duration-500"
         style={{
-          background: "rgba(232, 245, 211, 0.55)",
+          background: "rgba(232, 245, 211, 0.75)",
           filter: "blur(44px)",
           zIndex: 0,
         }}
