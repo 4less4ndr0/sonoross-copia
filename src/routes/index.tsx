@@ -126,7 +126,7 @@ const CHI_BLOCK1_PARAGRAPHS: string[] = [
 ];
 
 const PERCHE_PARAGRAPHS: string[] = [
-  "Siamo quattro persone che vivono lontano da casa, chi da Cagliari, chi da Roma, chi da Bergamo, finiti tutti qui in Veneto per lo stesso percorso. Abbiamo tutti a casa qualcuno di cui vogliamo essere tranquilli che stia bene.",
+  "Siamo quattro ragazzi che vivono lontano da casa, chi da Cagliari, chi da Roma, chi da Bergamo, finiti tutti qui in Veneto per lo stesso percorso. Abbiamo tutti a casa qualcuno di cui vogliamo essere tranquilli che stia bene.",
   "Non è un problema astratto: è qualcosa che già ci tocca e ci toccherà sempre di più.",
   "Le soluzioni che esistono oggi, quando le abbiamo guardate da vicino, non sono mai quelle che si scelgono. Sono quelle che si subiscono: qualcosa che si dimentica di indossare, qualcosa che sembra un controllo, non un aiuto, e niente che faccia venire voglia di dire \"sì, questo lo voglio\".",
   "R.O.S.S. nasce dalla voglia di costruire qualcosa che si sceglie, non che si subisce, che dia sostegno senza aggiungere ansia a una fase della vita che dovrebbe essere vissuta con più leggerezza, per chi la vive in prima persona e per chi le sta intorno.",
