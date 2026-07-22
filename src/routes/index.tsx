@@ -383,9 +383,9 @@ function StackCard({
         style={{
           background: "rgba(255, 255, 255, 0.32)",
           backdropFilter: "blur(16px)",
-          border: "1px solid rgba(232, 245, 211, 0.92)",
+          border: "1px solid rgba(232, 245, 211, 1.0)",
           boxShadow:
-            "0 20px 50px rgba(28,26,20,0.12), inset 0 1px 0 rgba(255,255,255,0.85), 0 0 0 1px rgba(232,245,211,0.35) inset",
+            "0 20px 50px rgba(28,26,20,0.12), inset 0 1px 0 rgba(255,255,255,0.85), 0 0 0 1px rgba(232,245,211,0.45) inset",
         }}
       >
         {/* Inner photo card */}
