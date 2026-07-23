@@ -23,7 +23,7 @@ function isTrackablePointer(pointerType: string) {
 }
 
 const DefaultCursorSVG: FC = () => {
-  // Sage liquid-glass frosted pointer
+  // Sage liquid-glass frosted pointer — flat, even sage fill
   return (
     <div
       style={{
@@ -31,8 +31,7 @@ const DefaultCursorSVG: FC = () => {
         height: 30,
         clipPath:
           "polygon(50% 0%, 100% 100%, 50% 78%, 0% 100%)",
-        background:
-          "linear-gradient(160deg, rgba(74, 93, 80, 0.55) 0%, rgba(74, 93, 80, 0.35) 45%, rgba(151, 196, 89, 0.4) 100%)",
+        background: "rgba(74, 93, 80, 0.55)",
         backdropFilter: "blur(10px) saturate(160%)",
         border: "1px solid rgba(255, 255, 255, 0.35)",
         boxShadow:
