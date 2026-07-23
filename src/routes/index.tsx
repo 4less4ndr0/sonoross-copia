@@ -306,11 +306,6 @@ function LeadForm() {
 
   return (
     <div className="relative mx-auto w-full max-w-md">
-      <div
-        aria-hidden
-        className="absolute -inset-2 rounded-full pointer-events-none"
-        style={{ background: "rgba(239, 159, 39, 0.40)", filter: "blur(14px)" }}
-      />
       <form
         onSubmit={onSubmit}
         className="relative z-10 flex items-center gap-2 rounded-full pl-5 sm:pl-6 pr-2 py-2 shadow-sm w-full"
