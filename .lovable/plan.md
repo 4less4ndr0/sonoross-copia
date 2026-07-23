@@ -1,29 +1,9 @@
-Spostare l’intero blocco header più in alto per far salire anche il carosello di card e rendere la pagina più compatta, mantenendo le proporzioni tra occhi, headline, form e griglia.
+Modifica il layout della landing page in `src/routes/index.tsx` per ridurre lo spazio vuoto sopra gli occhi e renderlo uguale allo spazio visibile tra la sezione hero (form email) e il carosello di card.
 
-### Modifiche previste
+Passaggi:
+1. Ispezionare la struttura attuale del hero (`h-screen`, flex centering, `mt-[2vh] sm:mt-[4vh]`, `pb-[10vh] sm:pb-[12vh]`).
+2. Ridurre il margine superiore del contenitore interno del hero e/o regolare il padding verticale in modo che lo spazio sopra gli occhi corrisponda al gap hero-card (attualmente gestito dalla negative margin `-mt-[18vh] sm:-mt-[22vh]` della sezione card).
+3. Mantenere il centramento orizzontale, la dimensione degli occhi, il blink e la posizione centrata sopra il headline.
+4. Verificare la coerenza su desktop e mobile senza rompere il carosello o il modal.
 
-1. **Ridurre il padding inferiore dell’hero**
-   - Attuale: `pb-[18vh]` mobile / `pb-[20vh]` desktop.
-   - Nuovo: ~`pb-[10vh]` mobile / ~`pb-[12vh]` desktop.
-   - Lascia più spazio visibile sotto il form senza comprimere gli elementi.
-
-2. **Ridurre il margine superiore del contenuto hero**
-   - Attuale: `mt-[5vh]` mobile / `mt-[7vh]` desktop sul wrapper interno.
-   - Nuovo: ~`mt-[2vh]` mobile / ~`mt-[4vh]` desktop.
-   - Sposta occhi, headline e form verso l’alto mantenendo il centro visivo.
-
-3. **Tirare su il carosello/card**
-   - Attuale: `-mt-[12vh]` mobile / `-mt-[16vh]` desktop.
-   - Nuovo: ~`-mt-[18vh]` mobile / ~`-mt-[22vh]` desktop.
-   - Le card salgono di conseguenza, coprendo meglio la parte bassa dello schermo.
-
-4. **Mantenere le proporzioni**
-   - Margine tra occhi e headline, tra headline e form, e tra form e card scalati in modo uniforme.
-   - Nessuna modifica a dimensioni font, occhi, bordi, colori o logica di interazione.
-
-5. **Verifica**
-   - Controllare in preview desktop e mobile che non ci siano sovrapposizioni tra form e card.
-   - Confermare che il carosello sia visibile senza scroll iniziale su viewport comuni.
-
-### File coinvolto
-- `src/routes/index.tsx` (hero section + cards section)
+Nessuna modifica a font, colori, copy, occhi, card o logica di interazione.
