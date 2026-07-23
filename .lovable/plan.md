@@ -1,27 +1,27 @@
 ## Problema
 
-Sul monitor desktop del tuo screenshot le card si sovrappongono all'headline. La causa è strutturale: l'hero è `h-screen` (100vh) e la sezione card viene tirata su con `lg:-mt-[28vh]`. Su monitor con aspect ratio diverso (ultrawide, 16:10) il contenuto dell'hero finisce a un'altezza diversa in vh, quindi il margine negativo fisso o lascia troppo spazio o crea overlap. È fragile per definizione.
+Su desktop l'hero usa `min-h-screen` e il carosello viene renderizzato subito sotto senza spaziatura. Quando l'utente zooma o cambia dimensioni, l'header (occhi + titolo + form) mantiene la sua altezza in `rem` mentre `min-h-screen` è in `vh`: cambiando lo zoom del browser il contenuto interno cresce ma il viewport resta uguale, quindi form e carosello si avvicinano fino a sovrapporsi. Su mobile/tablet lo stesso problema è mascherato dai margini negativi `-mt-[Xvh]` che sono comunque fragili.
 
-## Fix definitivo
+Serve un fix strutturale che garantisca che il carosello stia **sempre** sotto l'hero, indipendentemente da zoom, aspect ratio o altezza del contenuto.
 
-In `src/routes/index.tsx`:
+## Fix
 
-**Riga 881 (hero section):**
-- `h-screen` → `min-h-screen lg:min-h-0`
-- così su desktop l'hero si dimensiona al contenuto, non al viewport
+**File:** `src/routes/index.tsx`
 
-**Riga 882 (hero inner padding):**
-- aggiungere `lg:pt-24 lg:pb-16` (rem, non vh) per un padding verticale prevedibile su desktop
-- mobile/tablet restano con i valori `vh` attuali già approvati
+**1. Hero (riga 881)** — sostituire `min-h-screen lg:min-h-0` con solo `min-h-screen` su tutti i breakpoint. L'hero deve sempre occupare almeno il viewport, ma crescere se il contenuto lo richiede (evita che il form venga schiacciato allo zoom alto).
 
-**Riga 913 (cards section):**
-- `lg:-mt-[28vh] … lg:pt-4` → `lg:mt-0 lg:pt-0`
-- niente più margine negativo su desktop: il flow naturale garantisce zero overlap
-- mobile (`-mt-[42vh]`), sm (`-mt-[34vh]`), md (`-mt-[44vh]`) invariati
+**2. Carosello (riga 913)** — rimuovere tutti i margini negativi che causano l'overlap:
+- `-mt-[42vh] sm:-mt-[34vh] md:-mt-[44vh] lg:mt-0` → `mt-0` su tutti i breakpoint
+- Aggiungere un padding-top coerente in `rem` (non `vh`): `pt-8 sm:pt-12 lg:pt-16`
+
+**3. Hero inner (riga 882)** — usare `justify-center` invece di `justify-start` così il contenuto è verticalmente bilanciato dentro il `min-h-screen`, e semplificare il padding verticale in `rem`: `py-16 sm:py-20 lg:py-24` (rimuovere i valori `vh`).
+
+## Risultato
+
+- L'hero occupa sempre ≥ 100vh, il carosello inizia sempre sotto — zero overlap possibile a qualsiasi zoom o aspect ratio.
+- Il layout diventa deterministico: dipende dal contenuto e dal viewport, non da margini negativi calibrati a occhio.
+- Spacing verticale in `rem` = costante percepito dall'utente indipendentemente dallo zoom.
 
 ## Verifica
 
-Screenshot Playwright a 1440×900, 1920×1080 e 2560×1080 (ultrawide) per confermare:
-1. Zero overlap tra form e carosello a qualsiasi aspect ratio
-2. Gap costante e visivamente equilibrato
-3. Mobile e tablet inalterati
+Screenshot Playwright a 1440×900, 1920×1080, 2560×1080 e con zoom browser al 75%, 100%, 125%, 150% per confermare che form e carosello non si sovrappongano mai.
