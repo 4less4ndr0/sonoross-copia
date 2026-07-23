@@ -391,7 +391,12 @@ function DesktopCarousel({ onOpen }: { onOpen: (i: number) => void }) {
         style={{ willChange: "transform" }}
       >
         {[...CARDS, ...CARDS].map((c, i) => (
-          <div key={i} className="shrink-0 w-[clamp(360px,32vw,520px)]">
+          <div
+            key={i}
+            className="shrink-0 w-[clamp(360px,32vw,520px)]"
+            onMouseEnter={() => { pausedRef.current = true; }}
+            onMouseLeave={() => { pausedRef.current = false; }}
+          >
             <StackCard card={c} onOpen={() => onOpen(i % CARDS.length)} />
           </div>
         ))}
@@ -413,28 +418,29 @@ function StackCard({
       type="button"
       onClick={onOpen}
       aria-label={`Apri ${card.title}`}
-      className="group relative w-full text-left rounded-[24px] focus:outline-none focus-visible:ring-2 focus-visible:ring-[#EF9F27] transition-transform duration-300 ease-out hover:-translate-y-1 active:scale-[0.98]"
+      className="group relative w-full text-left rounded-[24px] focus:outline-none focus-visible:ring-2 focus-visible:ring-[#EF9F27] active:scale-[0.98]"
     >
-      {/* Terracotta halo — wraps the whole framed card on hover */}
+      {/* Terracotta halo — kept inside the card bounds to avoid hover bleed */}
       <span
         aria-hidden
-        className="absolute -inset-4 rounded-[34px] pointer-events-none opacity-0 group-hover:opacity-100 transition-opacity duration-500"
+        className="absolute -inset-1 rounded-[28px] pointer-events-none opacity-0 group-hover:opacity-100 transition-opacity duration-500"
         style={{
           background: "rgba(239, 159, 39, 0.28)",
-          filter: "blur(26px)",
+          filter: "blur(18px)",
           zIndex: 0,
         }}
       />
 
       {/* Glass frame */}
       <span
-        className="relative z-10 block w-full rounded-[24px] p-2 sm:p-2.5"
+        className="relative z-10 block w-full rounded-[24px] p-2 sm:p-2.5 transition-transform duration-300 ease-out group-hover:scale-[1.02]"
         style={{
           background: "rgba(255, 255, 255, 0.36)",
           backdropFilter: "blur(16px)",
           border: "1px solid rgba(255, 255, 255, 0.62)",
           boxShadow:
             "0 20px 50px rgba(28,26,20,0.12), inset 0 1px 0 rgba(255,255,255,0.85)",
+          transformOrigin: "center",
         }}
       >
         {/* Inner photo card */}

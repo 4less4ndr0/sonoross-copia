@@ -1,9 +1,30 @@
-Modifica il layout della landing page in `src/routes/index.tsx` per ridurre lo spazio vuoto sopra gli occhi e renderlo uguale allo spazio visibile tra la sezione hero (form email) e il carosello di card.
+## Problema
 
-Passaggi:
-1. Ispezionare la struttura attuale del hero (`h-screen`, flex centering, `mt-[2vh] sm:mt-[4vh]`, `pb-[10vh] sm:pb-[12vh]`).
-2. Ridurre il margine superiore del contenitore interno del hero e/o regolare il padding verticale in modo che lo spazio sopra gli occhi corrisponda al gap hero-card (attualmente gestito dalla negative margin `-mt-[18vh] sm:-mt-[22vh]` della sezione card).
-3. Mantenere il centramento orizzontale, la dimensione degli occhi, il blink e la posizione centrata sopra il headline.
-4. Verificare la coerenza su desktop e mobile senza rompere il carosello o il modal.
+Il carosello ha due bug di hover che si combinano e causano il "misalignment":
 
-Nessuna modifica a font, colori, copy, occhi, card o logica di interazione.
+1. **Salto verticale sotto il cursore.** `StackCard` ha `hover:-translate-y-1` sul `<button>`: quando il mouse entra su una card, la card si sposta di 4px verso l'alto. Se il cursore era vicino al bordo alto della card, esce dal bounding box → il `:hover` si spegne → la card torna giù → rientra sotto il cursore → e così via (flicker). Questo si percepisce come "hover che seleziona la card sbagliata".
+
+2. **Halo che sfora e si sovrappone tra card vicine.** L'halo terracotta usa `-inset-4` + `blur(26px)` sullo stesso elemento del bottone. Con `group-hover` su un `<button>` che ha anche il translate, l'area effettiva di hover si estende oltre la card e si accavalla con la card adiacente nel gap, alimentando lo stesso flicker.
+
+Un dettaglio correlato: la pausa è agganciata solo al wrapper esterno (`onMouseEnter/Leave` sul contenitore del carosello). Se il flicker fa perdere hover al wrapper (non dovrebbe, ma con `translate` e gap stretti può succedere in edge case), il track riparte per una manciata di ms — e si vede lo scatto orizzontale.
+
+## Fix (solo carosello desktop, tutto in `src/routes/index.tsx`)
+
+1. **Rimuovere `hover:-translate-y-1` dal bottone di `StackCard`.** Nessun movimento della card sotto il cursore → nessun flicker di hover. L'effetto di "attivazione" resta comunque visibile grazie a: focus ring, halo, e (nuovo) leggero scale sul contenuto interno (vedi punto 3).
+
+2. **Isolare l'halo dentro l'area della card.** Ridurre `-inset-4` → `-inset-1` (o `inset-0` con blur più contenuto) così l'halo non sfora nel gap tra due card e non "prende" hover dal vicino. Mantenere l'aspetto ammorbidendo `blur` (es. `18–20px`) e opacità come ora.
+
+3. **(Opzionale, per compensare la perdita del lift)** Applicare un piccolissimo `group-hover:scale-[1.02]` **solo alla cornice interna** (non al bottone che riceve l'hover), così l'area di hit-test del bottone resta fissa e non si autoescludes.
+
+4. **Pausa più robusta.** In aggiunta al listener sul wrapper, tenere pausa anche se il puntatore è sopra una singola card: aggiungere `onMouseEnter/Leave` (che settano `pausedRef.current`) al wrapper della singola card dentro `.map(...)`. Nessun cambio di logica RAF.
+
+## Cosa NON cambia
+
+- Velocità del carosello, direzione, duplicazione delle card, RAF loop.
+- Colore terracotta dell'halo, layout mobile, modale, hero, occhi, font.
+- Comportamento click → apre `CardModal`.
+
+## Verifica
+
+- Build.
+- Playwright: hover lento dal bordo sinistro fino al centro di una card, screenshot per confermare: (a) la card non si sposta, (b) l'halo compare solo su quella card, (c) il track resta fermo per tutta la durata dell'hover.
