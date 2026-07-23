@@ -816,7 +816,7 @@ function GridBackdrop() {
         `,
         backgroundSize: `${cell} ${cell}, ${cell} ${cell}`,
         maskImage:
-          "radial-gradient(ellipse 55% 55% at 50% 50%, #000 0%, rgba(0,0,0,0.85) 40%, rgba(0,0,0,0.35) 70%, transparent 100%)",
+          "radial-gradient(ellipse 60% 52% at 50% 38%, #000 0%, rgba(0,0,0,0.85) 40%, rgba(0,0,0,0.35) 70%, transparent 100%)",
       }}
     />
   );
