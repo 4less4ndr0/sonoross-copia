@@ -1,15 +1,23 @@
-Problema: la distanza verticale tra il form email (nel hero) e la sezione card è troppo ampia, sia su mobile che su desktop.
+## Obiettivo
+Ridurre ulteriormente la distanza verticale tra il form email e la sezione card su **mobile**, replicando la stessa logica di compattazione già applicata su desktop.
 
-Soluzione: stringere l'intercapedine agendo sui due punti di controllo del layout:
+## Stato attuale
+In `src/routes/index.tsx`:
+- Hero mobile: `pt-[8vh] pb-0`
+- Sezione card mobile: `-mt-[48vh] pt-2`
 
-1. **Hero bottom padding** — ridurre `pb-[6vh] sm:pb-[8vh]` del container interno del hero per avvicinare il fondo del form alla sezione sottostante.
-2. **Cards negative margin** — aumentare il valore negativo di `-mt-[30vh] sm:-mt-[28vh]` della sezione card per farla salire ulteriormente verso il form.
+La distanza residua tra il form e la prima card su mobile è ancora troppo ampia.
 
-File da modificare:
-- `src/routes/index.tsx` (hero container e sezione card)
+## Modifica proposta
+1. **Compattare ulteriormente il passaggio form → card su mobile** portando il margine negativo della sezione card da `-mt-[48vh]` a **`-mt-[56vh]`** (o simile, da verificare visivamente).
+2. **Mantenere invariati** padding, occhi, headline, form, carousel desktop, colori, font e interazioni esistenti.
+3. **Verificare** con screenshot su viewport mobile (≈ 375–414 px) che:
+   - la prima card sia visibile senza sovrapporsi al form;
+   - occhi e headline non vengano tagliati o schiacciati;
+   - non compaia alcuna striscia/banda colorata indesiderata.
 
-Verifica:
-- Controllare in preview che il form email e la prima card non siano troppo distanti, senza però sovrapporre gli occhi o il testo del hero.
-- Verificare sia su mobile che su desktop.
+## File coinvolto
+- `src/routes/index.tsx` (solo le classi responsive del hero e della card section)
 
-Nessuna modifica a font, colori, occhi, posizionamento delle nuvole/card, copy o logica di submit.
+## Consegna
+Dopo la modifica, condivido screenshot mobile prima/dopo per confermare che il gap sia quello desiderato.
