@@ -11,6 +11,7 @@ import { useEffect, type ReactNode } from "react";
 
 import "../styles.css";
 import { reportLovableError } from "../lib/lovable-error-reporting";
+import { SmoothCursor } from "@/components/ui/smooth-cursor";
 
 function NotFoundComponent() {
   return (
