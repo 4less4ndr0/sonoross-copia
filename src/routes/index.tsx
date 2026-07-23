@@ -842,21 +842,8 @@ function Index() {
         </div>
 
         {/* DESKTOP: horizontal auto-scrolling carousel, pauses on hover */}
-        <div className="hidden sm:block carousel-wrapper relative w-full py-8" style={{ overflowX: "clip" }}>
-          <div
-            className="flex gap-8 lg:gap-10 w-max carousel-track"
-            style={{ animation: "marquee 40s linear infinite" }}
-          >
-            {[...CARDS, ...CARDS].map((c, i) => (
-              <div
-                key={i}
-                className="shrink-0 w-[clamp(360px,32vw,520px)]"
-              >
-                <StackCard card={c} onOpen={() => setActiveCard(i % CARDS.length)} />
-              </div>
-            ))}
-          </div>
-        </div>
+        <DesktopCarousel onOpen={setActiveCard} />
+
 
 
 
