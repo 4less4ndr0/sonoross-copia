@@ -1,26 +1,24 @@
-## Problema
-Al primo hover su una card del carosello desktop c'è uno scatto orizzontale che sposta la card sotto il mouse e a volte fa cliccare la card sbagliata. La causa è che `animation-play-state: paused` in combinazione con `hover:-translate-y-1` sulla card e `group-hover:scale-105` sull'immagine produce un piccolo salto di layout / arrotondamento subpixel al momento della pausa dell'animazione CSS.
+Modifica il componente `FlatEye` nella landing page riducendone le dimensioni del ~10% su tutti i breakpoint.
 
-## Soluzione
-Sostituire l'animazione CSS `marquee` con uno scroll pilotato in JS (`requestAnimationFrame`) sulla track del carosello. In questo modo la pausa è esattamente il frame corrente, senza salti.
+**File coinvolto:** `src/routes/index.tsx`
 
-### Modifiche in `src/routes/index.tsx`
-- Estrarre il carosello desktop in un piccolo componente `Carousel` interno con:
-  - `useRef` sulla track.
-  - `useRef` per la posizione X corrente e per lo stato "paused".
-  - `useEffect` che lancia un loop `requestAnimationFrame`: incrementa X di `speed * dt` (velocità coerente con gli attuali ~40s per giro), applica `transform: translate3d(-X, 0, 0)` alla track, e quando `X >= trackWidth / 2` sottrae `trackWidth / 2` per loop seamless.
-  - `onMouseEnter` / `onMouseLeave` sul contenitore che flippano il flag paused (nessun cambio di transform → nessuno scatto).
-- Rimuovere `animation: marquee ...` inline e la classe `carousel-track` che aggancia `animation-play-state`.
-- Rispettare `prefers-reduced-motion`: se attivo, non far partire il loop.
+**Modifica da fare:**
+Aggiornare l'hook `useEyePixelSize` (righe ~734-748) con i nuovi valori di pixel ridotti del 10%:
 
-### Modifiche in `src/styles.css`
-- Rimuovere le regole `@keyframes marquee` e `.carousel-wrapper:hover .carousel-track { animation-play-state: paused }` ora non più usate.
+```text
+Prima:
+- mobile (<640px):     5px
+- tablet (640-1024px): 7px
+- desktop (1024-1536px): 10px
+- large (>=1536px):    12px
 
-## Fuori scope
-- Layout mobile, StackCard, halo, hero, modale, form email.
-- Design/spaziatura del carosello (restano invariati).
+Dopo:
+- mobile (<640px):     4px
+- tablet (640-1024px): 6px
+- desktop (1024-1536px): 9px
+- large (>=1536px):    11px
+```
 
-## Verifica
-- Preview desktop: entrando col mouse su una card, il carosello si ferma esattamente sotto al cursore, senza scatti orizzontali; il click apre la card corretta; uscendo, riparte fluido nello stesso punto.
-- Preview mobile: layout invariato.
-- Build TS ok.
+**Verifica:**
+- Build passa senza errori.
+- Gli occhi risultano visibilmente più piccoli in preview mantenendo proporzioni, posizione centrata sopra il titolo e animazione di blink.
