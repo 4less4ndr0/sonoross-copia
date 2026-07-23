@@ -307,10 +307,10 @@ function LeadForm() {
   return (
     <div className="relative mx-auto w-full max-w-md">
       <div
-        className="absolute -inset-4 rounded-[3rem] -z-10 pointer-events-none"
+        className="absolute -inset-3 rounded-[3rem] -z-10 pointer-events-none"
         style={{
-          background:
-            "radial-gradient(ellipse at center, rgba(239, 159, 39, 0.40) 0%, rgba(239, 159, 39, 0) 72%)",
+          background: "rgba(239, 159, 39, 0.38)",
+          filter: "blur(14px)",
         }}
       />
       <form
