@@ -188,8 +188,9 @@
   to { transform: translateX(-50%); }
 }
 
-.group:hover .carousel-track {
+.carousel-wrapper:hover .carousel-track {
   animation-play-state: paused !important;
 }
+
 
 

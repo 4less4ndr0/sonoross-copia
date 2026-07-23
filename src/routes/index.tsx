@@ -842,7 +842,7 @@ function Index() {
         </div>
 
         {/* DESKTOP: horizontal auto-scrolling carousel, pauses on hover */}
-        <div className="hidden sm:block group relative w-full overflow-hidden py-4">
+        <div className="hidden sm:block carousel-wrapper relative w-full py-8" style={{ overflowX: "clip" }}>
           <div
             className="flex gap-8 lg:gap-10 w-max carousel-track"
             style={{ animation: "marquee 40s linear infinite" }}
@@ -857,6 +857,7 @@ function Index() {
             ))}
           </div>
         </div>
+
 
 
         <div
