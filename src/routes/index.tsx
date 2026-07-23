@@ -357,7 +357,7 @@ function DesktopCarousel({ onOpen }: { onOpen: (i: number) => void }) {
     if (!track) return;
     if (window.matchMedia("(prefers-reduced-motion: reduce)").matches) return;
 
-    const SPEED = 40; // px/sec
+    const SPEED = 70; // px/sec
     let raf = 0;
     let last = performance.now();
 
