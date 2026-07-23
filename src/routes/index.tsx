@@ -347,7 +347,61 @@ function LeadForm() {
     </div>
   );
 }
+function DesktopCarousel({ onOpen }: { onOpen: (i: number) => void }) {
+  const trackRef = useRef<HTMLDivElement | null>(null);
+  const pausedRef = useRef(false);
+  const xRef = useRef(0);
+
+  useEffect(() => {
+    const track = trackRef.current;
+    if (!track) return;
+    if (window.matchMedia("(prefers-reduced-motion: reduce)").matches) return;
+
+    const SPEED = 40; // px/sec
+    let raf = 0;
+    let last = performance.now();
+
+    const tick = (now: number) => {
+      const dt = (now - last) / 1000;
+      last = now;
+      if (!pausedRef.current) {
+        const halfWidth = track.scrollWidth / 2;
+        if (halfWidth > 0) {
+          xRef.current += SPEED * dt;
+          if (xRef.current >= halfWidth) xRef.current -= halfWidth;
+          track.style.transform = `translate3d(${-xRef.current}px, 0, 0)`;
+        }
+      }
+      raf = requestAnimationFrame(tick);
+    };
+    raf = requestAnimationFrame(tick);
+    return () => cancelAnimationFrame(raf);
+  }, []);
+
+  return (
+    <div
+      className="hidden sm:block relative w-full py-8"
+      style={{ overflowX: "clip" }}
+      onMouseEnter={() => { pausedRef.current = true; }}
+      onMouseLeave={() => { pausedRef.current = false; }}
+    >
+      <div
+        ref={trackRef}
+        className="flex gap-8 lg:gap-10 w-max"
+        style={{ willChange: "transform" }}
+      >
+        {[...CARDS, ...CARDS].map((c, i) => (
+          <div key={i} className="shrink-0 w-[clamp(360px,32vw,520px)]">
+            <StackCard card={c} onOpen={() => onOpen(i % CARDS.length)} />
+          </div>
+        ))}
+      </div>
+    </div>
+  );
+}
+
 function StackCard({
+
   card,
   onOpen,
 }: {
@@ -842,21 +896,8 @@ function Index() {
         </div>
 
         {/* DESKTOP: horizontal auto-scrolling carousel, pauses on hover */}
-        <div className="hidden sm:block carousel-wrapper relative w-full py-8" style={{ overflowX: "clip" }}>
-          <div
-            className="flex gap-8 lg:gap-10 w-max carousel-track"
-            style={{ animation: "marquee 40s linear infinite" }}
-          >
-            {[...CARDS, ...CARDS].map((c, i) => (
-              <div
-                key={i}
-                className="shrink-0 w-[clamp(360px,32vw,520px)]"
-              >
-                <StackCard card={c} onOpen={() => setActiveCard(i % CARDS.length)} />
-              </div>
-            ))}
-          </div>
-        </div>
+        <DesktopCarousel onOpen={setActiveCard} />
+
 
 
 
