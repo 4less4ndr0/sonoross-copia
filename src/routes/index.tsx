@@ -841,12 +841,23 @@ function Index() {
           ))}
         </div>
 
-        {/* DESKTOP: 2x2 mosaic */}
-        <div className="hidden sm:grid grid-cols-2 gap-8 lg:gap-10 mx-auto w-[min(90vw,1200px)]">
-          {CARDS.map((c, i) => (
-            <StackCard key={i} card={c} onOpen={() => setActiveCard(i)} />
-          ))}
+        {/* DESKTOP: horizontal auto-scrolling carousel, pauses on hover */}
+        <div className="hidden sm:block group relative w-full overflow-hidden py-4">
+          <div
+            className="flex gap-8 lg:gap-10 w-max carousel-track"
+            style={{ animation: "marquee 40s linear infinite" }}
+          >
+            {[...CARDS, ...CARDS].map((c, i) => (
+              <div
+                key={i}
+                className="shrink-0 w-[clamp(360px,32vw,520px)]"
+              >
+                <StackCard card={c} onOpen={() => setActiveCard(i % CARDS.length)} />
+              </div>
+            ))}
+          </div>
         </div>
+
 
         <div
           className="relative z-10 max-w-2xl mx-auto mt-14 sm:mt-20 text-center"
