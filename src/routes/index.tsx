@@ -878,8 +878,8 @@ function Index() {
       />
 
       {/* HERO */}
-      <section className="relative z-10 min-h-screen w-full overflow-hidden flex flex-col">
-        <div className="relative z-20 flex-1 flex flex-col items-center justify-center px-5 sm:px-6 py-16 sm:py-20 lg:py-24">
+      <section className="relative z-10 min-h-[70vh] sm:min-h-[75vh] lg:min-h-[80vh] w-full overflow-hidden flex flex-col">
+        <div className="relative z-20 flex-1 flex flex-col items-center justify-center px-5 sm:px-6 pt-16 pb-8 sm:pt-20 sm:pb-10 lg:pt-24 lg:pb-12">
           <div className="relative w-full max-w-3xl">
             {/* Eyes — centered above the headline */}
             <div className="flex justify-center items-end gap-3 sm:gap-5 mb-6 sm:mb-10 pointer-events-none">
