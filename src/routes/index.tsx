@@ -315,8 +315,15 @@ function LeadForm() {
       />
       <form
         onSubmit={onSubmit}
-        className="relative z-10 flex items-center gap-2 rounded-full pl-5 sm:pl-6 pr-2 py-2 shadow-sm w-full"
-        style={{ backgroundColor: "#F6F3ED", border: "1px solid rgba(28,26,20,0.14)" }}
+        className="relative z-10 flex items-center gap-2 rounded-full pl-5 sm:pl-6 pr-2 py-2 w-full"
+        style={{
+          background: "rgba(255, 255, 255, 0.42)",
+          backdropFilter: "blur(16px)",
+          WebkitBackdropFilter: "blur(16px)",
+          border: "1px solid rgba(255, 255, 255, 0.65)",
+          boxShadow:
+            "0 20px 50px rgba(28,26,20,0.10), inset 0 1px 0 rgba(255,255,255,0.85)",
+        }}
       >
         <input
           type="email"
@@ -325,15 +332,23 @@ function LeadForm() {
           onChange={(e) => setEmail(e.target.value)}
           placeholder="Il tuo indirizzo email"
           disabled={status === "loading"}
-          className="flex-1 min-w-0 bg-transparent outline-none py-2 disabled:opacity-60 placeholder:text-neutral-500"
+          className="flex-1 min-w-0 bg-transparent outline-none py-2 disabled:opacity-60 placeholder:text-neutral-600"
           style={{ color: "#1C1A14" }}
         />
         <button
           type="submit"
           aria-label="Iscriviti"
           disabled={status === "loading"}
-          className="shrink-0 rounded-full w-10 h-10 flex items-center justify-center transition-opacity disabled:opacity-60 hover:opacity-90"
-          style={{ backgroundColor: "#EF9F27", color: "#1C1A14" }}
+          className="shrink-0 rounded-full w-10 h-10 flex items-center justify-center transition-all disabled:opacity-60 hover:scale-105 active:scale-95"
+          style={{
+            background: "rgba(239, 159, 39, 0.82)",
+            backdropFilter: "blur(10px)",
+            WebkitBackdropFilter: "blur(10px)",
+            border: "1px solid rgba(255, 255, 255, 0.45)",
+            color: "#1C1A14",
+            boxShadow:
+              "0 8px 24px rgba(239, 159, 39, 0.28), inset 0 1px 0 rgba(255,255,255,0.45)",
+          }}
         >
           →
         </button>
