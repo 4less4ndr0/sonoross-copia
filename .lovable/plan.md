@@ -1,39 +1,26 @@
 ## Obiettivo
-Aggiungere una cornice glass/gloss sottile intorno a ciascuna delle 4 card della landing page (Cosa, Chi, Manifesto, Perché), mantenendo le foto attuali all'interno e rispettando il design system R.O.S.S.
+Trasformare la griglia 2×2 desktop delle 4 card (Cosa, Chi, Manifesto, Perché) in un carosello orizzontale che scorre in autoplay a velocità moderata, si ferma quando il mouse va in hover sul carosello, e mantiene l'effetto attuale di hover sulla singola card (leggero scale + halo terracotta).
 
-## Stile scelto
-- **Tipo:** cornice glass/frosted sottile
-- **Colori:** sfondo bianco/crema semi-trasparente, bordo chiaro, ombra morbida ink; al hover alone terracotta (#EF9F27)
-- **Raggio:** angoli arrotondati 20-24 px, coerente con il resto dell'interfaccia
-- **Spessore:** cornice sottile con piccolo margine interno (passe-partout leggero)
+## Modifiche
 
-## Modifiche previste
+### 1. `src/routes/index.tsx` — solo layout desktop
+- Sostituire la griglia `grid-cols-2` desktop con un carosello orizzontale a larghezza piena viewport.
+- Duplicare l'array delle card (`[...CARDS, ...CARDS]`) per ottenere uno scorrimento infinito seamless.
+- Track interno che trasla con `animation: marquee linear infinite` (durata ~40s, regolabile).
+- Ogni card mantiene larghezza fissa coerente (es. ~32vw, min 380px, max 520px) e altezza attuale, con gap tra le card.
+- Su hover del contenitore carosello → `animation-play-state: paused` (pausa dolce, non scatto).
+- La singola `StackCard` mantiene esattamente l'attuale hover (scale + halo terracotta soft) e il click apre la stessa `CardModal`.
+- Mobile/tablet: nessuna modifica, resta lo stack verticale attuale.
 
-### 1. Componente `StackCard` in `src/routes/index.tsx`
-- Aggiungere un **wrapper esterno** attorno alla card attuale che funzioni da cornice.
-- La cornice avrà:
-  - `background: rgba(255, 255, 255, 0.30-0.40)`
-  - `backdrop-filter: blur(...)` (senza prefisso `-webkit-` manuale)
-  - `border: 1px solid rgba(255, 255, 255, 0.55-0.65)`
-  - `border-radius: 24px` (leggermente più grande del raggio interno)
-  - `padding: 8-12px` (desktop) / `6-8px` (mobile)
-  - ombra diffusa `0 20px 50px rgba(28, 26, 20, 0.10-0.14)`
-  - highlight interno `inset 0 1px 0 rgba(255,255,255,0.8)`
-- Spostare l'**alone terracotta al hover** dietro la cornice esterna in modo che avvolga l'intera card cornice compresa.
-- Mantenere la card interna con raggio 20px, foto a copertura, testo in basso a sinistra e bottone freccia in basso a destra.
-- Mantenere le animazioni e le interazioni esistenti (hover lift, scale al tap, click → apertura modale).
+### 2. `src/styles.css`
+- Aggiungere keyframes `marquee` (`translateX(0)` → `translateX(-50%)`) e una utility `.carousel-track` con `animation-play-state: running`, che diventa `paused` quando il contenitore ha `:hover`.
 
-### 2. Adattamenti responsive
-- La cornice si applica sia alla **stack mobile** che alla **griglia desktop 2×2**.
-- Ridurre leggermente padding e ombre su schermi piccoli per non appesantire il layout.
-
-### 3. Cosa NON cambia
-- Foto, titoli, sottotitoli e testi delle card.
-- Logica di apertura modale (`CardModal`) e contenuti interni.
-- Posizionamento della griglia e dello stack.
-- Occhi, hero, form email e sezione finale.
+## Fuori scope
+- Testi, immagini, modale, form email, occhi, hero, header.
+- Layout mobile/tablet.
+- Frecce/dots di navigazione manuale (autoplay + pausa on hover, come richiesto).
 
 ## Verifica
-- Build TypeScript senza errori.
-- Verifica visiva sul preview che ogni card abbia la cornice glass, l'alone terracotta al hover e che le foto restino visibili all'interno.
-- Controllo rapido su viewport mobile per confermare che la cornice non rompa la stack.
+- Build TS ok.
+- Preview desktop: le 4 card scorrono orizzontalmente in loop continuo senza salti; hover sul carosello mette in pausa; hover sulla singola card mostra scale + halo terracotta; click apre la modale corretta.
+- Preview mobile: layout invariato.
