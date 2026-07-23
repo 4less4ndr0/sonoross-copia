@@ -330,7 +330,7 @@ function LeadForm() {
           required
           value={email}
           onChange={(e) => setEmail(e.target.value)}
-          placeholder="Il tuo indirizzo email"
+          placeholder="La tua migliore email..."
           disabled={status === "loading"}
           className="flex-1 min-w-0 bg-transparent outline-none py-2 disabled:opacity-60 placeholder:text-neutral-600"
           style={{ color: "#1C1A14" }}
