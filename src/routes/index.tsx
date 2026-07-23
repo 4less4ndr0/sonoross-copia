@@ -910,7 +910,7 @@ function Index() {
       </section>
 
       {/* CARDS section — mobile: stacked; desktop: 2x2 mosaic */}
-      <section className="relative z-20 w-full mt-0 pt-8 sm:pt-12 lg:pt-16 pb-20 sm:pb-28 md:pb-20 lg:pb-28 px-5 sm:px-6">
+      <section className="relative z-20 w-full mt-0 pt-4 sm:pt-6 lg:pt-8 pb-20 sm:pb-28 md:pb-20 lg:pb-28 px-5 sm:px-6">
         {/* MOBILE: stacked cards */}
         <div className="sm:hidden mx-auto max-w-[640px] flex flex-col gap-5">
           {CARDS.map((c, i) => (
