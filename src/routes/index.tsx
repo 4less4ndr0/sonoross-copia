@@ -391,7 +391,12 @@ function DesktopCarousel({ onOpen }: { onOpen: (i: number) => void }) {
         style={{ willChange: "transform" }}
       >
         {[...CARDS, ...CARDS].map((c, i) => (
-          <div key={i} className="shrink-0 w-[clamp(360px,32vw,520px)]">
+          <div
+            key={i}
+            className="shrink-0 w-[clamp(360px,32vw,520px)]"
+            onMouseEnter={() => { pausedRef.current = true; }}
+            onMouseLeave={() => { pausedRef.current = false; }}
+          >
             <StackCard card={c} onOpen={() => onOpen(i % CARDS.length)} />
           </div>
         ))}
