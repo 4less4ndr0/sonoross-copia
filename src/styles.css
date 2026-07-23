@@ -183,14 +183,7 @@
   -webkit-box-decoration-break: clone;
 }
 
-@keyframes marquee {
-  from { transform: translateX(0); }
-  to { transform: translateX(-50%); }
-}
 
-.carousel-wrapper:hover .carousel-track {
-  animation-play-state: paused !important;
-}
 
 
 
