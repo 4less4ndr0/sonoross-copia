@@ -296,6 +296,8 @@ function LeadForm() {
       if (res.ok) {
         setStatus("success");
         setEmail("");
+        const { fireConfetti } = await import("@/lib/confetti");
+        void fireConfetti();
       } else {
         setStatus("error");
       }
