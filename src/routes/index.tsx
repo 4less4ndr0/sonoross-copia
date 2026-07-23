@@ -878,8 +878,8 @@ function Index() {
       />
 
       {/* HERO */}
-      <section className="relative z-10 h-screen w-full overflow-hidden">
-        <div className="relative z-20 h-full flex flex-col items-center justify-start px-5 sm:px-6 pt-[8vh] sm:pt-[10vh] md:pt-[10vh] lg:pt-[10vh] pb-[3vh] sm:pb-[3vh] md:pb-0 lg:pb-[3vh]">
+      <section className="relative z-10 min-h-screen lg:min-h-0 w-full overflow-hidden">
+        <div className="relative z-20 h-full flex flex-col items-center justify-start px-5 sm:px-6 pt-[8vh] sm:pt-[10vh] md:pt-[10vh] lg:pt-24 pb-[3vh] sm:pb-[3vh] md:pb-0 lg:pb-16">
           <div className="relative w-full max-w-3xl">
             {/* Eyes — centered above the headline */}
             <div className="flex justify-center items-end gap-3 sm:gap-5 mb-6 sm:mb-10 pointer-events-none">
@@ -910,7 +910,7 @@ function Index() {
       </section>
 
       {/* CARDS section — mobile: stacked; desktop: 2x2 mosaic */}
-      <section className="relative z-20 w-full -mt-[42vh] sm:-mt-[34vh] md:-mt-[44vh] lg:-mt-[28vh] pt-2 sm:pt-6 md:pt-2 lg:pt-4 pb-20 sm:pb-28 md:pb-20 lg:pb-28 px-5 sm:px-6">
+      <section className="relative z-20 w-full -mt-[42vh] sm:-mt-[34vh] md:-mt-[44vh] lg:mt-0 pt-2 sm:pt-6 md:pt-2 lg:pt-0 pb-20 sm:pb-28 md:pb-20 lg:pb-28 px-5 sm:px-6">
         {/* MOBILE: stacked cards */}
         <div className="sm:hidden mx-auto max-w-[640px] flex flex-col gap-5">
           {CARDS.map((c, i) => (
