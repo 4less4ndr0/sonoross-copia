@@ -1,15 +1,23 @@
-Problema: la distanza verticale tra il form email (nel hero) e la sezione card è troppo ampia, sia su mobile che su desktop.
+## Problema
 
-Soluzione: stringere l'intercapedine agendo sui due punti di controllo del layout:
+Su desktop (`lg`) il gap tra form email e carosello è troppo grande perché:
+- L'hero è `h-screen` (100vh) con contenuto ancorato in alto (`justify-start` + `pt-[10vh]`)
+- Il contenuto (occhi + headline + form) occupa circa 55–60vh
+- La sezione card ora ha `lg:mt-0`, quindi restano ~40vh di vuoto sotto al form prima delle card
 
-1. **Hero bottom padding** — ridurre `pb-[6vh] sm:pb-[8vh]` del container interno del hero per avvicinare il fondo del form alla sezione sottostante.
-2. **Cards negative margin** — aumentare il valore negativo di `-mt-[30vh] sm:-mt-[28vh]` della sezione card per farla salire ulteriormente verso il form.
+Il fix precedente ha risolto l'overlap ma è andato all'estremo opposto.
 
-File da modificare:
-- `src/routes/index.tsx` (hero container e sezione card)
+## Fix definitivo
 
-Verifica:
-- Controllare in preview che il form email e la prima card non siano troppo distanti, senza però sovrapporre gli occhi o il testo del hero.
-- Verificare sia su mobile che su desktop.
+In `src/routes/index.tsx`, sezione card (riga 913): sostituire `lg:mt-0 … lg:pt-8` con un margine negativo moderato calibrato sull'altezza reale del contenuto hero.
 
-Nessuna modifica a font, colori, occhi, posizionamento delle nuvole/card, copy o logica di submit.
+- `lg:-mt-[28vh]` — tira su il carosello di ~28vh, lasciando ~8–10vh di respiro sotto il form
+- `lg:pt-4` — padding top ridotto per non gonfiare di nuovo lo spazio
+
+Nessun altra modifica: mobile (`-mt-[42vh]`), sm (`-mt-[34vh]`) e md (`-mt-[44vh]`) restano invariati perché già approvati nei turni precedenti.
+
+## Verifica
+
+Screenshot Playwright a 1440×900 per confermare che:
+1. Il titolo/form non tocchi le card (no overlap)
+2. Il gap sia visivamente equilibrato (~1 riga di respiro)
