@@ -63,7 +63,7 @@ type Card = {
 const CARDS: Card[] = [
   {
     title: "Cosa",
-    subtitle: "Il cuore di R.O.S.S.",
+    subtitle: "Facciamo e faremo",
     image: cloudCosa,
     bodyIndexes: [2, 3],
   },
