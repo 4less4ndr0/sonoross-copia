@@ -736,10 +736,10 @@ function useEyePixelSize() {
   useEffect(() => {
     const update = () => {
       const w = window.innerWidth;
-      if (w < 640) setPx(5);
-      else if (w < 1024) setPx(7);
-      else if (w < 1536) setPx(10);
-      else setPx(12);
+      if (w < 640) setPx(4);
+      else if (w < 1024) setPx(6);
+      else if (w < 1536) setPx(9);
+      else setPx(11);
     };
     update();
     window.addEventListener("resize", update);
