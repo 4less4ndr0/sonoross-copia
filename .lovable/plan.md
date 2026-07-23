@@ -1,13 +1,15 @@
-## Fix spaziatura mobile
+Problema: la distanza verticale tra il form email (nel hero) e la sezione card è troppo ampia, sia su mobile che su desktop.
 
-Obiettivo: su mobile la distanza tra il bordo superiore e gli occhi deve essere uguale alla distanza tra l'email form e la parte visibile delle card.
+Soluzione: stringere l'intercapedine agendo sui due punti di controllo del layout:
 
-Attualmente su mobile:
-- `pt-[12vh]` sopra gli occhi
-- `-mt-[22vh]` sulle card (troppo poco → gap grande sotto il form)
+1. **Hero bottom padding** — ridurre `pb-[6vh] sm:pb-[8vh]` del container interno del hero per avvicinare il fondo del form alla sezione sottostante.
+2. **Cards negative margin** — aumentare il valore negativo di `-mt-[30vh] sm:-mt-[28vh]` della sezione card per farla salire ulteriormente verso il form.
 
-Modifica in `src/routes/index.tsx`:
-- Ridurre padding-top hero mobile da `pt-[12vh]` a `pt-[8vh]` (desktop invariato a `sm:pt-[10vh]`)
-- Aumentare pull-up card mobile da `-mt-[22vh]` a `-mt-[30vh]` (desktop invariato a `sm:-mt-[28vh]`)
+File da modificare:
+- `src/routes/index.tsx` (hero container e sezione card)
 
-Verifica con screenshot Playwright a 393×852 che i due gap risultino visivamente equivalenti; se necessario piccolo tuning di ±2vh.
+Verifica:
+- Controllare in preview che il form email e la prima card non siano troppo distanti, senza però sovrapporre gli occhi o il testo del hero.
+- Verificare sia su mobile che su desktop.
+
+Nessuna modifica a font, colori, occhi, posizionamento delle nuvole/card, copy o logica di submit.
