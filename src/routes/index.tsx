@@ -918,8 +918,12 @@ function Index() {
           ))}
         </div>
 
-        {/* DESKTOP: horizontal auto-scrolling carousel, pauses on hover */}
-        <DesktopCarousel onOpen={setActiveCard} />
+        {/* DESKTOP/TABLET: static 2x2 grid */}
+        <div className="hidden sm:grid sm:grid-cols-2 gap-5 lg:gap-6 max-w-5xl mx-auto">
+          {CARDS.map((c, i) => (
+            <StackCard key={i} card={c} onOpen={() => setActiveCard(i)} />
+          ))}
+        </div>
 
 
 
