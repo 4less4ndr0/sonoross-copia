@@ -11,7 +11,6 @@ import { useEffect, type ReactNode } from "react";
 
 import "../styles.css";
 import { reportLovableError } from "../lib/lovable-error-reporting";
-import { SmoothCursor } from "@/components/ui/smooth-cursor";
 
 function NotFoundComponent() {
   return (
@@ -121,7 +120,6 @@ function RootComponent() {
 
   return (
     <QueryClientProvider client={queryClient}>
-      <SmoothCursor />
       {/* Required: nested routes render here. Removing <Outlet /> breaks all child routes. */}
       <Outlet />
     </QueryClientProvider>
