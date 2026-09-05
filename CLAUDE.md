@@ -19,7 +19,9 @@ parte da `main`. Il branch si ricava dall'account GitHub autenticato
 `federicosassu-ship-it` → `Federico/lavoro`. Se l'account non è nessuno dei due,
 chiedere su quale branch lavorare invece di indovinare.
 
-Il merge su `main` lo fanno le persone a mano, tramite PR. Claude non lo fa.
+Finito il lavoro, Claude **apre sempre la pull request** verso `main`, senza
+che gliela si debba chiedere. Il merge invece lo fanno le persone: Claude non
+mergia mai.
 
 ## Deploy
 
